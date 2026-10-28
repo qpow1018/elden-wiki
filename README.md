@@ -6,7 +6,7 @@
 
 - Node.js 22 이상 (`.nvmrc`: 22.23.3)
 - npm / Next.js App Router / React / TypeScript
-- ESLint / 일반 CSS (필요 시 CSS Modules 사용 가능)
+- ESLint / SCSS (컴포넌트 스타일은 SCSS Modules 사용 가능)
 - Supabase JavaScript SDK
 
 ## 실행
@@ -54,6 +54,11 @@ npm start
 
 ```text
 src/
-  app/                  # 페이지, 레이아웃, 전역 스타일
+  app/                  # 페이지, 레이아웃, 폰트 리소스
+  assets/               # Sass 변수·믹스인·리셋·전역 스타일
   lib/supabase/client.ts # 공개 데이터 조회용 Supabase 클라이언트
 ```
+
+`src/assets/reset.scss`와 `global.scss`는 루트 레이아웃에서 순서대로 불러옵니다.
+`_variables.scss`와 `_mixins.scss`는 `next.config.ts`에서 자동 주입하므로
+개별 SCSS 파일에 반복해서 `@use`를 추가하지 않습니다.
