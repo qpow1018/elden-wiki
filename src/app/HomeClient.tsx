@@ -90,52 +90,49 @@ export default function HomeClient() {
   const [content, setContent] = useState("");
   const [attempt, setAttempt] = useState(0);
 
-  useEffect(
-    function synchronizeItems() {
-      let active = true;
-      async function loadItems() {
-        setStatus("loading");
-        try {
-          const client = createSupabaseClient();
-          const all: TItem[] = [];
-          // Data API의 기본 응답 한도를 넘는 목록도 빠짐없이 조회합니다.
-          for (let start = 0; ; start += 500) {
-            const { data, error } = await client
-              .from("items")
-              .select(
-                "id,name,type,image_url,content_code,game_description,item_categories(name),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))",
-              )
-              .order("id")
-              .range(start, start + 499);
-            if (error) throw error;
-            all.push(
-              ...(data.map((row) => ({
-                ...row,
-                item_categories: Array.isArray(row.item_categories)
-                  ? (row.item_categories[0] ?? null)
-                  : row.item_categories,
-                weapon_details: Array.isArray(row.weapon_details)
-                  ? (row.weapon_details[0] ?? null)
-                  : row.weapon_details,
-              })) as unknown as TItem[]),
-            );
-            if (data.length < 500) break;
-          }
-          if (active) {
-            setItems(all);
-            setStatus("ready");
-          }
-        } catch {
-          if (active) setStatus("error");
+  useEffect(() => {
+    let active = true;
+    async function loadItems() {
+      setStatus("loading");
+      try {
+        const client = createSupabaseClient();
+        const all: TItem[] = [];
+        // Data API의 기본 응답 한도를 넘는 목록도 빠짐없이 조회합니다.
+        for (let start = 0; ; start += 500) {
+          const { data, error } = await client
+            .from("items")
+            .select(
+              "id,name,type,image_url,content_code,game_description,item_categories(name),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))",
+            )
+            .order("id")
+            .range(start, start + 499);
+          if (error) throw error;
+          all.push(
+            ...(data.map((row) => ({
+              ...row,
+              item_categories: Array.isArray(row.item_categories)
+                ? (row.item_categories[0] ?? null)
+                : row.item_categories,
+              weapon_details: Array.isArray(row.weapon_details)
+                ? (row.weapon_details[0] ?? null)
+                : row.weapon_details,
+            })) as unknown as TItem[]),
+          );
+          if (data.length < 500) break;
         }
+        if (active) {
+          setItems(all);
+          setStatus("ready");
+        }
+      } catch {
+        if (active) setStatus("error");
       }
-      void loadItems();
-      return () => {
-        active = false;
-      };
-    },
-    [attempt],
-  );
+    }
+    void loadItems();
+    return () => {
+      active = false;
+    };
+  }, [attempt]);
 
   const categories = [
     ...new Set(
