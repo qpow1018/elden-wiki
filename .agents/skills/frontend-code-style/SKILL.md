@@ -26,9 +26,9 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 
 #### Next.js 페이지
 
-- App Router의 `page.tsx`는 서버 컴포넌트로 유지한다. `page.tsx`에 `"use client"`를 선언하지 않는다.
+- App Router의 `page.tsx`는 서버 컴포넌트로 유지한다. `page.tsx`에 `'use client'`를 선언하지 않는다.
 - `page.tsx`는 서버 입력 해석, 필요한 서버 데이터 조회, 라우트 단위 조립을 담당한다. 복잡한 조회 로직은 별도 함수로 분리하고, 페이지에서는 이를 호출해 결과를 전달한다.
-- 페이지에 대응하는 클라이언트 컴포넌트가 필요하면 페이지 의미에 맞는 `<PageName>Client.tsx`로 분리하고, 그 파일에 `"use client"`를 선언한다. 예: `/` 경로의 메인·홈 페이지는 `HomeClient.tsx`.
+- 페이지에 대응하는 클라이언트 컴포넌트가 필요하면 페이지 의미에 맞는 `<PageName>Client.tsx`로 분리하고, 그 파일에 `'use client'`를 선언한다. 예: `/` 경로의 메인·홈 페이지는 `HomeClient.tsx`.
 - `page.tsx`와 대응하는 `<PageName>Client.tsx`는 해당 라우트 폴더 바로 아래에 나란히 둔다. `_component` 같은 하위 컴포넌트 폴더가 생겨도 두 파일을 그 안으로 옮기지 않는다. 예: `src/app/page.tsx`, `src/app/HomeClient.tsx`.
 - `page.tsx`에서 해당 클라이언트 컴포넌트를 가져와 렌더링한다.
 
@@ -68,8 +68,8 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 - 그룹 사이는 빈 줄 하나로 구분하고, 없는 그룹은 생략한다.
 - 경로보다 가져오는 대상의 역할로 분류한다. 외부 라이브러리에서 가져오더라도 UI 컴포넌트는 UI 그룹에, 아이콘은 시각 리소스 그룹에 둔다. 외부 라이브러리 그룹에는 React·Next.js API와 일반 라이브러리를 둔다.
 - 타입 import는 관련 대상과 같은 그룹에 둔다. 같은 모듈에서 별도 선언이 필요한 import는 인접하게 배치한다.
-- 타입으로만 사용하는 대상에는 `type`을 명시한다. 같은 모듈에서 값과 타입을 함께 가져오면 인라인 `type`으로 합친다. 예: `import { fetchItems, type TItem } from "@/lib/items";`.
-- 타입만 가져오는 선언은 `import type`을 사용한다. 예: `import type { TItem } from "@/types/item";`.
+- 타입으로만 사용하는 대상에는 `type`을 명시한다. 같은 모듈에서 값과 타입을 함께 가져오면 인라인 `type`으로 합친다. 예: `import { fetchItems, type TItem } from '@/lib/items';`.
+- 타입만 가져오는 선언은 `import type`을 사용한다. 예: `import type { TItem } from '@/types/item';`.
 
 #### TypeScript
 
@@ -91,7 +91,9 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 
 - `src/api/index.ts`는 공통 API 연결·요청 처리를 담당한다.
 - 도메인 API와 Query 정의는 `src/api/<domain>/`에 함께 둔다. `index.ts`는 도메인 API 함수, `types.ts`는 API 관련 타입, `<domain>Query.ts`는 Query 정의를 관리한다. 예: `src/api/equipment/equipmentQuery.ts`.
-- API 함수는 요청 실행과 응답 정리·실패 전달을 담당하며, React·TanStack Query에 의존하지 않는다.
+- API 함수는 요청 실행과 응답 정리를 담당하며, React·TanStack Query에 의존하지 않는다. 실패 전달은 아래의 공통 오류 기록과 실패 전달 기준을 따른다.
+- 도메인 API 함수는 내부에서 `getApiClient()`로 공통 클라이언트를 얻는다. 클라이언트를 얻는 반복 한 줄을 없애기 위한 별도 추상화는 만들지 않는다.
+- 한 API에서만 사용하는 상수는 해당 함수 내부에 camelCase로 선언한다. 예: `pageSize`. 한 번 사용하는 조회 필드는 요청에 인라인으로 작성하고, 공유·재사용 필요가 있을 때만 별도로 추출한다.
 - Query 정의는 도메인 API를 호출하고 query key와 서버 상태 조회 정책을 담당한다. API 함수가 Query 정의를 참조하는 역방향 의존은 만들지 않는다.
 
 #### Query 객체와 조회 훅
@@ -102,11 +104,26 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 - 한 메서드에서만 쓰는 옵션은 `useQuery`에 직접 작성한다. 별도 옵션 상수나 `queryOptions`는 재사용 필요가 있을 때 도입한다.
 - 조회 옵션은 필요한 것만 명시한다. 라이브러리·프로젝트 기본값을 변경할 때는 실제 요구에 근거하며, 특정 옵션을 일괄 금지하지 않는다.
 
+#### 공통 오류 기록과 실패 전달
+
+- `src/api/index.ts`에서 Supabase의 `global.fetch`에 공통 fetch를 연결해 HTTP·네트워크 실패를 `console.error`로 기록한다. 도메인 API와 Query에서 같은 실패를 중복 기록하지 않는다.
+- HTTP 실패 응답은 복제본으로 로그를 읽고 원본 응답은 SDK에 그대로 전달한다. 네트워크 예외는 기록 후 원래 예외를 다시 던진다. 요청 취소는 일반 오류 로그에서 제외한다.
+- 도메인 API의 Supabase PostgREST 테이블·RPC 요청은 `.throwOnError()`로 실패를 전달한다. 이 메서드가 없는 Auth·Storage 등은 해당 SDK의 오류 반환 방식을 따르되 실패를 호출부까지 전달한다. 실패를 `null`·빈 배열 등 성공 데이터로 바꿔 숨기지 않는다.
+- 공통 fetch의 기록 범위는 HTTP·네트워크 실패다. 요청 전 설정 오류나 응답 이후 변환 오류까지 자동 기록된다고 가정하지 않는다. SDK 내부 재시도 시 요청 시도별로 기록될 수 있다.
+
 #### API 타입과 UI 타입
 
 - API 요청·응답과 관련 데이터 타입은 `src/api/<domain>/types.ts`에서 관리한다. UI에서도 사용한다는 이유로 타입을 복제하거나 UI 전용 타입으로 분류하지 않는다.
+- API 요청·응답 타입은 필드와 nullable 여부가 바로 보이도록 명시적으로 선언한다. DB 생성 타입을 `Pick`·인덱스 접근·교차 타입으로 조립하는 방식을 기본으로 삼지 않는다.
+- `database.types.ts`는 실제 DB 구조를 반영하는 SDK 검사용 생성 타입으로 유지한다. 도메인 API의 반환 타입을 명시해 조회 결과와 API 응답 계약의 호환성을 검사한다.
 - props·폼 초안·화면 상태 등 UI 전용 타입은 사용하는 코드 가까이에 두고, 공유 시 기존 타입 배치 기준을 따른다. API 폴더에 UI 전용 타입을 모으지 않는다.
 - API 타입으로 충분하면 그대로 사용한다. UI의 데이터 형태나 제약이 달라질 때만 별도 타입을 정의하며, 별도의 UI 타입 계층을 의무적으로 만들지 않는다.
+
+#### 데이터 이름 변환
+
+- DB 컬럼과 생성된 DB 타입의 필드명은 원래의 snake_case를 유지하고, 프론트엔드에서 사용하는 API 요청·응답 필드명은 camelCase로 작성한다. 타입 이름은 앞의 `T`·`TReq`·`TRes` 접두사 기준을 따른다.
+- 도메인 API 경계에서 DB 요청 컬럼을 지정하고 응답의 중첩 필드까지 명시적으로 camelCase에 매핑한다. Query와 UI에 DB 필드명 변환을 분산시키지 않는다.
+- 모든 키를 자동 변환하는 범용 변환기보다 명시적 필드 매핑을 사용한다. `base_game`, `smithing_stone` 등 저장된 코드 값 자체는 이름 변환 대상이 아니다.
 
 #### UI와 조회 경계
 
@@ -151,21 +168,7 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 
 ### 포맷
 
-- 프로젝트에 설치된 Prettier와 `.prettierrc.json`을 사용한다. 도구·설정이 아직 없으면 먼저 구성되어야 하며, 포맷 검사를 실행한 것으로 보고하지 않는다.
-- Prettier 설정은 다음을 기준으로 구성한다.
-
-```json
-{
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "all",
-  "printWidth": 100,
-  "arrowParens": "always",
-  "endOfLine": "lf"
-}
-```
-
+- 프로젝트에 설치된 Prettier와 루트 `.prettierrc.json`을 사용한다. 포맷 옵션은 설정 파일을 기준으로 하며 이 문서에 중복 정의하지 않는다.
 - 코드 작성·수정 후 변경한 코드 파일만 포맷하고, 같은 파일을 대상으로 `prettier --check`를 실행한다. 요청과 무관한 파일까지 일괄 포맷하지 않는다.
 - import 그룹과 순서는 이 스킬의 Import 기준에 따라 별도로 유지한다.
 
