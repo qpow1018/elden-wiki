@@ -223,3 +223,11 @@ join public.item_categories c on c.id = i.category_id
 join public.weapon_details d on d.item_id = i.id
 where i.name = '문리델의 기사검' and i.type = 'weapon' and c.name = '특대검'
 on conflict (item_id, affinity) do nothing;
+
+-- 사용자 확인: 세 샘플 무기 모두 기본 수면·발광 축적이 없습니다.
+update public.weapon_details d
+set sleep = 0, madness = 0
+from public.items i
+where d.item_id = i.id and i.type = 'weapon'
+  and i.name in ('대거', '문리델의 기사검', '이데스의 검')
+  and (d.sleep is distinct from 0 or d.madness is distinct from 0);
