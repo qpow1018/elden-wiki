@@ -1,11 +1,21 @@
-import { queryOptions } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
-import { getEquipment } from "@/api/equipment";
+import { getEquipment, getEquipmentCategories } from '@/api/equipment';
+import type { TReqGetEquipment } from './types';
 
-export const EQUIPMENT_QUERY_OPTIONS = queryOptions({
-  queryKey: ["equipment", "list"],
-  queryFn: ({ signal }) => getEquipment({ signal }),
-  networkMode: "always",
-  // 네트워크 복귀만으로 전체 목록을 다시 불러오지 않습니다.
-  refetchOnReconnect: false,
-});
+const equipmentQuery = {
+  useGetEquipment(params: Omit<TReqGetEquipment, 'signal'>) {
+    return useQuery({
+      queryKey: ['equipment', 'list', params],
+      queryFn: ({ signal }) => getEquipment({ ...params, signal }),
+    });
+  },
+  useGetEquipmentCategories() {
+    return useQuery({
+      queryKey: ['equipment', 'categories'],
+      queryFn: ({ signal }) => getEquipmentCategories({ signal }),
+    });
+  },
+};
+
+export default equipmentQuery;

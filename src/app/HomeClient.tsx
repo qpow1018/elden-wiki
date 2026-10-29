@@ -1,102 +1,98 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState } from 'react';
 
-import { EQUIPMENT_QUERY_OPTIONS } from "@/api/equipment/equipmentQuery";
-import type { TEquipment } from "@/api/equipment/types";
+import equipmentQuery from '@/api/equipment/equipmentQuery';
+import type { TEquipment, TReqGetEquipment } from '@/api/equipment/types';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import styles from "./HomeClient.module.scss";
+import styles from './HomeClient.module.scss';
 
 const ITEM_TYPES: Record<string, string> = {
-  weapon: "무기",
-  armor: "방어구",
-  talisman: "탈리스만",
-  spirit_ash: "뼛가루",
-  ash_of_war: "전회",
-  spell: "마술·기도",
-  gesture: "제스처",
+  weapon: '무기',
+  armor: '방어구',
+  talisman: '탈리스만',
+  spirit_ash: '뼛가루',
+  ash_of_war: '전회',
+  spell: '마술·기도',
+  gesture: '제스처',
 };
 const CONTENTS: Record<string, string> = {
-  base_game: "본편",
-  shadow_of_the_erdtree: "황금 나무의 그림자",
-  tarnished_pack: "빛바랜 자 팩",
+  base_game: '본편',
+  shadow_of_the_erdtree: '황금 나무의 그림자',
+  tarnished_pack: '빛바랜 자 팩',
 };
 const AFFINITIES: Record<string, string> = {
-  standard: "표준",
-  heavy: "중후",
-  keen: "예리",
-  quality: "상질",
-  fire: "화염",
-  flame_art: "화염술",
-  lightning: "벼락",
-  sacred: "신성",
-  magic: "마력",
-  cold: "냉기",
-  poison: "독",
-  blood: "피",
-  occult: "신비",
+  standard: '표준',
+  heavy: '중후',
+  keen: '예리',
+  quality: '상질',
+  fire: '화염',
+  flame_art: '화염술',
+  lightning: '벼락',
+  sacred: '신성',
+  magic: '마력',
+  cold: '냉기',
+  poison: '독',
+  blood: '피',
+  occult: '신비',
 };
 const ATTRIBUTES = [
-  ["strength", "근력"],
-  ["dexterity", "기량"],
-  ["intelligence", "지력"],
-  ["faith", "신앙"],
-  ["arcane", "신비"],
+  ['strength', '근력'],
+  ['dexterity', '기량'],
+  ['intelligence', '지력'],
+  ['faith', '신앙'],
+  ['arcane', '신비'],
 ] as const;
 const ELEMENTS = [
-  ["physical", "물리"],
-  ["magic", "마력"],
-  ["fire", "화염"],
-  ["lightning", "벼락"],
-  ["holy", "신성"],
+  ['physical', '물리'],
+  ['magic', '마력'],
+  ['fire', '화염'],
+  ['lightning', '벼락'],
+  ['holy', '신성'],
 ] as const;
 const ATTACK_TYPES: Record<string, string> = {
-  standard: "표준",
-  slash: "참격",
-  strike: "타격",
-  pierce: "관통",
+  standard: '표준',
+  slash: '참격',
+  strike: '타격',
+  pierce: '관통',
 };
 const UPGRADE_MATERIALS: Record<string, string> = {
-  smithing_stone: "단석",
-  somber_smithing_stone: "색 잃은 단석",
+  smithing_stone: '단석',
+  somber_smithing_stone: '색 잃은 단석',
 };
 
 export default function HomeClient() {
-  const { data: items = [], isPending, isFetching, isError, isSuccess, refetch } =
-    useQuery(EQUIPMENT_QUERY_OPTIONS);
-  const isLoading = isPending || isFetching;
-  const isReady = !isLoading && isSuccess;
-  const [query, setQuery] = useState("");
-  const [type, setType] = useState("");
-  const [category, setCategory] = useState("");
-  const [content, setContent] = useState("");
-
-  const categories = [
-    ...new Set(
-      items
-        .filter((item) => !type || item.type === type)
-        .map((item) => item.item_categories?.name)
-        .filter((name): name is string => !!name),
-    ),
-  ].sort((a, b) => a.localeCompare(b, "ko"));
-  const filtered = items.filter((item) => {
-    const matchesType = !type || item.type === type;
-    const matchesCategory = !category || item.item_categories?.name === category;
-    const matchesContent = !content || item.content_code === content;
-    const searchableText = `${item.name} ${item.game_description ?? ""} ${item.weapon_details?.weapon_skills?.name ?? ""}`;
-    const matchesQuery = searchableText
-      .toLocaleLowerCase()
-      .includes(query.trim().toLocaleLowerCase());
-    return matchesType && matchesCategory && matchesContent && matchesQuery;
+  const [params, setParams] = useState<Omit<TReqGetEquipment, 'signal'>>({
+    page: 1,
+    pageSize: 20,
   });
-  function reset() {
-    setQuery("");
-    setType("");
-    setCategory("");
-    setContent("");
+  const { data, isPending, isError, isSuccess, refetch } = equipmentQuery.useGetEquipment(params);
+  const categoriesQuery = equipmentQuery.useGetEquipmentCategories();
+  const items = data?.items ?? [];
+  const totalCount = data?.totalCount ?? 0;
+  const totalPages = Math.ceil(totalCount / params.pageSize);
+  const firstPage = Math.floor((params.page - 1) / 5) * 5 + 1;
+  const pageNumbers = Array.from(
+    { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
+    (_, index) => firstPage + index,
+  );
+  const categories = (categoriesQuery.data ?? []).filter(
+    (category) => !params.type || category.type === params.type,
+  );
+  const hasFilters = Boolean(
+    params.search || params.type || params.categoryId !== undefined || params.contentCode,
+  );
+
+  function handleFilterChange(
+    filters: Partial<Omit<TReqGetEquipment, 'signal' | 'page' | 'pageSize'>>,
+  ) {
+    setParams((previous) => ({ ...previous, ...filters, page: 1 }));
+  }
+
+  function handleReset() {
+    setParams((previous) => ({ page: 1, pageSize: previous.pageSize }));
   }
 
   return (
@@ -115,19 +111,21 @@ export default function HomeClient() {
           장비 검색
           <input
             type="search"
-            placeholder="이름, 설명, 전투 기술로 검색"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            placeholder="장비 이름으로 검색"
+            value={params.search ?? ''}
+            onChange={(event) => handleFilterChange({ search: event.target.value || undefined })}
           />
         </label>
         <label>
           종류
           <select
-            value={type}
-            onChange={(e) => {
-              setType(e.target.value);
-              setCategory("");
-            }}
+            value={params.type ?? ''}
+            onChange={(event) =>
+              handleFilterChange({
+                type: (event.target.value || undefined) as TEquipment['type'] | undefined,
+                categoryId: undefined,
+              })
+            }
           >
             <option value="">모든 종류</option>
             {Object.entries(ITEM_TYPES).map(([key, label]) => (
@@ -139,16 +137,31 @@ export default function HomeClient() {
         </label>
         <label>
           세부 분류
-          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <select
+            value={params.categoryId ?? ''}
+            disabled={categoriesQuery.isPending || categoriesQuery.isError}
+            onChange={(event) =>
+              handleFilterChange({
+                categoryId: event.target.value ? Number(event.target.value) : undefined,
+              })
+            }
+          >
             <option value="">모든 분류</option>
-            {categories.map((name) => (
-              <option key={name}>{name}</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
             ))}
           </select>
         </label>
         <label>
           콘텐츠
-          <select value={content} onChange={(e) => setContent(e.target.value)}>
+          <select
+            value={params.contentCode ?? ''}
+            onChange={(event) =>
+              handleFilterChange({ contentCode: event.target.value || undefined })
+            }
+          >
             <option value="">전체 콘텐츠</option>
             {Object.entries(CONTENTS).map(([key, label]) => (
               <option key={key} value={key}>
@@ -158,19 +171,31 @@ export default function HomeClient() {
           </select>
         </label>
       </div>
+      {categoriesQuery.isError && (
+        <p className={styles['note']}>
+          세부 분류를 불러오지 못했습니다.{' '}
+          <button
+            onClick={() => {
+              void categoriesQuery.refetch();
+            }}
+          >
+            분류 다시 불러오기
+          </button>
+        </p>
+      )}
       <div className={styles['list-heading']}>
         <h2>
-          장비 목록 <span>{filtered.length}</span>
+          장비 목록 <span>{data ? totalCount : '—'}</span>
         </h2>
-        <button onClick={reset}>필터 초기화</button>
+        <button onClick={handleReset}>필터 초기화</button>
       </div>
       <p className={styles['note']}>
         공격력·가드·능력 보정은 최대 강화 기준입니다. 공격력·가드는 표준 변질(변질 불가 무기는 기본
         상태), 부가 효과는 미강화 기준입니다. 0은 효과 없음, 미확인은 미등록 정보입니다.
       </p>
       <div aria-live="polite">
-        {isLoading && <p className={styles['message']}>장비를 불러오고 있습니다.</p>}
-        {!isLoading && isError && (
+        {isPending && <p className={styles['message']}>장비를 불러오고 있습니다.</p>}
+        {isError && (
           <div className={styles['message']}>
             <p>장비 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
             <button
@@ -182,18 +207,45 @@ export default function HomeClient() {
             </button>
           </div>
         )}
-        {isReady && filtered.length === 0 && (
+        {isSuccess && items.length === 0 && (
           <div className={styles['message']}>
             <p>
-              {items.length ? "검색 조건에 맞는 장비가 없습니다." : "아직 등록된 장비가 없습니다."}
+              {hasFilters ? '검색 조건에 맞는 장비가 없습니다.' : '아직 등록된 장비가 없습니다.'}
             </p>
-            {items.length > 0 && <button onClick={reset}>전체 목록 보기</button>}
+            {hasFilters && <button onClick={handleReset}>전체 목록 보기</button>}
           </div>
         )}
-        {isReady &&
-          filtered.length > 0 &&
-          filtered.map((item) => <EquipmentCard key={item.id} item={item} />)}
+        {isSuccess && items.map((item) => <EquipmentCard key={item.id} item={item} />)}
       </div>
+      {isSuccess && totalPages > 0 && (
+        <nav className={styles['pagination']} aria-label="장비 목록 페이지">
+          <button
+            disabled={params.page === 1}
+            onClick={() => setParams((previous) => ({ ...previous, page: previous.page - 1 }))}
+          >
+            이전
+          </button>
+          {pageNumbers.map((page) => (
+            <button
+              key={page}
+              aria-label={`${page}페이지`}
+              aria-current={page === params.page ? 'page' : undefined}
+              onClick={() => setParams((previous) => ({ ...previous, page }))}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            disabled={params.page >= totalPages}
+            onClick={() => setParams((previous) => ({ ...previous, page: previous.page + 1 }))}
+          >
+            다음
+          </button>
+          <span>
+            {params.page} / {totalPages} 페이지
+          </span>
+        </nav>
+      )}
       <footer className={styles['footer']}>엘든링 위키 · 장비 도감</footer>
     </main>
   );
@@ -220,7 +272,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
         </div>
         <div>
           <p className={styles['category']}>
-            {ITEM_TYPES[item.type]} / {item.item_categories?.name ?? "분류 미확인"}
+            {ITEM_TYPES[item.type]} / {item.item_categories?.name ?? '분류 미확인'}
           </p>
           <h2>{item.name}</h2>
           <span className={styles['badge']}>
@@ -229,7 +281,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
         </div>
       </div>
       <p className={styles['description']}>
-        {item.game_description ?? "장비 설명이 아직 등록되지 않았습니다."}
+        {item.game_description ?? '장비 설명이 아직 등록되지 않았습니다.'}
       </p>
       {w && (
         <>
@@ -242,13 +294,13 @@ function EquipmentCard({ item }: { item: TEquipment }) {
               <dt>공격 속성</dt>
               <dd>
                 {Array.isArray(w.physical_attack_types)
-                  ? w.physical_attack_types.map((t) => ATTACK_TYPES[t] ?? t).join(" / ") || "없음"
-                  : "미확인"}
+                  ? w.physical_attack_types.map((t) => ATTACK_TYPES[t] ?? t).join(' / ') || '없음'
+                  : '미확인'}
               </dd>
             </div>
             <div>
               <dt>강화 재료</dt>
-              <dd>{UPGRADE_MATERIALS[String(w.upgrade_material)] ?? "미확인"}</dd>
+              <dd>{UPGRADE_MATERIALS[String(w.upgrade_material)] ?? '미확인'}</dd>
             </div>
             <div>
               <dt>변질</dt>
@@ -259,14 +311,14 @@ function EquipmentCard({ item }: { item: TEquipment }) {
             <StatGroup
               title="공격력"
               stats={w}
-              fields={[...ELEMENTS.map(([k, l]) => [`attack_${k}`, l]), ["critical", "치명"]]}
+              fields={[...ELEMENTS.map(([k, l]) => [`attack_${k}`, l]), ['critical', '치명']]}
             />
             <StatGroup
               title="가드 시 경감률"
               stats={w}
               fields={[
                 ...ELEMENTS.map(([k, l]) => [`guard_${k}`, l]),
-                ["guard_boost", "가드 강도"],
+                ['guard_boost', '가드 강도'],
               ]}
             />
             <StatGroup
@@ -278,19 +330,19 @@ function EquipmentCard({ item }: { item: TEquipment }) {
               title="부가 효과"
               stats={w}
               fields={[
-                ["bleed", "출혈"],
-                ["frostbite", "동상"],
-                ["poison", "독"],
-                ["scarlet_rot", "붉은 부패"],
+                ['bleed', '출혈'],
+                ['frostbite', '동상'],
+                ['poison', '독'],
+                ['scarlet_rot', '붉은 부패'],
               ]}
             />
           </div>
           <div className={styles['bottom']}>
             <section className={styles['skill']}>
-              <h3>전투 기술 · {w.weapon_skills?.name ?? "미확인"}</h3>
-              <p>소모 FP {w.weapon_skills?.fp_cost_text ?? "미확인"}</p>
+              <h3>전투 기술 · {w.weapon_skills?.name ?? '미확인'}</h3>
+              <p>소모 FP {w.weapon_skills?.fp_cost_text ?? '미확인'}</p>
               <p className={styles['description']}>
-                {w.weapon_skills?.description ?? "전투 기술 설명이 아직 등록되지 않았습니다."}
+                {w.weapon_skills?.description ?? '전투 기술 설명이 아직 등록되지 않았습니다.'}
               </p>
             </section>
             <section className={styles['scalings']}>
@@ -340,7 +392,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
   );
 }
 function value(v: unknown) {
-  return v == null ? "미확인" : String(v);
+  return v == null ? '미확인' : String(v);
 }
 
 function StatGroup({
@@ -368,6 +420,6 @@ function StatGroup({
 }
 
 function formatAffinity(canChange: boolean | null) {
-  if (canChange == null) return "미확인";
-  return canChange ? "가능" : "불가";
+  if (canChange == null) return '미확인';
+  return canChange ? '가능' : '불가';
 }

@@ -258,6 +258,28 @@
     border: 1px solid #364350;
     margin-top: 22px;
   }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+
+    button {
+      &[aria-current='page'] {
+        background: #d8c28c;
+        color: #141d27;
+      }
+      &:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+    }
+    span {
+      color: #a4b1bd;
+    }
+  }
   .footer {
     padding: 40px 0 24px;
     color: #8998a7;
