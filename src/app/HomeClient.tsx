@@ -252,14 +252,14 @@ export default function HomeClient() {
 }
 
 function EquipmentCard({ item }: { item: TEquipment }) {
-  const w = item.weapon_details;
+  const w = item.weaponDetails;
   return (
     <article className={styles['item']}>
       <div className={styles['identity']}>
         <div className={styles['image']}>
-          {item.image_url ? (
+          {item.imageUrl ? (
             <Image
-              src={item.image_url}
+              src={item.imageUrl}
               alt={item.name}
               width={112}
               height={112}
@@ -272,16 +272,14 @@ function EquipmentCard({ item }: { item: TEquipment }) {
         </div>
         <div>
           <p className={styles['category']}>
-            {ITEM_TYPES[item.type]} / {item.item_categories?.name ?? '분류 미확인'}
+            {ITEM_TYPES[item.type]} / {item.itemCategories?.name ?? '분류 미확인'}
           </p>
           <h2>{item.name}</h2>
-          <span className={styles['badge']}>
-            {CONTENTS[item.content_code] ?? item.content_code}
-          </span>
+          <span className={styles['badge']}>{CONTENTS[item.contentCode] ?? item.contentCode}</span>
         </div>
       </div>
       <p className={styles['description']}>
-        {item.game_description ?? '장비 설명이 아직 등록되지 않았습니다.'}
+        {item.gameDescription ?? '장비 설명이 아직 등록되지 않았습니다.'}
       </p>
       {w && (
         <>
@@ -293,38 +291,41 @@ function EquipmentCard({ item }: { item: TEquipment }) {
             <div>
               <dt>공격 속성</dt>
               <dd>
-                {Array.isArray(w.physical_attack_types)
-                  ? w.physical_attack_types.map((t) => ATTACK_TYPES[t] ?? t).join(' / ') || '없음'
+                {Array.isArray(w.physicalAttackTypes)
+                  ? w.physicalAttackTypes.map((t) => ATTACK_TYPES[t] ?? t).join(' / ') || '없음'
                   : '미확인'}
               </dd>
             </div>
             <div>
               <dt>강화 재료</dt>
-              <dd>{UPGRADE_MATERIALS[String(w.upgrade_material)] ?? '미확인'}</dd>
+              <dd>{UPGRADE_MATERIALS[String(w.upgradeMaterial)] ?? '미확인'}</dd>
             </div>
             <div>
               <dt>변질</dt>
-              <dd>{formatAffinity(w.can_change_affinity)}</dd>
+              <dd>{formatAffinity(w.canChangeAffinity)}</dd>
             </div>
           </dl>
           <div className={styles['stats']}>
             <StatGroup
               title="공격력"
               stats={w}
-              fields={[...ELEMENTS.map(([k, l]) => [`attack_${k}`, l]), ['critical', '치명']]}
+              fields={[
+                ...ELEMENTS.map(([k, l]) => [`attack${k[0].toUpperCase()}${k.slice(1)}`, l]),
+                ['critical', '치명'],
+              ]}
             />
             <StatGroup
               title="가드 시 경감률"
               stats={w}
               fields={[
-                ...ELEMENTS.map(([k, l]) => [`guard_${k}`, l]),
-                ['guard_boost', '가드 강도'],
+                ...ELEMENTS.map(([k, l]) => [`guard${k[0].toUpperCase()}${k.slice(1)}`, l]),
+                ['guardBoost', '가드 강도'],
               ]}
             />
             <StatGroup
               title="필요 능력치"
               stats={w}
-              fields={ATTRIBUTES.map(([k, l]) => [`required_${k}`, l])}
+              fields={ATTRIBUTES.map(([k, l]) => [`required${k[0].toUpperCase()}${k.slice(1)}`, l])}
             />
             <StatGroup
               title="부가 효과"
@@ -333,21 +334,21 @@ function EquipmentCard({ item }: { item: TEquipment }) {
                 ['bleed', '출혈'],
                 ['frostbite', '동상'],
                 ['poison', '독'],
-                ['scarlet_rot', '붉은 부패'],
+                ['scarletRot', '붉은 부패'],
               ]}
             />
           </div>
           <div className={styles['bottom']}>
             <section className={styles['skill']}>
-              <h3>전투 기술 · {w.weapon_skills?.name ?? '미확인'}</h3>
-              <p>소모 FP {w.weapon_skills?.fp_cost_text ?? '미확인'}</p>
+              <h3>전투 기술 · {w.weaponSkills?.name ?? '미확인'}</h3>
+              <p>소모 FP {w.weaponSkills?.fpCostText ?? '미확인'}</p>
               <p className={styles['description']}>
-                {w.weapon_skills?.description ?? '전투 기술 설명이 아직 등록되지 않았습니다.'}
+                {w.weaponSkills?.description ?? '전투 기술 설명이 아직 등록되지 않았습니다.'}
               </p>
             </section>
             <section className={styles['scalings']}>
               <h3>변질별 능력 보정</h3>
-              {w.weapon_scalings.length > 0 && (
+              {w.weaponScalings.length > 0 && (
                 <div
                   className={styles['table-scroll']}
                   tabIndex={0}
@@ -367,7 +368,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
                     </thead>
                     <tbody>
                       {Object.keys(AFFINITIES).flatMap((affinity) =>
-                        w.weapon_scalings
+                        w.weaponScalings
                           .filter((s) => s.affinity === affinity)
                           .map((s) => (
                             <tr key={affinity}>
@@ -382,7 +383,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
                   </table>
                 </div>
               )}
-              {w.weapon_scalings.length === 0 && <p>능력 보정 정보가 아직 등록되지 않았습니다.</p>}
+              {w.weaponScalings.length === 0 && <p>능력 보정 정보가 아직 등록되지 않았습니다.</p>}
             </section>
           </div>
         </>

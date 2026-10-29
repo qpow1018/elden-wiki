@@ -38,11 +38,68 @@ export async function getEquipment({
   const { data, count } = await request.throwOnError();
 
   return {
-    items: data.map((row) => ({
-      ...row,
+    items: data.map((row) => {
       // 복합 외래키 관계는 배열로 응답하지만 item_id PK가 최대 한 행을 보장합니다.
-      weapon_details: row.weapon_details[0] ?? null,
-    })),
+      const weapon = row.weapon_details[0];
+
+      return {
+        id: row.id,
+        name: row.name,
+        type: row.type,
+        imageUrl: row.image_url,
+        contentCode: row.content_code,
+        gameDescription: row.game_description,
+        itemCategories: row.item_categories,
+        weaponDetails: weapon
+          ? {
+              itemId: weapon.item_id,
+              type: weapon.type,
+              weight: weapon.weight,
+              physicalAttackTypes: weapon.physical_attack_types,
+              upgradeMaterial: weapon.upgrade_material,
+              defaultSkillId: weapon.default_skill_id,
+              canChangeAffinity: weapon.can_change_affinity,
+              attackPhysical: weapon.attack_physical,
+              attackMagic: weapon.attack_magic,
+              attackFire: weapon.attack_fire,
+              attackLightning: weapon.attack_lightning,
+              attackHoly: weapon.attack_holy,
+              critical: weapon.critical,
+              guardPhysical: weapon.guard_physical,
+              guardMagic: weapon.guard_magic,
+              guardFire: weapon.guard_fire,
+              guardLightning: weapon.guard_lightning,
+              guardHoly: weapon.guard_holy,
+              guardBoost: weapon.guard_boost,
+              requiredStrength: weapon.required_strength,
+              requiredDexterity: weapon.required_dexterity,
+              requiredIntelligence: weapon.required_intelligence,
+              requiredFaith: weapon.required_faith,
+              requiredArcane: weapon.required_arcane,
+              bleed: weapon.bleed,
+              frostbite: weapon.frostbite,
+              poison: weapon.poison,
+              scarletRot: weapon.scarlet_rot,
+              weaponSkills: weapon.weapon_skills
+                ? {
+                    name: weapon.weapon_skills.name,
+                    description: weapon.weapon_skills.description,
+                    fpCostText: weapon.weapon_skills.fp_cost_text,
+                  }
+                : null,
+              weaponScalings: weapon.weapon_scalings.map((scaling) => ({
+                itemId: scaling.item_id,
+                affinity: scaling.affinity,
+                strength: scaling.strength,
+                dexterity: scaling.dexterity,
+                intelligence: scaling.intelligence,
+                faith: scaling.faith,
+                arcane: scaling.arcane,
+              })),
+            }
+          : null,
+      };
+    }),
     totalCount: count ?? 0,
   };
 }
