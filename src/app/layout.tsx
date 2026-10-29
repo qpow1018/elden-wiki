@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
 import "@/assets/reset.scss";
 import "@/assets/global.scss";
 
