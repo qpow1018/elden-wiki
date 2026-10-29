@@ -1,32 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { createSupabaseClient } from "@/lib/supabase/client";
+import { EQUIPMENT_QUERY_OPTIONS } from "@/api/equipment/equipmentQuery";
+import type { TEquipment } from "@/api/equipment/types";
 
 import Image from "next/image";
 
 import styles from "./HomeClient.module.scss";
 
-type TStats = Record<string, number | string | boolean | string[] | null>;
-type TWeapon = TStats & {
-  weapon_skills: {
-    name: string;
-    description: string | null;
-    fp_cost_text: string | null;
-  } | null;
-  weapon_scalings: (Record<string, string | null> & { affinity: string })[];
-};
-type TItem = {
-  id: number;
-  name: string;
-  type: string;
-  image_url: string | null;
-  content_code: string;
-  game_description: string | null;
-  item_categories: { name: string } | null;
-  weapon_details: TWeapon | null;
-};
 const ITEM_TYPES: Record<string, string> = {
   weapon: "무기",
   armor: "방어구",
@@ -82,57 +65,14 @@ const UPGRADE_MATERIALS: Record<string, string> = {
 };
 
 export default function HomeClient() {
-  const [items, setItems] = useState<TItem[]>([]);
-  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const { data: items = [], isPending, isFetching, isError, isSuccess, refetch } =
+    useQuery(EQUIPMENT_QUERY_OPTIONS);
+  const isLoading = isPending || isFetching;
+  const isReady = !isLoading && isSuccess;
   const [query, setQuery] = useState("");
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
-  const [attempt, setAttempt] = useState(0);
-
-  useEffect(() => {
-    let active = true;
-    async function loadItems() {
-      setStatus("loading");
-      try {
-        const client = createSupabaseClient();
-        const all: TItem[] = [];
-        // Data API의 기본 응답 한도를 넘는 목록도 빠짐없이 조회합니다.
-        for (let start = 0; ; start += 500) {
-          const { data, error } = await client
-            .from("items")
-            .select(
-              "id,name,type,image_url,content_code,game_description,item_categories(name),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))",
-            )
-            .order("id")
-            .range(start, start + 499);
-          if (error) throw error;
-          all.push(
-            ...(data.map((row) => ({
-              ...row,
-              item_categories: Array.isArray(row.item_categories)
-                ? (row.item_categories[0] ?? null)
-                : row.item_categories,
-              weapon_details: Array.isArray(row.weapon_details)
-                ? (row.weapon_details[0] ?? null)
-                : row.weapon_details,
-            })) as unknown as TItem[]),
-          );
-          if (data.length < 500) break;
-        }
-        if (active) {
-          setItems(all);
-          setStatus("ready");
-        }
-      } catch {
-        if (active) setStatus("error");
-      }
-    }
-    void loadItems();
-    return () => {
-      active = false;
-    };
-  }, [attempt]);
 
   const categories = [
     ...new Set(
@@ -229,14 +169,20 @@ export default function HomeClient() {
         상태), 부가 효과는 미강화 기준입니다. 0은 효과 없음, 미확인은 미등록 정보입니다.
       </p>
       <div aria-live="polite">
-        {status === "loading" && <p className={styles['message']}>장비를 불러오고 있습니다.</p>}
-        {status === "error" && (
+        {isLoading && <p className={styles['message']}>장비를 불러오고 있습니다.</p>}
+        {!isLoading && isError && (
           <div className={styles['message']}>
             <p>장비 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
-            <button onClick={() => setAttempt((n) => n + 1)}>다시 불러오기</button>
+            <button
+              onClick={() => {
+                void refetch();
+              }}
+            >
+              다시 불러오기
+            </button>
           </div>
         )}
-        {status === "ready" && filtered.length === 0 && (
+        {isReady && filtered.length === 0 && (
           <div className={styles['message']}>
             <p>
               {items.length ? "검색 조건에 맞는 장비가 없습니다." : "아직 등록된 장비가 없습니다."}
@@ -244,7 +190,7 @@ export default function HomeClient() {
             {items.length > 0 && <button onClick={reset}>전체 목록 보기</button>}
           </div>
         )}
-        {status === "ready" &&
+        {isReady &&
           filtered.length > 0 &&
           filtered.map((item) => <EquipmentCard key={item.id} item={item} />)}
       </div>
@@ -253,7 +199,7 @@ export default function HomeClient() {
   );
 }
 
-function EquipmentCard({ item }: { item: TItem }) {
+function EquipmentCard({ item }: { item: TEquipment }) {
   const w = item.weapon_details;
   return (
     <article className={styles['item']}>
@@ -403,7 +349,7 @@ function StatGroup({
   fields,
 }: {
   title: string;
-  stats: TStats;
+  stats: Record<string, unknown>;
   fields: readonly (readonly string[])[];
 }) {
   return (
@@ -421,7 +367,7 @@ function StatGroup({
   );
 }
 
-function formatAffinity(canChange: TStats[string]) {
+function formatAffinity(canChange: boolean | null) {
   if (canChange == null) return "미확인";
   return canChange ? "가능" : "불가";
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import QueryProvider from "@/providers/QueryProvider";
+
 import "@/assets/reset.scss";
 import "@/assets/global.scss";
 
@@ -18,7 +20,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className={pretendard.className}>{children}</body>
+      <body className={pretendard.className}>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
