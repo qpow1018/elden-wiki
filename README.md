@@ -77,8 +77,8 @@ npm start
 
 ```text
 src/
-  app/                  # 페이지, 레이아웃, 폰트 리소스
-  assets/               # Sass 변수·믹스인·리셋·전역 스타일
+  app/                  # 페이지, 레이아웃
+  assets/               # 폰트, Sass 변수·믹스인·리셋·전역 스타일
   lib/supabase/client.ts # 공개 데이터 조회용 Supabase 클라이언트
 ```
 

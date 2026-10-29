@@ -4,7 +4,7 @@ import "@/assets/reset.scss";
 import "@/assets/global.scss";
 
 const pretendard = localFont({
-  src: "./assets/fonts/PretendardVariable.woff2",
+  src: "../assets/fonts/PretendardVariable.woff2",
   weight: "100 900",
   display: "swap",
 });
