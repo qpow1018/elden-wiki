@@ -61,14 +61,10 @@ export default function FormShowcase() {
 
           <div className={styles['checkbox-field']}>
             <span>선택</span>
-            <Checkbox isChecked={isChecked} onChange={setIsChecked} label="이 옵션을 적용합니다" />
-            <Checkbox isChecked={false} onChange={() => undefined} label="비활성 선택" isDisabled />
-            <Checkbox
-              isChecked={isChecked}
-              size="small"
-              onChange={setIsChecked}
-              label="작은 크기"
-            />
+            <Checkbox checked={isChecked} onChange={setIsChecked} label="이 옵션을 적용합니다" />
+            <Checkbox checked={false} onChange={() => undefined} label="비활성 선택" disabled />
+            <Checkbox checked={isChecked} size="small" onChange={setIsChecked} label="작은 크기" />
+            <Checkbox defaultChecked label="비제어 선택" />
           </div>
           <label className={styles['form-field']}>
             <span>자동 높이 · 제어 입력</span>

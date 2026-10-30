@@ -1,45 +1,32 @@
 'use client';
 
+import type { ComponentProps, ReactNode } from 'react';
+
 import styles from './Checkbox.module.scss';
 
 import { MdCheck } from 'react-icons/md';
 
 type TCheckboxSize = 'small' | 'medium';
 
-export default function Checkbox(props: {
-  isChecked: boolean;
-  onChange: (isChecked: boolean) => void;
-  label: React.ReactNode;
-  size?: TCheckboxSize;
-  isDisabled?: boolean;
-  ariaLabel?: string;
-  className?: string;
-}) {
-  const {
-    isChecked,
-    onChange,
-    label,
-    size = 'medium',
-    isDisabled = false,
-    ariaLabel,
-    className,
-  } = props;
+export default function Checkbox(
+  props: Omit<ComponentProps<'input'>, 'type' | 'size' | 'onChange'> & {
+    onChange?: (checked: boolean) => void;
+    label: ReactNode;
+    size?: TCheckboxSize;
+  },
+) {
+  const { onChange, label, size = 'medium', ...inputProps } = props;
 
   return (
     <label
-      className={`${styles['checkbox']} ${styles[`size-${size}`]} ${isDisabled ? styles['is-disabled'] : ''} ${className ?? ''}`}
+      className={`${styles['checkbox']} ${styles[`size-${size}`]} ${inputProps.disabled ? styles['is-disabled'] : ''}`}
     >
       <input
+        {...inputProps}
         type="checkbox"
-        checked={isChecked}
-        disabled={isDisabled}
-        aria-label={ariaLabel}
-        onChange={(event) => onChange(event.target.checked)}
+        onChange={(event) => onChange?.(event.target.checked)}
       />
-      <span
-        className={`${styles['control']} ${isChecked ? styles['is-checked'] : ''}`}
-        aria-hidden="true"
-      >
+      <span className={styles['control']} aria-hidden="true">
         <MdCheck />
       </span>
       {label}
