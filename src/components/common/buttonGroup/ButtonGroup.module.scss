@@ -1,36 +1,48 @@
 .button-group {
   display: inline-flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
   padding: 2px;
   background-color: $bg-dark;
   border-radius: $border-radius;
   gap: 2px;
 
   &.size-small .option {
-    height: 28px;
+    min-height: 32px;
     padding: 0 14px;
+    font-size: 14px;
   }
 
   &.size-medium .option {
-    height: 32px;
+    min-height: 38px;
     padding: 0 16px;
+    font-size: 14px;
   }
 
   &.size-large .option {
-    height: 36px;
+    min-height: 44px;
     padding: 0 18px;
+    font-size: 15px;
   }
 
   .option {
+    min-width: 0;
     border-radius: 4px;
     background-color: transparent;
     color: $text-secondary;
-    font-size: 13px;
+    overflow-wrap: anywhere;
     transition:
       background-color $transition,
       color $transition;
 
-    &:hover {
+    &:hover:not(:disabled) {
       color: $text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: 2px;
     }
 
     &:disabled {
@@ -42,9 +54,5 @@
   .option-selected {
     background-color: $bg-light;
     color: $text-primary;
-
-    &:hover {
-      background-color: $bg-light;
-    }
   }
 }
