@@ -429,3 +429,115 @@ from public.items i
 join public.item_categories c on c.id = i.category_id
 where i.name = '무구 덩어리 부적' and i.type = 'talisman' and c.name = '탈리스만'
 on conflict (item_id) do nothing;
+
+-- 사용자 확인: EIP 주문 표에서 생략된 필요 능력치는 요구 없음(0)입니다.
+-- 미제공 FP·설명은 미확인(NULL)으로 유지합니다.
+insert into public.items (name, type, category_id, image_url, content_code)
+select '아듀라의 달의 검', 'spell', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_180-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'spell' and c.name = '마술'
+  and not exists (
+    select 1 from public.items
+    where name = '아듀라의 달의 검' and type = 'spell' and category_id = c.id
+  );
+
+insert into public.spell_details (
+  item_id, slots_used, required_intelligence, required_faith, required_arcane
+)
+select i.id, 1, 32, 0, 0
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '아듀라의 달의 검' and i.type = 'spell' and c.name = '마술'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '아길의 화염', 'spell', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_130-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'spell' and c.name = '기도'
+  and not exists (
+    select 1 from public.items
+    where name = '아길의 화염' and type = 'spell' and category_id = c.id
+  );
+
+insert into public.spell_details (
+  item_id, slots_used, required_intelligence, required_faith, required_arcane
+)
+select i.id, 1, 0, 23, 15
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '아길의 화염' and i.type = 'spell' and c.name = '기도'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '기습의 돌팔매', 'spell', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_065-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'spell' and c.name = '마술'
+  and not exists (
+    select 1 from public.items
+    where name = '기습의 돌팔매' and type = 'spell' and category_id = c.id
+  );
+
+insert into public.spell_details (
+  item_id, slots_used, required_intelligence, required_faith, required_arcane
+)
+select i.id, 1, 23, 0, 0
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '기습의 돌팔매' and i.type = 'spell' and c.name = '마술'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '옛 죽음의 영혼', 'spell', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_041-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'spell' and c.name = '마술'
+  and not exists (
+    select 1 from public.items
+    where name = '옛 죽음의 영혼' and type = 'spell' and category_id = c.id
+  );
+
+insert into public.spell_details (
+  item_id, slots_used, required_intelligence, required_faith, required_arcane
+)
+select i.id, 1, 34, 24, 0
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '옛 죽음의 영혼' and i.type = 'spell' and c.name = '마술'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '고룡의 뇌창', 'spell', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_016-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'spell' and c.name = '기도'
+  and not exists (
+    select 1 from public.items
+    where name = '고룡의 뇌창' and type = 'spell' and category_id = c.id
+  );
+
+insert into public.spell_details (
+  item_id, slots_used, required_intelligence, required_faith, required_arcane
+)
+select i.id, 1, 0, 32, 0
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '고룡의 뇌창' and i.type = 'spell' and c.name = '기도'
+on conflict (item_id) do nothing;
+
+-- 기존 로컬 주문 샘플에도 사용자 확인한 요구 없음(0)을 반영합니다.
+update public.spell_details d
+set required_intelligence = coalesce(d.required_intelligence, 0),
+    required_faith = coalesce(d.required_faith, 0),
+    required_arcane = coalesce(d.required_arcane, 0)
+from public.items i
+where d.item_id = i.id and i.type = 'spell'
+  and i.name in ('아듀라의 달의 검', '아길의 화염', '기습의 돌팔매', '옛 죽음의 영혼', '고룡의 뇌창')
+  and (d.required_intelligence is null or d.required_faith is null or d.required_arcane is null);
