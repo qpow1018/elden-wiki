@@ -1,6 +1,6 @@
 'use client';
 
-import { useId } from 'react';
+import { type ComponentProps, useId } from 'react';
 
 import {
   DndContext,
@@ -24,13 +24,7 @@ import { CSS } from '@dnd-kit/utilities';
 
 import styles from './DraggableList.module.scss';
 
-export type TDragHandleProps = {
-  ref: (node: HTMLElement | null) => void;
-  onPointerDown?: (event: React.PointerEvent) => void;
-  onKeyDown?: (event: React.KeyboardEvent) => void;
-  'aria-describedby'?: string;
-  'aria-pressed'?: boolean;
-};
+export type TDragHandleProps = ComponentProps<'button'>;
 
 export default function DraggableList<T>(props: {
   items: T[];
@@ -132,11 +126,10 @@ function SortableItem(props: {
   };
 
   const dragHandleProps: TDragHandleProps = {
+    ...attributes,
+    ...listeners,
     ref: setActivatorNodeRef,
-    onPointerDown: listeners?.onPointerDown as TDragHandleProps['onPointerDown'],
-    onKeyDown: listeners?.onKeyDown as TDragHandleProps['onKeyDown'],
-    'aria-describedby': attributes['aria-describedby'],
-    'aria-pressed': attributes['aria-pressed'],
+    type: 'button',
   };
 
   return (
