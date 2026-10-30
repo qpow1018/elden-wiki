@@ -20,7 +20,7 @@ export async function getEquipment({
   const request = client
     .from('items')
     .select(
-      'id,name,type,image_url,content_code,game_description,item_categories(name),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,item_categories(name),armor_details(*),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
     .order('id')
@@ -41,6 +41,7 @@ export async function getEquipment({
     items: data.map((row) => {
       // 복합 외래키 관계는 배열로 응답하지만 item_id PK가 최대 한 행을 보장합니다.
       const weapon = row.weapon_details[0];
+      const armor = row.armor_details[0];
 
       return {
         id: row.id,
@@ -50,6 +51,24 @@ export async function getEquipment({
         contentCode: row.content_code,
         gameDescription: row.game_description,
         itemCategories: row.item_categories,
+        armorDetails: armor
+          ? {
+              weight: armor.weight,
+              poise: armor.poise,
+              negationPhysical: armor.negation_physical,
+              negationStrike: armor.negation_strike,
+              negationSlash: armor.negation_slash,
+              negationPierce: armor.negation_pierce,
+              negationMagic: armor.negation_magic,
+              negationFire: armor.negation_fire,
+              negationLightning: armor.negation_lightning,
+              negationHoly: armor.negation_holy,
+              immunity: armor.immunity,
+              robustness: armor.robustness,
+              focus: armor.focus,
+              vitality: armor.vitality,
+            }
+          : null,
         weaponDetails: weapon
           ? {
               itemId: weapon.item_id,

@@ -231,3 +231,120 @@ from public.items i
 where d.item_id = i.id and i.type = 'weapon'
   and i.name in ('대거', '문리델의 기사검', '이데스의 검')
   and (d.sleep is distinct from 0 or d.madness is distinct from 0);
+
+-- 온 지혜 방어구 5종: 사용자 제공 EIP 표의 수치·이미지를 그대로 사용합니다.
+-- 한국어 이름은 한국어 방어구 자료와 대조했으며 게임 내 원문·부가 효과는 미입력입니다.
+insert into public.items (name, type, category_id, image_url, content_code)
+select '온 지혜의 갑옷', 'armor', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_209-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'armor' and c.name = '갑옷'
+  and not exists (
+    select 1 from public.items
+    where name = '온 지혜의 갑옷' and type = 'armor' and category_id = c.id
+  );
+
+insert into public.armor_details (
+  item_id, weight, poise,
+  negation_physical, negation_strike, negation_slash, negation_pierce,
+  negation_magic, negation_fire, negation_lightning, negation_holy,
+  immunity, robustness, focus, vitality
+)
+select i.id, 10.7, 16, 12.9, 11.9, 13.5, 11.9, 12.4, 9.5, 10.2, 8.8, 28, 46, 21, 21
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '온 지혜의 갑옷' and i.type = 'armor' and c.name = '갑옷'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '온 지혜의 갑옷(경장)', 'armor', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_140-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'armor' and c.name = '갑옷'
+  and not exists (
+    select 1 from public.items
+    where name = '온 지혜의 갑옷(경장)' and type = 'armor' and category_id = c.id
+  );
+
+insert into public.armor_details (
+  item_id, weight, poise,
+  negation_physical, negation_strike, negation_slash, negation_pierce,
+  negation_magic, negation_fire, negation_lightning, negation_holy,
+  immunity, robustness, focus, vitality
+)
+select i.id, 9.3, 13, 12.4, 10.9, 12.9, 11.4, 11.4, 8.8, 9.5, 8, 22, 38, 16, 16
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '온 지혜의 갑옷(경장)' and i.type = 'armor' and c.name = '갑옷'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '온 지혜의 장갑', 'armor', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_186-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'armor' and c.name = '장갑'
+  and not exists (
+    select 1 from public.items
+    where name = '온 지혜의 장갑' and type = 'armor' and category_id = c.id
+  );
+
+insert into public.armor_details (
+  item_id, weight, poise,
+  negation_physical, negation_strike, negation_slash, negation_pierce,
+  negation_magic, negation_fire, negation_lightning, negation_holy,
+  immunity, robustness, focus, vitality
+)
+select i.id, 3.5, 4, 3.2, 2.9, 3.3, 2.9, 3.1, 2.3, 2.5, 2.1, 9, 15, 7, 7
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '온 지혜의 장갑' and i.type = 'armor' and c.name = '장갑'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '온 지혜의 각반', 'armor', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_163-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'armor' and c.name = '각반'
+  and not exists (
+    select 1 from public.items
+    where name = '온 지혜의 각반' and type = 'armor' and category_id = c.id
+  );
+
+insert into public.armor_details (
+  item_id, weight, poise,
+  negation_physical, negation_strike, negation_slash, negation_pierce,
+  negation_magic, negation_fire, negation_lightning, negation_holy,
+  immunity, robustness, focus, vitality
+)
+select i.id, 6.6, 10, 7.4, 6.8, 7.7, 6.8, 7.1, 5.4, 5.8, 5, 17, 29, 13, 13
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '온 지혜의 각반' and i.type = 'armor' and c.name = '각반'
+on conflict (item_id) do nothing;
+
+insert into public.items (name, type, category_id, image_url, content_code)
+select '온 지혜의 투구', 'armor', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_232-150x150.png.webp',
+  'base_game'
+from public.item_categories c
+where c.type = 'armor' and c.name = '투구'
+  and not exists (
+    select 1 from public.items
+    where name = '온 지혜의 투구' and type = 'armor' and category_id = c.id
+  );
+
+insert into public.armor_details (
+  item_id, weight, poise,
+  negation_physical, negation_strike, negation_slash, negation_pierce,
+  negation_magic, negation_fire, negation_lightning, negation_holy,
+  immunity, robustness, focus, vitality
+)
+select i.id, 4.6, 5, 4.6, 4.2, 4.8, 4.2, 4.4, 3.4, 3.6, 3.1, 12, 20, 9, 9
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '온 지혜의 투구' and i.type = 'armor' and c.name = '투구'
+on conflict (item_id) do nothing;

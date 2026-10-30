@@ -7,6 +7,72 @@ export type TJson =
 export type TDatabase = {
   public: {
     Tables: {
+      armor_details: {
+        Row: {
+          focus: number | null;
+          immunity: number | null;
+          item_id: number;
+          negation_fire: number | null;
+          negation_holy: number | null;
+          negation_lightning: number | null;
+          negation_magic: number | null;
+          negation_physical: number | null;
+          negation_pierce: number | null;
+          negation_slash: number | null;
+          negation_strike: number | null;
+          poise: number | null;
+          robustness: number | null;
+          type: TDatabase['public']['Enums']['item_type'];
+          vitality: number | null;
+          weight: number | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          focus?: number | null;
+          immunity?: number | null;
+          item_id: number;
+          negation_fire?: number | null;
+          negation_holy?: number | null;
+          negation_lightning?: number | null;
+          negation_magic?: number | null;
+          negation_physical?: number | null;
+          negation_pierce?: number | null;
+          negation_slash?: number | null;
+          negation_strike?: number | null;
+          poise?: number | null;
+          robustness?: number | null;
+          type?: TDatabase['public']['Enums']['item_type'];
+          vitality?: number | null;
+          weight?: number | null;
+        };
+        Update: {
+          focus?: number | null;
+          immunity?: number | null;
+          item_id?: number;
+          negation_fire?: number | null;
+          negation_holy?: number | null;
+          negation_lightning?: number | null;
+          negation_magic?: number | null;
+          negation_physical?: number | null;
+          negation_pierce?: number | null;
+          negation_slash?: number | null;
+          negation_strike?: number | null;
+          poise?: number | null;
+          robustness?: number | null;
+          type?: TDatabase['public']['Enums']['item_type'];
+          vitality?: number | null;
+          weight?: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'armor_details_item_id_type_fkey';
+            columns: ['item_id', 'type'];
+            isOneToOne: false;
+            referencedRelation: 'items';
+            referencedColumns: ['id', 'type'];
+          },
+        ];
+      };
       item_categories: {
         Row: {
           id: number;
@@ -30,6 +96,7 @@ export type TDatabase = {
         Row: {
           category_id: number;
           content_code: string;
+          effect_description: string | null;
           game_description: string | null;
           id: number;
           image_url: string | null;
@@ -40,6 +107,7 @@ export type TDatabase = {
         Insert: {
           category_id: number;
           content_code: string;
+          effect_description?: string | null;
           game_description?: string | null;
           id?: never;
           image_url?: string | null;
@@ -49,6 +117,7 @@ export type TDatabase = {
         Update: {
           category_id?: number;
           content_code?: string;
+          effect_description?: string | null;
           game_description?: string | null;
           id?: never;
           image_url?: string | null;

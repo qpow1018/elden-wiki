@@ -72,6 +72,23 @@ export type TWeapon = {
   weaponScalings: TWeaponScaling[];
 };
 
+export type TArmor = {
+  weight: number | null;
+  poise: number | null;
+  negationPhysical: number | null;
+  negationStrike: number | null;
+  negationSlash: number | null;
+  negationPierce: number | null;
+  negationMagic: number | null;
+  negationFire: number | null;
+  negationLightning: number | null;
+  negationHoly: number | null;
+  immunity: number | null;
+  robustness: number | null;
+  focus: number | null;
+  vitality: number | null;
+};
+
 export type TEquipment = {
   id: number;
   name: string;
@@ -83,6 +100,7 @@ export type TEquipment = {
     name: string;
   } | null;
   weaponDetails: TWeapon | null;
+  armorDetails: TArmor | null;
 };
 
 export type TResGetEquipment = {

@@ -253,6 +253,7 @@ export default function HomeClient() {
 
 function EquipmentCard({ item }: { item: TEquipment }) {
   const w = item.weaponDetails;
+  const armor = item.armorDetails;
   return (
     <article className={styles['item']}>
       <div className={styles['identity']}>
@@ -388,7 +389,43 @@ function EquipmentCard({ item }: { item: TEquipment }) {
           </div>
         </>
       )}
-      {!w && <p className={styles['note']}>상세 능력치가 아직 등록되지 않았습니다.</p>}
+      {armor && (
+        <div className={styles['stats']}>
+          <StatGroup
+            title="기본 능력치"
+            stats={armor}
+            fields={[
+              ['weight', '중량'],
+              ['poise', '강인도'],
+            ]}
+          />
+          <StatGroup
+            title="경감률"
+            stats={armor}
+            fields={[
+              ['negationPhysical', '물리'],
+              ['negationStrike', '타격'],
+              ['negationSlash', '참격'],
+              ['negationPierce', '관통'],
+              ['negationMagic', '마력'],
+              ['negationFire', '화염'],
+              ['negationLightning', '벼락'],
+              ['negationHoly', '신성'],
+            ]}
+          />
+          <StatGroup
+            title="내성"
+            stats={armor}
+            fields={[
+              ['immunity', '면역'],
+              ['robustness', '강건'],
+              ['focus', '이성'],
+              ['vitality', '항사'],
+            ]}
+          />
+        </div>
+      )}
+      {!w && !armor && <p className={styles['note']}>상세 능력치가 아직 등록되지 않았습니다.</p>}
     </article>
   );
 }
