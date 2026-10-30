@@ -348,3 +348,84 @@ from public.items i
 join public.item_categories c on c.id = i.category_id
 where i.name = '온 지혜의 투구' and i.type = 'armor' and c.name = '투구'
 on conflict (item_id) do nothing;
+
+-- 사용자 제공 EIP 표의 탈리스만 샘플. 효과 설명은 합의한 한국어 요약입니다.
+insert into public.items (
+  name, type, category_id, image_url, content_code, effect_description
+)
+select '선조령의 뿔', 'talisman', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_020-150x150.png.webp',
+  'base_game', '적을 쓰러뜨리면 FP를 3 회복한다.'
+from public.item_categories c
+where c.type = 'talisman' and c.name = '탈리스만'
+  and not exists (
+    select 1 from public.items
+    where name = '선조령의 뿔' and type = 'talisman' and category_id = c.id
+  );
+
+insert into public.talisman_details (item_id, weight)
+select i.id, 1.2
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '선조령의 뿔' and i.type = 'talisman' and c.name = '탈리스만'
+on conflict (item_id) do nothing;
+
+insert into public.items (
+  name, type, category_id, image_url, content_code, effect_description
+)
+select '먼 화살의 탈리스만', 'talisman', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_125-150x150.png.webp',
+  'base_game', '활과 석궁의 유효 사거리가 증가한다.'
+from public.item_categories c
+where c.type = 'talisman' and c.name = '탈리스만'
+  and not exists (
+    select 1 from public.items
+    where name = '먼 화살의 탈리스만' and type = 'talisman' and category_id = c.id
+  );
+
+insert into public.talisman_details (item_id, weight)
+select i.id, 0.7
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '먼 화살의 탈리스만' and i.type = 'talisman' and c.name = '탈리스만'
+on conflict (item_id) do nothing;
+
+insert into public.items (
+  name, type, category_id, image_url, content_code, effect_description
+)
+select '튼튼한 화살의 탈리스만', 'talisman', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_105-150x150.png.webp',
+  'base_game', '화살과 볼트의 공격력이 10% 증가한다.'
+from public.item_categories c
+where c.type = 'talisman' and c.name = '탈리스만'
+  and not exists (
+    select 1 from public.items
+    where name = '튼튼한 화살의 탈리스만' and type = 'talisman' and category_id = c.id
+  );
+
+insert into public.talisman_details (item_id, weight)
+select i.id, 0.7
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '튼튼한 화살의 탈리스만' and i.type = 'talisman' and c.name = '탈리스만'
+on conflict (item_id) do nothing;
+
+insert into public.items (
+  name, type, category_id, image_url, content_code, effect_description
+)
+select '무구 덩어리 부적', 'talisman', c.id,
+  'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_208-150x150.png.webp',
+  'base_game', '장비 중량 상한이 15% 증가한다.'
+from public.item_categories c
+where c.type = 'talisman' and c.name = '탈리스만'
+  and not exists (
+    select 1 from public.items
+    where name = '무구 덩어리 부적' and type = 'talisman' and category_id = c.id
+  );
+
+insert into public.talisman_details (item_id, weight)
+select i.id, 1.5
+from public.items i
+join public.item_categories c on c.id = i.category_id
+where i.name = '무구 덩어리 부적' and i.type = 'talisman' and c.name = '탈리스만'
+on conflict (item_id) do nothing;

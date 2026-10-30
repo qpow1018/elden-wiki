@@ -134,6 +134,33 @@ export type TDatabase = {
           },
         ];
       };
+      talisman_details: {
+        Row: {
+          item_id: number;
+          type: TDatabase['public']['Enums']['item_type'];
+          weight: number | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          item_id: number;
+          type?: TDatabase['public']['Enums']['item_type'];
+          weight?: number | null;
+        };
+        Update: {
+          item_id?: number;
+          type?: TDatabase['public']['Enums']['item_type'];
+          weight?: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'talisman_details_item_id_type_fkey';
+            columns: ['item_id', 'type'];
+            isOneToOne: false;
+            referencedRelation: 'items';
+            referencedColumns: ['id', 'type'];
+          },
+        ];
+      };
       weapon_details: {
         Row: {
           attack_fire: number | null;

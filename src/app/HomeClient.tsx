@@ -254,6 +254,7 @@ export default function HomeClient() {
 function EquipmentCard({ item }: { item: TEquipment }) {
   const w = item.weaponDetails;
   const armor = item.armorDetails;
+  const talisman = item.talismanDetails;
   return (
     <article className={styles['item']}>
       <div className={styles['identity']}>
@@ -282,6 +283,20 @@ function EquipmentCard({ item }: { item: TEquipment }) {
       <p className={styles['description']}>
         {item.gameDescription ?? '장비 설명이 아직 등록되지 않았습니다.'}
       </p>
+      {item.effectDescription && (
+        <section className={styles['stat-group']}>
+          <h3>부가 효과</h3>
+          <p className={styles['description']}>{item.effectDescription}</p>
+        </section>
+      )}
+      {talisman && (
+        <dl className={styles['meta']}>
+          <div>
+            <dt>중량</dt>
+            <dd>{value(talisman.weight)}</dd>
+          </div>
+        </dl>
+      )}
       {w && (
         <>
           <dl className={styles['meta']}>
@@ -425,7 +440,9 @@ function EquipmentCard({ item }: { item: TEquipment }) {
           />
         </div>
       )}
-      {!w && !armor && <p className={styles['note']}>상세 능력치가 아직 등록되지 않았습니다.</p>}
+      {!w && !armor && !talisman && (
+        <p className={styles['note']}>상세 능력치가 아직 등록되지 않았습니다.</p>
+      )}
     </article>
   );
 }

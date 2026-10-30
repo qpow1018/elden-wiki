@@ -20,7 +20,7 @@ export async function getEquipment({
   const request = client
     .from('items')
     .select(
-      'id,name,type,image_url,content_code,game_description,item_categories(name),armor_details(*),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,effect_description,item_categories(name),armor_details(*),talisman_details(*),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
     .order('id')
@@ -42,6 +42,7 @@ export async function getEquipment({
       // 복합 외래키 관계는 배열로 응답하지만 item_id PK가 최대 한 행을 보장합니다.
       const weapon = row.weapon_details[0];
       const armor = row.armor_details[0];
+      const talisman = row.talisman_details[0];
 
       return {
         id: row.id,
@@ -50,6 +51,8 @@ export async function getEquipment({
         imageUrl: row.image_url,
         contentCode: row.content_code,
         gameDescription: row.game_description,
+        effectDescription: row.effect_description,
+        talismanDetails: talisman ? { weight: talisman.weight } : null,
         itemCategories: row.item_categories,
         armorDetails: armor
           ? {

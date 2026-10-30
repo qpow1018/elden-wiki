@@ -89,6 +89,10 @@ export type TArmor = {
   vitality: number | null;
 };
 
+export type TTalisman = {
+  weight: number | null;
+};
+
 export type TEquipment = {
   id: number;
   name: string;
@@ -96,11 +100,13 @@ export type TEquipment = {
   imageUrl: string | null;
   contentCode: string;
   gameDescription: string | null;
+  effectDescription: string | null;
   itemCategories: {
     name: string;
   } | null;
   weaponDetails: TWeapon | null;
   armorDetails: TArmor | null;
+  talismanDetails: TTalisman | null;
 };
 
 export type TResGetEquipment = {
