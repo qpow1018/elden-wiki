@@ -1,9 +1,14 @@
 body {
-  background: #141d27;
+  min-height: 100dvh;
+  background: $bg-page-outer;
+  color: $text-primary;
   line-height: 1.5;
 }
 
 main {
-  max-width: $page-width;
+  width: 100%;
+  max-width: $page-mobile-width;
+  min-height: 100dvh;
   margin: 0 auto;
+  background: $bg-dark;
 }

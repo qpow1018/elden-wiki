@@ -98,7 +98,7 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 - 스타일 파일은 사용하는 컴포넌트와 기본 이름·대소문자를 맞추고 같은 폴더에 둔다. 예: `HomeClient.tsx` → `HomeClient.module.scss`.
 - SCSS Module은 `styles`라는 이름으로 import한다.
 - 클래스명은 kebab-case로 작성하고, `styles['class-name']` 형식으로 접근한다.
-- 하위 요소는 대표 root class 아래에 nesting하되, HTML 계층을 그대로 복제하지 않고 요소의 관계가 읽히도록 작성한다.
+- 하위 선택자는 대표 root class 아래에 nesting한다. 미디어쿼리 내부에서도 root class를 다시 선언해 같은 선택자 관계를 유지한다. HTML 계층을 그대로 복제하지 않고 요소의 관계가 읽히도록 작성한다.
 - 상태와 modifier는 해당 요소 아래에 nesting한다.
 - nesting 깊이는 고정하지 않고 HTML 구조와 가독성에 따라 결정하되, 불필요한 nesting은 피한다.
 - `@keyframes`, `@mixin` 등은 사용 범위와 가독성에 맞춰 배치한다. 전역 스타일은 컴포넌트 스타일과 구분해 관리한다.
@@ -113,3 +113,10 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 
 - 좁은 화면과 긴 텍스트에서도 콘텐츠가 의도치 않게 잘리거나 페이지 전체에 가로 스크롤이 생기지 않도록 작성한다.
 - fixed 요소가 있다면 콘텐츠 가림 여부와 모바일 safe area·가상 키보드 영향을 확인한다.
+
+#### 반응형 작성 방향과 현재 제공 범위
+
+- 모바일 우선으로 작성한다. 현재는 모든 화면에 너비 100%·최대 `$page-mobile-width`의 모바일 레이아웃을 제공하며, 화면 너비에 따른 미디어쿼리는 작성하지 않는다.
+- `$page-width`와 `$breakpoint-mobile`은 향후 PC 확장용으로 유지한다. PC 대응을 시작하면 모바일 기본 스타일에 `@media (width >= $breakpoint-mobile)`로 달라지는 속성만 추가한다.
+- 미디어쿼리를 작성하는 단계에서는 root class 바깥의 파일 하단에 배치하고, 내부에서 root class를 다시 선언한다. 범위 문법을 사용한다.
+- 전역 main은 너비와 중앙 정렬을 관리하고, 좌우 여백은 내부 콘텐츠 영역에서 관리한다.

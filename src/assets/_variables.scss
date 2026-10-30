@@ -106,6 +106,7 @@ $border-strong: $gray-500;
 $focus-ring: $steel-accent;
 
 // Background
+$bg-page-outer: #0f1720;
 $bg-overlay: rgba(0, 0, 0, 0.5);
 $bg-dark: $gray-900;
 $bg: $gray-800;
@@ -113,14 +114,11 @@ $bg-light: $gray-700;
 $bg-accent: $gray-600;
 
 // Size
-$page-width: 1024px;
-$page-wide-width: 1440px;
+$page-width: 960px;
+$page-mobile-width: 480px;
+$breakpoint-mobile: 1024px;
 $header-height: 56px;
 $modal-header-height: 48px;
-$task-table-cell-height: 38px;
-$task-table-cell-width: 132px;
-$task-table-label-cell-width: 124px;
-$loa-summary-label-cell-width: 140px;
 
 // Common
 $font-family: var(--font-pretendard), sans-serif;
