@@ -1,0 +1,21 @@
+.confirm-content {
+  padding: 24px;
+
+  .message {
+    margin: 0 0 24px;
+    font-size: 14px;
+    color: $text-primary;
+    text-align: center;
+    white-space: pre-wrap;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 8px;
+
+    .button {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+}

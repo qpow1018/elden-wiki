@@ -1,0 +1,89 @@
+@mixin icon-button-color($color, $hover-color) {
+  background-color: $color;
+  color: $gray-900;
+
+  &:hover:not(:disabled) {
+    background-color: $hover-color;
+  }
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  color: $text-primary;
+  cursor: pointer;
+  transition: background-color $transition;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &.color-gray {
+    @include icon-button-color($gray-700, $gray-600);
+    color: $text-primary;
+  }
+
+  &.color-teal {
+    @include icon-button-color($teal, $teal-accent);
+  }
+
+  &.color-steel {
+    @include icon-button-color($steel, $steel-accent);
+  }
+
+  &.color-brass {
+    @include icon-button-color($brass, $brass-accent);
+  }
+
+  &.color-lavender {
+    @include icon-button-color($lavender, $lavender-accent);
+  }
+
+  &.color-error {
+    @include icon-button-color($error, $error-accent);
+  }
+
+  &.size-small {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+    }
+  }
+
+  &.size-medium {
+    width: 36px;
+    height: 36px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+    }
+  }
+
+  &.size-large {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+    }
+  }
+}

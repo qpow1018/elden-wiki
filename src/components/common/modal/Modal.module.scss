@@ -1,0 +1,58 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-modal;
+  background-color: $bg-overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  .modal {
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 80px;
+    max-height: calc(100vh - 112px);
+    display: flex;
+    flex-direction: column;
+    background-color: $bg;
+    border-radius: $border-radius;
+    overflow: hidden;
+
+    .header {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      height: $modal-header-height;
+      padding: 0 16px;
+      border-bottom: 1px solid $border-strong;
+      padding-right: 48px;
+
+      .header-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: $text-primary;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: $text-primary;
+    }
+
+    .body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+    }
+  }
+}

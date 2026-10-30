@@ -1,0 +1,50 @@
+.button-group {
+  display: inline-flex;
+  padding: 2px;
+  background-color: $bg-dark;
+  border-radius: $border-radius;
+  gap: 2px;
+
+  &.size-small .option {
+    height: 28px;
+    padding: 0 14px;
+  }
+
+  &.size-medium .option {
+    height: 32px;
+    padding: 0 16px;
+  }
+
+  &.size-large .option {
+    height: 36px;
+    padding: 0 18px;
+  }
+
+  .option {
+    border-radius: 4px;
+    background-color: transparent;
+    color: $text-secondary;
+    font-size: 13px;
+    transition:
+      background-color $transition,
+      color $transition;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .option-selected {
+    background-color: $bg-light;
+    color: $text-primary;
+
+    &:hover {
+      background-color: $bg-light;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $text-secondary;
+  font-size: 13px;
+  cursor: pointer;
+
+  > input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+
+    &:focus-visible + .control {
+      border-color: $steel-accent;
+      outline: 2px solid $steel-light;
+      outline-offset: 1px;
+    }
+  }
+
+  &:not(.is-disabled):hover .control {
+    border-color: $steel-accent;
+  }
+
+  .control {
+    display: inline-flex;
+    flex: 0 0 18px;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: 1px solid $border-strong;
+    border-radius: 4px;
+    background: transparent;
+    color: transparent;
+    transition: $transition;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &.is-checked {
+      border-color: $steel-accent;
+      background: $steel-accent;
+      color: $gray-900;
+    }
+  }
+
+  &.size-small .control {
+    flex-basis: 16px;
+    width: 16px;
+    height: 16px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+
+    > * {
+      opacity: 0.5;
+    }
+  }
+}

@@ -1,1 +1,134 @@
-$page-width: 960px;
+// Base
+$white: #fff;
+$black: #000;
+
+// Gray — steel-toned neutrals
+$gray-100: #e4edf3;
+$gray-200: #d1dfe9;
+$gray-300: #b3c9dd;
+$gray-400: #9cabbc;
+$gray-500: #6f8499;
+$gray-600: #304253;
+$gray-700: #263e54;
+$gray-800: #1b2936;
+$gray-900: #121b25;
+
+// Steel
+$steel-100: #e8f3fc;
+$steel-200: #cee4f6;
+$steel-300: #afd2ef;
+$steel-400: #8dbbe6;
+$steel-500: #6598c6;
+$steel-600: #4879a4;
+$steel-700: #355c7e;
+$steel-800: #263e54;
+$steel-900: #192b3c;
+
+// Steel semantic
+$steel: $steel-400;
+$steel-light: $steel-200;
+$steel-accent: $steel-300;
+$steel-tint: rgba($steel, 0.1);
+$steel-surface: $steel-800;
+
+// Teal
+$teal-100: #e6f4f1;
+$teal-200: #cbe6e0;
+$teal-300: #abd7ce;
+$teal-400: #8bc5bd;
+$teal-500: #66a79d;
+$teal-600: #4b877e;
+$teal-700: #38675f;
+$teal-800: #294c46;
+$teal-900: #1c3531;
+
+// Teal semantic
+$teal: $teal-400;
+$teal-light: $teal-200;
+$teal-accent: $teal-300;
+$teal-tint: rgba($teal, 0.1);
+$teal-surface: $teal-800;
+
+// Brass
+$brass-100: #f7f0df;
+$brass-200: #ede0bf;
+$brass-300: #e1cd9c;
+$brass-400: #d5b77d;
+$brass-500: #b49860;
+$brass-600: #927a4c;
+$brass-700: #705d3b;
+$brass-800: #51442d;
+$brass-900: #372e20;
+
+// Brass semantic
+$brass: $brass-400;
+$brass-light: $brass-200;
+$brass-accent: $brass-300;
+$brass-tint: rgba($brass, 0.1);
+$brass-surface: $brass-800;
+
+// Lavender
+$lavender-100: #f1ecf8;
+$lavender-200: #e0d6ee;
+$lavender-300: #ccbee5;
+$lavender-400: #b8a5dc;
+$lavender-500: #9985bd;
+$lavender-600: #7b699b;
+$lavender-700: #5f507a;
+$lavender-800: #453b59;
+$lavender-900: #30283e;
+
+// Lavender semantic
+$lavender: $lavender-400;
+$lavender-light: $lavender-200;
+$lavender-accent: $lavender-300;
+$lavender-tint: rgba($lavender, 0.1);
+$lavender-surface: $lavender-800;
+
+// Error semantic
+$error: #d98b8b;
+$error-light: #edbaba;
+$error-accent: #e6a1a1;
+$error-tint: rgba($error, 0.1);
+$error-surface: #573236;
+
+// Text
+$text-primary: $gray-100;
+$text-secondary: $gray-400;
+$text-muted: $gray-500;
+
+// Border
+$border-soft: $gray-700;
+$border: $gray-600;
+$border-strong: $gray-500;
+$border-focus: $gray-400;
+
+// Background
+$bg-overlay: rgba(0, 0, 0, 0.5);
+$bg-dark: $gray-900;
+$bg: $gray-800;
+$bg-light: $gray-700;
+$bg-accent: $gray-600;
+
+// Size
+$page-width: 1024px;
+$page-wide-width: 1440px;
+$header-height: 56px;
+$modal-header-height: 48px;
+$task-table-cell-height: 38px;
+$task-table-cell-width: 132px;
+$task-table-label-cell-width: 124px;
+$loa-summary-label-cell-width: 140px;
+
+// Common
+$font-family: var(--font-pretendard), sans-serif;
+$border-radius: 6px;
+$shadow-popover: 0 8px 16px rgba(0, 0, 0, 0.3);
+$transition: 0.25s ease;
+
+// Z-index
+$z-index-popover: 10;
+$z-index-header: 100;
+$z-index-modal: 200;
+$z-index-loading: 300;
+$z-index-toast: 400;

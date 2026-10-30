@@ -106,6 +106,7 @@ description: 사용자가 정한 프론트엔드 아키텍처와 코드 스타�
 
 #### 전역 스타일과 Sass 공통 자원
 
+- `src/assets/reset.scss`는 브라우저 기본 여백·박스·미디어·테이블·폼 초기화를 관리한다. 색상·서체·본문 줄 간격은 전역 스타일에서, 개별 UI 표현은 컴포넌트에서 관리한다. 전역 reset에서 포커스 표시·폼 기본 동작·링크와 목록의 의미를 일괄 제거하지 않는다.
 - `_variables.scss`와 `_mixins.scss`는 전역 주입하므로 SCSS Module마다 `@use`를 반복하지 않는다.
 - `line-height`는 `src/assets/global.scss`의 `body`에서 관리하며, 컴포넌트·라우트 스타일에서는 재정의하지 않는다.
 

@@ -1,0 +1,78 @@
+.select {
+  position: relative;
+  width: 100%;
+
+  .trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid $border-strong;
+    border-radius: $border-radius;
+    background: transparent;
+    color: $text-primary;
+    font-size: 13px;
+    text-align: left;
+    transition: border-color $transition;
+    cursor: pointer;
+
+    &:focus-visible {
+      border-color: $steel-accent;
+      outline: 2px solid $steel-light;
+      outline-offset: 1px;
+    }
+
+    &:disabled {
+      color: $text-secondary;
+      cursor: default;
+    }
+
+    .arrow {
+      flex: 0 0 auto;
+      margin-right: -6px;
+      font-size: 20px;
+    }
+  }
+
+  .options {
+    position: absolute;
+    top: calc(100% + 4px);
+    z-index: $z-index-popover;
+    width: 100%;
+    max-height: 240px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 4px;
+    overflow-y: auto;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    background: $bg-light;
+    box-shadow: $shadow-popover;
+    list-style: none;
+    outline: none;
+
+    .option {
+      padding: 8px 12px;
+      border-radius: 4px;
+      color: $text-primary;
+      font-size: 13px;
+      cursor: pointer;
+
+      &.is-active,
+      &:hover {
+        background: $bg-accent;
+      }
+
+      &.is-selected {
+        color: $steel-accent;
+      }
+
+      &[aria-disabled='true'] {
+        color: $text-secondary;
+        cursor: default;
+      }
+    }
+  }
+}

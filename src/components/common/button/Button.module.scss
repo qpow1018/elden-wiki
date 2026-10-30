@@ -1,0 +1,133 @@
+@mixin button-color($color, $light, $accent, $tint, $foreground: $gray-900) {
+  &.fill-solid {
+    background-color: $color;
+    border-color: $color;
+    color: $foreground;
+
+    &:hover:not(:disabled) {
+      background-color: $accent;
+      border-color: $accent;
+    }
+  }
+
+  &.fill-outline {
+    background-color: transparent;
+    border-color: $accent;
+    color: $light;
+
+    &:hover:not(:disabled) {
+      background-color: $tint;
+    }
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  min-width: 80px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-family: $font-family;
+  font-weight: 500;
+  transition:
+    background-color $transition,
+    border-color $transition,
+    color $transition;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &.color-teal {
+    @include button-color($teal, $teal-light, $teal-accent, $teal-tint);
+  }
+
+  &.color-steel {
+    @include button-color($steel, $steel-light, $steel-accent, $steel-tint);
+  }
+
+  &.color-gray {
+    @include button-color($gray-600, $gray-300, $gray-500, rgba($gray-600, 0.1), $text-primary);
+
+    &.fill-solid:hover:not(:disabled) {
+      color: $gray-900;
+    }
+  }
+
+  &.color-brass {
+    @include button-color($brass, $brass-light, $brass-accent, $brass-tint);
+  }
+
+  &.color-lavender {
+    @include button-color($lavender, $lavender-light, $lavender-accent, $lavender-tint);
+  }
+
+  &.color-error {
+    @include button-color($error, $error-light, $error-accent, $error-tint);
+  }
+
+  &.size-small {
+    height: 32px;
+    font-size: 12px;
+  }
+
+  &.size-medium {
+    height: 36px;
+    font-size: 13px;
+  }
+
+  &.size-large {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  &.is-full-width {
+    width: 100%;
+  }
+
+  &.is-loading {
+    cursor: wait;
+    pointer-events: none;
+
+    .content {
+      visibility: hidden;
+    }
+  }
+
+  .content {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  margin-left: -8px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

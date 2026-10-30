@@ -23,6 +23,8 @@ src/
       types.ts              # API 요청·응답과 관련 타입
       <domain>Query.ts      # Query 정의
   providers/                # 앱 전역 Provider
+  components/common/        # 도메인과 무관한 공용 UI
+  utils/                    # 공유 범용 함수와 React 훅
   lib/
     supabase/               # DB 생성 타입 등 Supabase 연동 기반
   assets/                   # 폰트·전역 스타일·Sass 공통 자원
@@ -33,7 +35,7 @@ docs/                      # 구조·데이터 모델 등 프로젝트 문서
 
 ### 필요할 때 추가하는 구조
 
-다음은 기존에 합의한 배치 기준이며, 현재 해당 폴더들은 생성되어 있지 않다.
+다음은 기존에 합의한 배치 기준이다. 필요한 역할과 사용 범위에 맞춰 추가한다.
 
 ```text
 src/

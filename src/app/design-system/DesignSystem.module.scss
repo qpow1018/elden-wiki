@@ -1,0 +1,378 @@
+$swatches: (
+  gray-100: $gray-100,
+  gray-200: $gray-200,
+  gray-300: $gray-300,
+  gray-400: $gray-400,
+  gray-500: $gray-500,
+  gray-600: $gray-600,
+  gray-700: $gray-700,
+  gray-800: $gray-800,
+  gray-900: $gray-900,
+  steel-100: $steel-100,
+  steel-200: $steel-200,
+  steel-300: $steel-300,
+  steel-400: $steel-400,
+  steel-500: $steel-500,
+  steel-600: $steel-600,
+  steel-700: $steel-700,
+  steel-800: $steel-800,
+  steel-900: $steel-900,
+  teal-100: $teal-100,
+  teal-200: $teal-200,
+  teal-300: $teal-300,
+  teal-400: $teal-400,
+  teal-500: $teal-500,
+  teal-600: $teal-600,
+  teal-700: $teal-700,
+  teal-800: $teal-800,
+  teal-900: $teal-900,
+  brass-100: $brass-100,
+  brass-200: $brass-200,
+  brass-300: $brass-300,
+  brass-400: $brass-400,
+  brass-500: $brass-500,
+  brass-600: $brass-600,
+  brass-700: $brass-700,
+  brass-800: $brass-800,
+  brass-900: $brass-900,
+  lavender-100: $lavender-100,
+  lavender-200: $lavender-200,
+  lavender-300: $lavender-300,
+  lavender-400: $lavender-400,
+  lavender-500: $lavender-500,
+  lavender-600: $lavender-600,
+  lavender-700: $lavender-700,
+  lavender-800: $lavender-800,
+  lavender-900: $lavender-900,
+  error: $error,
+  error-light: $error-light,
+  error-accent: $error-accent,
+  error-tint: $error-tint,
+  error-surface: $error-surface,
+  text-primary: $text-primary,
+  text-secondary: $text-secondary,
+  text-muted: $text-muted,
+  border-soft: $border-soft,
+  border: $border,
+  border-strong: $border-strong,
+  border-focus: $border-focus,
+  bg-dark: $bg-dark,
+  bg: $bg,
+  bg-light: $bg-light,
+  bg-accent: $bg-accent,
+);
+
+.design-system-page {
+  min-height: 100vh;
+  background: $bg-dark;
+  color: $text-primary;
+  color-scheme: dark;
+
+  .content {
+    width: min($page-width, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 72px 0 96px;
+  }
+
+  .page-header {
+    padding-bottom: 32px;
+    border-bottom: 1px solid $border-soft;
+
+    p,
+    h1,
+    span {
+      display: block;
+      margin: 0;
+    }
+
+    p {
+      color: $teal-accent;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: 32px;
+      letter-spacing: -1px;
+    }
+
+    span {
+      margin-top: 10px;
+      color: $text-secondary;
+      font-size: 14px;
+    }
+  }
+
+  .section {
+    padding-top: 48px;
+  }
+
+  .section-heading {
+    margin-bottom: 16px;
+
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      margin-top: 6px;
+      color: $text-secondary;
+      font-size: 13px;
+    }
+  }
+
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .button-card,
+  .state-card {
+    border: 1px solid $border-soft;
+    border-radius: 10px;
+  }
+
+  .button-card {
+    display: grid;
+    gap: 18px;
+    padding: 20px;
+    background: $bg;
+
+    h3,
+    code {
+      display: block;
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 15px;
+    }
+
+    code {
+      margin-top: 4px;
+      color: $text-secondary;
+      font-size: 11px;
+    }
+  }
+
+  .button-pair {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .state-card {
+    display: grid;
+    gap: 20px;
+    padding: 24px;
+    background: $bg;
+  }
+
+  .button-group-showcase {
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+    border-radius: $border-radius;
+    background: $bg;
+  }
+
+  .button-group-sample {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    span {
+      width: 40px;
+      color: $text-secondary;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .dropdown-menu-showcase {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px;
+  }
+
+  .form-field {
+    display: grid;
+    gap: 8px;
+  }
+
+  .form-field > span,
+  .checkbox-field > span {
+    color: $text-secondary;
+    font-size: 13px;
+  }
+
+  .textarea-field {
+    grid-column: 1 / -1;
+  }
+
+  .checkbox-field {
+    display: grid;
+    gap: 8px;
+  }
+
+  .tabs-showcase {
+    max-width: 480px;
+  }
+
+  .toast-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .modal-preview-content {
+    padding: 24px;
+
+    p {
+      margin: 0;
+      color: $text-secondary;
+      font-size: 14px;
+    }
+  }
+
+  .modal-preview-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .palette-list {
+    display: grid;
+    gap: 24px;
+    h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      text-transform: capitalize;
+    }
+  }
+  .palette-scale {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .palette-swatch {
+    min-width: 0;
+    span,
+    code {
+      display: block;
+      font-size: 11px;
+      color: $text-secondary;
+    }
+    > div {
+      height: 48px;
+      border-radius: 4px;
+      border: 1px solid $border-soft;
+    }
+  }
+  .semantic-colors {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .semantic-swatch {
+    min-width: 0;
+    code {
+      font-size: 11px;
+      overflow-wrap: anywhere;
+      color: $text-secondary;
+    }
+    > div {
+      height: 32px;
+      border: 1px solid $border-soft;
+      border-radius: 4px;
+    }
+  }
+  .drag-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-bottom: 1px solid $border-soft;
+  }
+  .drag-handle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    touch-action: none;
+    cursor: grab;
+    color: $steel;
+    font-size: 24px;
+  }
+  .selection-result {
+    margin: 0;
+    color: $text-secondary;
+    font-size: 13px;
+  }
+  .toast-actions {
+    flex-wrap: wrap;
+  }
+  .form-field {
+    min-width: 0;
+  }
+  .button-group-sample {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 700px) {
+    .content {
+      width: calc(100% - 32px);
+      padding-top: 32px;
+    }
+    .button-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .palette-scale {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .semantic-colors {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .state-card {
+      padding: 16px;
+    }
+    .button-group-showcase {
+      padding: 0;
+    }
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 430px) {
+    .button-grid {
+      grid-template-columns: 1fr;
+    }
+    .button-group-sample {
+      gap: 8px;
+    }
+  }
+  @each $name, $color in $swatches {
+    .swatch-#{$name} {
+      background: $color;
+    }
+    .value-#{$name}::after {
+      content: '#{$color}';
+    }
+  }
+}
