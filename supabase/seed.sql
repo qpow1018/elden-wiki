@@ -541,3 +541,146 @@ from public.items i
 where d.item_id = i.id and i.type = 'spell'
   and i.name in ('아듀라의 달의 검', '아길의 화염', '기습의 돌팔매', '옛 죽음의 영혼', '고룡의 뇌창')
   and (d.required_intelligence is null or d.required_faith is null or d.required_arcane is null);
+
+-- 사용자 제공 한국어 전회 자료의 원문·FP·기본 변질·적용 대상·이미지입니다.
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '파고들어 올려 베기', E'무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 올려 베기로 이을 수 있다.', '5 (-/8)'
+where not exists (select 1 from public.weapon_skills where name = '파고들어 올려 베기');
+
+insert into public.items (name, type, category_id, image_url, content_code, game_description)
+select '전회「파고들어 올려 베기」', 'ash_of_war', c.id,
+  'https://i.namu.wiki/i/d491eSJ83FJDhjkl6MRXBQ53ZB_c3wC9bVNM2eNmItogGGl2kiUrAJJZ7t_CK2qpPFfjg_y7bCF2Jyrp65exhsUh1Cv_M6W78vCOZnjykPBKWaz8IT5UQGJFAoyZWbrscBo8l2WI_od4H4LcSpM8_Q.webp',
+  'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「중후」, 전투 기술은 아래와 같다.\n\n전투 기술 「파고들어 올려 베기」\n무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 올려 베기로 이을 수 있다.\n\n검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
+from public.item_categories c
+where c.type = 'ash_of_war' and c.name = '전회'
+  and not exists (
+    select 1 from public.items
+    where name = '전회「파고들어 올려 베기」' and type = 'ash_of_war' and category_id = c.id
+  );
+
+insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+select i.id, s.id, 'heavy', E'검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
+from public.items i
+join public.item_categories c on c.id = i.category_id
+cross join public.weapon_skills s
+where i.name = '전회「파고들어 올려 베기」' and i.type = 'ash_of_war' and c.name = '전회'
+  and s.name = '파고들어 올려 베기'
+on conflict (item_id) do nothing;
+
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '파고들어 회전 베기', E'무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 회전 베기로 이을 수 있다.', '5 (-/8)'
+where not exists (select 1 from public.weapon_skills where name = '파고들어 회전 베기');
+
+insert into public.items (name, type, category_id, image_url, content_code, game_description)
+select '전회「파고들어 회전 베기」', 'ash_of_war', c.id,
+  'https://i.namu.wiki/i/9BamfSbw_vH6ykjcdlkXJOQQM64DebLNLZNy-D5rtpLA-2iTJABKUNkBGe8YyHHyQPND2sPAqQmw89GRA34ULYzlBComAncGb93-NaRJMZrwhr_Bk0myh-QRXaukjWukY56rN46hMtNlw0_jP0p9oA.webp',
+  'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「중후」, 전투 기술은 아래와 같다.\n\n전투 기술 「파고들어 회전 베기」\n무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 회전 베기로 이을 수 있다.\n\n검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
+from public.item_categories c
+where c.type = 'ash_of_war' and c.name = '전회'
+  and not exists (
+    select 1 from public.items
+    where name = '전회「파고들어 회전 베기」' and type = 'ash_of_war' and category_id = c.id
+  );
+
+insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+select i.id, s.id, 'heavy', E'검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
+from public.items i
+join public.item_categories c on c.id = i.category_id
+cross join public.weapon_skills s
+where i.name = '전회「파고들어 회전 베기」' and i.type = 'ash_of_war' and c.name = '전회'
+  and s.name = '파고들어 회전 베기'
+on conflict (item_id) do nothing;
+
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '휘석 돌팔매', E'동명의 휘석 마술을 사용하는 전투 기술.\n강공격으로 크게 파고드는 찌르기로 이으며\n그 공격에는 휘석의 마력이 남아 있다.', '8 ( - / 4 )'
+where not exists (select 1 from public.weapon_skills where name = '휘석 돌팔매');
+
+insert into public.items (name, type, category_id, image_url, content_code, game_description)
+select '전회「휘석 돌팔매」', 'ash_of_war', c.id,
+  'https://i.namu.wiki/i/KL5t7hTyM0ysHbDCx-fb1aV5TV48iEtf6-LfgzI0ccs_nQ1v8kYBplEG3yA06v14J4DSBBs0OsfGiQtKwxd3__y7xcODyBv1ClMykEzAumctwN6PAWz5NwxQvsm0Bvvgr-B2nOigOcWQm2AcycDiSg.webp',
+  'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「마력」, 전투 기술은 아래와 같다.\n\n전투 기술 「휘석 돌팔매」\n동명의 휘석 마술을 사용하는 전투 기술.\n강공격으로 크게 파고드는 찌르기로 이으며\n그 공격에는 휘석의 마력이 남아 있다.\n\n검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
+from public.item_categories c
+where c.type = 'ash_of_war' and c.name = '전회'
+  and not exists (
+    select 1 from public.items
+    where name = '전회「휘석 돌팔매」' and type = 'ash_of_war' and category_id = c.id
+  );
+
+insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+select i.id, s.id, 'magic', E'검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
+from public.items i
+join public.item_categories c on c.id = i.category_id
+cross join public.weapon_skills s
+where i.name = '전회「휘석 돌팔매」' and i.type = 'ash_of_war' and c.name = '전회'
+  and s.name = '휘석 돌팔매'
+on conflict (item_id) do nothing;
+
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '휘검의 원진', E'카리아 왕가를 섬긴 마술 기사들의 전투 기술.\n마력 휘검을 반원으로 띄워 자동으로 공격한다.\n강공격으로 크게 파고드는 찌르기로 잇는다.', '10 ( - / 4 )'
+where not exists (select 1 from public.weapon_skills where name = '휘검의 원진');
+
+insert into public.items (name, type, category_id, image_url, content_code, game_description)
+select '전회「휘검의 원진」', 'ash_of_war', c.id,
+  'https://i.namu.wiki/i/Ea3cstWnIRrOoQTEuO3I0Oz8m5FcSccFAZn0efnCgpPcskRs4XIGpnILzQ-zBiVZzA7IyGEE06Ys-ELvVHrLc6S1D6V2puayjXabyVPTOJGDnXcM_YAQUdgE7y4pt4RMxsMm6Zn4lkRjVRh3xI3kQg.webp',
+  'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「마력」, 전투 기술은 아래와 같다.\n\n전투 기술 「휘검의 원진」\n카리아 왕가를 섬긴 마술 기사들의 전투 기술.\n마력 휘검을 반원으로 띄워 자동으로 공격한다.\n강공격으로 크게 파고드는 찌르기로 잇는다.\n\n검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
+from public.item_categories c
+where c.type = 'ash_of_war' and c.name = '전회'
+  and not exists (
+    select 1 from public.items
+    where name = '전회「휘검의 원진」' and type = 'ash_of_war' and category_id = c.id
+  );
+
+insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+select i.id, s.id, 'magic', E'검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
+from public.items i
+join public.item_categories c on c.id = i.category_id
+cross join public.weapon_skills s
+where i.name = '전회「휘검의 원진」' and i.type = 'ash_of_war' and c.name = '전회'
+  and s.name = '휘검의 원진'
+on conflict (item_id) do nothing;
+
+-- 사용자 제공 결정 물방울 자료. 효과 수치·지속 시간은 설명으로만 저장합니다.
+insert into public.items (
+  name, type, category_id, image_url, content_code, game_description, effect_description
+)
+select '붉은 결정 물방울', 'crystal_tear', c.id,
+  'https://i.namu.wiki/i/CvDRq_-2FqteVMDos97jzR1fAAQtITU0LyuNXsIFpgykM6DwvT7ZdLpYQUMG4vbxW78mTytyz35QYTeyBc3Ecep_K3rwEkTKsjP0b-ZQJwixlSLdO99cD0-l7rENgMHbsQ23C_xAVWZLgGIHQonQPA.webp',
+  'base_game',
+  E'황금 나무의 은혜가 내리는 땅에\n오랜 세월이 지나 생겨난 결정 물방울.\n\n「영약의 성배병」에 배합하여\n최대 HP의 반만큼 회복한다.',
+  '최대 HP의 50%를 회복한다.'
+from public.item_categories c
+where c.type = 'crystal_tear' and c.name = '결정 물방울'
+  and not exists (
+    select 1 from public.items
+    where name = '붉은 결정 물방울' and type = 'crystal_tear' and category_id = c.id
+  );
+
+insert into public.items (
+  name, type, category_id, image_url, content_code, game_description, effect_description
+)
+select '넘친 붉은 결정 물방울', 'crystal_tear', c.id,
+  'https://i.namu.wiki/i/llTXFZh2NYgvLaxe3u71KqBItEUQWgJk4cVxeeEOOfwF2Alz3tejXReClR2K5js-F9ANAv58iO-7X-pjvrjuX5MQcWbdGd-wnGbZr0EHXl8KfKgpLkhKQAm1_Z9lpAlwg-gKX56PkjnDlrGS2yF27w.webp',
+  'base_game',
+  E'황금 나무의 은혜가 내리는 땅에\n오랜 세월이 지나 생겨난 결정 물방울.\n\n「영약의 성배병」에 배합하여\n일시적으로 최대 HP를 증가시킨다.',
+  '3분 동안 최대 HP가 10% 증가한다.'
+from public.item_categories c
+where c.type = 'crystal_tear' and c.name = '결정 물방울'
+  and not exists (
+    select 1 from public.items
+    where name = '넘친 붉은 결정 물방울' and type = 'crystal_tear' and category_id = c.id
+  );
+
+insert into public.items (
+  name, type, category_id, image_url, content_code, game_description, effect_description
+)
+select '샘솟는 붉은 결정 물방울', 'crystal_tear', c.id,
+  'https://i.namu.wiki/i/O2TfUEYyuv_w6Cilb3V_oETk6jYlCP0RQpPHIthhoTAMEoaOONSCa6vtWFbMKjxvTgT5h3LrY9OtCKp6i9mI6kjm3BgwwKg1nargt760LeWIvpVZmaZUqYR89JEGgrbduAVYt_rcty2n59Bv_GSU0A.webp',
+  'base_game',
+  E'황금 나무의 은혜가 내리는 땅에\n오랜 세월이 지나 생겨난 결정 물방울.\n\n「영약의 성배병」에 배합하여\n일정 시간 HP가 조금씩 회복한다.',
+  '3분 동안 초당 HP를 7씩, 총 1260 회복한다.'
+from public.item_categories c
+where c.type = 'crystal_tear' and c.name = '결정 물방울'
+  and not exists (
+    select 1 from public.items
+    where name = '샘솟는 붉은 결정 물방울' and type = 'crystal_tear' and category_id = c.id
+  );

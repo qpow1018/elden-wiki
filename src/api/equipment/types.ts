@@ -1,5 +1,12 @@
 export type TItemType =
-  'spirit_ash' | 'ash_of_war' | 'weapon' | 'armor' | 'talisman' | 'spell' | 'gesture';
+  | 'spirit_ash'
+  | 'ash_of_war'
+  | 'weapon'
+  | 'armor'
+  | 'talisman'
+  | 'spell'
+  | 'gesture'
+  | 'crystal_tear';
 
 export type TReqGetEquipment = {
   page: number;
@@ -101,6 +108,12 @@ export type TSpell = {
   requiredArcane: number | null;
 };
 
+export type TAshOfWar = {
+  nativeAffinity: string | null;
+  applicableArmamentsText: string | null;
+  weaponSkills: TWeaponSkill | null;
+};
+
 export type TEquipment = {
   id: number;
   name: string;
@@ -116,6 +129,7 @@ export type TEquipment = {
   armorDetails: TArmor | null;
   talismanDetails: TTalisman | null;
   spellDetails: TSpell | null;
+  ashOfWarDetails: TAshOfWar | null;
 };
 
 export type TResGetEquipment = {

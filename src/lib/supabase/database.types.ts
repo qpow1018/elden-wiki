@@ -73,6 +73,46 @@ export type TDatabase = {
           },
         ];
       };
+      ash_of_war_details: {
+        Row: {
+          applicable_armaments_text: string | null;
+          item_id: number;
+          native_affinity: string | null;
+          skill_id: number | null;
+          type: TDatabase['public']['Enums']['item_type'];
+        };
+        ComputedFields: never;
+        Insert: {
+          applicable_armaments_text?: string | null;
+          item_id: number;
+          native_affinity?: string | null;
+          skill_id?: number | null;
+          type?: TDatabase['public']['Enums']['item_type'];
+        };
+        Update: {
+          applicable_armaments_text?: string | null;
+          item_id?: number;
+          native_affinity?: string | null;
+          skill_id?: number | null;
+          type?: TDatabase['public']['Enums']['item_type'];
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'ash_of_war_details_item_id_type_fkey';
+            columns: ['item_id', 'type'];
+            isOneToOne: false;
+            referencedRelation: 'items';
+            referencedColumns: ['id', 'type'];
+          },
+          {
+            foreignKeyName: 'ash_of_war_details_skill_id_fkey';
+            columns: ['skill_id'];
+            isOneToOne: false;
+            referencedRelation: 'weapon_skills';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       item_categories: {
         Row: {
           id: number;
@@ -385,7 +425,14 @@ export type TDatabase = {
     };
     Enums: {
       item_type:
-        'spirit_ash' | 'ash_of_war' | 'weapon' | 'armor' | 'talisman' | 'spell' | 'gesture';
+        | 'spirit_ash'
+        | 'ash_of_war'
+        | 'weapon'
+        | 'armor'
+        | 'talisman'
+        | 'spell'
+        | 'gesture'
+        | 'crystal_tear';
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -499,7 +546,16 @@ export type TCompositeTypes<
 export const DATABASE_CONSTANTS = {
   public: {
     Enums: {
-      item_type: ['spirit_ash', 'ash_of_war', 'weapon', 'armor', 'talisman', 'spell', 'gesture'],
+      item_type: [
+        'spirit_ash',
+        'ash_of_war',
+        'weapon',
+        'armor',
+        'talisman',
+        'spell',
+        'gesture',
+        'crystal_tear',
+      ],
     },
   },
 } as const;

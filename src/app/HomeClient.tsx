@@ -17,6 +17,7 @@ const ITEM_TYPES: Record<string, string> = {
   ash_of_war: '전회',
   spell: '마술·기도',
   gesture: '제스처',
+  crystal_tear: '결정 물방울',
 };
 const CONTENTS: Record<string, string> = {
   base_game: '본편',
@@ -256,6 +257,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
   const armor = item.armorDetails;
   const talisman = item.talismanDetails;
   const spell = item.spellDetails;
+  const ashOfWar = item.ashOfWarDetails;
   return (
     <article className={styles['item']}>
       <div className={styles['identity']}>
@@ -462,7 +464,29 @@ function EquipmentCard({ item }: { item: TEquipment }) {
           />
         </div>
       )}
-      {!w && !armor && !talisman && !spell && (
+      {ashOfWar && (
+        <>
+          <dl className={styles['meta']}>
+            <div>
+              <dt>기본 변질</dt>
+              <dd>{AFFINITIES[ashOfWar.nativeAffinity ?? ''] ?? '미확인'}</dd>
+            </div>
+            <div>
+              <dt>전투 기술</dt>
+              <dd>{ashOfWar.weaponSkills?.name ?? '미확인'}</dd>
+            </div>
+            <div>
+              <dt>소비 FP</dt>
+              <dd>{value(ashOfWar.weaponSkills?.fpCostText)}</dd>
+            </div>
+          </dl>
+          <section className={styles['stat-group']}>
+            <h3>적용 가능 무기</h3>
+            <p className={styles['description']}>{ashOfWar.applicableArmamentsText ?? '미확인'}</p>
+          </section>
+        </>
+      )}
+      {!w && !armor && !talisman && !spell && !ashOfWar && item.type !== 'crystal_tear' && (
         <p className={styles['note']}>상세 능력치가 아직 등록되지 않았습니다.</p>
       )}
     </article>

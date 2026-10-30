@@ -20,7 +20,7 @@ export async function getEquipment({
   const request = client
     .from('items')
     .select(
-      'id,name,type,image_url,content_code,game_description,effect_description,item_categories(name),armor_details(*),talisman_details(*),spell_details(*),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,effect_description,item_categories(name),armor_details(*),talisman_details(*),spell_details(*),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
     .order('id')
@@ -44,6 +44,7 @@ export async function getEquipment({
       const armor = row.armor_details[0];
       const talisman = row.talisman_details[0];
       const spell = row.spell_details[0];
+      const ashOfWar = row.ash_of_war_details[0];
 
       return {
         id: row.id,
@@ -61,6 +62,19 @@ export async function getEquipment({
               requiredIntelligence: spell.required_intelligence,
               requiredFaith: spell.required_faith,
               requiredArcane: spell.required_arcane,
+            }
+          : null,
+        ashOfWarDetails: ashOfWar
+          ? {
+              nativeAffinity: ashOfWar.native_affinity,
+              applicableArmamentsText: ashOfWar.applicable_armaments_text,
+              weaponSkills: ashOfWar.weapon_skills
+                ? {
+                    name: ashOfWar.weapon_skills.name,
+                    description: ashOfWar.weapon_skills.description,
+                    fpCostText: ashOfWar.weapon_skills.fp_cost_text,
+                  }
+                : null,
             }
           : null,
         itemCategories: row.item_categories,
