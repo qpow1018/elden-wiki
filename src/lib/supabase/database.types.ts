@@ -134,6 +134,45 @@ export type TDatabase = {
           },
         ];
       };
+      spell_details: {
+        Row: {
+          fp_cost_text: string | null;
+          item_id: number;
+          required_arcane: number | null;
+          required_faith: number | null;
+          required_intelligence: number | null;
+          slots_used: number | null;
+          type: TDatabase['public']['Enums']['item_type'];
+        };
+        ComputedFields: never;
+        Insert: {
+          fp_cost_text?: string | null;
+          item_id: number;
+          required_arcane?: number | null;
+          required_faith?: number | null;
+          required_intelligence?: number | null;
+          slots_used?: number | null;
+          type?: TDatabase['public']['Enums']['item_type'];
+        };
+        Update: {
+          fp_cost_text?: string | null;
+          item_id?: number;
+          required_arcane?: number | null;
+          required_faith?: number | null;
+          required_intelligence?: number | null;
+          slots_used?: number | null;
+          type?: TDatabase['public']['Enums']['item_type'];
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'spell_details_item_id_type_fkey';
+            columns: ['item_id', 'type'];
+            isOneToOne: false;
+            referencedRelation: 'items';
+            referencedColumns: ['id', 'type'];
+          },
+        ];
+      };
       talisman_details: {
         Row: {
           item_id: number;

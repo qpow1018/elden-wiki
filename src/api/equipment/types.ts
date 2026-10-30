@@ -93,6 +93,14 @@ export type TTalisman = {
   weight: number | null;
 };
 
+export type TSpell = {
+  fpCostText: string | null;
+  slotsUsed: number | null;
+  requiredIntelligence: number | null;
+  requiredFaith: number | null;
+  requiredArcane: number | null;
+};
+
 export type TEquipment = {
   id: number;
   name: string;
@@ -107,6 +115,7 @@ export type TEquipment = {
   weaponDetails: TWeapon | null;
   armorDetails: TArmor | null;
   talismanDetails: TTalisman | null;
+  spellDetails: TSpell | null;
 };
 
 export type TResGetEquipment = {

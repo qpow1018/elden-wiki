@@ -20,7 +20,7 @@ export async function getEquipment({
   const request = client
     .from('items')
     .select(
-      'id,name,type,image_url,content_code,game_description,effect_description,item_categories(name),armor_details(*),talisman_details(*),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,effect_description,item_categories(name),armor_details(*),talisman_details(*),spell_details(*),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
     .order('id')
@@ -43,6 +43,7 @@ export async function getEquipment({
       const weapon = row.weapon_details[0];
       const armor = row.armor_details[0];
       const talisman = row.talisman_details[0];
+      const spell = row.spell_details[0];
 
       return {
         id: row.id,
@@ -53,6 +54,15 @@ export async function getEquipment({
         gameDescription: row.game_description,
         effectDescription: row.effect_description,
         talismanDetails: talisman ? { weight: talisman.weight } : null,
+        spellDetails: spell
+          ? {
+              fpCostText: spell.fp_cost_text,
+              slotsUsed: spell.slots_used,
+              requiredIntelligence: spell.required_intelligence,
+              requiredFaith: spell.required_faith,
+              requiredArcane: spell.required_arcane,
+            }
+          : null,
         itemCategories: row.item_categories,
         armorDetails: armor
           ? {

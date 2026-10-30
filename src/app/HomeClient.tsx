@@ -255,6 +255,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
   const w = item.weaponDetails;
   const armor = item.armorDetails;
   const talisman = item.talismanDetails;
+  const spell = item.spellDetails;
   return (
     <article className={styles['item']}>
       <div className={styles['identity']}>
@@ -440,7 +441,28 @@ function EquipmentCard({ item }: { item: TEquipment }) {
           />
         </div>
       )}
-      {!w && !armor && !talisman && (
+      {spell && (
+        <div className={styles['stats']}>
+          <StatGroup
+            title="소비 FP·슬롯"
+            stats={spell}
+            fields={[
+              ['fpCostText', '소비 FP'],
+              ['slotsUsed', '사용 슬롯'],
+            ]}
+          />
+          <StatGroup
+            title="필요 능력치"
+            stats={spell}
+            fields={[
+              ['requiredIntelligence', '지력'],
+              ['requiredFaith', '신앙'],
+              ['requiredArcane', '신비'],
+            ]}
+          />
+        </div>
+      )}
+      {!w && !armor && !talisman && !spell && (
         <p className={styles['note']}>상세 능력치가 아직 등록되지 않았습니다.</p>
       )}
     </article>
