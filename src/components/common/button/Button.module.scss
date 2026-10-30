@@ -1,4 +1,4 @@
-@mixin button-color($color, $light, $accent, $tint, $foreground: $gray-900) {
+@mixin button-theme($color, $light, $accent, $tint, $foreground: $gray-900) {
   &.fill-solid {
     background-color: $color;
     border-color: $color;
@@ -40,7 +40,7 @@
     color $transition;
 
   &:focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid $focus-ring;
     outline-offset: 2px;
   }
 
@@ -49,47 +49,47 @@
     opacity: 0.5;
   }
 
-  &.color-teal {
-    @include button-color($teal, $teal-light, $teal-accent, $teal-tint);
+  &.theme-teal {
+    @include button-theme($teal, $teal-light, $teal-accent, $teal-tint);
   }
 
-  &.color-steel {
-    @include button-color($steel, $steel-light, $steel-accent, $steel-tint);
+  &.theme-steel {
+    @include button-theme($steel, $steel-light, $steel-accent, $steel-tint);
   }
 
-  &.color-gray {
-    @include button-color($gray-600, $gray-300, $gray-500, rgba($gray-600, 0.1), $text-primary);
+  &.theme-gray {
+    @include button-theme($gray-600, $gray-300, $gray-500, rgba($gray-600, 0.1), $text-primary);
 
     &.fill-solid:hover:not(:disabled) {
       color: $gray-900;
     }
   }
 
-  &.color-brass {
-    @include button-color($brass, $brass-light, $brass-accent, $brass-tint);
+  &.theme-brass {
+    @include button-theme($brass, $brass-light, $brass-accent, $brass-tint);
   }
 
-  &.color-lavender {
-    @include button-color($lavender, $lavender-light, $lavender-accent, $lavender-tint);
+  &.theme-lavender {
+    @include button-theme($lavender, $lavender-light, $lavender-accent, $lavender-tint);
   }
 
-  &.color-error {
-    @include button-color($error, $error-light, $error-accent, $error-tint);
+  &.theme-error {
+    @include button-theme($error, $error-light, $error-accent, $error-tint);
   }
 
   &.size-small {
-    height: 32px;
-    font-size: 12px;
+    height: 36px;
+    font-size: 14px;
   }
 
   &.size-medium {
-    height: 36px;
-    font-size: 13px;
+    height: 42px;
+    font-size: 14px;
   }
 
   &.size-large {
-    height: 40px;
-    font-size: 14px;
+    height: 48px;
+    font-size: 15px;
   }
 
   &.is-full-width {
@@ -101,7 +101,7 @@
     pointer-events: none;
 
     .content {
-      visibility: hidden;
+      opacity: 0;
     }
   }
 

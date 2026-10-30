@@ -1,38 +1,38 @@
-import Button, { type TButtonColor } from '@/components/common/button/Button';
+import Button, { type TButtonTheme } from '@/components/common/button/Button';
 
 import styles from '@/app/design-system/DesignSystem.module.scss';
 
-const BUTTON_COLORS: { color: TButtonColor; label: string; token: string }[] = [
-  { color: 'teal', label: 'Teal', token: '$teal' },
-  { color: 'steel', label: 'Steel', token: '$steel' },
-  { color: 'gray', label: 'Gray', token: '$gray-600' },
-  { color: 'brass', label: 'Brass', token: '$brass' },
-  { color: 'lavender', label: 'Lavender', token: '$lavender' },
-  { color: 'error', label: 'Error', token: '$error' },
+const BUTTON_THEMES: { theme: TButtonTheme; label: string; token: string }[] = [
+  { theme: 'teal', label: 'Teal', token: '$teal' },
+  { theme: 'steel', label: 'Steel', token: '$steel' },
+  { theme: 'gray', label: 'Gray', token: '$gray-600' },
+  { theme: 'brass', label: 'Brass', token: '$brass' },
+  { theme: 'lavender', label: 'Lavender', token: '$lavender' },
+  { theme: 'error', label: 'Error', token: '$error' },
 ];
 
 export default function ButtonShowcase() {
   return (
     <>
-      <section className={styles['section']} aria-labelledby="button-colors-title">
+      <section className={styles['section']} aria-labelledby="button-themes-title">
         <div className={styles['section-heading']}>
-          <h2 id="button-colors-title">Color &amp; fill</h2>
+          <h2 id="button-themes-title">Theme &amp; fill</h2>
           <p>각 색상은 solid와 outline을 제공합니다.</p>
         </div>
 
         <div className={styles['button-grid']}>
-          {BUTTON_COLORS.map((buttonColor) => (
-            <article key={buttonColor.color} className={styles['button-card']}>
+          {BUTTON_THEMES.map((buttonTheme) => (
+            <article key={buttonTheme.theme} className={styles['button-card']}>
               <div>
-                <h3>{buttonColor.label}</h3>
-                <code>{buttonColor.token}</code>
+                <h3>{buttonTheme.label}</h3>
+                <code>{buttonTheme.token}</code>
               </div>
               <div className={styles['button-pair']}>
-                <Button color={buttonColor.color} fill="solid">
-                  Solid
+                <Button theme={buttonTheme.theme} fill="solid">
+                  장비 보기
                 </Button>
-                <Button color={buttonColor.color} fill="outline">
-                  Outline
+                <Button theme={buttonTheme.theme} fill="outline">
+                  장비 보기
                 </Button>
               </div>
             </article>
@@ -48,16 +48,16 @@ export default function ButtonShowcase() {
 
         <div className={styles['state-card']}>
           <div className={styles['button-pair']}>
-            <Button size="small">Small</Button>
-            <Button>Medium</Button>
-            <Button size="large">Large</Button>
+            <Button size="small">장비 보기</Button>
+            <Button>장비 보기</Button>
+            <Button size="large">장비 보기</Button>
           </div>
           <div className={styles['button-pair']}>
-            <Button color="lavender" fill="outline" isLoading>
-              Loading
+            <Button theme="lavender" fill="outline" isLoading>
+              불러오기
             </Button>
-            <Button color="gray" fill="outline" isDisabled>
-              Disabled
+            <Button theme="gray" fill="outline" disabled>
+              선택 불가
             </Button>
           </div>
         </div>

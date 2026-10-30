@@ -1,4 +1,4 @@
-@mixin icon-button-color($color, $hover-color) {
+@mixin icon-button-theme($color, $hover-color) {
   background-color: $color;
   color: $gray-900;
 
@@ -20,7 +20,7 @@
   transition: background-color $transition;
 
   &:focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid $focus-ring;
     outline-offset: 2px;
   }
 
@@ -29,34 +29,34 @@
     opacity: 0.5;
   }
 
-  &.color-gray {
-    @include icon-button-color($gray-700, $gray-600);
+  &.theme-gray {
+    @include icon-button-theme($gray-700, $gray-600);
     color: $text-primary;
   }
 
-  &.color-teal {
-    @include icon-button-color($teal, $teal-accent);
+  &.theme-teal {
+    @include icon-button-theme($teal, $teal-accent);
   }
 
-  &.color-steel {
-    @include icon-button-color($steel, $steel-accent);
+  &.theme-steel {
+    @include icon-button-theme($steel, $steel-accent);
   }
 
-  &.color-brass {
-    @include icon-button-color($brass, $brass-accent);
+  &.theme-brass {
+    @include icon-button-theme($brass, $brass-accent);
   }
 
-  &.color-lavender {
-    @include icon-button-color($lavender, $lavender-accent);
+  &.theme-lavender {
+    @include icon-button-theme($lavender, $lavender-accent);
   }
 
-  &.color-error {
-    @include icon-button-color($error, $error-accent);
+  &.theme-error {
+    @include icon-button-theme($error, $error-accent);
   }
 
   &.size-small {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 
     svg {
       width: 16px;
@@ -66,8 +66,8 @@
   }
 
   &.size-medium {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
 
     svg {
       width: 18px;
@@ -77,8 +77,8 @@
   }
 
   &.size-large {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
 
     svg {
       width: 20px;

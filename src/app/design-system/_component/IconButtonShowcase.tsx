@@ -1,11 +1,11 @@
 import IconButton from '@/components/common/button/IconButton';
-import type { TButtonColor } from '@/components/common/button/Button';
+import type { TButtonTheme } from '@/components/common/button/Button';
 
 import styles from '@/app/design-system/DesignSystem.module.scss';
 
 import { MdAdd, MdDeleteOutline } from 'react-icons/md';
 
-const COLORS: readonly TButtonColor[] = ['steel', 'teal', 'brass', 'lavender', 'gray', 'error'];
+const THEMES: readonly TButtonTheme[] = ['steel', 'teal', 'brass', 'lavender', 'gray', 'error'];
 
 export default function IconButtonShowcase() {
   return (
@@ -28,14 +28,14 @@ export default function IconButtonShowcase() {
           </IconButton>
         </div>
         <div className={styles['button-pair']}>
-          {COLORS.map((color) => (
-            <IconButton key={color} color={color} aria-label={`${color} 아이콘 버튼`}>
+          {THEMES.map((theme) => (
+            <IconButton key={theme} theme={theme} aria-label={`${theme} 아이콘 버튼`}>
               <MdAdd />
             </IconButton>
           ))}
         </div>
         <div className={styles['button-pair']}>
-          <IconButton aria-label="삭제" isDisabled>
+          <IconButton aria-label="삭제" disabled>
             <MdDeleteOutline />
           </IconButton>
         </div>

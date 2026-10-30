@@ -101,7 +101,9 @@ $text-muted: $gray-500;
 $border-soft: $gray-700;
 $border: $gray-600;
 $border-strong: $gray-500;
-$border-focus: $gray-400;
+
+// Focus
+$focus-ring: $steel-accent;
 
 // Background
 $bg-overlay: rgba(0, 0, 0, 0.5);

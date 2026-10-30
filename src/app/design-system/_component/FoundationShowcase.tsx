@@ -39,7 +39,7 @@ export default function FoundationShowcase() {
           'border-soft',
           'border',
           'border-strong',
-          'border-focus',
+          'focus-ring',
           'bg-dark',
           'bg',
           'bg-light',

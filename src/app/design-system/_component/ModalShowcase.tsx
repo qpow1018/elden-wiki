@@ -22,7 +22,7 @@ export default function ModalShowcase() {
       <div className={styles['state-card']}>
         <div className={styles['button-pair']}>
           <Button onClick={() => setIsModalOpen(true)}>Modal 열기</Button>
-          <Button color="error" fill="outline" onClick={() => setIsConfirmOpen(true)}>
+          <Button theme="error" fill="outline" onClick={() => setIsConfirmOpen(true)}>
             Confirm 열기
           </Button>
         </div>

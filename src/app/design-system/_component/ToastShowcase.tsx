@@ -19,21 +19,21 @@ export default function ToastShowcase() {
       <div className={styles['state-card']}>
         <div className={styles['toast-actions']}>
           <Button
-            color="teal"
+            theme="teal"
             fill="solid"
             onClick={() => toast.success('저장이 완료되었습니다.', { isShowCloseButton: true })}
           >
             성공 Toast
           </Button>
           <Button
-            color="error"
+            theme="error"
             fill="solid"
             onClick={() => toast.error('요청을 처리하지 못했습니다.', { isShowCloseButton: true })}
           >
             오류 Toast
           </Button>
           <Button
-            color="gray"
+            theme="gray"
             fill="solid"
             onClick={() => toast.info('새로운 안내가 있습니다.', { isShowCloseButton: true })}
           >
