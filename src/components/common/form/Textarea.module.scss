@@ -5,12 +5,16 @@
   padding: 8px 12px;
   border: 1px solid $border-strong;
   border-radius: $border-radius;
-  font-size: 13px;
+  font-size: 14px;
   color: $text-primary;
   transition: border-color $transition;
 
   &:focus-within {
-    border-color: $steel-accent;
+    border-color: $focus-ring;
+  }
+
+  &.is-readonly {
+    background: $bg-light;
   }
 
   > textarea {
@@ -26,11 +30,5 @@
     &:focus {
       outline: none;
     }
-  }
-}
-
-@media (pointer: coarse) {
-  .textarea {
-    font-size: 16px;
   }
 }

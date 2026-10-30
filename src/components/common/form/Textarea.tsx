@@ -1,72 +1,68 @@
 'use client';
 
-import { useLayoutEffect, useRef } from 'react';
+import { type ComponentProps, useImperativeHandle, useLayoutEffect, useRef } from 'react';
 
 import styles from './Textarea.module.scss';
 
-export default function Textarea(props: {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  rows?: number;
-  autoFocus?: boolean;
-  isCursorAtEndOnAutoFocus?: boolean;
-  isAutoHeight?: boolean;
-  className?: string;
-  ref?: React.Ref<HTMLTextAreaElement>;
-}) {
-  const {
-    value,
-    onChange,
-    placeholder,
-    rows = 4,
-    autoFocus,
-    isCursorAtEndOnAutoFocus,
-    isAutoHeight,
-    className,
-    ref,
-  } = props;
-
+export default function Textarea(
+  props: Omit<ComponentProps<'textarea'>, 'onChange'> & {
+    onChange?: (value: string) => void;
+    isCursorAtEndOnAutoFocus?: boolean;
+    isAutoHeight?: boolean;
+  },
+) {
+  const { onChange, isCursorAtEndOnAutoFocus, isAutoHeight = false, ...textareaProps } = props;
   const internalRef = useRef<HTMLTextAreaElement | null>(null);
-
-  function setRefs(node: HTMLTextAreaElement | null) {
-    internalRef.current = node;
-    if (typeof ref === 'function') {
-      ref(node);
-    } else if (ref) {
-      ref.current = node;
-    }
-  }
+  useImperativeHandle(textareaProps.ref, () => internalRef.current!, []);
 
   useLayoutEffect(() => {
     const el = internalRef.current;
-    if (!el) return;
-    if (!isAutoHeight) {
-      el.style.height = '';
-      return;
-    }
-    el.style.height = 'auto';
-    el.style.height = `${el.scrollHeight}px`;
-  }, [value, isAutoHeight]);
+    if (!el || !isAutoHeight) return;
+
+    const originalHeight = el.style.height;
+    resizeToContent(el);
+    let width = el.getBoundingClientRect().width;
+    const observer = new ResizeObserver(() => {
+      const nextWidth = el.getBoundingClientRect().width;
+      if (nextWidth === width) return;
+      width = nextWidth;
+      resizeToContent(el);
+    });
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      el.style.height = originalHeight;
+    };
+  }, [isAutoHeight, textareaProps.style?.height]);
+
+  useLayoutEffect(() => {
+    if (isAutoHeight && internalRef.current) resizeToContent(internalRef.current);
+  }, [textareaProps.value, textareaProps.defaultValue, textareaProps.rows, isAutoHeight]);
 
   useLayoutEffect(() => {
     const el = internalRef.current;
-    if (!el || !autoFocus || !isCursorAtEndOnAutoFocus) return;
-
+    if (!el || !textareaProps.autoFocus || !isCursorAtEndOnAutoFocus) return;
     const cursorPosition = el.value.length;
     el.setSelectionRange(cursorPosition, cursorPosition);
-  }, [autoFocus, isCursorAtEndOnAutoFocus]);
+  }, [textareaProps.autoFocus, isCursorAtEndOnAutoFocus]);
 
   return (
-    <div className={`${styles['textarea']} ${className ?? ''}`}>
+    <div className={`${styles['textarea']} ${textareaProps.readOnly ? styles['is-readonly'] : ''}`}>
       <textarea
-        ref={setRefs}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        rows={rows}
-        autoFocus={autoFocus}
+        {...textareaProps}
+        ref={internalRef}
+        rows={textareaProps.rows ?? 4}
+        onChange={(event) => onChange?.(event.target.value)}
+        onInput={(event) => {
+          if (isAutoHeight) resizeToContent(event.currentTarget);
+          textareaProps.onInput?.(event);
+        }}
       />
     </div>
   );
+}
+
+function resizeToContent(el: HTMLTextAreaElement) {
+  el.style.height = 'auto';
+  el.style.height = `${el.scrollHeight}px`;
 }

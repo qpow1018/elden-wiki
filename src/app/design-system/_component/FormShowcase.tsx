@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import Checkbox from '@/components/common/form/Checkbox';
+import Button from '@/components/common/button/Button';
 import Select from '@/components/common/form/Select';
 import Textarea from '@/components/common/form/Textarea';
 import TextInput from '@/components/common/form/TextInput';
@@ -21,6 +22,7 @@ export default function FormShowcase() {
   const [selectedOption, setSelectedOption] = useState('sword');
   const [textarea, setTextarea] = useState('여러 줄로 입력할 수 있는 설명입니다.');
   const [isChecked, setIsChecked] = useState(true);
+  const [isCursorExampleVisible, setIsCursorExampleVisible] = useState(false);
 
   return (
     <section className={styles['section']} aria-labelledby="form-title">
@@ -66,6 +68,40 @@ export default function FormShowcase() {
               onChange={setIsChecked}
               label="작은 크기"
             />
+          </div>
+          <label className={styles['form-field']}>
+            <span>자동 높이 · 제어 입력</span>
+            <Textarea
+              aria-label="자동 높이 제어 입력"
+              value={textarea}
+              onChange={setTextarea}
+              isAutoHeight
+            />
+          </label>
+          <label className={styles['form-field']}>
+            <span>자동 높이 · 비제어 입력</span>
+            <Textarea defaultValue="줄을 추가하거나 지워보세요." isAutoHeight />
+          </label>
+          <label className={styles['form-field']}>
+            <span>읽기 전용 설명</span>
+            <Textarea value="수정할 수 없는 설명입니다." readOnly />
+          </label>
+          <label className={styles['form-field']}>
+            <span>비활성 설명</span>
+            <Textarea defaultValue="비활성 상태입니다." disabled />
+          </label>
+          <div className={styles['form-field']}>
+            <Button onClick={() => setIsCursorExampleVisible(!isCursorExampleVisible)}>
+              {isCursorExampleVisible ? '커서 예시 닫기' : '커서 끝 이동 예시 열기'}
+            </Button>
+            {isCursorExampleVisible && (
+              <Textarea
+                aria-label="커서 끝 이동"
+                defaultValue="커서가 이 문장의 끝에 놓입니다."
+                autoFocus
+                isCursorAtEndOnAutoFocus
+              />
+            )}
           </div>
           <label className={styles['form-field']}>
             <span>읽기 전용</span>
