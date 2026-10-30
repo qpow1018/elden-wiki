@@ -1,50 +1,35 @@
 'use client';
 
+import type { ComponentProps, KeyboardEvent } from 'react';
+
 import styles from './TextInput.module.scss';
 
-export default function TextInput(props: {
-  value: string;
-  onChange?: (value: string) => void;
-  isReadonly?: boolean;
-  inputMode?: React.ComponentProps<'input'>['inputMode'];
-  placeholder?: string;
-  onPressEnter?: () => void;
-  className?: string;
-  ref?: React.Ref<HTMLInputElement>;
-}) {
-  const {
-    value,
-    onChange,
-    isReadonly = false,
-    inputMode,
-    placeholder,
-    onPressEnter,
-    className,
-    ref,
-  } = props;
-  const isReadOnly = isReadonly || onChange === undefined;
+export default function TextInput(
+  props: Omit<ComponentProps<'input'>, 'onChange'> & {
+    onChange?: (value: string) => void;
+    onPressEnter?: () => void;
+  },
+) {
+  const { onChange, onPressEnter, ...inputProps } = props;
 
-  function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (isReadOnly) return;
-    if (e.nativeEvent.isComposing) return;
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    inputProps.onKeyDown?.(e);
+    if (e.defaultPrevented) return;
+    if (inputProps.readOnly) return;
+    // IME 확정 Enter는 일부 브라우저에서 isComposing이 false일 수 있다.
+    if (e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return;
     if (e.key === 'Enter' && onPressEnter !== undefined) {
       onPressEnter();
     }
   }
 
   return (
-    <div
-      className={`${styles['text-input']} ${isReadOnly ? styles['is-readonly'] : ''} ${className ?? ''}`}
-    >
+    <div className={`${styles['text-input']} ${inputProps.readOnly ? styles['is-readonly'] : ''}`}>
       <input
-        ref={ref}
-        type="text"
-        value={value}
-        readOnly={isReadOnly}
-        inputMode={inputMode}
+        {...inputProps}
+        type={inputProps.type ?? 'text'}
         onChange={(e) => onChange?.(e.target.value)}
-        placeholder={placeholder}
-        onKeyUp={handleKeyUp}
+        onKeyDown={handleKeyDown}
       />
     </div>
   );

@@ -69,7 +69,7 @@ export default function FormShowcase() {
           </div>
           <label className={styles['form-field']}>
             <span>읽기 전용</span>
-            <TextInput value="수정할 수 없는 입력값" isReadonly />
+            <TextInput value="수정할 수 없는 입력값" readOnly />
           </label>
           <div className={styles['form-field']}>
             <span id="disabled-select-label">비활성 선택</span>
