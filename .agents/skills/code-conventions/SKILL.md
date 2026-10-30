@@ -46,4 +46,3 @@ description: 엘든 위키의 TypeScript·import·이름·일반 함수·포맷 
 - 프로젝트에 설치된 Prettier와 루트 `.prettierrc.json`을 사용한다. 포맷 옵션은 설정 파일을 기준으로 하며 이 문서에 중복 정의하지 않는다.
 - 코드 작성·수정 후 변경한 코드 파일만 포맷하고, 같은 파일을 대상으로 `prettier --check`를 실행한다. 요청과 무관한 파일까지 일괄 포맷하지 않는다.
 - import 그룹과 순서는 이 스킬의 Import 기준에 따라 별도로 유지한다.
-

@@ -1,12 +1,12 @@
 # 엘든링 위키
 
-엘든링 게임 정보 사이트. 현재는 기능 기획 전 기본 개발 환경만 구성되어 있습니다.
+엘든링 게임 정보 사이트. 현재 홈에서 장비 목록 조회·검색·필터·페이지 탐색을 제공합니다.
 
 ## 개발 환경
 
 - Node.js 22 이상 (`.nvmrc`: 22.23.3)
 - npm / Next.js App Router / React / TypeScript
-- ESLint / SCSS (컴포넌트 스타일은 SCSS Modules 사용 가능)
+- ESLint / SCSS Modules
 - Supabase JavaScript SDK
 
 ## 실행
@@ -21,7 +21,7 @@ npm run dev
 ```
 
 브라우저에서 http://localhost:3000 에 접속합니다.
-기본 페이지는 Supabase 환경변수 없이도 실행됩니다.
+장비 데이터를 조회하려면 로컬 Supabase 실행과 환경 변수 설정이 필요합니다.
 
 ## Supabase 설정
 
@@ -51,16 +51,16 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=로컬_Publishable_키
 `NEXT_PUBLIC_` 환경변수는 빌드 시 반영되므로 운영 빌드 전에 설정합니다.
 
 스키마 변경은 로컬에서 마이그레이션 파일로 만들고 검증한 뒤 운영에 적용합니다.
-현재 CLI는 운영 프로젝트에 연결하지 않았으며, 운영 배포 명령도 등록하지 않았습니다.
+운영 적용 전 대상 프로젝트와 실제 적용 이력을 확인합니다. `package.json`에는 운영 배포 명령이 등록되어 있지 않습니다.
 
-`src/lib/supabase/client.ts`의 `createSupabaseClient()`는 공개 데이터 조회용입니다.
+`src/api/index.ts`의 `getApiClient()`는 공개 데이터 조회용 공통 클라이언트를 제공합니다.
 환경변수는 클라이언트 생성 시 확인하며, 사용자 세션 저장과 자동 갱신은 비활성화되어 있습니다.
 로그인이 필요해지면 쿠키 기반 서버·브라우저 클라이언트를 별도로 설계합니다.
 
 `NEXT_PUBLIC_` 값은 브라우저에 공개됩니다. secret key와 `service_role` key는 넣지 않습니다.
 .env.local은 Git에서 제외되므로 다른 개발 환경에서는 로컬 키를 별도로 설정해야 합니다.
-테이블, RLS 정책, 인증 및 데이터 조회 기능은 아직 구성하지 않았습니다.
-테이블을 추가할 때 공개 범위에 맞는 RLS 정책도 함께 구성해야 합니다.
+테이블과 공개 조회 정책은 마이그레이션으로 관리하며 장비 조회 API가 구현되어 있습니다. 사용자 인증은 아직 구현하지 않았습니다.
+데이터 모델·권한·등록 기준은 [DB 문서](docs/DATABASE.md)를 확인합니다. 특정 환경의 실제 적용 상태는 해당 DB에서 별도로 확인합니다.
 
 공식 문서: [Supabase 클라이언트 초기화](https://supabase.com/docs/reference/javascript/initializing)
 
@@ -73,15 +73,9 @@ npm run build
 npm start
 ```
 
-## 구조
+## 프로젝트 문서
 
-```text
-src/
-  app/                  # 페이지, 레이아웃
-  assets/               # 폰트, Sass 변수·믹스인·리셋·전역 스타일
-  lib/supabase/client.ts # 공개 데이터 조회용 Supabase 클라이언트
-```
-
-`src/assets/reset.scss`와 `global.scss`는 루트 레이아웃에서 순서대로 불러옵니다.
-`_variables.scss`와 `_mixins.scss`는 `next.config.ts`에서 자동 주입하므로
-개별 SCSS 파일에 반복해서 `@use`를 추가하지 않습니다.
+- [작업 지침](AGENTS.md): 작업 범위·진행·검토·검증 기준과 문서 선택 안내.
+- [아키텍처](docs/ARCHITECTURE.md): 폴더 구조·역할·배치 기준·의존 방향.
+- [DB 설계](docs/DATABASE.md): 데이터 의미·관계·제약·권한·등록 기준.
+- 코드 작성 규칙은 작업 지침에 연결된 공통 코드·프론트엔드·백엔드 스킬을 따릅니다.
