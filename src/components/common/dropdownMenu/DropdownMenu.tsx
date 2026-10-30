@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { type ComponentProps, useEffect, useId, useRef, useState } from 'react';
 
 import styles from './DropdownMenu.module.scss';
 
@@ -11,7 +11,7 @@ export type TDropdownMenuItem = {
 
 type TTriggerProps = {
   isOpen: boolean;
-  toggle: () => void;
+  triggerProps: ComponentProps<'button'>;
 };
 
 export default function DropdownMenu(props: {
@@ -22,6 +22,8 @@ export default function DropdownMenu(props: {
 
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuId = useId();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -31,15 +33,9 @@ export default function DropdownMenu(props: {
         setIsOpen(false);
       }
     }
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') setIsOpen(false);
-    }
-
     document.addEventListener('mousedown', handlePointerDown);
-    document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('mousedown', handlePointerDown);
-      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
 
@@ -53,16 +49,36 @@ export default function DropdownMenu(props: {
   }
 
   return (
-    <div className={styles['dropdown-menu']} ref={containerRef}>
-      {trigger({ isOpen, toggle })}
+    <div
+      className={styles['dropdown-menu']}
+      ref={containerRef}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false);
+      }}
+      onKeyDown={(event) => {
+        if (!isOpen || event.key !== 'Escape') return;
+        event.stopPropagation();
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      }}
+    >
+      {trigger({
+        isOpen,
+        triggerProps: {
+          ref: triggerRef,
+          type: 'button',
+          onClick: toggle,
+          'aria-expanded': isOpen,
+          'aria-controls': isOpen ? menuId : undefined,
+        },
+      })}
 
       {isOpen && (
-        <ul className={styles['menu']} role="menu">
+        <ul id={menuId} className={styles['menu']}>
           {items.map((item, idx) => (
             <li key={idx}>
               <button
                 type="button"
-                role="menuitem"
                 className={styles['menu-item']}
                 onClick={() => handleItemClick(item)}
               >

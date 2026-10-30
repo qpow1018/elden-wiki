@@ -20,8 +20,8 @@ export default function DropdownMenuShowcase() {
       <div className={styles['state-card']}>
         <div className={styles['dropdown-menu-showcase']}>
           <DropdownMenu
-            trigger={({ toggle }) => (
-              <IconButton size="small" aria-label="더 보기" onClick={toggle}>
+            trigger={({ triggerProps }) => (
+              <IconButton {...triggerProps} size="small" aria-label="더 보기">
                 <MdMoreHoriz />
               </IconButton>
             )}
