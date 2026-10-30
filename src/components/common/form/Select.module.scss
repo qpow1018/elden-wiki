@@ -7,20 +7,20 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 40px;
+    height: 42px;
     padding: 0 12px;
     border: 1px solid $border-strong;
     border-radius: $border-radius;
     background: transparent;
     color: $text-primary;
-    font-size: 13px;
+    font-size: 14px;
     text-align: left;
     transition: border-color $transition;
     cursor: pointer;
 
     &:focus-visible {
-      border-color: $steel-accent;
-      outline: 2px solid $steel-light;
+      border-color: $focus-ring;
+      outline: 2px solid $focus-ring;
       outline-offset: 1px;
     }
 
@@ -54,14 +54,14 @@
     outline: none;
 
     .option {
-      padding: 8px 12px;
+      padding: 12px;
       border-radius: 4px;
       color: $text-primary;
-      font-size: 13px;
+      font-size: 14px;
       cursor: pointer;
 
-      &.is-active,
-      &:hover {
+      &.is-active:not([aria-disabled='true']),
+      &:hover:not([aria-disabled='true']) {
         background: $bg-accent;
       }
 

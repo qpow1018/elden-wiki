@@ -1,6 +1,13 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import {
+  type ComponentProps,
+  useEffect,
+  useId,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 import styles from './Select.module.scss';
 
@@ -12,52 +19,62 @@ type TSelectOption = {
   isDisabled?: boolean;
 };
 
-export default function Select(props: {
-  id?: string;
-  labelId: string;
-  options: readonly TSelectOption[];
-  value: string;
-  onChange: (value: string) => void;
-  isDisabled?: boolean;
-  className?: string;
-}) {
-  const { id, labelId, options, value, onChange, isDisabled = false, className } = props;
+export default function Select(
+  props: Omit<ComponentProps<'button'>, 'onChange' | 'value' | 'children'> & {
+    labelId?: string;
+    options: readonly TSelectOption[];
+    value: string;
+    onChange: (value: string) => void;
+  },
+) {
+  const { labelId, options, value, onChange, ...buttonProps } = props;
   const generatedId = useId();
-  const listboxId = `${id ?? generatedId}-listbox`;
-  const selectedIndex = Math.max(
-    options.findIndex((option) => option.value === value && !option.isDisabled),
-    0,
-  );
+  const listboxId = `${buttonProps.id ?? generatedId}-listbox`;
+  const selectedOptionIndex = options.findIndex((option) => option.value === value);
+  const selectedOption = options[selectedOptionIndex];
+  const selectedIndex =
+    selectedOption && !selectedOption.isDisabled
+      ? selectedOptionIndex
+      : options.findIndex((option) => !option.isDisabled);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(selectedIndex);
+  const [focusedIndex, setFocusedIndex] = useState(selectedIndex);
+  const activeIndex =
+    options[focusedIndex] && !options[focusedIndex].isDisabled ? focusedIndex : selectedIndex;
+  if (buttonProps.disabled && isOpen) setIsOpen(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
   const optionRefs = useRef<Array<HTMLLIElement | null>>([]);
 
+  useImperativeHandle(buttonProps.ref, () => triggerRef.current!, []);
+
   useEffect(() => {
     if (!isOpen) return;
 
-    function handlePointerDown(event: MouseEvent) {
+    function handlePointerDown(event: PointerEvent) {
       if (!containerRef.current?.contains(event.target as Node)) {
         setIsOpen(false);
       }
     }
 
-    document.addEventListener('mousedown', handlePointerDown);
-    return () => document.removeEventListener('mousedown', handlePointerDown);
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
   }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
     listboxRef.current?.focus();
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
     optionRefs.current[activeIndex]?.scrollIntoView({ block: 'nearest' });
   }, [activeIndex, isOpen]);
 
   function open() {
-    if (isDisabled) return;
-    setActiveIndex(selectedIndex);
+    if (buttonProps.disabled) return;
+    setFocusedIndex(selectedIndex);
     setIsOpen(true);
   }
 
@@ -66,7 +83,7 @@ export default function Select(props: {
   }
 
   function selectOption(option: TSelectOption) {
-    if (option.isDisabled) return;
+    if (buttonProps.disabled || option.isDisabled) return;
     onChange(option.value);
     close();
     triggerRef.current?.focus();
@@ -82,41 +99,36 @@ export default function Select(props: {
   }
 
   function handleTriggerKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
+    buttonProps.onKeyDown?.(event);
+    if (event.defaultPrevented) return;
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault();
       open();
-      return;
-    }
-
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      if (isOpen) close();
-      else open();
     }
   }
 
   function handleListboxKeyDown(event: React.KeyboardEvent<HTMLUListElement>) {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      setActiveIndex((index) => getNextEnabledIndex(index, 1));
+      setFocusedIndex(getNextEnabledIndex(activeIndex, 1));
       return;
     }
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      setActiveIndex((index) => getNextEnabledIndex(index, -1));
+      setFocusedIndex(getNextEnabledIndex(activeIndex, -1));
       return;
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
-      setActiveIndex(options.findIndex((option) => !option.isDisabled));
+      setFocusedIndex(options.findIndex((option) => !option.isDisabled));
       return;
     }
 
     if (event.key === 'End') {
       event.preventDefault();
-      setActiveIndex(options.findLastIndex((option) => !option.isDisabled));
+      setFocusedIndex(options.findLastIndex((option) => !option.isDisabled));
       return;
     }
 
@@ -134,21 +146,29 @@ export default function Select(props: {
     }
   }
 
-  const selectedOption = options.find((option) => option.value === value);
-
   return (
-    <div className={`${styles['select']} ${className ?? ''}`} ref={containerRef}>
+    <div
+      className={styles['select']}
+      ref={containerRef}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) close();
+      }}
+    >
       <button
-        id={id}
+        {...buttonProps}
         ref={triggerRef}
         type="button"
-        className={styles['trigger']}
-        aria-labelledby={labelId}
+        className={`${styles['trigger']} ${buttonProps.className ?? ''}`}
+        aria-labelledby={labelId ?? buttonProps['aria-labelledby']}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-controls={listboxId}
-        disabled={isDisabled}
-        onClick={() => (isOpen ? close() : open())}
+        aria-controls={isOpen ? listboxId : undefined}
+        onClick={(event) => {
+          buttonProps.onClick?.(event);
+          if (event.defaultPrevented) return;
+          if (isOpen) close();
+          else open();
+        }}
         onKeyDown={handleTriggerKeyDown}
       >
         <span>{selectedOption?.label}</span>
@@ -161,8 +181,11 @@ export default function Select(props: {
           ref={listboxRef}
           className={styles['options']}
           role="listbox"
-          aria-labelledby={labelId}
-          aria-activedescendant={`${listboxId}-option-${activeIndex}`}
+          aria-labelledby={labelId ?? buttonProps['aria-labelledby']}
+          aria-label={buttonProps['aria-label']}
+          aria-activedescendant={
+            activeIndex >= 0 ? `${listboxId}-option-${activeIndex}` : undefined
+          }
           tabIndex={-1}
           onKeyDown={handleListboxKeyDown}
         >

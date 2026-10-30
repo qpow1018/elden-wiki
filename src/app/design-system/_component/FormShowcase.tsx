@@ -19,6 +19,7 @@ const SELECT_OPTIONS = [
 
 export default function FormShowcase() {
   const [text, setText] = useState('입력값');
+  const [edgeOption, setEdgeOption] = useState('');
   const [selectedOption, setSelectedOption] = useState('sword');
   const [textarea, setTextarea] = useState('여러 줄로 입력할 수 있는 설명입니다.');
   const [isChecked, setIsChecked] = useState(true);
@@ -114,7 +115,33 @@ export default function FormShowcase() {
               options={SELECT_OPTIONS}
               value="sword"
               onChange={() => undefined}
-              isDisabled
+              disabled
+            />
+          </div>
+          <div className={styles['form-field']}>
+            <span>첫 항목 비활성 · 선택값 없음</span>
+            <Select
+              aria-label="선택 가능한 항목 탐색"
+              options={[
+                { value: 'disabled', label: '선택 불가', isDisabled: true },
+                { value: 'first', label: '첫 선택 가능' },
+                { value: 'second', label: '두 번째 선택 가능' },
+              ]}
+              value={edgeOption}
+              onChange={setEdgeOption}
+            />
+          </div>
+          <div className={styles['form-field']}>
+            <span>빈 선택 목록</span>
+            <Select aria-label="빈 선택 목록" options={[]} value="" onChange={() => undefined} />
+          </div>
+          <div className={styles['form-field']}>
+            <span>모든 항목 비활성</span>
+            <Select
+              aria-label="모든 항목 비활성"
+              options={[{ value: 'disabled', label: '선택 불가', isDisabled: true }]}
+              value=""
+              onChange={() => undefined}
             />
           </div>
         </div>
