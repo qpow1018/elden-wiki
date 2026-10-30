@@ -239,23 +239,6 @@ $swatches: (
     gap: 8px;
   }
 
-  .modal-preview-content {
-    padding: 24px;
-
-    p {
-      margin: 0;
-      color: $text-secondary;
-      font-size: 14px;
-    }
-  }
-
-  .modal-preview-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 24px;
-  }
-
   .palette-list {
     display: grid;
     gap: 24px;
@@ -375,4 +358,22 @@ $swatches: (
       content: '#{$color}';
     }
   }
+}
+
+.modal-preview-content {
+  padding: 24px;
+
+  p {
+    margin: 0;
+    color: $text-secondary;
+    font-size: 14px;
+  }
+}
+
+.modal-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
 }

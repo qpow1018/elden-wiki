@@ -12,10 +12,10 @@ export default function Confirm(props: {
   message: string;
   buttons: {
     label: string;
-    color: TButtonTheme;
-    fill: 'solid' | 'outline';
+    theme?: TButtonTheme;
+    fill?: 'solid' | 'outline';
     onClick: () => void;
-    isDisabled?: boolean;
+    disabled?: boolean;
   }[];
 }) {
   const { isOpen, onClose, title, message, buttons } = props;
@@ -29,10 +29,10 @@ export default function Confirm(props: {
           {buttons.map((b, i) => (
             <Button
               key={i}
-              theme={b.color}
+              theme={b.theme}
               fill={b.fill}
               size="large"
-              disabled={b.isDisabled}
+              disabled={b.disabled}
               onClick={b.onClick}
               className={styles['button']}
             >

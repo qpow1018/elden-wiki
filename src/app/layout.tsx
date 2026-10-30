@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 import QueryProvider from '@/providers/QueryProvider';
+import ToastContainer from '@/components/common/toast/ToastContainer';
 
 import '@/assets/reset.scss';
 import '@/assets/global.scss';
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body className={`${pretendard.className} ${pretendard.variable}`}>
         <QueryProvider>{children}</QueryProvider>
+        <ToastContainer />
       </body>
     </html>
   );

@@ -21,7 +21,7 @@ export default function TabsShowcase() {
     <section className={styles['section']} aria-labelledby="tabs-title">
       <div className={styles['section-heading']}>
         <h2 id="tabs-title">Tabs</h2>
-        <p>페이지 안의 보기를 전환하는 40px 탭입니다.</p>
+        <p>페이지 안의 보기를 전환하는 42px 탭입니다.</p>
       </div>
 
       <div className={styles['state-card']}>

@@ -3,11 +3,11 @@
   border-bottom: 1px solid $border-strong;
 
   .tab {
-    height: 40px;
+    height: 42px;
     padding: 0 12px;
     background-color: transparent;
     color: $text-secondary;
-    font-size: 13px;
+    font-size: 14px;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition:
@@ -17,14 +17,15 @@
     &:hover {
       color: $text-primary;
     }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: 2px;
+    }
   }
 
   .tab-selected {
     color: $text-primary;
     border-bottom-color: $steel-accent;
-
-    &:hover {
-      color: $text-primary;
-    }
   }
 }

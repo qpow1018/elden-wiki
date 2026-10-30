@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useId, useRef } from 'react';
+import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useBodyScrollLock } from '@/utils/useBodyScrollLock';
 
@@ -32,32 +33,66 @@ export default function Modal(props: {
     width = 480,
   } = props;
 
-  useBodyScrollLock(isOpen);
+  const portalTarget = useSyncExternalStore(
+    subscribeToHydration,
+    () => document.body,
+    () => null,
+  );
+  useBodyScrollLock(isOpen && portalTarget !== null);
 
   const onCloseRef = useRef(onClose);
+  const isCloseOnEscapeRef = useRef(isCloseOnEscape);
   const isBackdropPointerDownRef = useRef(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
 
   useEffect(() => {
     onCloseRef.current = onClose;
-  }, [onClose]);
+    isCloseOnEscapeRef.current = isCloseOnEscape;
+  }, [onClose, isCloseOnEscape]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !portalTarget) return;
 
     const token = Symbol();
-    openModalStack.push(token);
     const previousFocus = document.activeElement;
-    const focusableSelector =
-      'button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), a[href], [tabindex="0"]';
-    modalRef.current?.querySelector<HTMLElement>(focusableSelector)?.focus();
+    const modal = modalRef.current;
+    if (!modal) return;
+    openModalStack.push(token);
+
+    function getFocusableElements() {
+      return Array.from(
+        modal!.querySelectorAll<HTMLElement>(
+          'button, input, textarea, select, a[href], [tabindex]',
+        ),
+      )
+        .filter(
+          (element) =>
+            element.tabIndex >= 0 &&
+            !element.matches(':disabled') &&
+            !element.closest('[inert], [hidden]') &&
+            element.getClientRects().length > 0 &&
+            getComputedStyle(element).visibility === 'visible',
+        )
+        .sort((a, b) => (a.tabIndex || Infinity) - (b.tabIndex || Infinity));
+    }
+
+    function focusInside() {
+      (getFocusableElements()[0] ?? modal)?.focus({ preventScroll: true });
+    }
+
+    focusInside();
+
+    function handleFocus(event: FocusEvent) {
+      if (openModalStack[openModalStack.length - 1] !== token) return;
+      if (!modal?.contains(event.target as Node)) focusInside();
+    }
 
     function handleKeyDown(e: KeyboardEvent) {
       if (openModalStack[openModalStack.length - 1] !== token) return;
-      if (e.key === 'Escape' && isCloseOnEscape) onCloseRef.current();
+      if (e.key === 'Escape' && isCloseOnEscapeRef.current) onCloseRef.current();
       if (e.key !== 'Tab') return;
-      const elements = modalRef.current?.querySelectorAll<HTMLElement>(focusableSelector);
+      const elements = getFocusableElements();
       if (!elements?.length) {
         e.preventDefault();
         modalRef.current?.focus();
@@ -65,7 +100,10 @@ export default function Modal(props: {
       }
       const first = elements[0];
       const last = elements[elements.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
+      if (!elements.includes(document.activeElement as HTMLElement)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      } else if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
       } else if (!e.shiftKey && document.activeElement === last) {
@@ -75,15 +113,19 @@ export default function Modal(props: {
     }
 
     document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('focusin', handleFocus);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('focusin', handleFocus);
       const idx = openModalStack.indexOf(token);
       if (idx !== -1) openModalStack.splice(idx, 1);
-      if (previousFocus instanceof HTMLElement) previousFocus.focus();
+      if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+        previousFocus.focus({ preventScroll: true });
+      }
     };
-  }, [isOpen, isCloseOnEscape]);
+  }, [isOpen, portalTarget]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !portalTarget) return null;
 
   function handleBackdropPointerDown(e: React.PointerEvent<HTMLDivElement>) {
     isBackdropPointerDownRef.current = e.target === e.currentTarget;
@@ -99,7 +141,7 @@ export default function Modal(props: {
     if (isBackdropClick) onClose();
   }
 
-  return (
+  return createPortal(
     <div
       className={styles['modal-backdrop']}
       onPointerDown={handleBackdropPointerDown}
@@ -136,6 +178,12 @@ export default function Modal(props: {
 
         <div className={styles['body']}>{children}</div>
       </div>
-    </div>
+    </div>,
+    portalTarget,
   );
+}
+
+// 서버와 초기 hydration에서는 생략하고, 클라이언트에서 body에 연결한다.
+function subscribeToHydration() {
+  return () => {};
 }

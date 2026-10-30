@@ -15,20 +15,20 @@ export default function FixedLoading() {
     const loading = loadingRef.current;
     if (!loading) return;
 
-    loading.focus({ preventScroll: true });
-
     function handleKey(event: KeyboardEvent) {
       event.stopImmediatePropagation();
       if (['Tab', 'Enter', ' ', 'Escape'].includes(event.key)) event.preventDefault();
     }
 
     function handleFocus(event: FocusEvent) {
+      event.stopImmediatePropagation();
       if (event.target !== loading) loading?.focus({ preventScroll: true });
     }
 
     document.addEventListener('keydown', handleKey, true);
     document.addEventListener('keyup', handleKey, true);
     document.addEventListener('focusin', handleFocus, true);
+    loading.focus({ preventScroll: true });
     return () => {
       document.removeEventListener('keydown', handleKey, true);
       document.removeEventListener('keyup', handleKey, true);

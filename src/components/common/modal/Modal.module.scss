@@ -12,7 +12,7 @@
     position: relative;
     max-width: 100%;
     margin-bottom: 80px;
-    max-height: calc(100vh - 112px);
+    max-height: calc(100dvh - 112px);
     display: flex;
     flex-direction: column;
     background-color: $bg;
@@ -47,6 +47,11 @@
       height: 32px;
       border-radius: 50%;
       color: $text-primary;
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: 2px;
+      }
     }
 
     .body {

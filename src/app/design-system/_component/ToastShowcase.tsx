@@ -3,7 +3,6 @@
 import toast from '@/utils/toast';
 
 import Button from '@/components/common/button/Button';
-import ToastContainer from '@/components/common/toast/ToastContainer';
 
 import styles from '@/app/design-system/DesignSystem.module.scss';
 
@@ -15,7 +14,6 @@ export default function ToastShowcase() {
         <p>작업 결과와 짧은 안내를 하단에 표시합니다.</p>
       </div>
 
-      <ToastContainer />
       <div className={styles['state-card']}>
         <div className={styles['toast-actions']}>
           <Button
