@@ -1,5 +1,4 @@
 .page {
-  padding: 0 20px;
   color: #dce1e6;
   min-height: 100vh;
   font-size: 14px;
@@ -17,57 +16,7 @@
     font-weight: 750;
     color: #d8c28c;
   }
-  .intro {
-    padding: 28px 0 30px;
-    h1 {
-      margin: 0 0 10px;
-      font-size: 32px;
-      letter-spacing: -1.5px;
-      color: #eee9dc;
-    }
-    p {
-      margin: 5px 0;
-      font-size: 17px;
-      color: #c7b889;
-    }
-    .hint {
-      color: #a5b1bd;
-      font-size: 14px;
-    }
-  }
-  .search {
-    grid-column: 1 / -1;
-  }
-  .filters {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    padding: 14px;
-    background: #1b2733;
-    border: 1px solid #364350;
-    border-radius: 6px;
-    label {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      color: #b4c0cb;
-      font-size: 12px;
-    }
-    input,
-    select {
-      width: 100%;
-      min-width: 0;
-      height: 44px;
-      padding: 0 12px;
-      background: #141d27;
-      border: 1px solid #495767;
-      border-radius: 3px;
-      color: #e1e5e9;
-      font: inherit;
-      font-size: 14px;
-    }
-  }
-  button {
+  :where(button) {
     color: #d8c28c;
     font: inherit;
     background: transparent;

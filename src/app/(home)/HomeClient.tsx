@@ -5,25 +5,13 @@ import { useState } from 'react';
 import equipmentQuery from '@/api/equipment/equipmentQuery';
 import type { TEquipment, TReqGetEquipment } from '@/api/equipment/types';
 
+import { CONTENTS, ITEM_TYPES } from './_define/items';
+
+import ItemFilters from './_component/ItemFilters';
 import Image from 'next/image';
 
 import styles from './HomeClient.module.scss';
 
-const ITEM_TYPES: Record<string, string> = {
-  weapon: '무기',
-  armor: '방어구',
-  talisman: '탈리스만',
-  spirit_ash: '뼛가루',
-  ash_of_war: '전회',
-  spell: '마술·기도',
-  gesture: '제스처',
-  crystal_tear: '결정 물방울',
-};
-const CONTENTS: Record<string, string> = {
-  base_game: '본편',
-  shadow_of_the_erdtree: '황금 나무의 그림자',
-  tarnished_pack: '빛바랜 자 팩',
-};
 const AFFINITIES: Record<string, string> = {
   standard: '표준',
   heavy: '중후',
@@ -70,7 +58,6 @@ export default function HomeClient() {
     pageSize: 20,
   });
   const { data, isPending, isError, isSuccess, refetch } = equipmentQuery.useGetEquipment(params);
-  const categoriesQuery = equipmentQuery.useGetEquipmentCategories();
   const items = data?.items ?? [];
   const totalCount = data?.totalCount ?? 0;
   const totalPages = Math.ceil(totalCount / params.pageSize);
@@ -79,9 +66,7 @@ export default function HomeClient() {
     { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
     (_, index) => firstPage + index,
   );
-  const categories = (categoriesQuery.data ?? []).filter(
-    (category) => !params.type || category.type === params.type,
-  );
+  const selectedTypeLabel = params.type ? ITEM_TYPES[params.type] : '전체 아이템';
   const hasFilters = Boolean(
     params.search || params.type || params.categoryId !== undefined || params.contentCode,
   );
@@ -102,103 +87,21 @@ export default function HomeClient() {
         <span className={styles['brand']}>엘든링 위키</span>
         <span>틈새의 땅 도감</span>
       </header>
-      <div className={styles['intro']}>
-        <h1>장비 도감</h1>
-        <p>무엇을 들고, 어떤 길을 걸을 것인가.</p>
-        <p className={styles['hint']}>장비의 설명부터 능력치까지, 한곳에서 확인하세요.</p>
-      </div>
-      <div className={styles['filters']}>
-        <label className={styles['search']}>
-          장비 검색
-          <input
-            type="search"
-            placeholder="장비 이름으로 검색"
-            value={params.search ?? ''}
-            onChange={(event) => handleFilterChange({ search: event.target.value || undefined })}
-          />
-        </label>
-        <label>
-          종류
-          <select
-            value={params.type ?? ''}
-            onChange={(event) =>
-              handleFilterChange({
-                type: (event.target.value || undefined) as TEquipment['type'] | undefined,
-                categoryId: undefined,
-              })
-            }
-          >
-            <option value="">모든 종류</option>
-            {Object.entries(ITEM_TYPES).map(([key, label]) => (
-              <option key={key} value={key}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          세부 분류
-          <select
-            value={params.categoryId ?? ''}
-            disabled={categoriesQuery.isPending || categoriesQuery.isError}
-            onChange={(event) =>
-              handleFilterChange({
-                categoryId: event.target.value ? Number(event.target.value) : undefined,
-              })
-            }
-          >
-            <option value="">모든 분류</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          콘텐츠
-          <select
-            value={params.contentCode ?? ''}
-            onChange={(event) =>
-              handleFilterChange({ contentCode: event.target.value || undefined })
-            }
-          >
-            <option value="">전체 콘텐츠</option>
-            {Object.entries(CONTENTS).map(([key, label]) => (
-              <option key={key} value={key}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      {categoriesQuery.isError && (
-        <p className={styles['note']}>
-          세부 분류를 불러오지 못했습니다.{' '}
-          <button
-            onClick={() => {
-              void categoriesQuery.refetch();
-            }}
-          >
-            분류 다시 불러오기
-          </button>
-        </p>
-      )}
+      <ItemFilters params={params} onChange={handleFilterChange} onReset={handleReset} />
       <div className={styles['list-heading']}>
         <h2>
-          장비 목록 <span>{data ? totalCount : '—'}</span>
+          {selectedTypeLabel} <span>{data ? totalCount : '—'}</span>
         </h2>
-        <button onClick={handleReset}>필터 초기화</button>
       </div>
       <p className={styles['note']}>
         공격력·가드·능력 보정은 최대 강화 기준입니다. 공격력·가드는 표준 변질(변질 불가 무기는 기본
         상태), 부가 효과는 미강화 기준입니다. 0은 효과 없음, 미확인은 미등록 정보입니다.
       </p>
       <div aria-live="polite">
-        {isPending && <p className={styles['message']}>장비를 불러오고 있습니다.</p>}
+        {isPending && <p className={styles['message']}>아이템을 불러오고 있습니다.</p>}
         {isError && (
           <div className={styles['message']}>
-            <p>장비 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
+            <p>아이템 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
             <button
               onClick={() => {
                 void refetch();
@@ -211,7 +114,9 @@ export default function HomeClient() {
         {isSuccess && items.length === 0 && (
           <div className={styles['message']}>
             <p>
-              {hasFilters ? '검색 조건에 맞는 장비가 없습니다.' : '아직 등록된 장비가 없습니다.'}
+              {hasFilters
+                ? '검색 조건에 맞는 아이템이 없습니다.'
+                : '아직 등록된 아이템이 없습니다.'}
             </p>
             {hasFilters && <button onClick={handleReset}>전체 목록 보기</button>}
           </div>
@@ -219,7 +124,7 @@ export default function HomeClient() {
         {isSuccess && items.map((item) => <EquipmentCard key={item.id} item={item} />)}
       </div>
       {isSuccess && totalPages > 0 && (
-        <nav className={styles['pagination']} aria-label="장비 목록 페이지">
+        <nav className={styles['pagination']} aria-label="아이템 목록 페이지">
           <button
             disabled={params.page === 1}
             onClick={() => setParams((previous) => ({ ...previous, page: previous.page - 1 }))}
@@ -247,7 +152,7 @@ export default function HomeClient() {
           </span>
         </nav>
       )}
-      <footer className={styles['footer']}>엘든링 위키 · 장비 도감</footer>
+      <footer className={styles['footer']}>엘든링 위키 · 아이템 도감</footer>
     </main>
   );
 }
