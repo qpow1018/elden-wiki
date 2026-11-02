@@ -1,16 +1,15 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
 import type { TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
 import { CONTENTS } from '@/app/catalog/[type]/_define/gameItems';
 
-import IconButton from '@/components/common/button/IconButton';
 import Button from '@/components/common/button/Button';
 import Select from '@/components/common/form/Select';
 
 import styles from './CatalogFilters.module.scss';
 
-import { MdTune } from 'react-icons/md';
+import { MdCheck, MdTune } from 'react-icons/md';
 
 const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = {
   weapon: { categoryLabel: '무기 종류' },
@@ -18,134 +17,102 @@ const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = 
   spell: { categoryLabel: '주문 종류' },
 };
 
+const CONTENT_OPTIONS = [
+  { value: '', label: '전체 콘텐츠' },
+  ...Object.entries(CONTENTS).map(([value, label]) => ({ value, label })),
+];
+
 type TCatalogFiltersProps = {
   params: Omit<TReqGetGameItems, 'signal' | 'type' | 'search'> & { type: TGameItemType };
   onChange: (
     filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'page' | 'pageSize'>>,
   ) => void;
-  onReset: () => void;
   typeLabel: string;
 };
 
-export default function CatalogFilters({
-  params,
-  onChange,
-  onReset,
-  typeLabel,
-}: TCatalogFiltersProps) {
+export default function CatalogFilters({ params, onChange, typeLabel }: TCatalogFiltersProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const panelId = useId();
   const categoriesQuery = gameItemQuery.useGetGameItemCategories();
   const categories = (categoriesQuery.data ?? []).filter(
     (category) => category.type === params.type,
   );
   const typeFilter = TYPE_FILTERS[params.type];
-  const selectedTypeLabel = typeLabel;
-  const selectedCategory = categories.find((category) => category.id === params.categoryId);
-  const hasFilters = Boolean(params.categoryId !== undefined || params.contentCode);
+  const hasContentFilter = Boolean(params.contentCode);
 
   return (
-    <div className={styles['catalog-filters']}>
-      <section className={styles['filters']} aria-label="아이템 필터">
-        <div className={styles['toolbar']}>
-          <div className={styles['classification']}>
-            {!typeFilter && <span>{selectedTypeLabel}</span>}
-            {typeFilter && (
-              <select
-                aria-label={typeFilter.categoryLabel}
-                value={params.categoryId ?? ''}
-                disabled={categoriesQuery.isPending || categoriesQuery.isError}
-                onChange={(event) =>
-                  onChange({
-                    categoryId: event.target.value ? Number(event.target.value) : undefined,
-                  })
-                }
-              >
-                <option value="">
-                  {categoriesQuery.isPending ? '로딩 중' : `전체 ${selectedTypeLabel}`}
-                </option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
-          <div className={styles['actions']}>
-            <IconButton
-              aria-label="상세 필터"
-              aria-expanded={isFilterOpen}
-              aria-controls="catalog-filter-panel"
-              onClick={() => setIsFilterOpen((previous) => !previous)}
-              theme={isFilterOpen || params.contentCode ? 'brass' : 'gray'}
-            >
-              <MdTune aria-hidden="true" />
-              {params.contentCode && <span className={styles['count']}>1</span>}
-            </IconButton>
-          </div>
-        </div>
-        {typeFilter && categoriesQuery.isError && (
-          <div className={styles['panel']} role="status">
-            <span>세부 분류를 불러오지 못했습니다.</span>
-            <Button
-              size="small"
-              fill="outline"
-              onClick={() => {
-                void categoriesQuery.refetch();
-              }}
-            >
-              다시 불러오기
-            </Button>
-          </div>
-        )}
-        {isFilterOpen && (
-          <div id="catalog-filter-panel" className={styles['panel']}>
-            <div className={styles['filter-heading']}>
-              <span id="content-label">콘텐츠</span>
-              <Button
-                size="small"
-                fill="outline"
-                theme="brass"
-                disabled={!params.contentCode}
-                onClick={() => onChange({ contentCode: undefined })}
-              >
-                필터 초기화
-              </Button>
-            </div>
+    <section className={styles['catalog-filters']} aria-label="아이템 분류 및 필터">
+      <div className={styles['toolbar']}>
+        <div className={styles['classification']}>
+          {typeFilter ? (
             <Select
-              labelId="content-label"
-              value={params.contentCode ?? ''}
+              aria-label={typeFilter.categoryLabel}
+              value={String(params.categoryId ?? '')}
+              disabled={categoriesQuery.isPending || categoriesQuery.isError}
               options={[
-                { value: '', label: '전체 콘텐츠' },
-                ...Object.entries(CONTENTS).map(([value, label]) => ({ value, label })),
+                {
+                  value: '',
+                  label: categoriesQuery.isPending ? '분류 불러오는 중' : `전체 ${typeLabel}`,
+                },
+                ...categories.map((category) => ({
+                  value: String(category.id),
+                  label: category.name,
+                })),
               ]}
-              onChange={(contentCode) => onChange({ contentCode: contentCode || undefined })}
+              onChange={(categoryId) =>
+                onChange({ categoryId: categoryId ? Number(categoryId) : undefined })
+              }
             />
-          </div>
-        )}
-      </section>
-      {hasFilters && (
-        <div className={styles['active-filters']} aria-label="적용 중인 필터">
-          <span>적용 중</span>
-          <button onClick={onReset}>전체 초기화</button>
-          {selectedCategory && (
-            <button
-              onClick={() => onChange({ categoryId: undefined })}
-              aria-label={`${selectedCategory.name} 필터 해제`}
-            >
-              {selectedCategory.name} ×
-            </button>
+          ) : (
+            <span className={styles['type-label']}>전체 {typeLabel}</span>
           )}
-          {params.contentCode && (
-            <button
-              onClick={() => onChange({ contentCode: undefined })}
-              aria-label="콘텐츠 필터 해제"
-            >
-              {CONTENTS[params.contentCode]} ×
-            </button>
-          )}
+        </div>
+        <Button
+          theme={hasContentFilter || isFilterOpen ? 'brass' : 'gray'}
+          fill="outline"
+          aria-expanded={isFilterOpen}
+          aria-controls={panelId}
+          aria-label={hasContentFilter ? '콘텐츠 필터, 1개 적용 중' : '콘텐츠 필터'}
+          onClick={() => setIsFilterOpen((previous) => !previous)}
+        >
+          <MdTune aria-hidden="true" />
+          필터{hasContentFilter && <span className={styles['filter-count']}>1</span>}
+        </Button>
+      </div>
+      {typeFilter && categoriesQuery.isError && (
+        <div className={styles['category-error']} role="status">
+          <p>분류를 불러오지 못했습니다.</p>
+          <Button
+            size="small"
+            fill="outline"
+            onClick={() => {
+              void categoriesQuery.refetch();
+            }}
+          >
+            다시 불러오기
+          </Button>
         </div>
       )}
-    </div>
+      <div id={panelId} hidden={!isFilterOpen}>
+        <fieldset className={styles['content-panel']}>
+          <legend>콘텐츠</legend>
+          <div className={styles['content-options']}>
+            {CONTENT_OPTIONS.map(({ value, label }) => (
+              <label className={styles['content-option']} key={value}>
+                <input
+                  type="radio"
+                  name={`${panelId}-content`}
+                  value={value}
+                  checked={(params.contentCode ?? '') === value}
+                  onChange={() => onChange({ contentCode: value || undefined })}
+                />
+                <span>{label}</span>
+                {(params.contentCode ?? '') === value && <MdCheck aria-hidden="true" />}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </div>
+    </section>
   );
 }

@@ -94,7 +94,6 @@ export default function CatalogClient({ type }: { type: TGameItemType }) {
         params={{ ...params, type }}
         typeLabel={selectedTypeLabel}
         onChange={handleFilterChange}
-        onReset={handleReset}
       />
       <div className={styles['list-heading']}>
         <h2>
