@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import equipmentQuery from '@/api/equipment/equipmentQuery';
-import type { TEquipment, TReqGetEquipment } from '@/api/equipment/types';
+import type { TEquipment, TItemType, TReqGetEquipment } from '@/api/equipment/types';
 
 import { CONTENTS, ITEM_TYPES } from './_define/items';
 
@@ -84,7 +84,29 @@ export default function HomeClient() {
 
   return (
     <main className={styles['page']}>
-      <Header title="아이템 도감" />
+      <Header
+        title="아이템 도감"
+        rightComponents={
+          <select
+            className={styles['type-select']}
+            aria-label="아이템 타입"
+            value={params.type ?? ''}
+            onChange={(event) =>
+              handleFilterChange({
+                type: (event.target.value || undefined) as TItemType | undefined,
+                categoryId: undefined,
+              })
+            }
+          >
+            <option value="">전체 아이템</option>
+            {Object.entries(ITEM_TYPES).map(([type, label]) => (
+              <option key={type} value={type}>
+                {label}
+              </option>
+            ))}
+          </select>
+        }
+      />
       <ItemFilters params={params} onChange={handleFilterChange} onReset={handleReset} />
       <div className={styles['list-heading']}>
         <h2>

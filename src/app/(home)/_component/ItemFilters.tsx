@@ -44,46 +44,27 @@ export default function ItemFilters({ params, onChange, onReset }: TItemFiltersP
       <section className={styles['filters']} aria-label="아이템 검색 및 필터">
         <div className={styles['toolbar']}>
           <div className={styles['classification']}>
-            <select
-              aria-label="아이템 타입"
-              value={params.type ?? ''}
-              onChange={(event) =>
-                onChange({
-                  type: (event.target.value || undefined) as TItemType | undefined,
-                  categoryId: undefined,
-                })
-              }
-            >
-              <option value="">전체 아이템</option>
-              {Object.entries(ITEM_TYPES).map(([type, label]) => (
-                <option key={type} value={type}>
-                  {label}
-                </option>
-              ))}
-            </select>
+            {!typeFilter && <span>{selectedTypeLabel}</span>}
             {typeFilter && (
-              <>
-                <span className={styles['separator']} aria-hidden="true">
-                  /
-                </span>
-                <select
-                  aria-label={typeFilter.categoryLabel}
-                  value={params.categoryId ?? ''}
-                  disabled={categoriesQuery.isPending || categoriesQuery.isError}
-                  onChange={(event) =>
-                    onChange({
-                      categoryId: event.target.value ? Number(event.target.value) : undefined,
-                    })
-                  }
-                >
-                  <option value="">{categoriesQuery.isPending ? '로딩 중' : '전체'}</option>
-                  {categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </>
+              <select
+                aria-label={typeFilter.categoryLabel}
+                value={params.categoryId ?? ''}
+                disabled={categoriesQuery.isPending || categoriesQuery.isError}
+                onChange={(event) =>
+                  onChange({
+                    categoryId: event.target.value ? Number(event.target.value) : undefined,
+                  })
+                }
+              >
+                <option value="">
+                  {categoriesQuery.isPending ? '로딩 중' : `전체 ${selectedTypeLabel}`}
+                </option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             )}
           </div>
           <div className={styles['actions']}>
