@@ -4,7 +4,7 @@ import gameItemQuery from '@/api/gameItem/gameItemQuery';
 import type { TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
 
 import Button from '@/components/common/button/Button';
-import Modal from '@/components/common/modal/Modal';
+import BottomModal from '@/components/common/modal/BottomModal';
 
 import styles from './CatalogFilters.module.scss';
 
@@ -84,7 +84,7 @@ export default function CatalogFilters({ params, onChange, typeLabel }: TCatalog
       )}
 
       {typeFilter && (
-        <Modal
+        <BottomModal
           isOpen={isCategoryOpen}
           onClose={() => setIsCategoryOpen(false)}
           title={typeFilter.categoryLabel}
@@ -113,7 +113,7 @@ export default function CatalogFilters({ params, onChange, typeLabel }: TCatalog
               </button>
             ))}
           </div>
-        </Modal>
+        </BottomModal>
       )}
     </section>
   );
