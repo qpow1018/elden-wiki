@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
 import type { TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
-import { CONTENTS, GAME_ITEM_TYPES } from '@/app/catalog/[type]/_define/gameItems';
+import { CONTENTS } from '@/app/catalog/[type]/_define/gameItems';
 
 import IconButton from '@/components/common/button/IconButton';
 import Button from '@/components/common/button/Button';
@@ -25,9 +25,15 @@ type TCatalogFiltersProps = {
     filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'page' | 'pageSize'>>,
   ) => void;
   onReset: () => void;
+  typeLabel: string;
 };
 
-export default function CatalogFilters({ params, onChange, onReset }: TCatalogFiltersProps) {
+export default function CatalogFilters({
+  params,
+  onChange,
+  onReset,
+  typeLabel,
+}: TCatalogFiltersProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const categoriesQuery = gameItemQuery.useGetGameItemCategories();
@@ -35,7 +41,7 @@ export default function CatalogFilters({ params, onChange, onReset }: TCatalogFi
     (category) => category.type === params.type,
   );
   const typeFilter = TYPE_FILTERS[params.type];
-  const selectedTypeLabel = GAME_ITEM_TYPES[params.type];
+  const selectedTypeLabel = typeLabel;
   const selectedCategory = categories.find((category) => category.id === params.categoryId);
   const hasFilters = Boolean(
     params.search || params.categoryId !== undefined || params.contentCode,

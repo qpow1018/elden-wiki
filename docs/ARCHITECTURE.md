@@ -6,6 +6,7 @@
 
 - `catalog`: 도감 화면·라우트. `/catalog/[type]`, `CatalogClient`, `CatalogFilters`로 표현한다.
 - `gameItem`: 개별 게임 아이템과 데이터 API 도메인. `TGameItem`, `gameItems`, `gameItemQuery`로 표현한다.
+- 도감 메뉴는 무기·방어구·탈리스만·뼛가루·전회·주문·물방울·기타 순서로 표시한다. `CATALOG_TYPES`가 메뉴와 실제 게임 아이템 타입을 연결하며, 기타(`/catalog/other`)는 DB의 `other` 타입을 조회한다. 제스처·도구·재료 등의 세부 분류는 실제 데이터 추가 시 정의한다. DB 타입과 메뉴 표시명은 구분한다.
 - 범용 목록·메뉴의 `item`·`items`는 게임 도메인이 아니므로 유지한다.
 
 ## 기본 원칙

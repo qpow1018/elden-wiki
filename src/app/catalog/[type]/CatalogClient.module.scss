@@ -2,17 +2,6 @@
   color: #dce1e6;
   min-height: 100vh;
   font-size: 14px;
-  .type-select {
-    max-width: 160px;
-    min-height: 44px;
-    padding: 0 8px;
-    border: 1px solid $border;
-    border-radius: 3px;
-    background: $bg-dark;
-    color: $text-primary;
-    font: inherit;
-    cursor: pointer;
-  }
   :where(button) {
     color: #d8c28c;
     font: inherit;

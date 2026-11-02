@@ -1,15 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
-import type { TGameItem, TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
+import type { TGameItem, TReqGetGameItems } from '@/api/gameItem/types';
 
-import { CONTENTS, GAME_ITEM_TYPES } from './_define/gameItems';
+import { CATALOG_TYPES, CONTENTS, GAME_ITEM_TYPES, type TCatalogType } from './_define/gameItems';
 
 import Header from '@/components/common/header/Header';
 import CatalogFilters from './_component/CatalogFilters';
+import CatalogNavigation from './_component/CatalogNavigation';
 import Image from 'next/image';
 
 import styles from './CatalogClient.module.scss';
@@ -54,15 +54,14 @@ const UPGRADE_MATERIALS: Record<string, string> = {
   somber_smithing_stone: '색 잃은 단석',
 };
 
-export default function CatalogClient({ type }: { type: TGameItemType }) {
-  const router = useRouter();
+export default function CatalogClient({ type }: { type: TCatalogType }) {
   const [params, setParams] = useState<Omit<TReqGetGameItems, 'signal' | 'type'>>({
     page: 1,
     pageSize: 20,
   });
   const { data, isPending, isError, isSuccess, refetch } = gameItemQuery.useGetGameItems({
     ...params,
-    type,
+    type: CATALOG_TYPES[type].gameItemType,
   });
   const gameItems = data?.gameItems ?? [];
   const totalCount = data?.totalCount ?? 0;
@@ -72,7 +71,7 @@ export default function CatalogClient({ type }: { type: TGameItemType }) {
     { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
     (_, index) => firstPage + index,
   );
-  const selectedTypeLabel = GAME_ITEM_TYPES[type];
+  const selectedTypeLabel = type === 'crystal_tear' ? '결정 물방울' : CATALOG_TYPES[type].label;
   const hasFilters = Boolean(
     params.search || params.categoryId !== undefined || params.contentCode,
   );
@@ -89,25 +88,13 @@ export default function CatalogClient({ type }: { type: TGameItemType }) {
 
   return (
     <main className={styles['page']}>
-      <Header
-        title="아이템 도감"
-        rightComponents={
-          <select
-            className={styles['type-select']}
-            aria-label="아이템 타입"
-            value={type}
-            onChange={(event) => router.push(`/catalog/${event.target.value}`)}
-          >
-            {Object.entries(GAME_ITEM_TYPES).map(([type, label]) => (
-              <option key={type} value={type}>
-                {label}
-              </option>
-            ))}
-          </select>
-        }
-      />
+      <Header title="아이템 도감" />
+
+      <CatalogNavigation type={type} />
+
       <CatalogFilters
-        params={{ ...params, type }}
+        params={{ ...params, type: CATALOG_TYPES[type].gameItemType }}
+        typeLabel={selectedTypeLabel}
         onChange={handleFilterChange}
         onReset={handleReset}
       />

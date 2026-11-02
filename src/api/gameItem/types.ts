@@ -5,7 +5,7 @@ export type TGameItemType =
   | 'armor'
   | 'talisman'
   | 'spell'
-  | 'gesture'
+  | 'other'
   | 'crystal_tear';
 
 export type TReqGetGameItems = {

@@ -70,9 +70,11 @@ erDiagram
 | `talisman`     | 탈리스만    |
 | `ash_of_war`   | 전회        |
 | `spell`        | 주문        |
-| `gesture`      | 제스처      |
+| `other`        | 기타        |
 | `crystal_tear` | 결정 물방울 |
 | `spirit_ash`   | 뼛가루      |
+
+`20261102015026_replace_gesture_type_with_other.sql`에서 미사용 `gesture` 값을 `other`로 교체합니다. 기타는 핵심 7개 타입 이외의 대상을 담으며, 제스처 등의 세부 분류는 데이터 등록 시 정의합니다. 현재 기타 아이템과 세부 분류는 없습니다.
 
 ## `game_item_categories`: 세부 분류
 

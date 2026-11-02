@@ -431,7 +431,7 @@ export type TDatabase = {
         | 'armor'
         | 'talisman'
         | 'spell'
-        | 'gesture'
+        | 'other'
         | 'crystal_tear';
     };
     CompositeTypes: {
@@ -553,7 +553,7 @@ export const DATABASE_CONSTANTS = {
         'armor',
         'talisman',
         'spell',
-        'gesture',
+        'other',
         'crystal_tear',
       ],
     },

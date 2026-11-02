@@ -1,0 +1,38 @@
+.type-navigation {
+  display: grid;
+  border-bottom: 1px solid $border-soft;
+
+  .type-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    & + .type-row {
+      border-top: 1px solid $border-soft;
+    }
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 42px;
+    color: $text-secondary;
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+
+    & + a {
+      border-left: 1px solid $border-soft;
+    }
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    &[aria-current='page'] {
+      color: $brass-accent;
+      font-weight: 500;
+    }
+  }
+}
