@@ -32,14 +32,9 @@ export default function UtilityShowcase() {
       <section className={styles['section']} aria-labelledby="header-title">
         <div className={styles['section-heading']}>
           <h2 id="header-title">Header</h2>
-          <p>로고와 메뉴의 기본·현재 페이지 상태입니다.</p>
+          <p>페이지 제목을 표시하는 모바일 헤더입니다.</p>
         </div>
-        <Header
-          menus={[
-            { name: '장비 도감', link: '/' },
-            { name: '디자인 시스템', link: '/design-system' },
-          ]}
-        />
+        <Header title="아이템 도감" />
       </section>
       <section className={styles['section']} aria-labelledby="drag-title">
         <div className={styles['section-heading']}>

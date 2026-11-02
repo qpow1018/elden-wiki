@@ -7,6 +7,7 @@ import type { TEquipment, TReqGetEquipment } from '@/api/equipment/types';
 
 import { CONTENTS, ITEM_TYPES } from './_define/items';
 
+import Header from '@/components/common/header/Header';
 import ItemFilters from './_component/ItemFilters';
 import Image from 'next/image';
 
@@ -83,10 +84,7 @@ export default function HomeClient() {
 
   return (
     <main className={styles['page']}>
-      <header className={styles['header']}>
-        <span className={styles['brand']}>엘든링 위키</span>
-        <span>틈새의 땅 도감</span>
-      </header>
+      <Header title="아이템 도감" />
       <ItemFilters params={params} onChange={handleFilterChange} onReset={handleReset} />
       <div className={styles['list-heading']}>
         <h2>
