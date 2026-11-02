@@ -5,7 +5,9 @@ import { GAME_ITEM_TYPES } from '@/app/catalog/[type]/_define/gameItems';
 
 import styles from './CatalogNavigation.module.scss';
 
-export default function CatalogNavigation({ type }: { type: TGameItemType }) {
+export default function CatalogNavigation(props: { type: TGameItemType }) {
+  const { type } = props;
+
   return (
     <nav className={styles['type-navigation']} aria-label="아이템 도감 종류">
       {[Object.entries(GAME_ITEM_TYPES).slice(0, 4), Object.entries(GAME_ITEM_TYPES).slice(4)].map(
