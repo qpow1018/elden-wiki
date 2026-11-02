@@ -57,7 +57,9 @@ const UPGRADE_MATERIALS: Record<string, string> = {
 export default function CatalogClient(props: { type: TGameItemType }) {
   const { type } = props;
 
-  const [params, setParams] = useState<Omit<TReqGetGameItems, 'signal' | 'type' | 'search'>>({
+  const [params, setParams] = useState<
+    Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'contentCode'>
+  >({
     page: 1,
     pageSize: 20,
   });
@@ -74,10 +76,12 @@ export default function CatalogClient(props: { type: TGameItemType }) {
     (_, index) => firstPage + index,
   );
   const selectedTypeLabel = GAME_ITEM_TYPES[type];
-  const hasFilters = Boolean(params.categoryId !== undefined || params.contentCode);
+  const hasFilters = params.categoryId !== undefined;
 
   function handleFilterChange(
-    filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'page' | 'pageSize'>>,
+    filters: Partial<
+      Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'contentCode' | 'page' | 'pageSize'>
+    >,
   ) {
     setParams((previous) => ({ ...previous, ...filters, page: 1 }));
   }

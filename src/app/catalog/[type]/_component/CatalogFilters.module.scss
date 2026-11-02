@@ -1,38 +1,56 @@
 .catalog-filters {
-  padding: 16px;
+  padding: 0 16px;
   border-bottom: 1px solid $border;
+  background: $bg;
 
   .toolbar {
     display: flex;
     align-items: center;
-    gap: 12px;
+    min-height: 49px;
   }
 
   .classification {
-    flex: 1;
     min-width: 0;
+  }
+
+  .category-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    max-width: 100%;
+    color: $text-primary;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+
+    span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    svg {
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      color: $text-muted;
+    }
   }
 
   .type-label {
     display: flex;
     align-items: center;
-    min-height: 42px;
-    color: $text-primary;
-    font-size: 14px;
-    font-weight: 500;
+    min-height: 40px;
+    color: $text-secondary;
+    font-size: 13px;
     overflow-wrap: anywhere;
-  }
-
-  .filter-count {
-    display: grid;
-    place-items: center;
-    min-width: 18px;
-    height: 18px;
-    margin-left: 4px;
-    border-radius: $border-radius;
-    background: $brass-tint;
-    font-size: 12px;
-    font-variant-numeric: tabular-nums;
   }
 
   .category-error {
@@ -40,68 +58,44 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 12px;
+    padding-bottom: 8px;
     color: $text-secondary;
     font-size: 13px;
   }
+}
 
-  .content-panel {
-    min-width: 0;
-    margin-top: 16px;
-    padding-top: 12px;
-    border-top: 1px solid $border-soft;
+.category-options {
+  display: grid;
+  gap: 4px;
+  padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
 
-    legend {
-      padding-right: 12px;
-      color: $text-secondary;
-      font-size: 12px;
-      font-weight: 500;
-    }
-  }
-
-  .content-options {
-    display: grid;
-    gap: 6px;
-  }
-
-  .content-option {
+  .category-option {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 12px;
     min-height: 44px;
     padding: 10px 12px;
-    border: 1px solid transparent;
     border-radius: $border-radius;
     color: $text-secondary;
     font-size: 14px;
-    cursor: pointer;
-
-    input {
-      margin: 0;
-      accent-color: $brass;
-    }
-
-    span {
-      flex: 1;
-      min-width: 0;
-      overflow-wrap: anywhere;
-    }
+    text-align: left;
+    overflow-wrap: anywhere;
 
     svg {
       flex-shrink: 0;
     }
 
     &:hover {
-      background: $bg;
+      background: $bg-light;
     }
 
-    &:has(input:checked) {
-      border-color: $brass-surface;
+    &[aria-pressed='true'] {
       background: $brass-tint;
       color: $brass-light;
     }
 
-    &:has(input:focus-visible) {
+    &:focus-visible {
       outline: 2px solid $focus-ring;
       outline-offset: 2px;
     }
