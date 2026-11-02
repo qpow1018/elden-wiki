@@ -55,7 +55,7 @@ const UPGRADE_MATERIALS: Record<string, string> = {
 };
 
 export default function CatalogClient({ type }: { type: TGameItemType }) {
-  const [params, setParams] = useState<Omit<TReqGetGameItems, 'signal' | 'type'>>({
+  const [params, setParams] = useState<Omit<TReqGetGameItems, 'signal' | 'type' | 'search'>>({
     page: 1,
     pageSize: 20,
   });
@@ -72,12 +72,10 @@ export default function CatalogClient({ type }: { type: TGameItemType }) {
     (_, index) => firstPage + index,
   );
   const selectedTypeLabel = GAME_ITEM_TYPES[type];
-  const hasFilters = Boolean(
-    params.search || params.categoryId !== undefined || params.contentCode,
-  );
+  const hasFilters = Boolean(params.categoryId !== undefined || params.contentCode);
 
   function handleFilterChange(
-    filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'page' | 'pageSize'>>,
+    filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'page' | 'pageSize'>>,
   ) {
     setParams((previous) => ({ ...previous, ...filters, page: 1 }));
   }
@@ -125,7 +123,7 @@ export default function CatalogClient({ type }: { type: TGameItemType }) {
           <div className={styles['message']}>
             <p>
               {hasFilters
-                ? '검색 조건에 맞는 아이템이 없습니다.'
+                ? '필터 조건에 맞는 아이템이 없습니다.'
                 : '아직 등록된 아이템이 없습니다.'}
             </p>
             {hasFilters && <button onClick={handleReset}>전체 목록 보기</button>}

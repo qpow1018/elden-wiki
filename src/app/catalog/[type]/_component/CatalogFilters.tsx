@@ -7,11 +7,10 @@ import { CONTENTS } from '@/app/catalog/[type]/_define/gameItems';
 import IconButton from '@/components/common/button/IconButton';
 import Button from '@/components/common/button/Button';
 import Select from '@/components/common/form/Select';
-import TextInput from '@/components/common/form/TextInput';
 
 import styles from './CatalogFilters.module.scss';
 
-import { MdSearch, MdTune } from 'react-icons/md';
+import { MdTune } from 'react-icons/md';
 
 const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = {
   weapon: { categoryLabel: '무기 종류' },
@@ -20,9 +19,9 @@ const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = 
 };
 
 type TCatalogFiltersProps = {
-  params: Omit<TReqGetGameItems, 'signal' | 'type'> & { type: TGameItemType };
+  params: Omit<TReqGetGameItems, 'signal' | 'type' | 'search'> & { type: TGameItemType };
   onChange: (
-    filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'page' | 'pageSize'>>,
+    filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'page' | 'pageSize'>>,
   ) => void;
   onReset: () => void;
   typeLabel: string;
@@ -34,7 +33,6 @@ export default function CatalogFilters({
   onReset,
   typeLabel,
 }: TCatalogFiltersProps) {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const categoriesQuery = gameItemQuery.useGetGameItemCategories();
   const categories = (categoriesQuery.data ?? []).filter(
@@ -43,13 +41,11 @@ export default function CatalogFilters({
   const typeFilter = TYPE_FILTERS[params.type];
   const selectedTypeLabel = typeLabel;
   const selectedCategory = categories.find((category) => category.id === params.categoryId);
-  const hasFilters = Boolean(
-    params.search || params.categoryId !== undefined || params.contentCode,
-  );
+  const hasFilters = Boolean(params.categoryId !== undefined || params.contentCode);
 
   return (
     <div className={styles['catalog-filters']}>
-      <section className={styles['filters']} aria-label="아이템 검색 및 필터">
+      <section className={styles['filters']} aria-label="아이템 필터">
         <div className={styles['toolbar']}>
           <div className={styles['classification']}>
             {!typeFilter && <span>{selectedTypeLabel}</span>}
@@ -77,16 +73,6 @@ export default function CatalogFilters({
           </div>
           <div className={styles['actions']}>
             <IconButton
-              aria-label="이름 검색"
-              aria-expanded={isSearchOpen}
-              aria-controls="catalog-search-panel"
-              onClick={() => setIsSearchOpen((previous) => !previous)}
-              theme={isSearchOpen || params.search ? 'brass' : 'gray'}
-            >
-              <MdSearch aria-hidden="true" />
-              {params.search && <span className={styles['indicator']} />}
-            </IconButton>
-            <IconButton
               aria-label="상세 필터"
               aria-expanded={isFilterOpen}
               aria-controls="catalog-filter-panel"
@@ -110,18 +96,6 @@ export default function CatalogFilters({
             >
               다시 불러오기
             </Button>
-          </div>
-        )}
-        {isSearchOpen && (
-          <div id="catalog-search-panel" className={styles['panel']}>
-            <label htmlFor="game-item-name-search">이름 검색</label>
-            <TextInput
-              id="game-item-name-search"
-              type="search"
-              placeholder={`${selectedTypeLabel} 이름으로 검색`}
-              value={params.search ?? ''}
-              onChange={(search) => onChange({ search: search || undefined })}
-            />
           </div>
         )}
         {isFilterOpen && (
@@ -151,7 +125,7 @@ export default function CatalogFilters({
         )}
       </section>
       {hasFilters && (
-        <div className={styles['active-filters']} aria-label="적용 중인 검색 조건">
+        <div className={styles['active-filters']} aria-label="적용 중인 필터">
           <span>적용 중</span>
           <button onClick={onReset}>전체 초기화</button>
           {selectedCategory && (
@@ -160,11 +134,6 @@ export default function CatalogFilters({
               aria-label={`${selectedCategory.name} 필터 해제`}
             >
               {selectedCategory.name} ×
-            </button>
-          )}
-          {params.search && (
-            <button onClick={() => onChange({ search: undefined })} aria-label="이름 검색 해제">
-              이름: {params.search} ×
             </button>
           )}
           {params.contentCode && (
