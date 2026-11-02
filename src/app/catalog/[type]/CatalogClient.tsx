@@ -54,7 +54,9 @@ const UPGRADE_MATERIALS: Record<string, string> = {
   somber_smithing_stone: '색 잃은 단석',
 };
 
-export default function CatalogClient({ type }: { type: TGameItemType }) {
+export default function CatalogClient(props: { type: TGameItemType }) {
+  const { type } = props;
+
   const [params, setParams] = useState<Omit<TReqGetGameItems, 'signal' | 'type' | 'search'>>({
     page: 1,
     pageSize: 20,
