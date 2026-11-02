@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import equipmentQuery from '@/api/equipment/equipmentQuery';
 import type { TEquipment, TItemType, TReqGetEquipment } from '@/api/equipment/types';
@@ -11,7 +12,7 @@ import Header from '@/components/common/header/Header';
 import ItemFilters from './_component/ItemFilters';
 import Image from 'next/image';
 
-import styles from './HomeClient.module.scss';
+import styles from './ItemsClient.module.scss';
 
 const AFFINITIES: Record<string, string> = {
   standard: '표준',
@@ -53,12 +54,16 @@ const UPGRADE_MATERIALS: Record<string, string> = {
   somber_smithing_stone: '색 잃은 단석',
 };
 
-export default function HomeClient() {
-  const [params, setParams] = useState<Omit<TReqGetEquipment, 'signal'>>({
+export default function ItemsClient({ type }: { type: TItemType }) {
+  const router = useRouter();
+  const [params, setParams] = useState<Omit<TReqGetEquipment, 'signal' | 'type'>>({
     page: 1,
     pageSize: 20,
   });
-  const { data, isPending, isError, isSuccess, refetch } = equipmentQuery.useGetEquipment(params);
+  const { data, isPending, isError, isSuccess, refetch } = equipmentQuery.useGetEquipment({
+    ...params,
+    type,
+  });
   const items = data?.items ?? [];
   const totalCount = data?.totalCount ?? 0;
   const totalPages = Math.ceil(totalCount / params.pageSize);
@@ -67,13 +72,13 @@ export default function HomeClient() {
     { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
     (_, index) => firstPage + index,
   );
-  const selectedTypeLabel = params.type ? ITEM_TYPES[params.type] : '전체 아이템';
+  const selectedTypeLabel = ITEM_TYPES[type];
   const hasFilters = Boolean(
-    params.search || params.type || params.categoryId !== undefined || params.contentCode,
+    params.search || params.categoryId !== undefined || params.contentCode,
   );
 
   function handleFilterChange(
-    filters: Partial<Omit<TReqGetEquipment, 'signal' | 'page' | 'pageSize'>>,
+    filters: Partial<Omit<TReqGetEquipment, 'signal' | 'type' | 'page' | 'pageSize'>>,
   ) {
     setParams((previous) => ({ ...previous, ...filters, page: 1 }));
   }
@@ -90,15 +95,9 @@ export default function HomeClient() {
           <select
             className={styles['type-select']}
             aria-label="아이템 타입"
-            value={params.type ?? ''}
-            onChange={(event) =>
-              handleFilterChange({
-                type: (event.target.value || undefined) as TItemType | undefined,
-                categoryId: undefined,
-              })
-            }
+            value={type}
+            onChange={(event) => router.push(`/items/${event.target.value}`)}
           >
-            <option value="">전체 아이템</option>
             {Object.entries(ITEM_TYPES).map(([type, label]) => (
               <option key={type} value={type}>
                 {label}
@@ -107,7 +106,11 @@ export default function HomeClient() {
           </select>
         }
       />
-      <ItemFilters params={params} onChange={handleFilterChange} onReset={handleReset} />
+      <ItemFilters
+        params={{ ...params, type }}
+        onChange={handleFilterChange}
+        onReset={handleReset}
+      />
       <div className={styles['list-heading']}>
         <h2>
           {selectedTypeLabel} <span>{data ? totalCount : '—'}</span>

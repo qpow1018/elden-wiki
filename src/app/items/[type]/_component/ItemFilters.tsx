@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import equipmentQuery from '@/api/equipment/equipmentQuery';
 import type { TItemType, TReqGetEquipment } from '@/api/equipment/types';
-import { CONTENTS, ITEM_TYPES } from '@/app/(home)/_define/items';
+import { CONTENTS, ITEM_TYPES } from '@/app/items/[type]/_define/items';
 
 import IconButton from '@/components/common/button/IconButton';
 import Button from '@/components/common/button/Button';
@@ -20,8 +20,10 @@ const TYPE_FILTERS: Partial<Record<TItemType, { categoryLabel: string }>> = {
 };
 
 type TItemFiltersProps = {
-  params: Omit<TReqGetEquipment, 'signal'>;
-  onChange: (filters: Partial<Omit<TReqGetEquipment, 'signal' | 'page' | 'pageSize'>>) => void;
+  params: Omit<TReqGetEquipment, 'signal' | 'type'> & { type: TItemType };
+  onChange: (
+    filters: Partial<Omit<TReqGetEquipment, 'signal' | 'type' | 'page' | 'pageSize'>>,
+  ) => void;
   onReset: () => void;
 };
 
@@ -32,11 +34,11 @@ export default function ItemFilters({ params, onChange, onReset }: TItemFiltersP
   const categories = (categoriesQuery.data ?? []).filter(
     (category) => category.type === params.type,
   );
-  const typeFilter = params.type ? TYPE_FILTERS[params.type] : undefined;
-  const selectedTypeLabel = params.type ? ITEM_TYPES[params.type] : '전체 아이템';
+  const typeFilter = TYPE_FILTERS[params.type];
+  const selectedTypeLabel = ITEM_TYPES[params.type];
   const selectedCategory = categories.find((category) => category.id === params.categoryId);
   const hasFilters = Boolean(
-    params.search || params.type || params.categoryId !== undefined || params.contentCode,
+    params.search || params.categoryId !== undefined || params.contentCode,
   );
 
   return (
@@ -146,14 +148,6 @@ export default function ItemFilters({ params, onChange, onReset }: TItemFiltersP
         <div className={styles['active-filters']} aria-label="적용 중인 검색 조건">
           <span>적용 중</span>
           <button onClick={onReset}>전체 초기화</button>
-          {params.type && (
-            <button
-              onClick={() => onChange({ type: undefined, categoryId: undefined })}
-              aria-label={`${selectedTypeLabel} 필터 해제`}
-            >
-              {selectedTypeLabel} ×
-            </button>
-          )}
           {selectedCategory && (
             <button
               onClick={() => onChange({ categoryId: undefined })}
