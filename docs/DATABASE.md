@@ -16,9 +16,17 @@
 
 개발 환경은 Docker 로컬 Supabase, 운영 환경은 Supabase 클라우드로 분리합니다. 현재 마이그레이션과 시드 적용은 로컬에서 검증했습니다.
 
+## 명칭 기준
+
+- 도감 UI·경로는 `catalog`, 개별 게임 아이템과 API 도메인은 `gameItem`을 사용합니다.
+- DB에서는 snake_case로 `game_items`, `game_item_categories`, `game_item_type`, `game_item_id`를 사용합니다.
+- `20261102011418_rename_game_item_domain.sql`에서 기존 이름을 변경합니다. 이전 마이그레이션은 당시 이름을 유지합니다.
+- API 응답은 `gameItems`, `gameItemCategories`, `gameItemId`로 명시적으로 변환합니다.
+- 이름 변경 마이그레이션을 로컬 DB에 적용하고 게임 아이템 24개 유지, 시드 재실행, 공개 조회와 쓰기 제한을 확인했습니다. 운영 DB 적용은 수행하지 않았습니다.
+
 ## 개발 전에 확인할 확정 규칙
 
-- 공통 아이템 식별자는 `items.id`입니다. 이름에는 고유 제약이 없으므로 기능에서 이름을 식별자로 사용하지 않습니다.
+- 공통 아이템 식별자는 `game_items.id`입니다. 이름에는 고유 제약이 없으므로 기능에서 이름을 식별자로 사용하지 않습니다.
 - `type`은 무기·주문 등의 종류, `category_id`는 단검·마술 등의 세부 분류입니다. 두 종류가 일치해야 한다는 규칙은 복합 외래키로 보장합니다.
 - 이미지·콘텐츠 소속·게임 내 설명은 공통 정보입니다. 일반 설명은 제외했습니다. 게임 내 원문과 사용자 해설을 같은 컬럼에 섞지 않습니다.
 - `content_code`는 콘텐츠 소속이며 판매 에디션·현재 소유 여부·획득 장소를 뜻하지 않습니다.
@@ -33,26 +41,26 @@
 
 ```mermaid
 erDiagram
-  item_categories ||--o{ items : "분류"
-  items ||--o| ash_of_war_details : "전회 상세"
+  game_item_categories ||--o{ game_items : "분류"
+  game_items ||--o| ash_of_war_details : "전회 상세"
   weapon_skills o|--o{ ash_of_war_details : "부여 기술"
-  items ||--o| spell_details : "주문 상세"
-  items ||--o| talisman_details : "탈리스만 상세"
-  items ||--o| armor_details : "방어구 상세"
-  items ||--o| weapon_details : "무기 상세"
+  game_items ||--o| spell_details : "주문 상세"
+  game_items ||--o| talisman_details : "탈리스만 상세"
+  game_items ||--o| armor_details : "방어구 상세"
+  game_items ||--o| weapon_details : "무기 상세"
   weapon_skills o|--o{ weapon_details : "기본 전투 기술"
   weapon_details ||--o{ weapon_scalings : "변질별 보정"
 ```
 
-- 모든 획득 대상은 `items`에 저장하고, 종류별 정보는 상세 테이블로 분리합니다.
-- 현재 상세 테이블은 무기·방어구·탈리스만·주문·전회를 구현했습니다. `items` 행만 있고 무기 상세가 없는 상태도 허용합니다.
+- 모든 획득 대상은 `game_items`에 저장하고, 종류별 정보는 상세 테이블로 분리합니다.
+- 현재 상세 테이블은 무기·방어구·탈리스만·주문·전회를 구현했습니다. `game_items` 행만 있고 무기 상세가 없는 상태도 허용합니다.
 - 무기는 기본 전투 기술 하나를 선택적으로 참조합니다. 여러 무기가 같은 기술을 참조할 수 있습니다.
 - 전회는 획득 아이템이고 전투 기술은 발동하는 기술입니다. 전회는 `ash_of_war_details.skill_id`로 부여하는 기술을 참조합니다.
 - 외래키는 모두 `ON UPDATE RESTRICT`, `ON DELETE RESTRICT`입니다. 참조 중인 키의 변경·삭제를 막으며 자동 연쇄 삭제는 하지 않습니다.
 
-## 공통 종류: `item_type`
+## 공통 종류: `game_item_type`
 
-`items`, `item_categories`, `weapon_details`, `armor_details`에서 사용하는 PostgreSQL enum입니다.
+`game_items`, `game_item_categories`, `weapon_details`, `armor_details`에서 사용하는 PostgreSQL enum입니다.
 이 문서의 코드 대응은 현재 스키마와 합의한 한국어 명칭을 기준으로 합니다. 모든 용어를 공식 현지화 자료와 별도 대조했다는 의미는 아닙니다.
 
 | 값             | 의미        |
@@ -66,31 +74,31 @@ erDiagram
 | `crystal_tear` | 결정 물방울 |
 | `spirit_ash`   | 뼛가루      |
 
-## `item_categories`: 세부 분류
+## `game_item_categories`: 세부 분류
 
 직검·단검·투구처럼 각 종류 안의 세부 분류를 관리합니다. 분류는 실제 아이템을 입력할 때 추가할 수 있습니다.
 
-| 컬럼   | 자료형      | NULL 허용 | 의미                                  |
-| ------ | ----------- | --------- | ------------------------------------- |
-| `id`   | `bigint`    | 아니요    | 자동 생성 기본키                      |
-| `name` | `text`      | 아니요    | 분류명. 빈 문자열·공백만 있는 값 금지 |
-| `type` | `item_type` | 아니요    | 분류가 속한 종류                      |
+| 컬럼   | 자료형           | NULL 허용 | 의미                                  |
+| ------ | ---------------- | --------- | ------------------------------------- |
+| `id`   | `bigint`         | 아니요    | 자동 생성 기본키                      |
+| `name` | `text`           | 아니요    | 분류명. 빈 문자열·공백만 있는 값 금지 |
+| `type` | `game_item_type` | 아니요    | 분류가 속한 종류                      |
 
 - `(type, name)`은 고유합니다. 같은 종류에 같은 분류명을 중복 등록할 수 없습니다.
 - `(id, type)` 고유 제약은 아이템에서 ID와 종류를 함께 참조하기 위해 사용합니다.
 
-## `items`: 획득 대상의 공통 정보
+## `game_items`: 획득 대상의 공통 정보
 
-| 컬럼                 | 자료형      | NULL 허용 | 의미                                                        |
-| -------------------- | ----------- | --------- | ----------------------------------------------------------- |
-| `id`                 | `bigint`    | 아니요    | 자동 생성 기본키                                            |
-| `name`               | `text`      | 아니요    | 아이템 이름. 빈 문자열·공백만 있는 값 금지                  |
-| `type`               | `item_type` | 아니요    | 획득 대상의 종류                                            |
-| `category_id`        | `bigint`    | 아니요    | 세부 분류 ID                                                |
-| `image_url`          | `text`      | 예        | 이미지 주소. URL 형식·접근 가능 여부는 DB에서 검증하지 않음 |
-| `content_code`       | `text`      | 아니요    | 콘텐츠 소속. 아래 세 값만 허용하며 기본값 없음              |
-| `game_description`   | `text`      | 예        | 게임 내 설명 원문                                           |
-| `effect_description` | `text`      | 예        | 아이템 부가 효과의 표시용 설명                              |
+| 컬럼                 | 자료형           | NULL 허용 | 의미                                                        |
+| -------------------- | ---------------- | --------- | ----------------------------------------------------------- |
+| `id`                 | `bigint`         | 아니요    | 자동 생성 기본키                                            |
+| `name`               | `text`           | 아니요    | 아이템 이름. 빈 문자열·공백만 있는 값 금지                  |
+| `type`               | `game_item_type` | 아니요    | 획득 대상의 종류                                            |
+| `category_id`        | `bigint`         | 아니요    | 세부 분류 ID                                                |
+| `image_url`          | `text`           | 예        | 이미지 주소. URL 형식·접근 가능 여부는 DB에서 검증하지 않음 |
+| `content_code`       | `text`           | 아니요    | 콘텐츠 소속. 아래 세 값만 허용하며 기본값 없음              |
+| `game_description`   | `text`           | 예        | 게임 내 설명 원문                                           |
+| `effect_description` | `text`           | 예        | 아이템 부가 효과의 표시용 설명                              |
 
 | `content_code`          | 의미               |
 | ----------------------- | ------------------ |
@@ -103,7 +111,7 @@ erDiagram
 일반 해설·사용자 설명은 현재 저장하지 않습니다.
 부가 효과는 `effect_description`에 설명으로만 저장합니다. NULL은 효과 없음 또는 미입력이며 구분하지 않습니다. 효과별 필터·계산용 구조는 두지 않습니다. 무기의 출혈·동상 등 축적 수치는 기존 전용 컬럼을 유지합니다.
 
-- `(category_id, type)`이 `item_categories(id, type)`을 참조합니다. 무기에 방어구 분류를 연결할 수 없습니다.
+- `(category_id, type)`이 `game_item_categories(id, type)`을 참조합니다. 무기에 방어구 분류를 연결할 수 없습니다.
 - `(id, type)`은 무기 상세의 복합 외래키를 위한 고유 제약입니다.
 - 아이템 이름에는 고유 제약이 없습니다. 이름이 아닌 ID가 식별 기준입니다.
 - `(category_id, type)` 인덱스가 있습니다.
@@ -126,15 +134,15 @@ erDiagram
 
 ### 기본 특성
 
-| 컬럼                    | 자료형      | 의미·제약                                                                                              |
-| ----------------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
-| `item_id`               | `bigint`    | 기본키. 아래 `type`과 함께 `items(id, type)` 참조                                                      |
-| `type`                  | `item_type` | 기본값 `weapon`, NULL 불가, `weapon`만 허용. 무기 외 아이템 연결 차단용                                |
-| `weight`                | `numeric`   | 중량, 0 이상                                                                                           |
-| `can_change_affinity`   | `boolean`   | `true`: 변질 가능, `false`: 변질 불가, NULL: 미확인. 기본값 없음                                       |
-| `physical_attack_types` | `text[]`    | 물리 공격 방식 목록. 아래 값만 허용하며 배열 내부 NULL 금지                                            |
-| `upgrade_material`      | `text`      | `smithing_stone`(단석), `somber_smithing_stone`(색 잃은 단석), `none`(강화 불가)만 허용. NULL은 미확인 |
-| `default_skill_id`      | `bigint`    | 기본 전투 기술. `weapon_skills.id` 참조                                                                |
+| 컬럼                    | 자료형           | 의미·제약                                                                                              |
+| ----------------------- | ---------------- | ------------------------------------------------------------------------------------------------------ |
+| `game_item_id`          | `bigint`         | 기본키. 아래 `type`과 함께 `game_items(id, type)` 참조                                                 |
+| `type`                  | `game_item_type` | 기본값 `weapon`, NULL 불가, `weapon`만 허용. 무기 외 아이템 연결 차단용                                |
+| `weight`                | `numeric`        | 중량, 0 이상                                                                                           |
+| `can_change_affinity`   | `boolean`        | `true`: 변질 가능, `false`: 변질 불가, NULL: 미확인. 기본값 없음                                       |
+| `physical_attack_types` | `text[]`         | 물리 공격 방식 목록. 아래 값만 허용하며 배열 내부 NULL 금지                                            |
+| `upgrade_material`      | `text`           | `smithing_stone`(단석), `somber_smithing_stone`(색 잃은 단석), `none`(강화 불가)만 허용. NULL은 미확인 |
+| `default_skill_id`      | `bigint`         | 기본 전투 기술. `weapon_skills.id` 참조                                                                |
 
 | `physical_attack_types` 요소 | 게임 용어 |
 | ---------------------------- | --------- |
@@ -200,17 +208,17 @@ erDiagram
 
 **최대 강화 기준**으로 지원하는 변질의 행만 등록합니다. 변질 불가 무기는 기본 상태를 `standard` 한 행으로 저장하고, 화면에서 표준 변질 가능으로 해석하지 않습니다. 변질 가능 여부는 `weapon_details.can_change_affinity`로 확인합니다. 이 행 구성 규칙은 입력 규칙이며, 현재 DB가 변질 가능 여부와 보정 행의 조합을 강제하지는 않습니다.
 
-| 컬럼           | 자료형   | NULL 허용 | 의미                          |
-| -------------- | -------- | --------- | ----------------------------- |
-| `item_id`      | `bigint` | 아니요    | `weapon_details.item_id` 참조 |
-| `affinity`     | `text`   | 아니요    | 변질 종류                     |
-| `strength`     | `text`   | 예        | 근력 보정                     |
-| `dexterity`    | `text`   | 예        | 기량 보정                     |
-| `intelligence` | `text`   | 예        | 지력 보정                     |
-| `faith`        | `text`   | 예        | 신앙 보정                     |
-| `arcane`       | `text`   | 예        | 신비 보정                     |
+| 컬럼           | 자료형   | NULL 허용 | 의미                               |
+| -------------- | -------- | --------- | ---------------------------------- |
+| `game_item_id` | `bigint` | 아니요    | `weapon_details.game_item_id` 참조 |
+| `affinity`     | `text`   | 아니요    | 변질 종류                          |
+| `strength`     | `text`   | 예        | 근력 보정                          |
+| `dexterity`    | `text`   | 예        | 기량 보정                          |
+| `intelligence` | `text`   | 예        | 지력 보정                          |
+| `faith`        | `text`   | 예        | 신앙 보정                          |
+| `arcane`       | `text`   | 예        | 신비 보정                          |
 
-- `(item_id, affinity)`가 복합 기본키입니다. 동일 무기·변질 중복을 막습니다.
+- `(game_item_id, affinity)`가 복합 기본키입니다. 동일 무기·변질 중복을 막습니다.
 - 보정 값은 `S`, `A`, `B`, `C`, `D`, `E`, `-`만 허용합니다. `-`는 보정 없음, NULL은 미확인입니다.
 - 등급을 비교·정렬할 때는 `S > A > B > C > D > E` 순서입니다. 문자열 사전순으로 정렬하지 않습니다. `-`와 NULL은 등급이 아닙니다.
 - 모든 무기에 13행을 요구하지 않습니다. 행이 없는 이유(미입력·지원 안 함)는 현재 스키마만으로 구분하지 않습니다.
@@ -261,11 +269,11 @@ erDiagram
 
 | 게임에서 보는 정보 | 저장 위치                                           | 시드 예시                                  |
 | ------------------ | --------------------------------------------------- | ------------------------------------------ |
-| 이름·종류          | `items.name`, `items.type`                          | `대거`, `weapon`                           |
-| 무기 유형          | `items.category_id` → `item_categories`             | 이름 `단검`, 종류 `weapon`인 분류          |
-| 이미지             | `items.image_url`                                   | 사용자가 제공한 외부 이미지 URL            |
-| 콘텐츠             | `items.content_code`                                | `base_game`                                |
-| 게임 내 설명       | `items.game_description`                            | 검신이 곧은 매우 짧은 단검…                |
+| 이름·종류          | `game_items.name`, `game_items.type`                | `대거`, `weapon`                           |
+| 무기 유형          | `game_items.category_id` → `game_item_categories`   | 이름 `단검`, 종류 `weapon`인 분류          |
+| 이미지             | `game_items.image_url`                              | 사용자가 제공한 외부 이미지 URL            |
+| 콘텐츠             | `game_items.content_code`                           | `base_game`                                |
+| 게임 내 설명       | `game_items.game_description`                       | 검신이 곧은 매우 짧은 단검…                |
 | 공격 속성          | `weapon_details.physical_attack_types`              | `['slash', 'pierce']`                      |
 | 중량·강화 재료     | `weapon_details.weight`, `upgrade_material`         | `1.5`, `smithing_stone`                    |
 | 전투 기술          | `weapon_details.default_skill_id` → `weapon_skills` | 퀵스텝, FP 문자열 `3`, 기술 설명           |
@@ -276,7 +284,7 @@ erDiagram
 | 필요 능력치        | `weapon_details.required_*`                         | 근력 `5`, 기량 `9`, 나머지 `0`             |
 | 변질별 보정        | `weapon_scalings`                                   | 13행. 표준: 근력 `D`, 기량 `B`, 나머지 `-` |
 
-무기 하나의 상세 화면을 조회할 때 기준 행은 `items`입니다. 분류·무기 상세·기본 전투 기술을 연결하고, 변질별 보정은 여러 행의 목록으로 가져옵니다. 상세와 기술 연결이 선택 사항이므로 목록에서 무조건 내부 조인하면 상세 미입력 아이템이 빠질 수 있습니다.
+무기 하나의 상세 화면을 조회할 때 기준 행은 `game_items`입니다. 분류·무기 상세·기본 전투 기술을 연결하고, 변질별 보정은 여러 행의 목록으로 가져옵니다. 상세와 기술 연결이 선택 사항이므로 목록에서 무조건 내부 조인하면 상세 미입력 아이템이 빠질 수 있습니다.
 
 예를 들어 다음은 공통 정보와 기본 기술을 조회하는 읽기 전용 SQL입니다. `$1`은 조회할 아이템 ID를 받는 바인딩 매개변수이며, SQL Editor에서 그대로 실행할 때는 실제 ID로 바꿉니다.
 
@@ -286,14 +294,14 @@ select
   c.name as category_name,
   d.weight, d.attack_physical,
   s.name as skill_name, s.description as skill_description, s.fp_cost_text
-from public.items i
-join public.item_categories c on c.id = i.category_id
-left join public.weapon_details d on d.item_id = i.id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+left join public.weapon_details d on d.game_item_id = i.id
 left join public.weapon_skills s on s.id = d.default_skill_id
 where i.id = $1;
 ```
 
-변질별 보정은 `weapon_scalings.item_id`로 조회합니다. 단순 조인으로 13행을 합치면 공통 아이템 정보도 13번 반복되므로, 조회 결과를 그대로 아이템 13개로 취급하지 않습니다. 변질의 화면 표시 순서도 별도로 정해야 합니다.
+변질별 보정은 `weapon_scalings.game_item_id`로 조회합니다. 단순 조인으로 13행을 합치면 공통 아이템 정보도 13번 반복되므로, 조회 결과를 그대로 아이템 13개로 취급하지 않습니다. 변질의 화면 표시 순서도 별도로 정해야 합니다.
 
 ## 마이그레이션·시드
 
@@ -309,7 +317,7 @@ where i.id = $1;
 
 ## 변질 불가 무기 예시: 문리델의 기사검
 
-- `items`: 이름 `문리델의 기사검`, 종류 `weapon`, 분류 `특대검`, 콘텐츠 `shadow_of_the_erdtree`.
+- `game_items`: 이름 `문리델의 기사검`, 종류 `weapon`, 분류 `특대검`, 콘텐츠 `shadow_of_the_erdtree`.
 - `weapon_details`: `can_change_affinity=false`, `physical_attack_types=['standard']`, 중량 `18.0`, 강화 재료 `somber_smithing_stone`(색 잃은 단석).
 - 기본 기술은 거검진, FP 표기는 `16 ( - / 6 )`입니다. 게임 내 설명과 전투 기술 설명은 제공된 원문을 각각 저장합니다.
 - 최대 강화 공격력은 물리 `303`, 마력 `196`, 나머지 `0`. 치명 `100`, 가드 강도 `55`. 가드 감소율은 물리 `70`, 마력 `55`, 나머지 세 속성 각 `43`입니다.
@@ -321,7 +329,7 @@ where i.id = $1;
 
 ## 추가 콘텐츠 무기 예시: 이데스의 검
 
-- `items`: 분류 `경대검`, 콘텐츠 `tarnished_pack`(서비스 표시명: 빛바랜자 에디션). 획득 장소가 본편 지역이어도 콘텐츠 소속은 `base_game`으로 바꾸지 않습니다.
+- `game_items`: 분류 `경대검`, 콘텐츠 `tarnished_pack`(서비스 표시명: 빛바랜자 에디션). 획득 장소가 본편 지역이어도 콘텐츠 소속은 `base_game`으로 바꾸지 않습니다.
 - `weapon_details`: `can_change_affinity=true`, 공격 속성 `['standard', 'pierce']`, 중량 `7.0`, 강화 재료 `smithing_stone`.
 - 기본 기술은 관통 찌르기, FP 문자열은 `9 ( - / - )`입니다.
 - 최대 강화 공격력은 물리 `303`, 나머지 `0`, 치명 `100`, 가드 강도 `45`. 가드 감소율은 물리 `65`, 나머지 네 속성 각 `33`입니다.
@@ -331,33 +339,33 @@ where i.id = $1;
 ## 후속 검토에서 보류한 항목
 
 - 전회 교체 가능 여부(`can_change_ash_of_war`): 현재 도감에서 표시·필터 사용처가 확정되지 않아 추가하지 않았습니다. `can_change_affinity`나 강화 재료로 대신 추론하지 않습니다.
-- 상태 이상 외 고유 효과 설명: 공통 `items.effect_description`에 표시용 설명으로 저장하도록 확장했습니다.
+- 상태 이상 외 고유 효과 설명: 공통 `game_items.effect_description`에 표시용 설명으로 저장하도록 확장했습니다.
 - 촉매의 마술·기도 보정: 캐릭터 능력치에 따라 달라지므로 촉매 샘플과 표시 기준을 정할 때 설계합니다. 현재 `weapon_scalings`의 등급과는 다른 정보입니다.
 - 기존 세 무기는 수면·발광 축적이 모두 없다는 사용자 확인에 따라 `0`을 저장합니다. 기존 제공 수치는 그대로 유지했으며, 최신 게임 수치 및 캐릭터 보정 제외 여부를 외부 자료로 재검증한 것은 아닙니다.
 
 ## `armor_details`: 방어구 상세
 
-개별 방어구를 목록 단위로 사용하며 `item_categories`의 갑옷·투구·장갑·각반으로 분류합니다.
+개별 방어구를 목록 단위로 사용하며 `game_item_categories`의 갑옷·투구·장갑·각반으로 분류합니다.
 세트와 경갑·중갑 등의 분류는 현재 저장하지 않습니다. 추후 부위 분류를 유지하면서 별도 관계나 필드로 확장합니다.
 
-| 컬럼                 | 자료형      | 의미                                         |
-| -------------------- | ----------- | -------------------------------------------- |
-| `item_id`            | `bigint`    | 기본키. `type`과 함께 `items(id, type)` 참조 |
-| `type`               | `item_type` | NULL 불가, 기본값 `armor`, `armor`만 허용    |
-| `weight`             | `numeric`   | 중량, 0 이상                                 |
-| `negation_physical`  | `numeric`   | 물리 경감률                                  |
-| `negation_strike`    | `numeric`   | 타격 경감률                                  |
-| `negation_slash`     | `numeric`   | 참격 경감률                                  |
-| `negation_pierce`    | `numeric`   | 관통 경감률                                  |
-| `negation_magic`     | `numeric`   | 마력 경감률                                  |
-| `negation_fire`      | `numeric`   | 화염 경감률                                  |
-| `negation_lightning` | `numeric`   | 벼락 경감률                                  |
-| `negation_holy`      | `numeric`   | 신성 경감률                                  |
-| `immunity`           | `integer`   | 면역                                         |
-| `robustness`         | `integer`   | 강건                                         |
-| `focus`              | `integer`   | 이성                                         |
-| `vitality`           | `integer`   | 항사                                         |
-| `poise`              | `integer`   | 강인도                                       |
+| 컬럼                 | 자료형           | 의미                                              |
+| -------------------- | ---------------- | ------------------------------------------------- |
+| `game_item_id`       | `bigint`         | 기본키. `type`과 함께 `game_items(id, type)` 참조 |
+| `type`               | `game_item_type` | NULL 불가, 기본값 `armor`, `armor`만 허용         |
+| `weight`             | `numeric`        | 중량, 0 이상                                      |
+| `negation_physical`  | `numeric`        | 물리 경감률                                       |
+| `negation_strike`    | `numeric`        | 타격 경감률                                       |
+| `negation_slash`     | `numeric`        | 참격 경감률                                       |
+| `negation_pierce`    | `numeric`        | 관통 경감률                                       |
+| `negation_magic`     | `numeric`        | 마력 경감률                                       |
+| `negation_fire`      | `numeric`        | 화염 경감률                                       |
+| `negation_lightning` | `numeric`        | 벼락 경감률                                       |
+| `negation_holy`      | `numeric`        | 신성 경감률                                       |
+| `immunity`           | `integer`        | 면역                                              |
+| `robustness`         | `integer`        | 강건                                              |
+| `focus`              | `integer`        | 이성                                              |
+| `vitality`           | `integer`        | 항사                                              |
+| `poise`              | `integer`        | 강인도                                            |
 
 키·종류 외 모든 컬럼은 NULL을 허용합니다. 0은 실제 0, NULL은 미확인입니다.
 경감률은 0~100, 내성과 강인도는 0 이상의 값만 허용합니다.
@@ -375,14 +383,14 @@ where i.id = $1;
 
 ## `talisman_details`: 탈리스만 상세
 
-| 컬럼      | 자료형      | 의미                                            |
-| --------- | ----------- | ----------------------------------------------- |
-| `item_id` | `bigint`    | 기본키. `type`과 함께 `items(id, type)` 참조    |
-| `type`    | `item_type` | NULL 불가, 기본값 `talisman`, `talisman`만 허용 |
-| `weight`  | `numeric`   | NULL 허용, 0 이상. 0은 실제 0, NULL은 미확인    |
+| 컬럼           | 자료형           | 의미                                              |
+| -------------- | ---------------- | ------------------------------------------------- |
+| `game_item_id` | `bigint`         | 기본키. `type`과 함께 `game_items(id, type)` 참조 |
+| `type`         | `game_item_type` | NULL 불가, 기본값 `talisman`, `talisman`만 허용   |
+| `weight`       | `numeric`        | NULL 허용, 0 이상. 0은 실제 0, NULL은 미확인      |
 
-- 기본 분류는 `item_categories`의 탈리스만 하나입니다. 효과별 분류·복수 태그는 추후 필요할 때 추가합니다.
-- 이름·이미지·콘텐츠 소속·원문·효과 설명은 공통 `items`에 저장합니다. 효과는 설명으로만 제공하고 계산·필터용 구조는 두지 않습니다.
+- 기본 분류는 `game_item_categories`의 탈리스만 하나입니다. 효과별 분류·복수 태그는 추후 필요할 때 추가합니다.
+- 이름·이미지·콘텐츠 소속·원문·효과 설명은 공통 `game_items`에 저장합니다. 효과는 설명으로만 제공하고 계산·필터용 구조는 두지 않습니다.
 - +1·+2 등의 변형은 별도 아이템으로 등록합니다. 변형 연결·동시 장착 제한·사용자 장착 상태는 현재 저장하지 않습니다.
 - 외래키는 UPDATE·DELETE RESTRICT이며, RLS와 공개 SELECT만 허용하는 정책을 따릅니다.
 - 로컬 시드에 선조령의 뿔(1.2), 먼 화살의 탈리스만(0.7), 튼튼한 화살의 탈리스만(0.7), 무구 덩어리 부적(1.5)을 등록합니다. 모두 본편입니다.
@@ -393,22 +401,22 @@ where i.id = $1;
 
 ## `spell_details`: 주문 상세
 
-`items.type`은 `spell`, 기본 분류는 `item_categories`의 마술·기도입니다.
+`game_items.type`은 `spell`, 기본 분류는 `game_item_categories`의 마술·기도입니다.
 요구 능력치로 분류를 추론하지 않습니다. 세부 계통은 추후 별도 관계로 확장하며 현재 저장하지 않습니다.
 
-| 컬럼                    | 자료형      | 의미                                                    |
-| ----------------------- | ----------- | ------------------------------------------------------- |
-| `item_id`               | `bigint`    | 기본키. `type`과 함께 `items(id, type)` 참조            |
-| `type`                  | `item_type` | NULL 불가, 기본값 `spell`, `spell`만 허용               |
-| `fp_cost_text`          | `text`      | 소비 FP 표시용 문자열. 수치 정렬·계산에는 사용하지 않음 |
-| `slots_used`            | `integer`   | 사용 슬롯, 1 이상                                       |
-| `required_intelligence` | `integer`   | 필요 지력, 0 이상                                       |
-| `required_faith`        | `integer`   | 필요 신앙, 0 이상                                       |
-| `required_arcane`       | `integer`   | 필요 신비, 0 이상                                       |
+| 컬럼                    | 자료형           | 의미                                                    |
+| ----------------------- | ---------------- | ------------------------------------------------------- |
+| `game_item_id`          | `bigint`         | 기본키. `type`과 함께 `game_items(id, type)` 참조       |
+| `type`                  | `game_item_type` | NULL 불가, 기본값 `spell`, `spell`만 허용               |
+| `fp_cost_text`          | `text`           | 소비 FP 표시용 문자열. 수치 정렬·계산에는 사용하지 않음 |
+| `slots_used`            | `integer`        | 사용 슬롯, 1 이상                                       |
+| `required_intelligence` | `integer`        | 필요 지력, 0 이상                                       |
+| `required_faith`        | `integer`        | 필요 신앙, 0 이상                                       |
+| `required_arcane`       | `integer`        | 필요 신비, 0 이상                                       |
 
 - 키·종류 외 모든 컬럼은 NULL을 허용합니다. 필요 능력치의 0은 요구 없음, NULL은 미확인입니다.
 - FP는 버프·장비에 의한 소비량 변경을 제외한 주문 자체의 표시 정보입니다. 추가·지속 비용은 확인한 표현을 문자열로 보존합니다.
-- 이름·이미지·콘텐츠 소속·게임 내 설명 원문·효과 설명은 공통 `items`에 저장합니다.
+- 이름·이미지·콘텐츠 소속·게임 내 설명 원문·효과 설명은 공통 `game_items`에 저장합니다.
 - 스태미나·차지 여부·연속 시전·계통·공격력·회복량·지속 시간의 전용 컬럼과 사용자 기억 상태는 두지 않습니다. 필요한 효과·조건은 설명으로 제공합니다.
 - 외래키는 UPDATE·DELETE RESTRICT이며 RLS와 공개 SELECT 정책을 따릅니다.
 - 마술·기도 분류는 마이그레이션으로 등록합니다. 아래 주문 5종을 로컬 개발 시드로 등록합니다.
@@ -431,18 +439,18 @@ where i.id = $1;
 
 ## `ash_of_war_details`: 전회 상세
 
-획득 아이템인 전회와 발동 기술인 `weapon_skills`를 구분합니다. 기본 분류는 `item_categories`의 전회 하나입니다.
+획득 아이템인 전회와 발동 기술인 `weapon_skills`를 구분합니다. 기본 분류는 `game_item_categories`의 전회 하나입니다.
 
-| 컬럼                        | 자료형      | 의미                                                          |
-| --------------------------- | ----------- | ------------------------------------------------------------- |
-| `item_id`                   | `bigint`    | 기본키. `type`과 함께 `items(id, type)` 참조                  |
-| `type`                      | `item_type` | NULL 불가, 기본값 `ash_of_war`, 이 값만 허용                  |
-| `skill_id`                  | `bigint`    | 부여하는 기술. `weapon_skills.id` 참조, NULL은 미확인         |
-| `native_affinity`           | `text`      | 표시되는 기본 변질. 기존 13종 변질 코드만 허용, NULL은 미확인 |
-| `applicable_armaments_text` | `text`      | 적용 가능한 무기와 제외 조건 설명, NULL은 미확인              |
+| 컬럼                        | 자료형           | 의미                                                          |
+| --------------------------- | ---------------- | ------------------------------------------------------------- |
+| `game_item_id`              | `bigint`         | 기본키. `type`과 함께 `game_items(id, type)` 참조             |
+| `type`                      | `game_item_type` | NULL 불가, 기본값 `ash_of_war`, 이 값만 허용                  |
+| `skill_id`                  | `bigint`         | 부여하는 기술. `weapon_skills.id` 참조, NULL은 미확인         |
+| `native_affinity`           | `text`           | 표시되는 기본 변질. 기존 13종 변질 코드만 허용, NULL은 미확인 |
+| `applicable_armaments_text` | `text`           | 적용 가능한 무기와 제외 조건 설명, NULL은 미확인              |
 
 - 기술 이름·설명·소비 FP는 `weapon_skills`에서 재사용합니다. 전회에 중복 컬럼을 두지 않습니다.
-- 전회 이름·이미지·콘텐츠 소속·게임 내 설명 원문은 공통 `items`에 저장합니다.
+- 전회 이름·이미지·콘텐츠 소속·게임 내 설명 원문은 공통 `game_items`에 저장합니다.
 - 기본 변질은 선택 가능한 모든 변질이나 사용자 장착 상태를 의미하지 않습니다. 적용 대상 설명으로 실제 장착 가능 여부를 자동 판정하지 않습니다.
 - 기본 장착 무기는 `weapon_details.default_skill_id`가 담당합니다. 파생 기술 관계·획득 방법·공략·평가·패치 이력은 이번 범위에서 저장하지 않습니다.
 - 동명의 주문과 전투 기술은 별개입니다. 휘검의 원진과 거검진 역시 별개 기술로 유지합니다.
@@ -459,18 +467,18 @@ where i.id = $1;
 
 - 사용자 제공 [한국어 전회 자료](https://namu.wiki/w/엘든%20링/전회)의 원문·FP·기본 변질·적용 대상·이미지를 사용합니다. 4종 모두 본편입니다.
 - 자료의 적용 게임 버전은 미확인입니다. 최신 패치 수치·이미지 접근 가능 여부·게임 클라이언트 원문을 별도 검증한 것은 아닙니다.
-- 원문 전체는 `items.game_description`, 그 안의 기술 설명은 `weapon_skills.description`, 적용 조건은 `applicable_armaments_text`로 제공합니다. 일반 해설은 `effect_description`에 섞지 않고 NULL로 둡니다.
+- 원문 전체는 `game_items.game_description`, 그 안의 기술 설명은 `weapon_skills.description`, 적용 조건은 `applicable_armaments_text`로 제공합니다. 일반 해설은 `effect_description`에 섞지 않고 NULL로 둡니다.
 - 기존 시드와 같이 이름·종류·분류로 개발 샘플을 찾고 기존 값을 덮어쓰지 않습니다. 기술 이름 조회는 개발 샘플용이며 일반 식별 규칙이 아닙니다.
 
 ### 후속 분류 검토
 
-아이템 종류별 상세 설계를 진행한 뒤 `item_categories`의 역할과 분류 기준을 다시 검토합니다. 현재 단일 분류와 무기·방어구·주문별 분류가 함께 존재하며, 전회의 기본 변질은 별도 필드로 유지합니다.
+아이템 종류별 상세 설계를 진행한 뒤 `game_item_categories`의 역할과 분류 기준을 다시 검토합니다. 현재 단일 분류와 무기·방어구·주문별 분류가 함께 존재하며, 전회의 기본 변질은 별도 필드로 유지합니다.
 
 ## 결정 물방울: `crystal_tear`
 
-- 영약에 배합하는 결정 물방울을 `items.type = 'crystal_tear'`로 등록합니다. 일반 성배병 회복량 강화용 성배의 물방울은 포함하지 않습니다.
-- `category_id`는 현재 필수이므로 기본 분류 결정 물방울 하나를 등록합니다. `item_categories`의 역할은 후속 검토 대상입니다.
-- 이름·이미지·콘텐츠 소속·게임 내 원문·효과 설명은 `items` 공통 필드에 저장합니다. 전용 상세 테이블과 수치·지속 시간 전용 컬럼은 두지 않습니다.
+- 영약에 배합하는 결정 물방울을 `game_items.type = 'crystal_tear'`로 등록합니다. 일반 성배병 회복량 강화용 성배의 물방울은 포함하지 않습니다.
+- `category_id`는 현재 필수이므로 기본 분류 결정 물방울 하나를 등록합니다. `game_item_categories`의 역할은 후속 검토 대상입니다.
+- 이름·이미지·콘텐츠 소속·게임 내 원문·효과 설명은 `game_items` 공통 필드에 저장합니다. 전용 상세 테이블과 수치·지속 시간 전용 컬럼은 두지 않습니다.
 - 영약의 성배병 자체와 사용자 배합 상태는 현재 등록하지 않습니다.
 
 ### 결정 물방울 개발 샘플

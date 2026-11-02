@@ -1,12 +1,12 @@
 import { getApiClient } from '@/api';
 import type {
-  TReqGetEquipment,
-  TReqGetEquipmentCategories,
-  TResGetEquipment,
-  TResGetEquipmentCategories,
+  TReqGetGameItems,
+  TReqGetGameItemCategories,
+  TResGetGameItems,
+  TResGetGameItemCategories,
 } from './types';
 
-export async function getEquipment({
+export async function getGameItems({
   page,
   pageSize,
   search,
@@ -14,13 +14,13 @@ export async function getEquipment({
   categoryId,
   contentCode,
   signal,
-}: TReqGetEquipment): Promise<TResGetEquipment> {
+}: TReqGetGameItems): Promise<TResGetGameItems> {
   const client = getApiClient();
   const start = (page - 1) * pageSize;
   const request = client
-    .from('items')
+    .from('game_items')
     .select(
-      'id,name,type,image_url,content_code,game_description,effect_description,item_categories(name),armor_details(*),talisman_details(*),spell_details(*),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,effect_description,game_item_categories(name),armor_details(*),talisman_details(*),spell_details(*),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
     .order('id')
@@ -38,8 +38,8 @@ export async function getEquipment({
   const { data, count } = await request.throwOnError();
 
   return {
-    items: data.map((row) => {
-      // 복합 외래키 관계는 배열로 응답하지만 item_id PK가 최대 한 행을 보장합니다.
+    gameItems: data.map((row) => {
+      // 복합 외래키 관계는 배열로 응답하지만 game_item_id PK가 최대 한 행을 보장합니다.
       const weapon = row.weapon_details[0];
       const armor = row.armor_details[0];
       const talisman = row.talisman_details[0];
@@ -77,7 +77,7 @@ export async function getEquipment({
                 : null,
             }
           : null,
-        itemCategories: row.item_categories,
+        gameItemCategories: row.game_item_categories,
         armorDetails: armor
           ? {
               weight: armor.weight,
@@ -98,7 +98,7 @@ export async function getEquipment({
           : null,
         weaponDetails: weapon
           ? {
-              itemId: weapon.item_id,
+              gameItemId: weapon.game_item_id,
               type: weapon.type,
               weight: weapon.weight,
               physicalAttackTypes: weapon.physical_attack_types,
@@ -134,7 +134,7 @@ export async function getEquipment({
                   }
                 : null,
               weaponScalings: weapon.weapon_scalings.map((scaling) => ({
-                itemId: scaling.item_id,
+                gameItemId: scaling.game_item_id,
                 affinity: scaling.affinity,
                 strength: scaling.strength,
                 dexterity: scaling.dexterity,
@@ -150,11 +150,11 @@ export async function getEquipment({
   };
 }
 
-export async function getEquipmentCategories({
+export async function getGameItemCategories({
   signal,
-}: TReqGetEquipmentCategories = {}): Promise<TResGetEquipmentCategories> {
+}: TReqGetGameItemCategories = {}): Promise<TResGetGameItemCategories> {
   const client = getApiClient();
-  const request = client.from('item_categories').select('id,name,type').order('name');
+  const request = client.from('game_item_categories').select('id,name,type').order('name');
   if (signal) request.abortSignal(signal);
 
   const { data } = await request.throwOnError();

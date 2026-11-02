@@ -2,6 +2,12 @@
 
 이 문서는 프로젝트의 기본 원칙, 폴더 구조와 역할, 영역 간 의존 방향을 관리한다. 구체적인 코드 작성 규칙은 [공통 코드](../.agents/skills/code-conventions/SKILL.md)·[프론트엔드](../.agents/skills/frontend-conventions/SKILL.md)·[백엔드](../.agents/skills/backend-conventions/SKILL.md) 스킬에서 관리한다. DB 모델은 [DATABASE.md](DATABASE.md)를 참고한다.
 
+## 용어
+
+- `catalog`: 도감 화면·라우트. `/catalog/[type]`, `CatalogClient`, `CatalogFilters`로 표현한다.
+- `gameItem`: 개별 게임 아이템과 데이터 API 도메인. `TGameItem`, `gameItems`, `gameItemQuery`로 표현한다.
+- 범용 목록·메뉴의 `item`·`items`는 게임 도메인이 아니므로 유지한다.
+
 ## 기본 원칙
 
 - 코드는 책임과 사용 범위를 기준으로 배치한다. 라우트 전용 코드와 여러 라우트에서 공유하는 코드를 구분한다.
@@ -11,13 +17,13 @@
 
 ## 폴더 구조
 
-현재 존재하는 주요 구조다. `<domain>`은 도메인별 폴더를 뜻하며 현재는 `equipment`가 있다.
+현재 존재하는 주요 구조다. `<domain>`은 도메인별 폴더를 뜻하며 현재는 `gameItem`이 있다.
 
 ```text
 src/
   app/                      # 라우트·레이아웃·라우트 전용 화면
     (home)/                 # URL /에서 기본 도감으로 연결
-    items/[type]/           # 타입별 도감 페이지·클라이언트 화면·필터·상수
+    catalog/[type]/           # 타입별 도감 페이지·클라이언트 화면·필터·상수
   api/
     index.ts                # 공통 API 연결·요청 처리
     <domain>/
@@ -57,11 +63,11 @@ src/
 ### 라우트와 UI
 
 - `src/app/`은 URL에 대응하는 페이지와 레이아웃, 라우트 전용 코드를 관리한다.
-- 루트 `layout.tsx`는 앱 전체 틀을 관리하고, 홈 파일은 URL에 포함되지 않는 `(home)` 라우트 그룹에 둔다. 홈 주소 `/`와 `/items`는 기본 도감 `/items/weapon`으로 연결한다.
+- 루트 `layout.tsx`는 앱 전체 틀을 관리하고, 홈 파일은 URL에 포함되지 않는 `(home)` 라우트 그룹에 둔다. 홈 주소 `/`와 `/catalog`는 기본 도감 `/catalog/weapon`으로 연결한다.
 - `page.tsx`는 서버 입력 해석·필요한 서버 조회·라우트 조립을 맡는다. 대응하는 클라이언트 화면이 필요하면 `<PageName>Client.tsx`를 같은 라우트 폴더 바로 아래에 나란히 둔다. 두 파일은 `_component/`로 옮기지 않는다.
 - 분리한 라우트 전용 컴포넌트는 `_component/`에 둔다. 여러 파일에서 공유하는 라우트 전용 타입·유틸·상수는 `_type/`·`_util/`·`_define/`에 둔다.
 - 한 파일에서만 쓰는 타입·유틸·상수는 기본적으로 해당 파일에 둔다. 독립된 책임이 있고 분리하는 편이 읽기 좋으면 추출할 수 있다. 컴포넌트마다 폴더를 만들거나 종류만으로 기계적으로 분리하지 않는다.
-- 아이템 도감은 `/items/[type]`에서 서버 페이지가 타입을 검증하고 공통 `ItemsClient`에 전달한다. 타입은 코드 상수로 관리하며, 타입 전환은 경로 이동으로 처리한다. 검색·세부 분류·페이지는 현재 클라이언트 상태이며 타입 전환 시 초기화한다.
+- 아이템 도감은 `/catalog/[type]`에서 서버 페이지가 타입을 검증하고 공통 `CatalogClient`에 전달한다. 타입은 코드 상수로 관리하며, 타입 전환은 경로 이동으로 처리한다. 검색·세부 분류·페이지는 현재 클라이언트 상태이며 타입 전환 시 초기화한다.
 - 공유 도메인 컴포넌트는 `src/components/<domain>/`, 도메인과 무관한 공통 UI는 `src/components/common/`에 둔다. 새로운 공통화·이동 시의 제안과 동의 절차는 프론트엔드 스킬을 따른다.
 - UI 전용 타입은 사용하는 코드 가까이에 두며, API 폴더에 모으지 않는다.
 

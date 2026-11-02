@@ -1,6 +1,6 @@
-import type { TItemType } from '@/api/equipment/types';
+import type { TGameItemType } from '@/api/gameItem/types';
 
-export const ITEM_TYPES: Record<TItemType, string> = {
+export const GAME_ITEM_TYPES: Record<TGameItemType, string> = {
   weapon: '무기',
   armor: '방어구',
   talisman: '탈리스만',
@@ -16,6 +16,6 @@ export const CONTENTS: Record<string, string> = {
   tarnished_pack: '빛바랜 자 팩',
 };
 
-export function isItemType(value: string): value is TItemType {
-  return Object.hasOwn(ITEM_TYPES, value);
+export function isGameItemType(value: string): value is TGameItemType {
+  return Object.hasOwn(GAME_ITEM_TYPES, value);
 }

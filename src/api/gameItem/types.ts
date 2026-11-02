@@ -1,4 +1,4 @@
-export type TItemType =
+export type TGameItemType =
   | 'spirit_ash'
   | 'ash_of_war'
   | 'weapon'
@@ -8,27 +8,27 @@ export type TItemType =
   | 'gesture'
   | 'crystal_tear';
 
-export type TReqGetEquipment = {
+export type TReqGetGameItems = {
   page: number;
   pageSize: number;
   search?: string;
-  type?: TItemType;
+  type?: TGameItemType;
   categoryId?: number;
   contentCode?: string;
   signal?: AbortSignal;
 };
 
-export type TReqGetEquipmentCategories = {
+export type TReqGetGameItemCategories = {
   signal?: AbortSignal;
 };
 
-export type TEquipmentCategory = {
+export type TGameItemCategory = {
   id: number;
   name: string;
-  type: TItemType;
+  type: TGameItemType;
 };
 
-export type TResGetEquipmentCategories = TEquipmentCategory[];
+export type TResGetGameItemCategories = TGameItemCategory[];
 
 export type TWeaponSkill = {
   name: string;
@@ -37,7 +37,7 @@ export type TWeaponSkill = {
 };
 
 export type TWeaponScaling = {
-  itemId: number;
+  gameItemId: number;
   affinity: string;
   strength: string | null;
   dexterity: string | null;
@@ -47,8 +47,8 @@ export type TWeaponScaling = {
 };
 
 export type TWeapon = {
-  itemId: number;
-  type: TItemType;
+  gameItemId: number;
+  type: TGameItemType;
   weight: number | null;
   physicalAttackTypes: string[] | null;
   upgradeMaterial: string | null;
@@ -114,15 +114,15 @@ export type TAshOfWar = {
   weaponSkills: TWeaponSkill | null;
 };
 
-export type TEquipment = {
+export type TGameItem = {
   id: number;
   name: string;
-  type: TItemType;
+  type: TGameItemType;
   imageUrl: string | null;
   contentCode: string;
   gameDescription: string | null;
   effectDescription: string | null;
-  itemCategories: {
+  gameItemCategories: {
     name: string;
   } | null;
   weaponDetails: TWeapon | null;
@@ -132,7 +132,7 @@ export type TEquipment = {
   ashOfWarDetails: TAshOfWar | null;
 };
 
-export type TResGetEquipment = {
-  items: TEquipment[];
+export type TResGetGameItems = {
+  gameItems: TGameItem[];
   totalCount: number;
 };

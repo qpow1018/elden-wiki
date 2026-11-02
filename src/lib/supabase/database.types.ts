@@ -1,4 +1,4 @@
-// Generated from the local public schema with `supabase gen types typescript --local --schema public`.
+// Generated from the local public schema with `supabase gen types --local --schema public`.
 // Type identifiers use the project T prefix.
 
 export type TJson =
@@ -10,8 +10,8 @@ export type TDatabase = {
       armor_details: {
         Row: {
           focus: number | null;
+          game_item_id: number;
           immunity: number | null;
-          item_id: number;
           negation_fire: number | null;
           negation_holy: number | null;
           negation_lightning: number | null;
@@ -22,15 +22,15 @@ export type TDatabase = {
           negation_strike: number | null;
           poise: number | null;
           robustness: number | null;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
           vitality: number | null;
           weight: number | null;
         };
         ComputedFields: never;
         Insert: {
           focus?: number | null;
+          game_item_id: number;
           immunity?: number | null;
-          item_id: number;
           negation_fire?: number | null;
           negation_holy?: number | null;
           negation_lightning?: number | null;
@@ -41,14 +41,14 @@ export type TDatabase = {
           negation_strike?: number | null;
           poise?: number | null;
           robustness?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
           vitality?: number | null;
           weight?: number | null;
         };
         Update: {
           focus?: number | null;
+          game_item_id?: number;
           immunity?: number | null;
-          item_id?: number;
           negation_fire?: number | null;
           negation_holy?: number | null;
           negation_lightning?: number | null;
@@ -59,16 +59,16 @@ export type TDatabase = {
           negation_strike?: number | null;
           poise?: number | null;
           robustness?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
           vitality?: number | null;
           weight?: number | null;
         };
         Relationships: [
           {
-            foreignKeyName: 'armor_details_item_id_type_fkey';
-            columns: ['item_id', 'type'];
+            foreignKeyName: 'armor_details_game_item_id_type_fkey';
+            columns: ['game_item_id', 'type'];
             isOneToOne: false;
-            referencedRelation: 'items';
+            referencedRelation: 'game_items';
             referencedColumns: ['id', 'type'];
           },
         ];
@@ -76,32 +76,32 @@ export type TDatabase = {
       ash_of_war_details: {
         Row: {
           applicable_armaments_text: string | null;
-          item_id: number;
+          game_item_id: number;
           native_affinity: string | null;
           skill_id: number | null;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
         };
         ComputedFields: never;
         Insert: {
           applicable_armaments_text?: string | null;
-          item_id: number;
+          game_item_id: number;
           native_affinity?: string | null;
           skill_id?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
           applicable_armaments_text?: string | null;
-          item_id?: number;
+          game_item_id?: number;
           native_affinity?: string | null;
           skill_id?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Relationships: [
           {
-            foreignKeyName: 'ash_of_war_details_item_id_type_fkey';
-            columns: ['item_id', 'type'];
+            foreignKeyName: 'ash_of_war_details_game_item_id_type_fkey';
+            columns: ['game_item_id', 'type'];
             isOneToOne: false;
-            referencedRelation: 'items';
+            referencedRelation: 'game_items';
             referencedColumns: ['id', 'type'];
           },
           {
@@ -113,26 +113,26 @@ export type TDatabase = {
           },
         ];
       };
-      item_categories: {
+      game_item_categories: {
         Row: {
           id: number;
           name: string;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
         };
         ComputedFields: never;
         Insert: {
           id?: never;
           name: string;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
           id?: never;
           name?: string;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Relationships: [];
       };
-      items: {
+      game_items: {
         Row: {
           category_id: number;
           content_code: string;
@@ -141,7 +141,7 @@ export type TDatabase = {
           id: number;
           image_url: string | null;
           name: string;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
         };
         ComputedFields: never;
         Insert: {
@@ -152,7 +152,7 @@ export type TDatabase = {
           id?: never;
           image_url?: string | null;
           name: string;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
           category_id?: number;
@@ -162,14 +162,14 @@ export type TDatabase = {
           id?: never;
           image_url?: string | null;
           name?: string;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Relationships: [
           {
-            foreignKeyName: 'items_category_id_type_fkey';
+            foreignKeyName: 'game_items_category_id_type_fkey';
             columns: ['category_id', 'type'];
             isOneToOne: false;
-            referencedRelation: 'item_categories';
+            referencedRelation: 'game_item_categories';
             referencedColumns: ['id', 'type'];
           },
         ];
@@ -177,65 +177,65 @@ export type TDatabase = {
       spell_details: {
         Row: {
           fp_cost_text: string | null;
-          item_id: number;
+          game_item_id: number;
           required_arcane: number | null;
           required_faith: number | null;
           required_intelligence: number | null;
           slots_used: number | null;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
         };
         ComputedFields: never;
         Insert: {
           fp_cost_text?: string | null;
-          item_id: number;
+          game_item_id: number;
           required_arcane?: number | null;
           required_faith?: number | null;
           required_intelligence?: number | null;
           slots_used?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
           fp_cost_text?: string | null;
-          item_id?: number;
+          game_item_id?: number;
           required_arcane?: number | null;
           required_faith?: number | null;
           required_intelligence?: number | null;
           slots_used?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Relationships: [
           {
-            foreignKeyName: 'spell_details_item_id_type_fkey';
-            columns: ['item_id', 'type'];
+            foreignKeyName: 'spell_details_game_item_id_type_fkey';
+            columns: ['game_item_id', 'type'];
             isOneToOne: false;
-            referencedRelation: 'items';
+            referencedRelation: 'game_items';
             referencedColumns: ['id', 'type'];
           },
         ];
       };
       talisman_details: {
         Row: {
-          item_id: number;
-          type: TDatabase['public']['Enums']['item_type'];
+          game_item_id: number;
+          type: TDatabase['public']['Enums']['game_item_type'];
           weight: number | null;
         };
         ComputedFields: never;
         Insert: {
-          item_id: number;
-          type?: TDatabase['public']['Enums']['item_type'];
+          game_item_id: number;
+          type?: TDatabase['public']['Enums']['game_item_type'];
           weight?: number | null;
         };
         Update: {
-          item_id?: number;
-          type?: TDatabase['public']['Enums']['item_type'];
+          game_item_id?: number;
+          type?: TDatabase['public']['Enums']['game_item_type'];
           weight?: number | null;
         };
         Relationships: [
           {
-            foreignKeyName: 'talisman_details_item_id_type_fkey';
-            columns: ['item_id', 'type'];
+            foreignKeyName: 'talisman_details_game_item_id_type_fkey';
+            columns: ['game_item_id', 'type'];
             isOneToOne: false;
-            referencedRelation: 'items';
+            referencedRelation: 'game_items';
             referencedColumns: ['id', 'type'];
           },
         ];
@@ -252,13 +252,13 @@ export type TDatabase = {
           critical: number | null;
           default_skill_id: number | null;
           frostbite: number | null;
+          game_item_id: number;
           guard_boost: number | null;
           guard_fire: number | null;
           guard_holy: number | null;
           guard_lightning: number | null;
           guard_magic: number | null;
           guard_physical: number | null;
-          item_id: number;
           madness: number | null;
           physical_attack_types: string[] | null;
           poison: number | null;
@@ -269,7 +269,7 @@ export type TDatabase = {
           required_strength: number | null;
           scarlet_rot: number | null;
           sleep: number | null;
-          type: TDatabase['public']['Enums']['item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
           upgrade_material: string | null;
           weight: number | null;
         };
@@ -285,13 +285,13 @@ export type TDatabase = {
           critical?: number | null;
           default_skill_id?: number | null;
           frostbite?: number | null;
+          game_item_id: number;
           guard_boost?: number | null;
           guard_fire?: number | null;
           guard_holy?: number | null;
           guard_lightning?: number | null;
           guard_magic?: number | null;
           guard_physical?: number | null;
-          item_id: number;
           madness?: number | null;
           physical_attack_types?: string[] | null;
           poison?: number | null;
@@ -302,7 +302,7 @@ export type TDatabase = {
           required_strength?: number | null;
           scarlet_rot?: number | null;
           sleep?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
           upgrade_material?: string | null;
           weight?: number | null;
         };
@@ -317,13 +317,13 @@ export type TDatabase = {
           critical?: number | null;
           default_skill_id?: number | null;
           frostbite?: number | null;
+          game_item_id?: number;
           guard_boost?: number | null;
           guard_fire?: number | null;
           guard_holy?: number | null;
           guard_lightning?: number | null;
           guard_magic?: number | null;
           guard_physical?: number | null;
-          item_id?: number;
           madness?: number | null;
           physical_attack_types?: string[] | null;
           poison?: number | null;
@@ -334,7 +334,7 @@ export type TDatabase = {
           required_strength?: number | null;
           scarlet_rot?: number | null;
           sleep?: number | null;
-          type?: TDatabase['public']['Enums']['item_type'];
+          type?: TDatabase['public']['Enums']['game_item_type'];
           upgrade_material?: string | null;
           weight?: number | null;
         };
@@ -347,10 +347,10 @@ export type TDatabase = {
             referencedColumns: ['id'];
           },
           {
-            foreignKeyName: 'weapon_details_item_id_type_fkey';
-            columns: ['item_id', 'type'];
+            foreignKeyName: 'weapon_details_game_item_id_type_fkey';
+            columns: ['game_item_id', 'type'];
             isOneToOne: false;
-            referencedRelation: 'items';
+            referencedRelation: 'game_items';
             referencedColumns: ['id', 'type'];
           },
         ];
@@ -361,8 +361,8 @@ export type TDatabase = {
           arcane: string | null;
           dexterity: string | null;
           faith: string | null;
+          game_item_id: number;
           intelligence: string | null;
-          item_id: number;
           strength: string | null;
         };
         ComputedFields: never;
@@ -371,8 +371,8 @@ export type TDatabase = {
           arcane?: string | null;
           dexterity?: string | null;
           faith?: string | null;
+          game_item_id: number;
           intelligence?: string | null;
-          item_id: number;
           strength?: string | null;
         };
         Update: {
@@ -380,17 +380,17 @@ export type TDatabase = {
           arcane?: string | null;
           dexterity?: string | null;
           faith?: string | null;
+          game_item_id?: number;
           intelligence?: string | null;
-          item_id?: number;
           strength?: string | null;
         };
         Relationships: [
           {
-            foreignKeyName: 'weapon_scalings_item_id_fkey';
-            columns: ['item_id'];
+            foreignKeyName: 'weapon_scalings_game_item_id_fkey';
+            columns: ['game_item_id'];
             isOneToOne: false;
             referencedRelation: 'weapon_details';
-            referencedColumns: ['item_id'];
+            referencedColumns: ['game_item_id'];
           },
         ];
       };
@@ -424,7 +424,7 @@ export type TDatabase = {
       [_ in never]: never;
     };
     Enums: {
-      item_type:
+      game_item_type:
         | 'spirit_ash'
         | 'ash_of_war'
         | 'weapon'
@@ -445,26 +445,26 @@ type TDatabaseWithoutInternals = Omit<TDatabase, '__InternalSupabase'>;
 type TDefaultSchema = TDatabaseWithoutInternals[Extract<keyof TDatabase, 'public'>];
 
 export type TTables<
-  TDefaultSchemaTableNameOrOptions extends
+  DefaultSchemaTableNameOrOptions extends
     | keyof (TDefaultSchema['Tables'] & TDefaultSchema['Views'])
     | { schema: keyof TDatabaseWithoutInternals },
-  TableName extends (TDefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof TDatabaseWithoutInternals;
   }
-    ? keyof (TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Tables'] &
-        TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Views'])
+    ? keyof (TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'] &
+        TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Views'])
     : never) = never,
-> = TDefaultSchemaTableNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
-  ? (TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Tables'] &
-      TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Views'])[TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
+  ? (TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'] &
+      TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Views'])[TableName] extends {
       Row: infer R;
     }
     ? R
     : never
-  : TDefaultSchemaTableNameOrOptions extends keyof (TDefaultSchema['Tables'] &
+  : DefaultSchemaTableNameOrOptions extends keyof (TDefaultSchema['Tables'] &
         TDefaultSchema['Views'])
     ? (TDefaultSchema['Tables'] &
-        TDefaultSchema['Views'])[TDefaultSchemaTableNameOrOptions] extends {
+        TDefaultSchema['Views'])[DefaultSchemaTableNameOrOptions] extends {
         Row: infer R;
       }
       ? R
@@ -472,21 +472,21 @@ export type TTables<
     : never;
 
 export type TTablesInsert<
-  TDefaultSchemaTableNameOrOptions extends
+  DefaultSchemaTableNameOrOptions extends
     keyof TDefaultSchema['Tables'] | { schema: keyof TDatabaseWithoutInternals },
-  TableName extends (TDefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof TDatabaseWithoutInternals;
   }
-    ? keyof TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Tables']
+    ? keyof TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables']
     : never) = never,
-> = TDefaultSchemaTableNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
-  ? TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
+  ? TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Insert: infer I;
     }
     ? I
     : never
-  : TDefaultSchemaTableNameOrOptions extends keyof TDefaultSchema['Tables']
-    ? TDefaultSchema['Tables'][TDefaultSchemaTableNameOrOptions] extends {
+  : DefaultSchemaTableNameOrOptions extends keyof TDefaultSchema['Tables']
+    ? TDefaultSchema['Tables'][DefaultSchemaTableNameOrOptions] extends {
         Insert: infer I;
       }
       ? I
@@ -494,21 +494,21 @@ export type TTablesInsert<
     : never;
 
 export type TTablesUpdate<
-  TDefaultSchemaTableNameOrOptions extends
+  DefaultSchemaTableNameOrOptions extends
     keyof TDefaultSchema['Tables'] | { schema: keyof TDatabaseWithoutInternals },
-  TableName extends (TDefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof TDatabaseWithoutInternals;
   }
-    ? keyof TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Tables']
+    ? keyof TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables']
     : never) = never,
-> = TDefaultSchemaTableNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
-  ? TDatabaseWithoutInternals[TDefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
+  ? TDatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Update: infer U;
     }
     ? U
     : never
-  : TDefaultSchemaTableNameOrOptions extends keyof TDefaultSchema['Tables']
-    ? TDefaultSchema['Tables'][TDefaultSchemaTableNameOrOptions] extends {
+  : DefaultSchemaTableNameOrOptions extends keyof TDefaultSchema['Tables']
+    ? TDefaultSchema['Tables'][DefaultSchemaTableNameOrOptions] extends {
         Update: infer U;
       }
       ? U
@@ -516,17 +516,17 @@ export type TTablesUpdate<
     : never;
 
 export type TEnums<
-  TDefaultSchemaEnumNameOrOptions extends
+  DefaultSchemaEnumNameOrOptions extends
     keyof TDefaultSchema['Enums'] | { schema: keyof TDatabaseWithoutInternals },
-  EnumName extends (TDefaultSchemaEnumNameOrOptions extends {
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
     schema: keyof TDatabaseWithoutInternals;
   }
-    ? keyof TDatabaseWithoutInternals[TDefaultSchemaEnumNameOrOptions['schema']]['Enums']
+    ? keyof TDatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions['schema']]['Enums']
     : never) = never,
-> = TDefaultSchemaEnumNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
-  ? TDatabaseWithoutInternals[TDefaultSchemaEnumNameOrOptions['schema']]['Enums'][EnumName]
-  : TDefaultSchemaEnumNameOrOptions extends keyof TDefaultSchema['Enums']
-    ? TDefaultSchema['Enums'][TDefaultSchemaEnumNameOrOptions]
+> = DefaultSchemaEnumNameOrOptions extends { schema: keyof TDatabaseWithoutInternals }
+  ? TDatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions['schema']]['Enums'][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof TDefaultSchema['Enums']
+    ? TDefaultSchema['Enums'][DefaultSchemaEnumNameOrOptions]
     : never;
 
 export type TCompositeTypes<
@@ -546,7 +546,7 @@ export type TCompositeTypes<
 export const DATABASE_CONSTANTS = {
   public: {
     Enums: {
-      item_type: [
+      game_item_type: [
         'spirit_ash',
         'ash_of_war',
         'weapon',

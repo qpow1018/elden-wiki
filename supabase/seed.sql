@@ -1,5 +1,5 @@
 -- 로컬 개발용 데이터. ID는 DB가 부여합니다.
-insert into public.item_categories (name, type)
+insert into public.game_item_categories (name, type)
 values ('단검', 'weapon')
 on conflict (type, name) do nothing;
 
@@ -14,7 +14,7 @@ where not exists (
 );
 
 -- 사용자 확인: 본편 아이템, 공격력·가드 성능은 표준 변질 최대 강화 기준.
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, game_description
 )
 select
@@ -24,15 +24,15 @@ select
   'https://i.namu.wiki/i/xqXKOrXirHvR_F5Q-ugg4AmBt0rKIpDRJJ41euNpsuk1aTdqPiaeir_K-hQw_6wzr-SQ2lZE6s541kAa3YhQsTmp_jasXGHur9ZjMWo887-IbAzZUEn9_aC4DcmBGB7PrHoHdKyxEU-Os0BpySqGKw.webp',
   'base_game',
   E'검신이 곧은 매우 짧은 단검.\n\n공격력과 공격 범위는 부족하지만\n가벼워서 재빠른 연속 공격이 가능하며\n치명적인 일격의 위력도 높다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'weapon' and c.name = '단검'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '대거' and type = 'weapon' and category_id = c.id
   );
 
 insert into public.weapon_details (
-  item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
   attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy,
   critical, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy,
   guard_boost, scarlet_rot, frostbite, bleed, poison,
@@ -45,28 +45,28 @@ select
   130, 35.0, 20.0, 20.0, 20.0, 20.0,
   15, 0, 0, 0, 0,
   5, 9, 0, 0, 0
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 cross join public.weapon_skills s
 where i.name = '대거' and i.type = 'weapon' and c.name = '단검'
   and s.name = '퀵스텝'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 -- 기존 로컬 대거에도 새로 합의한 변질 가능 여부를 반영합니다.
 update public.weapon_details d
 set can_change_affinity = true
-from public.items i
-join public.item_categories c on c.id = i.category_id
-where d.item_id = i.id and i.name = '대거' and i.type = 'weapon'
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+where d.game_item_id = i.id and i.name = '대거' and i.type = 'weapon'
   and c.name = '단검' and d.can_change_affinity is distinct from true;
 
 insert into public.weapon_scalings (
-  item_id, affinity, strength, dexterity, intelligence, faith, arcane
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
 )
 select i.id, v.*
-from public.items i
-join public.item_categories c on c.id = i.category_id
-join public.weapon_details d on d.item_id = i.id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
 cross join (values
   ('standard',  'D', 'B', '-', '-', '-'),
   ('heavy',     'A', '-', '-', '-', '-'),
@@ -83,10 +83,10 @@ cross join (values
   ('occult',    'E', 'D', '-', '-', 'A')
 ) as v(affinity, strength, dexterity, intelligence, faith, arcane)
 where i.name = '대거' and i.type = 'weapon' and c.name = '단검'
-on conflict (item_id, affinity) do nothing;
+on conflict (game_item_id, affinity) do nothing;
 
 -- 이데스의 검: 변질 가능, 미강화 기본 부가 효과 없음으로 사용자 확인.
-insert into public.item_categories (name, type)
+insert into public.game_item_categories (name, type)
 values ('경대검', 'weapon')
 on conflict (type, name) do nothing;
 
@@ -99,7 +99,7 @@ where not exists (
   select 1 from public.weapon_skills where name = '관통 찌르기'
 );
 
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, game_description
 )
 select
@@ -107,15 +107,15 @@ select
   'https://i.namu.wiki/i/pbb4-4kgjhmXIPruxWpCXMkd6QgpHElDmD5lOQFfWAXZdr3PbbZf_qzFy37Es6sP9of1-wPhFHmfSt8Eu70PUH_c2tBI7bOOl-v4FyoPDzgnpcbKtvdp8xLqxm4aLb51gMYfTt9kdDHegDc3Asv_wQ.webp',
   'tarnished_pack',
   E'대검에 맞먹는 긴 검신을 지녔으면서\n높은 기술로 가볍게 만들어진 경대검.\n\n이데스 땅의 독특한 무기.\n\n형태가 세련되어\n직검과 동등한 속도로 휘두를 수 있다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'weapon' and c.name = '경대검'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '이데스의 검' and type = 'weapon' and category_id = c.id
   );
 
 insert into public.weapon_details (
-  item_id, can_change_affinity, weight, physical_attack_types,
+  game_item_id, can_change_affinity, weight, physical_attack_types,
   upgrade_material, default_skill_id,
   attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy,
   critical, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy,
@@ -129,20 +129,20 @@ select
   100, 65.0, 33.0, 33.0, 33.0, 33.0,
   45, 0, 0, 0, 0,
   10, 15, 0, 0, 0
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 cross join public.weapon_skills s
 where i.name = '이데스의 검' and i.type = 'weapon' and c.name = '경대검'
   and s.name = '관통 찌르기'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 insert into public.weapon_scalings (
-  item_id, affinity, strength, dexterity, intelligence, faith, arcane
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
 )
 select i.id, v.*
-from public.items i
-join public.item_categories c on c.id = i.category_id
-join public.weapon_details d on d.item_id = i.id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
 cross join (values
   ('standard',  'D', 'D', '-', '-', '-'),
   ('heavy',     'B', '-', '-', '-', '-'),
@@ -159,10 +159,10 @@ cross join (values
   ('occult',    'E', 'E', '-', '-', 'C')
 ) as v(affinity, strength, dexterity, intelligence, faith, arcane)
 where i.name = '이데스의 검' and i.type = 'weapon' and c.name = '경대검'
-on conflict (item_id, affinity) do nothing;
+on conflict (game_item_id, affinity) do nothing;
 
 -- 문리델의 기사검: 사용자 제공 자료와 확인에 따른 두 번째 개발 샘플.
-insert into public.item_categories (name, type)
+insert into public.game_item_categories (name, type)
 values ('특대검', 'weapon')
 on conflict (type, name) do nothing;
 
@@ -175,7 +175,7 @@ where not exists (
   select 1 from public.weapon_skills where name = '거검진'
 );
 
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, game_description
 )
 select
@@ -185,15 +185,15 @@ select
   'https://i.namu.wiki/i/78XYnD5uv4YbcJYQvK-VJEAu4kcLx5EZd6qyP4PELikC-8gndqCZIoNWmgfItdHO1Jf_lngD-l8RyJ4hRC7QZYdOWYqtIsQ4zLNNWLS_oSntisT-30a_UAUmxWbkCmPerLsypZvJwuJJtM7PJUmW1A.webp',
   'shadow_of_the_erdtree',
   E'검신에 파란 휘석이 박힌 대검.\n괴력의 카리아 기사 문리델의 무기.\n\n쌍월의 시종인 문리델은\n왕가를 섬기던 트롤들의 친구로\n그들의 무기를 함께 들었다고 한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'weapon' and c.name = '특대검'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '문리델의 기사검' and type = 'weapon' and category_id = c.id
   );
 
 insert into public.weapon_details (
-  item_id, can_change_affinity, weight, physical_attack_types,
+  game_item_id, can_change_affinity, weight, physical_attack_types,
   upgrade_material, default_skill_id,
   attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy,
   critical, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy,
@@ -207,338 +207,338 @@ select
   100, 70.0, 55.0, 43.0, 43.0, 43.0,
   55, 0, 0, 0, 0,
   20, 14, 18, 0, 0
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 cross join public.weapon_skills s
 where i.name = '문리델의 기사검' and i.type = 'weapon' and c.name = '특대검'
   and s.name = '거검진'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 insert into public.weapon_scalings (
-  item_id, affinity, strength, dexterity, intelligence, faith, arcane
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
 )
 select i.id, 'standard', 'C', 'C', 'D', '-', '-'
-from public.items i
-join public.item_categories c on c.id = i.category_id
-join public.weapon_details d on d.item_id = i.id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
 where i.name = '문리델의 기사검' and i.type = 'weapon' and c.name = '특대검'
-on conflict (item_id, affinity) do nothing;
+on conflict (game_item_id, affinity) do nothing;
 
 -- 사용자 확인: 세 샘플 무기 모두 기본 수면·발광 축적이 없습니다.
 update public.weapon_details d
 set sleep = 0, madness = 0
-from public.items i
-where d.item_id = i.id and i.type = 'weapon'
+from public.game_items i
+where d.game_item_id = i.id and i.type = 'weapon'
   and i.name in ('대거', '문리델의 기사검', '이데스의 검')
   and (d.sleep is distinct from 0 or d.madness is distinct from 0);
 
 -- 온 지혜 방어구 5종: 사용자 제공 EIP 표의 수치·이미지를 그대로 사용합니다.
 -- 한국어 이름은 한국어 방어구 자료와 대조했으며 게임 내 원문·부가 효과는 미입력입니다.
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '온 지혜의 갑옷', 'armor', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_209-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'armor' and c.name = '갑옷'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '온 지혜의 갑옷' and type = 'armor' and category_id = c.id
   );
 
 insert into public.armor_details (
-  item_id, weight, poise,
+  game_item_id, weight, poise,
   negation_physical, negation_strike, negation_slash, negation_pierce,
   negation_magic, negation_fire, negation_lightning, negation_holy,
   immunity, robustness, focus, vitality
 )
 select i.id, 10.7, 16, 12.9, 11.9, 13.5, 11.9, 12.4, 9.5, 10.2, 8.8, 28, 46, 21, 21
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '온 지혜의 갑옷' and i.type = 'armor' and c.name = '갑옷'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '온 지혜의 갑옷(경장)', 'armor', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_140-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'armor' and c.name = '갑옷'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '온 지혜의 갑옷(경장)' and type = 'armor' and category_id = c.id
   );
 
 insert into public.armor_details (
-  item_id, weight, poise,
+  game_item_id, weight, poise,
   negation_physical, negation_strike, negation_slash, negation_pierce,
   negation_magic, negation_fire, negation_lightning, negation_holy,
   immunity, robustness, focus, vitality
 )
 select i.id, 9.3, 13, 12.4, 10.9, 12.9, 11.4, 11.4, 8.8, 9.5, 8, 22, 38, 16, 16
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '온 지혜의 갑옷(경장)' and i.type = 'armor' and c.name = '갑옷'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '온 지혜의 장갑', 'armor', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_186-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'armor' and c.name = '장갑'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '온 지혜의 장갑' and type = 'armor' and category_id = c.id
   );
 
 insert into public.armor_details (
-  item_id, weight, poise,
+  game_item_id, weight, poise,
   negation_physical, negation_strike, negation_slash, negation_pierce,
   negation_magic, negation_fire, negation_lightning, negation_holy,
   immunity, robustness, focus, vitality
 )
 select i.id, 3.5, 4, 3.2, 2.9, 3.3, 2.9, 3.1, 2.3, 2.5, 2.1, 9, 15, 7, 7
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '온 지혜의 장갑' and i.type = 'armor' and c.name = '장갑'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '온 지혜의 각반', 'armor', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_163-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'armor' and c.name = '각반'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '온 지혜의 각반' and type = 'armor' and category_id = c.id
   );
 
 insert into public.armor_details (
-  item_id, weight, poise,
+  game_item_id, weight, poise,
   negation_physical, negation_strike, negation_slash, negation_pierce,
   negation_magic, negation_fire, negation_lightning, negation_holy,
   immunity, robustness, focus, vitality
 )
 select i.id, 6.6, 10, 7.4, 6.8, 7.7, 6.8, 7.1, 5.4, 5.8, 5, 17, 29, 13, 13
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '온 지혜의 각반' and i.type = 'armor' and c.name = '각반'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '온 지혜의 투구', 'armor', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_04_232-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'armor' and c.name = '투구'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '온 지혜의 투구' and type = 'armor' and category_id = c.id
   );
 
 insert into public.armor_details (
-  item_id, weight, poise,
+  game_item_id, weight, poise,
   negation_physical, negation_strike, negation_slash, negation_pierce,
   negation_magic, negation_fire, negation_lightning, negation_holy,
   immunity, robustness, focus, vitality
 )
 select i.id, 4.6, 5, 4.6, 4.2, 4.8, 4.2, 4.4, 3.4, 3.6, 3.1, 12, 20, 9, 9
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '온 지혜의 투구' and i.type = 'armor' and c.name = '투구'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 -- 사용자 제공 EIP 표의 탈리스만 샘플. 효과 설명은 합의한 한국어 요약입니다.
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, effect_description
 )
 select '선조령의 뿔', 'talisman', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_020-150x150.png.webp',
   'base_game', '적을 쓰러뜨리면 FP를 3 회복한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'talisman' and c.name = '탈리스만'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '선조령의 뿔' and type = 'talisman' and category_id = c.id
   );
 
-insert into public.talisman_details (item_id, weight)
+insert into public.talisman_details (game_item_id, weight)
 select i.id, 1.2
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '선조령의 뿔' and i.type = 'talisman' and c.name = '탈리스만'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, effect_description
 )
 select '먼 화살의 탈리스만', 'talisman', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_125-150x150.png.webp',
   'base_game', '활과 석궁의 유효 사거리가 증가한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'talisman' and c.name = '탈리스만'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '먼 화살의 탈리스만' and type = 'talisman' and category_id = c.id
   );
 
-insert into public.talisman_details (item_id, weight)
+insert into public.talisman_details (game_item_id, weight)
 select i.id, 0.7
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '먼 화살의 탈리스만' and i.type = 'talisman' and c.name = '탈리스만'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, effect_description
 )
 select '튼튼한 화살의 탈리스만', 'talisman', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_105-150x150.png.webp',
   'base_game', '화살과 볼트의 공격력이 10% 증가한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'talisman' and c.name = '탈리스만'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '튼튼한 화살의 탈리스만' and type = 'talisman' and category_id = c.id
   );
 
-insert into public.talisman_details (item_id, weight)
+insert into public.talisman_details (game_item_id, weight)
 select i.id, 0.7
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '튼튼한 화살의 탈리스만' and i.type = 'talisman' and c.name = '탈리스만'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, effect_description
 )
 select '무구 덩어리 부적', 'talisman', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_06_208-150x150.png.webp',
   'base_game', '장비 중량 상한이 15% 증가한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'talisman' and c.name = '탈리스만'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '무구 덩어리 부적' and type = 'talisman' and category_id = c.id
   );
 
-insert into public.talisman_details (item_id, weight)
+insert into public.talisman_details (game_item_id, weight)
 select i.id, 1.5
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '무구 덩어리 부적' and i.type = 'talisman' and c.name = '탈리스만'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 -- 사용자 확인: EIP 주문 표에서 생략된 필요 능력치는 요구 없음(0)입니다.
 -- 미제공 FP·설명은 미확인(NULL)으로 유지합니다.
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '아듀라의 달의 검', 'spell', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_180-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'spell' and c.name = '마술'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '아듀라의 달의 검' and type = 'spell' and category_id = c.id
   );
 
 insert into public.spell_details (
-  item_id, slots_used, required_intelligence, required_faith, required_arcane
+  game_item_id, slots_used, required_intelligence, required_faith, required_arcane
 )
 select i.id, 1, 32, 0, 0
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '아듀라의 달의 검' and i.type = 'spell' and c.name = '마술'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '아길의 화염', 'spell', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_130-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'spell' and c.name = '기도'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '아길의 화염' and type = 'spell' and category_id = c.id
   );
 
 insert into public.spell_details (
-  item_id, slots_used, required_intelligence, required_faith, required_arcane
+  game_item_id, slots_used, required_intelligence, required_faith, required_arcane
 )
 select i.id, 1, 0, 23, 15
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '아길의 화염' and i.type = 'spell' and c.name = '기도'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '기습의 돌팔매', 'spell', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_065-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'spell' and c.name = '마술'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '기습의 돌팔매' and type = 'spell' and category_id = c.id
   );
 
 insert into public.spell_details (
-  item_id, slots_used, required_intelligence, required_faith, required_arcane
+  game_item_id, slots_used, required_intelligence, required_faith, required_arcane
 )
 select i.id, 1, 23, 0, 0
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '기습의 돌팔매' and i.type = 'spell' and c.name = '마술'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '옛 죽음의 영혼', 'spell', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_041-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'spell' and c.name = '마술'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '옛 죽음의 영혼' and type = 'spell' and category_id = c.id
   );
 
 insert into public.spell_details (
-  item_id, slots_used, required_intelligence, required_faith, required_arcane
+  game_item_id, slots_used, required_intelligence, required_faith, required_arcane
 )
 select i.id, 1, 34, 24, 0
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '옛 죽음의 영혼' and i.type = 'spell' and c.name = '마술'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
-insert into public.items (name, type, category_id, image_url, content_code)
+insert into public.game_items (name, type, category_id, image_url, content_code)
 select '고룡의 뇌창', 'spell', c.id,
   'https://eip.gg/wp-content/uploads/2022/03/SB_ICON_02_A_016-150x150.png.webp',
   'base_game'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'spell' and c.name = '기도'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '고룡의 뇌창' and type = 'spell' and category_id = c.id
   );
 
 insert into public.spell_details (
-  item_id, slots_used, required_intelligence, required_faith, required_arcane
+  game_item_id, slots_used, required_intelligence, required_faith, required_arcane
 )
 select i.id, 1, 0, 32, 0
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 where i.name = '고룡의 뇌창' and i.type = 'spell' and c.name = '기도'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 -- 기존 로컬 주문 샘플에도 사용자 확인한 요구 없음(0)을 반영합니다.
 update public.spell_details d
 set required_intelligence = coalesce(d.required_intelligence, 0),
     required_faith = coalesce(d.required_faith, 0),
     required_arcane = coalesce(d.required_arcane, 0)
-from public.items i
-where d.item_id = i.id and i.type = 'spell'
+from public.game_items i
+where d.game_item_id = i.id and i.type = 'spell'
   and i.name in ('아듀라의 달의 검', '아길의 화염', '기습의 돌팔매', '옛 죽음의 영혼', '고룡의 뇌창')
   and (d.required_intelligence is null or d.required_faith is null or d.required_arcane is null);
 
@@ -547,100 +547,100 @@ insert into public.weapon_skills (name, description, fp_cost_text)
 select '파고들어 올려 베기', E'무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 올려 베기로 이을 수 있다.', '5 (-/8)'
 where not exists (select 1 from public.weapon_skills where name = '파고들어 올려 베기');
 
-insert into public.items (name, type, category_id, image_url, content_code, game_description)
+insert into public.game_items (name, type, category_id, image_url, content_code, game_description)
 select '전회「파고들어 올려 베기」', 'ash_of_war', c.id,
   'https://i.namu.wiki/i/d491eSJ83FJDhjkl6MRXBQ53ZB_c3wC9bVNM2eNmItogGGl2kiUrAJJZ7t_CK2qpPFfjg_y7bCF2Jyrp65exhsUh1Cv_M6W78vCOZnjykPBKWaz8IT5UQGJFAoyZWbrscBo8l2WI_od4H4LcSpM8_Q.webp',
   'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「중후」, 전투 기술은 아래와 같다.\n\n전투 기술 「파고들어 올려 베기」\n무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 올려 베기로 이을 수 있다.\n\n검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'ash_of_war' and c.name = '전회'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '전회「파고들어 올려 베기」' and type = 'ash_of_war' and category_id = c.id
   );
 
-insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+insert into public.ash_of_war_details (game_item_id, skill_id, native_affinity, applicable_armaments_text)
 select i.id, s.id, 'heavy', E'검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 cross join public.weapon_skills s
 where i.name = '전회「파고들어 올려 베기」' and i.type = 'ash_of_war' and c.name = '전회'
   and s.name = '파고들어 올려 베기'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 insert into public.weapon_skills (name, description, fp_cost_text)
 select '파고들어 회전 베기', E'무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 회전 베기로 이을 수 있다.', '5 (-/8)'
 where not exists (select 1 from public.weapon_skills where name = '파고들어 회전 베기');
 
-insert into public.items (name, type, category_id, image_url, content_code, game_description)
+insert into public.game_items (name, type, category_id, image_url, content_code, game_description)
 select '전회「파고들어 회전 베기」', 'ash_of_war', c.id,
   'https://i.namu.wiki/i/9BamfSbw_vH6ykjcdlkXJOQQM64DebLNLZNy-D5rtpLA-2iTJABKUNkBGe8YyHHyQPND2sPAqQmw89GRA34ULYzlBComAncGb93-NaRJMZrwhr_Bk0myh-QRXaukjWukY56rN46hMtNlw0_jP0p9oA.webp',
   'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「중후」, 전투 기술은 아래와 같다.\n\n전투 기술 「파고들어 회전 베기」\n무기를 들고 몸을 굳혀서 낮게 파고들어\n순간적으로 강인도를 높이는 전투 기술.\n강 공격을 하면 회전 베기로 이을 수 있다.\n\n검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'ash_of_war' and c.name = '전회'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '전회「파고들어 회전 베기」' and type = 'ash_of_war' and category_id = c.id
   );
 
-insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+insert into public.ash_of_war_details (game_item_id, skill_id, native_affinity, applicable_armaments_text)
 select i.id, s.id, 'heavy', E'검/도끼/망치에 사용 가능.\n(소형/중형 검 제외)'
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 cross join public.weapon_skills s
 where i.name = '전회「파고들어 회전 베기」' and i.type = 'ash_of_war' and c.name = '전회'
   and s.name = '파고들어 회전 베기'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 insert into public.weapon_skills (name, description, fp_cost_text)
 select '휘석 돌팔매', E'동명의 휘석 마술을 사용하는 전투 기술.\n강공격으로 크게 파고드는 찌르기로 이으며\n그 공격에는 휘석의 마력이 남아 있다.', '8 ( - / 4 )'
 where not exists (select 1 from public.weapon_skills where name = '휘석 돌팔매');
 
-insert into public.items (name, type, category_id, image_url, content_code, game_description)
+insert into public.game_items (name, type, category_id, image_url, content_code, game_description)
 select '전회「휘석 돌팔매」', 'ash_of_war', c.id,
   'https://i.namu.wiki/i/KL5t7hTyM0ysHbDCx-fb1aV5TV48iEtf6-LfgzI0ccs_nQ1v8kYBplEG3yA06v14J4DSBBs0OsfGiQtKwxd3__y7xcODyBv1ClMykEzAumctwN6PAWz5NwxQvsm0Bvvgr-B2nOigOcWQm2AcycDiSg.webp',
   'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「마력」, 전투 기술은 아래와 같다.\n\n전투 기술 「휘석 돌팔매」\n동명의 휘석 마술을 사용하는 전투 기술.\n강공격으로 크게 파고드는 찌르기로 이으며\n그 공격에는 휘석의 마력이 남아 있다.\n\n검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'ash_of_war' and c.name = '전회'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '전회「휘석 돌팔매」' and type = 'ash_of_war' and category_id = c.id
   );
 
-insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+insert into public.ash_of_war_details (game_item_id, skill_id, native_affinity, applicable_armaments_text)
 select i.id, s.id, 'magic', E'검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 cross join public.weapon_skills s
 where i.name = '전회「휘석 돌팔매」' and i.type = 'ash_of_war' and c.name = '전회'
   and s.name = '휘석 돌팔매'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 insert into public.weapon_skills (name, description, fp_cost_text)
 select '휘검의 원진', E'카리아 왕가를 섬긴 마술 기사들의 전투 기술.\n마력 휘검을 반원으로 띄워 자동으로 공격한다.\n강공격으로 크게 파고드는 찌르기로 잇는다.', '10 ( - / 4 )'
 where not exists (select 1 from public.weapon_skills where name = '휘검의 원진');
 
-insert into public.items (name, type, category_id, image_url, content_code, game_description)
+insert into public.game_items (name, type, category_id, image_url, content_code, game_description)
 select '전회「휘검의 원진」', 'ash_of_war', c.id,
   'https://i.namu.wiki/i/Ea3cstWnIRrOoQTEuO3I0Oz8m5FcSccFAZn0efnCgpPcskRs4XIGpnILzQ-zBiVZzA7IyGEE06Ys-ELvVHrLc6S1D6V2puayjXabyVPTOJGDnXcM_YAQUdgE7y4pt4RMxsMm6Zn4lkRjVRh3xI3kQg.webp',
   'base_game', E'무기에 속성과 전투 기술을 부여 가능한 전회.\n속성은 「마력」, 전투 기술은 아래와 같다.\n\n전투 기술 「휘검의 원진」\n카리아 왕가를 섬긴 마술 기사들의 전투 기술.\n마력 휘검을 반원으로 띄워 자동으로 공격한다.\n강공격으로 크게 파고드는 찌르기로 잇는다.\n\n검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'ash_of_war' and c.name = '전회'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '전회「휘검의 원진」' and type = 'ash_of_war' and category_id = c.id
   );
 
-insert into public.ash_of_war_details (item_id, skill_id, native_affinity, applicable_armaments_text)
+insert into public.ash_of_war_details (game_item_id, skill_id, native_affinity, applicable_armaments_text)
 select i.id, s.id, 'magic', E'검에 더하여\n관통 가능한 긴 자루 무기에 사용 가능.\n(특대형 제외)'
-from public.items i
-join public.item_categories c on c.id = i.category_id
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
 cross join public.weapon_skills s
 where i.name = '전회「휘검의 원진」' and i.type = 'ash_of_war' and c.name = '전회'
   and s.name = '휘검의 원진'
-on conflict (item_id) do nothing;
+on conflict (game_item_id) do nothing;
 
 -- 사용자 제공 결정 물방울 자료. 효과 수치·지속 시간은 설명으로만 저장합니다.
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, game_description, effect_description
 )
 select '붉은 결정 물방울', 'crystal_tear', c.id,
@@ -648,14 +648,14 @@ select '붉은 결정 물방울', 'crystal_tear', c.id,
   'base_game',
   E'황금 나무의 은혜가 내리는 땅에\n오랜 세월이 지나 생겨난 결정 물방울.\n\n「영약의 성배병」에 배합하여\n최대 HP의 반만큼 회복한다.',
   '최대 HP의 50%를 회복한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'crystal_tear' and c.name = '결정 물방울'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '붉은 결정 물방울' and type = 'crystal_tear' and category_id = c.id
   );
 
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, game_description, effect_description
 )
 select '넘친 붉은 결정 물방울', 'crystal_tear', c.id,
@@ -663,14 +663,14 @@ select '넘친 붉은 결정 물방울', 'crystal_tear', c.id,
   'base_game',
   E'황금 나무의 은혜가 내리는 땅에\n오랜 세월이 지나 생겨난 결정 물방울.\n\n「영약의 성배병」에 배합하여\n일시적으로 최대 HP를 증가시킨다.',
   '3분 동안 최대 HP가 10% 증가한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'crystal_tear' and c.name = '결정 물방울'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '넘친 붉은 결정 물방울' and type = 'crystal_tear' and category_id = c.id
   );
 
-insert into public.items (
+insert into public.game_items (
   name, type, category_id, image_url, content_code, game_description, effect_description
 )
 select '샘솟는 붉은 결정 물방울', 'crystal_tear', c.id,
@@ -678,9 +678,9 @@ select '샘솟는 붉은 결정 물방울', 'crystal_tear', c.id,
   'base_game',
   E'황금 나무의 은혜가 내리는 땅에\n오랜 세월이 지나 생겨난 결정 물방울.\n\n「영약의 성배병」에 배합하여\n일정 시간 HP가 조금씩 회복한다.',
   '3분 동안 초당 HP를 7씩, 총 1260 회복한다.'
-from public.item_categories c
+from public.game_item_categories c
 where c.type = 'crystal_tear' and c.name = '결정 물방울'
   and not exists (
-    select 1 from public.items
+    select 1 from public.game_items
     where name = '샘솟는 붉은 결정 물방울' and type = 'crystal_tear' and category_id = c.id
   );

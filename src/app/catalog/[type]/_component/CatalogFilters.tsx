@@ -1,48 +1,48 @@
 import { useState } from 'react';
 
-import equipmentQuery from '@/api/equipment/equipmentQuery';
-import type { TItemType, TReqGetEquipment } from '@/api/equipment/types';
-import { CONTENTS, ITEM_TYPES } from '@/app/items/[type]/_define/items';
+import gameItemQuery from '@/api/gameItem/gameItemQuery';
+import type { TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
+import { CONTENTS, GAME_ITEM_TYPES } from '@/app/catalog/[type]/_define/gameItems';
 
 import IconButton from '@/components/common/button/IconButton';
 import Button from '@/components/common/button/Button';
 import Select from '@/components/common/form/Select';
 import TextInput from '@/components/common/form/TextInput';
 
-import styles from './ItemFilters.module.scss';
+import styles from './CatalogFilters.module.scss';
 
 import { MdSearch, MdTune } from 'react-icons/md';
 
-const TYPE_FILTERS: Partial<Record<TItemType, { categoryLabel: string }>> = {
+const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = {
   weapon: { categoryLabel: '무기 종류' },
   armor: { categoryLabel: '장착 부위' },
   spell: { categoryLabel: '주문 종류' },
 };
 
-type TItemFiltersProps = {
-  params: Omit<TReqGetEquipment, 'signal' | 'type'> & { type: TItemType };
+type TCatalogFiltersProps = {
+  params: Omit<TReqGetGameItems, 'signal' | 'type'> & { type: TGameItemType };
   onChange: (
-    filters: Partial<Omit<TReqGetEquipment, 'signal' | 'type' | 'page' | 'pageSize'>>,
+    filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'page' | 'pageSize'>>,
   ) => void;
   onReset: () => void;
 };
 
-export default function ItemFilters({ params, onChange, onReset }: TItemFiltersProps) {
+export default function CatalogFilters({ params, onChange, onReset }: TCatalogFiltersProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const categoriesQuery = equipmentQuery.useGetEquipmentCategories();
+  const categoriesQuery = gameItemQuery.useGetGameItemCategories();
   const categories = (categoriesQuery.data ?? []).filter(
     (category) => category.type === params.type,
   );
   const typeFilter = TYPE_FILTERS[params.type];
-  const selectedTypeLabel = ITEM_TYPES[params.type];
+  const selectedTypeLabel = GAME_ITEM_TYPES[params.type];
   const selectedCategory = categories.find((category) => category.id === params.categoryId);
   const hasFilters = Boolean(
     params.search || params.categoryId !== undefined || params.contentCode,
   );
 
   return (
-    <div className={styles['item-filters']}>
+    <div className={styles['catalog-filters']}>
       <section className={styles['filters']} aria-label="아이템 검색 및 필터">
         <div className={styles['toolbar']}>
           <div className={styles['classification']}>
@@ -73,7 +73,7 @@ export default function ItemFilters({ params, onChange, onReset }: TItemFiltersP
             <IconButton
               aria-label="이름 검색"
               aria-expanded={isSearchOpen}
-              aria-controls="item-search-panel"
+              aria-controls="catalog-search-panel"
               onClick={() => setIsSearchOpen((previous) => !previous)}
               theme={isSearchOpen || params.search ? 'brass' : 'gray'}
             >
@@ -83,7 +83,7 @@ export default function ItemFilters({ params, onChange, onReset }: TItemFiltersP
             <IconButton
               aria-label="상세 필터"
               aria-expanded={isFilterOpen}
-              aria-controls="item-filter-panel"
+              aria-controls="catalog-filter-panel"
               onClick={() => setIsFilterOpen((previous) => !previous)}
               theme={isFilterOpen || params.contentCode ? 'brass' : 'gray'}
             >
@@ -107,10 +107,10 @@ export default function ItemFilters({ params, onChange, onReset }: TItemFiltersP
           </div>
         )}
         {isSearchOpen && (
-          <div id="item-search-panel" className={styles['panel']}>
-            <label htmlFor="item-name-search">이름 검색</label>
+          <div id="catalog-search-panel" className={styles['panel']}>
+            <label htmlFor="game-item-name-search">이름 검색</label>
             <TextInput
-              id="item-name-search"
+              id="game-item-name-search"
               type="search"
               placeholder={`${selectedTypeLabel} 이름으로 검색`}
               value={params.search ?? ''}
@@ -119,7 +119,7 @@ export default function ItemFilters({ params, onChange, onReset }: TItemFiltersP
           </div>
         )}
         {isFilterOpen && (
-          <div id="item-filter-panel" className={styles['panel']}>
+          <div id="catalog-filter-panel" className={styles['panel']}>
             <div className={styles['filter-heading']}>
               <span id="content-label">콘텐츠</span>
               <Button

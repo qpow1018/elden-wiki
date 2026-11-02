@@ -3,16 +3,16 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import equipmentQuery from '@/api/equipment/equipmentQuery';
-import type { TEquipment, TItemType, TReqGetEquipment } from '@/api/equipment/types';
+import gameItemQuery from '@/api/gameItem/gameItemQuery';
+import type { TGameItem, TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
 
-import { CONTENTS, ITEM_TYPES } from './_define/items';
+import { CONTENTS, GAME_ITEM_TYPES } from './_define/gameItems';
 
 import Header from '@/components/common/header/Header';
-import ItemFilters from './_component/ItemFilters';
+import CatalogFilters from './_component/CatalogFilters';
 import Image from 'next/image';
 
-import styles from './ItemsClient.module.scss';
+import styles from './CatalogClient.module.scss';
 
 const AFFINITIES: Record<string, string> = {
   standard: '표준',
@@ -54,17 +54,17 @@ const UPGRADE_MATERIALS: Record<string, string> = {
   somber_smithing_stone: '색 잃은 단석',
 };
 
-export default function ItemsClient({ type }: { type: TItemType }) {
+export default function CatalogClient({ type }: { type: TGameItemType }) {
   const router = useRouter();
-  const [params, setParams] = useState<Omit<TReqGetEquipment, 'signal' | 'type'>>({
+  const [params, setParams] = useState<Omit<TReqGetGameItems, 'signal' | 'type'>>({
     page: 1,
     pageSize: 20,
   });
-  const { data, isPending, isError, isSuccess, refetch } = equipmentQuery.useGetEquipment({
+  const { data, isPending, isError, isSuccess, refetch } = gameItemQuery.useGetGameItems({
     ...params,
     type,
   });
-  const items = data?.items ?? [];
+  const gameItems = data?.gameItems ?? [];
   const totalCount = data?.totalCount ?? 0;
   const totalPages = Math.ceil(totalCount / params.pageSize);
   const firstPage = Math.floor((params.page - 1) / 5) * 5 + 1;
@@ -72,13 +72,13 @@ export default function ItemsClient({ type }: { type: TItemType }) {
     { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
     (_, index) => firstPage + index,
   );
-  const selectedTypeLabel = ITEM_TYPES[type];
+  const selectedTypeLabel = GAME_ITEM_TYPES[type];
   const hasFilters = Boolean(
     params.search || params.categoryId !== undefined || params.contentCode,
   );
 
   function handleFilterChange(
-    filters: Partial<Omit<TReqGetEquipment, 'signal' | 'type' | 'page' | 'pageSize'>>,
+    filters: Partial<Omit<TReqGetGameItems, 'signal' | 'type' | 'page' | 'pageSize'>>,
   ) {
     setParams((previous) => ({ ...previous, ...filters, page: 1 }));
   }
@@ -96,9 +96,9 @@ export default function ItemsClient({ type }: { type: TItemType }) {
             className={styles['type-select']}
             aria-label="아이템 타입"
             value={type}
-            onChange={(event) => router.push(`/items/${event.target.value}`)}
+            onChange={(event) => router.push(`/catalog/${event.target.value}`)}
           >
-            {Object.entries(ITEM_TYPES).map(([type, label]) => (
+            {Object.entries(GAME_ITEM_TYPES).map(([type, label]) => (
               <option key={type} value={type}>
                 {label}
               </option>
@@ -106,7 +106,7 @@ export default function ItemsClient({ type }: { type: TItemType }) {
           </select>
         }
       />
-      <ItemFilters
+      <CatalogFilters
         params={{ ...params, type }}
         onChange={handleFilterChange}
         onReset={handleReset}
@@ -134,7 +134,7 @@ export default function ItemsClient({ type }: { type: TItemType }) {
             </button>
           </div>
         )}
-        {isSuccess && items.length === 0 && (
+        {isSuccess && gameItems.length === 0 && (
           <div className={styles['message']}>
             <p>
               {hasFilters
@@ -144,7 +144,8 @@ export default function ItemsClient({ type }: { type: TItemType }) {
             {hasFilters && <button onClick={handleReset}>전체 목록 보기</button>}
           </div>
         )}
-        {isSuccess && items.map((item) => <EquipmentCard key={item.id} item={item} />)}
+        {isSuccess &&
+          gameItems.map((gameItem) => <GameItemCard key={gameItem.id} gameItem={gameItem} />)}
       </div>
       {isSuccess && totalPages > 0 && (
         <nav className={styles['pagination']} aria-label="아이템 목록 페이지">
@@ -180,20 +181,20 @@ export default function ItemsClient({ type }: { type: TItemType }) {
   );
 }
 
-function EquipmentCard({ item }: { item: TEquipment }) {
-  const w = item.weaponDetails;
-  const armor = item.armorDetails;
-  const talisman = item.talismanDetails;
-  const spell = item.spellDetails;
-  const ashOfWar = item.ashOfWarDetails;
+function GameItemCard({ gameItem }: { gameItem: TGameItem }) {
+  const w = gameItem.weaponDetails;
+  const armor = gameItem.armorDetails;
+  const talisman = gameItem.talismanDetails;
+  const spell = gameItem.spellDetails;
+  const ashOfWar = gameItem.ashOfWarDetails;
   return (
-    <article className={styles['item']}>
+    <article className={styles['game-item']}>
       <div className={styles['identity']}>
         <div className={styles['image']}>
-          {item.imageUrl ? (
+          {gameItem.imageUrl ? (
             <Image
-              src={item.imageUrl}
-              alt={item.name}
+              src={gameItem.imageUrl}
+              alt={gameItem.name}
               width={112}
               height={112}
               unoptimized
@@ -205,19 +206,21 @@ function EquipmentCard({ item }: { item: TEquipment }) {
         </div>
         <div>
           <p className={styles['category']}>
-            {ITEM_TYPES[item.type]} / {item.itemCategories?.name ?? '분류 미확인'}
+            {GAME_ITEM_TYPES[gameItem.type]} / {gameItem.gameItemCategories?.name ?? '분류 미확인'}
           </p>
-          <h2>{item.name}</h2>
-          <span className={styles['badge']}>{CONTENTS[item.contentCode] ?? item.contentCode}</span>
+          <h2>{gameItem.name}</h2>
+          <span className={styles['badge']}>
+            {CONTENTS[gameItem.contentCode] ?? gameItem.contentCode}
+          </span>
         </div>
       </div>
       <p className={styles['description']}>
-        {item.gameDescription ?? '장비 설명이 아직 등록되지 않았습니다.'}
+        {gameItem.gameDescription ?? '장비 설명이 아직 등록되지 않았습니다.'}
       </p>
-      {item.effectDescription && (
+      {gameItem.effectDescription && (
         <section className={styles['stat-group']}>
           <h3>부가 효과</h3>
-          <p className={styles['description']}>{item.effectDescription}</p>
+          <p className={styles['description']}>{gameItem.effectDescription}</p>
         </section>
       )}
       {talisman && (
@@ -300,7 +303,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
                   className={styles['table-scroll']}
                   tabIndex={0}
                   role="region"
-                  aria-label={`${item.name} 변질별 능력 보정`}
+                  aria-label={`${gameItem.name} 변질별 능력 보정`}
                 >
                   <table>
                     <thead>
@@ -414,7 +417,7 @@ function EquipmentCard({ item }: { item: TEquipment }) {
           </section>
         </>
       )}
-      {!w && !armor && !talisman && !spell && !ashOfWar && item.type !== 'crystal_tear' && (
+      {!w && !armor && !talisman && !spell && !ashOfWar && gameItem.type !== 'crystal_tear' && (
         <p className={styles['note']}>상세 능력치가 아직 등록되지 않았습니다.</p>
       )}
     </article>
