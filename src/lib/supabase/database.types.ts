@@ -117,17 +117,20 @@ export type TDatabase = {
         Row: {
           id: number;
           name: string;
+          sort_order: number;
           type: TDatabase['public']['Enums']['game_item_type'];
         };
         ComputedFields: never;
         Insert: {
           id?: never;
           name: string;
+          sort_order: number;
           type: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
           id?: never;
           name?: string;
+          sort_order?: number;
           type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Relationships: [];
@@ -141,6 +144,7 @@ export type TDatabase = {
           id: number;
           image_url: string | null;
           name: string;
+          sort_order: number;
           type: TDatabase['public']['Enums']['game_item_type'];
         };
         ComputedFields: never;
@@ -152,6 +156,7 @@ export type TDatabase = {
           id?: never;
           image_url?: string | null;
           name: string;
+          sort_order: number;
           type: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
@@ -162,6 +167,7 @@ export type TDatabase = {
           id?: never;
           image_url?: string | null;
           name?: string;
+          sort_order?: number;
           type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Relationships: [
@@ -432,7 +438,9 @@ export type TDatabase = {
         | 'talisman'
         | 'spell'
         | 'other'
-        | 'crystal_tear';
+        | 'crystal_tear'
+        | 'catalyst'
+        | 'other_weapon';
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -555,6 +563,8 @@ export const DATABASE_CONSTANTS = {
         'spell',
         'other',
         'crystal_tear',
+        'catalyst',
+        'other_weapon',
       ],
     },
   },

@@ -20,9 +20,12 @@ export async function getGameItems({
   const request = client
     .from('game_items')
     .select(
-      'id,name,type,image_url,content_code,game_description,effect_description,game_item_categories(name),armor_details(*),talisman_details(*),spell_details(*),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,effect_description,game_item_categories(name,sort_order),armor_details(*),talisman_details(*),spell_details(*),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
+    .order('game_item_categories(sort_order)')
+    .order('category_id')
+    .order('sort_order')
     .order('id')
     .range(start, start + pageSize - 1);
 
@@ -77,7 +80,9 @@ export async function getGameItems({
                 : null,
             }
           : null,
-        gameItemCategories: row.game_item_categories,
+        gameItemCategories: row.game_item_categories
+          ? { name: row.game_item_categories.name }
+          : null,
         armorDetails: armor
           ? {
               weight: armor.weight,
@@ -156,7 +161,12 @@ export async function getGameItemCategories({
   signal,
 }: TReqGetGameItemCategories = {}): Promise<TResGetGameItemCategories> {
   const client = getApiClient();
-  const request = client.from('game_item_categories').select('id,name,type').order('name');
+  const request = client
+    .from('game_item_categories')
+    .select('id,name,type')
+    .order('type')
+    .order('sort_order')
+    .order('id');
   if (signal) request.abortSignal(signal);
 
   const { data } = await request.throwOnError();

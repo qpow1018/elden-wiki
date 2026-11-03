@@ -2,13 +2,15 @@ import type { TGameItemType } from '@/api/gameItem/types';
 
 export const GAME_ITEM_TYPES: Record<TGameItemType, string> = {
   weapon: '무기',
+  catalyst: '촉매',
+  other_weapon: '기타 무기',
   armor: '방어구',
   talisman: '탈리스만',
   spirit_ash: '뼛가루',
   ash_of_war: '전회',
   spell: '주문',
   crystal_tear: '물방울',
-  other: '기타',
+  other: '아이템',
 };
 export const CONTENTS: Record<string, string> = {
   base_game: '본편',

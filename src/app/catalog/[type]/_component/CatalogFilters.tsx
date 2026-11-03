@@ -13,6 +13,8 @@ import { MdCheck, MdKeyboardArrowDown } from 'react-icons/md';
 
 const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = {
   weapon: { categoryLabel: '무기 종류' },
+  catalyst: { categoryLabel: '촉매 종류' },
+  other_weapon: { categoryLabel: '기타 무기 종류' },
   armor: { categoryLabel: '장착 부위' },
   spell: { categoryLabel: '주문 종류' },
 };

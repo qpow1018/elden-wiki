@@ -1,0 +1,244 @@
+.weapon-details {
+  display: grid;
+  gap: 28px;
+  min-width: 0;
+  padding-top: 8px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+
+  section {
+    min-width: 0;
+  }
+
+  h3 {
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  dt,
+  .note,
+  .basis,
+  .muted {
+    color: $text-secondary;
+  }
+
+  .note,
+  .basis {
+    margin-top: -6px;
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+
+  .overview {
+    padding: 16px;
+    background: $steel-tint;
+    border-radius: $border-radius;
+
+    dl {
+      display: grid;
+      gap: 10px;
+    }
+
+    dl > div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    dd {
+      text-align: right;
+    }
+  }
+
+  .requirements {
+    dl {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      padding: 14px 0;
+      background: $brass-tint;
+      border-top: 1px solid rgba($brass, 0.3);
+      border-bottom: 1px solid rgba($brass, 0.3);
+    }
+
+    dl > div {
+      text-align: center;
+      border-right: 1px solid rgba($brass, 0.15);
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+    dt {
+      font-size: 12px;
+    }
+
+    dd {
+      margin-top: 6px;
+      color: $brass-light;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  .basic-scaling dl {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    text-align: center;
+    padding: 12px 0;
+    border-block: 1px solid $border-soft;
+
+    dt {
+      font-size: 12px;
+    }
+    dd {
+      margin-top: 6px;
+      color: $brass-light;
+      font-size: 18px;
+    }
+  }
+
+  .values {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 24px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid $border-soft;
+    }
+  }
+
+  .combat dd {
+    color: $brass-light;
+    font-weight: 500;
+  }
+
+  .effects {
+    padding: 14px 16px;
+    background: $teal-tint;
+    border-left: 2px solid $teal;
+  }
+
+  .scaling {
+    summary {
+      cursor: pointer;
+      padding: 14px 0;
+      border-block: 1px solid $border-soft;
+      font-size: 14px;
+      color: $brass-light;
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: 3px;
+      }
+    }
+
+    &[open] summary {
+      margin-bottom: 12px;
+    }
+  }
+
+  .scaling-scroll {
+    overflow-x: auto;
+    border: 1px solid $border-soft;
+    border-radius: $border-radius;
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: 3px;
+    }
+
+    table {
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    th,
+    td {
+      padding: 10px 6px;
+      white-space: nowrap;
+      border-bottom: 1px solid $border-soft;
+    }
+
+    thead th {
+      color: $text-secondary;
+      font-weight: 400;
+      background: $bg-dark;
+    }
+
+    tbody th {
+      color: $brass-light;
+      font-weight: 500;
+    }
+
+    tbody tr:nth-child(even) {
+      background: $steel-tint;
+    }
+
+    tbody tr:last-child > * {
+      border-bottom: 0;
+    }
+  }
+
+  .buildup dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid $border-soft;
+    }
+  }
+
+  .skill {
+    padding: 16px;
+    border-left: 2px solid $brass;
+    background: $brass-tint;
+
+    h3 {
+      color: $text-secondary;
+      font-size: 12px;
+    }
+  }
+
+  .skill-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+
+    h4 {
+      color: $brass-light;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    span {
+      color: $text-secondary;
+      font-size: 12px;
+    }
+
+    strong {
+      color: $text-primary;
+      font-weight: 500;
+    }
+  }
+
+  .description {
+    color: $gray-200;
+    white-space: pre-wrap;
+  }
+}

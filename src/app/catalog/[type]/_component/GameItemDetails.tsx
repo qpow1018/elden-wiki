@@ -1,28 +1,20 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 
-import type {
-  TGameItem,
-  TWeapon,
-  TArmor,
-  TSpell,
-  TAshOfWar,
-  TWeaponSkill,
-} from '@/api/gameItem/types';
-import {
-  AFFINITIES,
-  ATTACK_TYPES,
-  ATTRIBUTES,
-  CONTENTS,
-  GAME_ITEM_TYPES,
-  UPGRADE_MATERIALS,
-} from '@/define/gameItems';
+import type { TGameItem, TArmor, TSpell, TAshOfWar, TWeaponSkill } from '@/api/gameItem/types';
+import { AFFINITIES, CONTENTS, GAME_ITEM_TYPES } from '@/define/gameItems';
+
+import WeaponDetails from './details/WeaponDetails';
 
 import styles from './GameItemDetails.module.scss';
 
 type TStat = readonly [label: string, value: string | number | null | undefined];
 
 export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
+  const hasWeaponDetails =
+    ['weapon', 'catalyst', 'other_weapon'].includes(gameItem.type) &&
+    gameItem.weaponDetails !== null;
+
   return (
     <article className={styles['game-item-details']}>
       <header className={styles['identity']}>
@@ -56,13 +48,12 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
         </div>
       </header>
 
-      {gameItem.effectDescription && (
-        <Section title="고유 효과">
-          <p className={styles['text']}>{gameItem.effectDescription}</p>
-        </Section>
-      )}
-      {gameItem.type === 'weapon' && gameItem.weaponDetails && (
-        <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
+      {hasWeaponDetails && gameItem.weaponDetails && (
+        <WeaponDetails
+          weapon={gameItem.weaponDetails}
+          name={gameItem.name}
+          effectDescription={gameItem.effectDescription}
+        />
       )}
       {gameItem.type === 'armor' && gameItem.armorDetails && (
         <ArmorDetails armor={gameItem.armorDetails} />
@@ -77,148 +68,17 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
         <AshOfWarDetails ashOfWar={gameItem.ashOfWarDetails} />
       )}
 
+      {gameItem.effectDescription && !hasWeaponDetails && (
+        <Section title="고유 효과">
+          <p className={styles['text']}>{gameItem.effectDescription}</p>
+        </Section>
+      )}
       <Section title="아이템 설명">
         <p className={styles['text']}>
           {gameItem.gameDescription ?? '아이템 설명이 아직 등록되지 않았습니다.'}
         </p>
       </Section>
     </article>
-  );
-}
-
-function WeaponDetails({ weapon, name }: { weapon: TWeapon; name: string }) {
-  const attackTypes = weapon.physicalAttackTypes
-    ?.map((type) => ATTACK_TYPES[type] ?? type)
-    .join(' / ');
-  const scalings = Object.keys(AFFINITIES).flatMap((affinity) =>
-    weapon.weaponScalings.filter((scaling) => scaling.affinity === affinity),
-  );
-
-  return (
-    <>
-      <StatList
-        title="무기 정보"
-        rows={[
-          ['중량', weapon.weight],
-          ['공격 속성', attackTypes === '' ? '없음' : attackTypes],
-          [
-            '강화 재료',
-            weapon.upgradeMaterial === null
-              ? null
-              : (UPGRADE_MATERIALS[weapon.upgradeMaterial] ?? weapon.upgradeMaterial),
-          ],
-          [
-            '변질',
-            weapon.canChangeAffinity == null ? null : weapon.canChangeAffinity ? '가능' : '불가',
-          ],
-        ]}
-      />
-      <Section title="전투 능력치">
-        <p className={styles['basis']}>
-          최대 강화 기준{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
-        </p>
-        <table className={styles['combat-table']}>
-          <thead>
-            <tr>
-              <th scope="col">속성</th>
-              <th scope="col">공격력</th>
-              <th scope="col">가드 시 경감률</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(
-              [
-                ['물리', weapon.attackPhysical, weapon.guardPhysical],
-                ['마력', weapon.attackMagic, weapon.guardMagic],
-                ['화염', weapon.attackFire, weapon.guardFire],
-                ['벼락', weapon.attackLightning, weapon.guardLightning],
-                ['신성', weapon.attackHoly, weapon.guardHoly],
-              ] as const
-            ).map(([label, attack, guard]) => (
-              <tr key={label}>
-                <th scope="row">{label}</th>
-                <td>{formatValue(attack)}</td>
-                <td>{formatValue(guard)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <dl className={styles['combat-extra']}>
-          <div>
-            <dt>치명</dt>
-            <dd>{formatValue(weapon.critical)}</dd>
-          </div>
-          <div>
-            <dt>가드 강도</dt>
-            <dd>{formatValue(weapon.guardBoost)}</dd>
-          </div>
-        </dl>
-      </Section>
-      <StatList
-        title="필요 능력치"
-        isHorizontal
-        rows={[
-          ['근력', weapon.requiredStrength],
-          ['기량', weapon.requiredDexterity],
-          ['지력', weapon.requiredIntelligence],
-          ['신앙', weapon.requiredFaith],
-          ['신비', weapon.requiredArcane],
-        ]}
-      />
-      <Section title={weapon.canChangeAffinity === false ? '능력 보정' : '변질별 능력 보정'}>
-        {scalings.length === 0 && (
-          <p className={styles['muted']}>능력 보정 정보가 아직 등록되지 않았습니다.</p>
-        )}
-        {scalings.length > 0 && (
-          <div
-            className={styles['scaling-scroll']}
-            tabIndex={0}
-            role="region"
-            aria-label={`${name} 능력 보정`}
-          >
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">{weapon.canChangeAffinity === false ? '상태' : '변질'}</th>
-                  {Object.entries(ATTRIBUTES).map(([key, label]) => (
-                    <th scope="col" key={key}>
-                      {label}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {scalings.map((scaling) => (
-                  <tr key={scaling.affinity}>
-                    <th scope="row">
-                      {weapon.canChangeAffinity === false && scaling.affinity === 'standard'
-                        ? '기본'
-                        : AFFINITIES[scaling.affinity]}
-                    </th>
-                    {Object.keys(ATTRIBUTES).map((key) => (
-                      <td key={key}>{formatValue(scaling[key as keyof typeof ATTRIBUTES])}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Section>
-      <StatList
-        title="상태 이상 축적"
-        note="미강화 기본 수치"
-        rows={[
-          ['출혈', weapon.bleed],
-          ['동상', weapon.frostbite],
-          ['독', weapon.poison],
-          ['붉은 부패', weapon.scarletRot],
-          ['수면', weapon.sleep],
-          ['발광', weapon.madness],
-        ]}
-      />
-      <SkillDetails skill={weapon.weaponSkills} />
-    </>
   );
 }
 
