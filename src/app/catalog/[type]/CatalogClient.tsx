@@ -218,7 +218,10 @@ function GameItemCard({ gameItem }: { gameItem: TGameItem }) {
               title="공격력"
               stats={w}
               fields={[
-                ...ELEMENTS.map(([k, l]) => [`attack${k[0].toUpperCase()}${k.slice(1)}`, l]),
+                ...Object.entries(ELEMENTS).map(([k, l]) => [
+                  `attack${k[0].toUpperCase()}${k.slice(1)}`,
+                  l,
+                ]),
                 ['critical', '치명'],
               ]}
             />
@@ -226,14 +229,20 @@ function GameItemCard({ gameItem }: { gameItem: TGameItem }) {
               title="가드 시 경감률"
               stats={w}
               fields={[
-                ...ELEMENTS.map(([k, l]) => [`guard${k[0].toUpperCase()}${k.slice(1)}`, l]),
+                ...Object.entries(ELEMENTS).map(([k, l]) => [
+                  `guard${k[0].toUpperCase()}${k.slice(1)}`,
+                  l,
+                ]),
                 ['guardBoost', '가드 강도'],
               ]}
             />
             <StatGroup
               title="필요 능력치"
               stats={w}
-              fields={ATTRIBUTES.map(([k, l]) => [`required${k[0].toUpperCase()}${k.slice(1)}`, l])}
+              fields={Object.entries(ATTRIBUTES).map(([k, l]) => [
+                `required${k[0].toUpperCase()}${k.slice(1)}`,
+                l,
+              ])}
             />
             <StatGroup
               title="부가 효과"
@@ -267,7 +276,7 @@ function GameItemCard({ gameItem }: { gameItem: TGameItem }) {
                     <thead>
                       <tr>
                         <th scope="col">변질</th>
-                        {ATTRIBUTES.map(([k, l]) => (
+                        {Object.entries(ATTRIBUTES).map(([k, l]) => (
                           <th key={k} scope="col">
                             {l}
                           </th>
@@ -281,8 +290,8 @@ function GameItemCard({ gameItem }: { gameItem: TGameItem }) {
                           .map((s) => (
                             <tr key={affinity}>
                               <th scope="row">{AFFINITIES[affinity]}</th>
-                              {ATTRIBUTES.map(([k]) => (
-                                <td key={k}>{value(s[k])}</td>
+                              {Object.entries(ATTRIBUTES).map(([k]) => (
+                                <td key={k}>{value(s[k as keyof typeof ATTRIBUTES])}</td>
                               ))}
                             </tr>
                           )),

@@ -15,7 +15,6 @@ export const CONTENTS: Record<string, string> = {
   shadow_of_the_erdtree: '황금 나무의 그림자',
   tarnished_pack: '빛바랜 자 팩',
 };
-
 export const AFFINITIES: Record<string, string> = {
   standard: '표준',
   heavy: '중후',
@@ -31,20 +30,20 @@ export const AFFINITIES: Record<string, string> = {
   blood: '피',
   occult: '신비',
 };
-export const ATTRIBUTES = [
-  ['strength', '근력'],
-  ['dexterity', '기량'],
-  ['intelligence', '지력'],
-  ['faith', '신앙'],
-  ['arcane', '신비'],
-] as const;
-export const ELEMENTS = [
-  ['physical', '물리'],
-  ['magic', '마력'],
-  ['fire', '화염'],
-  ['lightning', '벼락'],
-  ['holy', '신성'],
-] as const;
+export const ATTRIBUTES = {
+  strength: '근력',
+  dexterity: '기량',
+  intelligence: '지력',
+  faith: '신앙',
+  arcane: '신비',
+} as const;
+export const ELEMENTS = {
+  physical: '물리',
+  magic: '마력',
+  fire: '화염',
+  lightning: '벼락',
+  holy: '신성',
+} as const;
 export const ATTACK_TYPES: Record<string, string> = {
   standard: '표준',
   slash: '참격',
