@@ -1,0 +1,11 @@
+.infinite-scroll {
+  position: relative;
+
+  .observe-box {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    pointer-events: none;
+  }
+}
