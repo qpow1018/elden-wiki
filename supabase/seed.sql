@@ -1,5 +1,5 @@
 -- 2026-11-03 사용자 제공 무기·촉매·기타 무기 도감 분류. 전달 순서를 표시 순서로 사용합니다.
--- 화살·볼트는 보류합니다. 단검 데이터는 seeds/weapons/daggers.sql에서 등록합니다.
+-- 화살·볼트는 보류합니다. 단검·투척검 데이터는 config.toml에 지정한 개별 시드에서 등록합니다.
 -- 재실행해도 기존 분류의 순서 변경을 덮어쓰지 않습니다.
 insert into public.game_item_categories (name, type, sort_order)
 values
