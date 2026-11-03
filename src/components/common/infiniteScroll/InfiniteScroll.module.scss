@@ -1,6 +1,17 @@
 .infinite-scroll {
   position: relative;
 
+  .error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 20px;
+    color: $text-secondary;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
   .observe-box {
     position: absolute;
     left: 0;

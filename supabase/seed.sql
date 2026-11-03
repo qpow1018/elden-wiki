@@ -684,3 +684,1016 @@ where c.type = 'crystal_tear' and c.name = '결정 물방울'
     select 1 from public.game_items
     where name = '샘솟는 붉은 결정 물방울' and type = 'crystal_tear' and category_id = c.id
   );
+
+-- 2026-11-03 사용자 제공 나무위키 단검 17종: 로컬 테스트 전용.
+-- 출처: https://namu.wiki/w/엘든%20링/무기/소형%20무기#s-2
+-- 적용 버전 미확인. 변질 표의 -를 그대로 보존하며 기본→최대 보정은 최대 값을 사용합니다.
+-- 이미지 미제공. 패리의 FP 차이(- / 3)도 원문대로 구분합니다.
+
+-- 패링 대거
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '패리', E'근접 공격의 타이밍에 맞춰 사용해 공격을\n피하고 적의 자세를 무너뜨리는 전투 기술.\n치명적인 일격을 가할 기회가 된다.', '-'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '패리' and description = E'근접 공격의 타이밍에 맞춰 사용해 공격을\n피하고 적의 자세를 무너뜨리는 전투 기술.\n치명적인 일격을 가할 기회가 된다.' and fp_cost_text = '-'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '패링 대거', 'weapon', c.id, 'base_game', E'독특하게 굽은 날밑을 지닌 단검.\n패리를 노리는 무기.\n\n적의 공격을 간파해 카운터를 체현한다\n달인에게는 이 무기만 있으면 된다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '패링 대거' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 1.5, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 183, 0, 0, 0, 0, 110,
+  35.0, 20.0, 20.0, 20.0, 20.0, 18, 0, 0, 0, 0,
+  5, 14, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '패리' and description = E'근접 공격의 타이밍에 맞춰 사용해 공격을\n피하고 적의 자세를 무너뜨리는 전투 기술.\n치명적인 일격을 가할 기회가 된다.' and fp_cost_text = '-'
+  order by id limit 1
+) s
+where i.name = '패링 대거' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'E', 'B', '-', '-', '-'),
+  ('heavy', 'A', '-', '-', '-', '-'),
+  ('keen', 'E', 'S', '-', '-', '-'),
+  ('quality', 'B', 'B', '-', '-', '-'),
+  ('fire', 'B', 'E', '-', '-', '-'),
+  ('flame_art', 'E', 'D', '-', 'B', '-'),
+  ('lightning', 'E', 'B', '-', '-', '-'),
+  ('sacred', 'E', 'D', '-', 'B', '-'),
+  ('magic', 'E', 'D', 'B', '-', '-'),
+  ('cold', 'D', 'B', 'C', '-', '-'),
+  ('poison', 'D', 'B', '-', '-', 'D'),
+  ('blood', 'D', 'B', '-', '-', 'D'),
+  ('occult', 'E', 'D', '-', '-', 'A')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '패링 대거' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 자비의 단검
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '자비의 단검', 'weapon', c.id, 'base_game', E'백의의 종군 의사들이 쓰는 단검.\n굳고 날카로우며 치명적인 일격에 뛰어나다.\n\n의료는 자비이며\n전장에서 자비는 편히 죽게 해 주는 것이다.\n그렇기에 의사들은 두려운 살인자가 된다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '자비의 단검' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 225, 0, 0, 0, 0, 140,
+  36.0, 21.0, 21.0, 21.0, 21.0, 18, 0, 0, 0, 0,
+  7, 12, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '자비의 단검' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'E', 'C', '-', '-', '-'),
+  ('heavy', 'B', '-', '-', '-', '-'),
+  ('keen', 'E', 'B', '-', '-', '-'),
+  ('quality', 'C', 'C', '-', '-', '-'),
+  ('fire', 'C', 'E', '-', '-', '-'),
+  ('flame_art', 'E', 'D', '-', 'D', '-'),
+  ('lightning', 'E', 'C', '-', '-', '-'),
+  ('sacred', 'E', 'D', '-', 'D', '-'),
+  ('magic', 'E', 'E', 'C', '-', '-'),
+  ('cold', 'E', 'C', 'D', '-', '-'),
+  ('poison', 'D', 'C', '-', '-', 'D'),
+  ('blood', 'D', 'C', '-', '-', 'D'),
+  ('occult', 'E', 'D', '-', '-', 'B')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '자비의 단검' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 대형 나이프
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '대형 나이프', 'weapon', c.id, 'base_game', E'폭이 넓고 굽은 칼날을 지닌 큰 나이프.\n\n베어 가르기 위한 무기이며\n출혈 상태 이상 효과가 있다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '대형 나이프' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 1.5, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 183, 0, 0, 0, 0, 110,
+  35.0, 20.0, 20.0, 20.0, 20.0, 18, 0, 0, 38, 0,
+  6, 12, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '대형 나이프' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'E', 'B', '-', '-', '-'),
+  ('heavy', 'A', '-', '-', '-', '-'),
+  ('keen', 'E', 'S', '-', '-', '-'),
+  ('quality', 'B', 'B', '-', '-', '-'),
+  ('fire', 'B', 'E', '-', '-', '-'),
+  ('flame_art', 'E', 'D', '-', 'B', '-'),
+  ('lightning', 'E', 'B', '-', '-', '-'),
+  ('sacred', 'E', 'D', '-', 'B', '-'),
+  ('magic', 'E', 'D', 'B', '-', '-'),
+  ('cold', 'E', 'B', 'C', '-', '-'),
+  ('poison', 'E', 'A', '-', '-', 'D'),
+  ('blood', 'E', 'A', '-', '-', 'D'),
+  ('occult', 'E', 'D', '-', '-', 'A')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '대형 나이프' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 피투성이 단도
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '피투성이 단도', 'weapon', c.id, 'base_game', E'눌어붙은 피로 더러워진 단도.\n출혈 상태 이상 효과가 있다.\n\n집요하게 베고 찔러온 칼날은\n더러워져도 오히려 더 날카롭고 굳다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '피투성이 단도' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 198, 0, 0, 0, 0, 110,
+  36.0, 21.0, 21.0, 21.0, 21.0, 18, 0, 0, 38, 0,
+  9, 12, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '피투성이 단도' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'B', 'D', '-', '-', '-'),
+  ('heavy', 'A', '-', '-', '-', '-'),
+  ('keen', 'E', 'B', '-', '-', '-'),
+  ('quality', 'B', 'B', '-', '-', '-'),
+  ('fire', 'B', 'E', '-', '-', '-'),
+  ('flame_art', 'D', 'E', '-', 'B', '-'),
+  ('lightning', 'E', 'B', '-', '-', '-'),
+  ('sacred', 'D', 'E', '-', 'B', '-'),
+  ('magic', 'D', 'E', 'B', '-', '-'),
+  ('cold', 'B', 'D', 'C', '-', '-'),
+  ('poison', 'B', 'D', '-', '-', 'D'),
+  ('blood', 'B', 'D', '-', '-', 'D'),
+  ('occult', 'D', 'E', '-', '-', 'B')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '피투성이 단도' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 황동 단도
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '황동 단도', 'weapon', c.id, 'base_game', E'황동 칼날에 풀무늬가 조각된 단도.\n황금 나무의 왕족이 평소 지니는 호신구.\n\n질이 좋지만 다루기 어려우며\n신앙으로도 공격력이 높아진다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '황동 단도' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 164, 0, 0, 0, 0, 110,
+  36.0, 21.0, 21.0, 21.0, 21.0, 18, 0, 0, 0, 0,
+  7, 12, 0, 14, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '황동 단도' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'D', 'D', '-', 'D', '-'),
+  ('heavy', 'A', '-', '-', 'D', '-'),
+  ('keen', 'E', 'A', '-', 'D', '-'),
+  ('quality', 'B', 'B', '-', 'D', '-'),
+  ('fire', 'C', 'E', '-', 'D', '-'),
+  ('flame_art', 'E', 'E', '-', 'B', '-'),
+  ('lightning', 'E', 'C', '-', 'D', '-'),
+  ('sacred', 'E', 'E', '-', 'B', '-'),
+  ('magic', 'E', 'E', 'B', 'D', '-'),
+  ('cold', 'D', 'D', 'B', 'D', '-'),
+  ('poison', 'D', 'D', '-', 'D', 'D'),
+  ('blood', 'D', 'D', '-', 'D', 'D'),
+  ('occult', 'E', 'E', '-', 'D', 'A')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '황동 단도' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 불의 기사 단검
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '불의 기사 단검', 'weapon', c.id, 'shadow_of_the_erdtree', E'불의 기사들이 사용하는 단검.\n가는 검신은 불을 본떠 파도친다.\n\n미리 화염의 기도를 담았으며\n어떠한 방법으로 화염 공격력을 부여할 시\n상승 효과로 크게 위력이 높아진다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '불의 기사 단검' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 183, 0, 53, 0, 0, 110,
+  32.0, 18.0, 31.0, 18.0, 18.0, 18, 0, 0, 0, 0,
+  8, 13, 0, 12, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '불의 기사 단검' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'D', 'C', '-', 'D', '-'),
+  ('heavy', '-', '-', '-', '-', '-'),
+  ('keen', '-', '-', '-', '-', '-'),
+  ('quality', '-', '-', '-', '-', '-'),
+  ('fire', '-', '-', '-', '-', '-'),
+  ('flame_art', '-', '-', '-', '-', '-'),
+  ('lightning', '-', '-', '-', '-', '-'),
+  ('sacred', '-', '-', '-', '-', '-'),
+  ('magic', '-', '-', '-', '-', '-'),
+  ('cold', '-', '-', '-', '-', '-'),
+  ('poison', '-', '-', '-', '-', '-'),
+  ('blood', '-', '-', '-', '-', '-'),
+  ('occult', '-', '-', '-', '-', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '불의 기사 단검' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 협차
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '협차', 'weapon', c.id, 'base_game', E'담금질되어 무늬가 생긴 칼날을 지닌 단검.\n갈대의 땅 무사들이 쓰는 독특한 무기.\n출혈 상태 이상 효과가 있다.\n\n오른손에 도, 왼손에 협차를 드는\n이도류로도 알려져 있다.\n「노인」 이라 불리는 한 수라가 쓰는 검이다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '협차' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 3.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 230, 0, 0, 0, 0, 100,
+  42.0, 24.0, 24.0, 24.0, 24.0, 21, 0, 0, 38, 0,
+  9, 13, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '협차' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'D', 'C', '-', '-', '-'),
+  ('heavy', 'B', '-', '-', '-', '-'),
+  ('keen', 'E', 'B', '-', '-', '-'),
+  ('quality', 'B', 'B', '-', '-', '-'),
+  ('fire', 'C', 'E', '-', '-', '-'),
+  ('flame_art', 'E', 'E', '-', 'C', '-'),
+  ('lightning', 'E', 'C', '-', '-', '-'),
+  ('sacred', 'E', 'E', '-', 'C', '-'),
+  ('magic', 'E', 'E', 'B', '-', '-'),
+  ('cold', 'D', 'C', 'C', '-', '-'),
+  ('poison', 'C', 'C', '-', '-', 'D'),
+  ('blood', 'C', 'C', '-', '-', 'D'),
+  ('occult', 'E', 'D', '-', '-', 'B')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '협차' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 맹고슈
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '패리', E'근접 공격의 타이밍에 맞춰 사용해 공격을\n피하고 적의 자세를 무너뜨리는 전투 기술.\n치명적인 일격을 가할 기회가 된다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '패리' and description = E'근접 공격의 타이밍에 맞춰 사용해 공격을\n피하고 적의 자세를 무너뜨리는 전투 기술.\n치명적인 일격을 가할 기회가 된다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '맹고슈', 'weapon', c.id, 'shadow_of_the_erdtree', E'대형 주먹보호대가 붙은 단검.\n\n왼손으로 쓰는 것을 상정한 무기이며\n오른손에 자검, 또는 같은 무기를 장비했을 때\n독특한 이도류를 사용할 수 있다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '맹고슈' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 193, 0, 0, 0, 0, 110,
+  38.0, 22.0, 22.0, 22.0, 22.0, 19, 0, 0, 0, 0,
+  7, 15, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '패리' and description = E'근접 공격의 타이밍에 맞춰 사용해 공격을\n피하고 적의 자세를 무너뜨리는 전투 기술.\n치명적인 일격을 가할 기회가 된다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '맹고슈' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'D', 'B', '-', '-', '-'),
+  ('heavy', '-', '-', '-', '-', '-'),
+  ('keen', '-', '-', '-', '-', '-'),
+  ('quality', '-', '-', '-', '-', '-'),
+  ('fire', '-', '-', '-', '-', '-'),
+  ('flame_art', '-', '-', '-', '-', '-'),
+  ('lightning', '-', '-', '-', '-', '-'),
+  ('sacred', '-', '-', '-', '-', '-'),
+  ('magic', '-', '-', '-', '-', '-'),
+  ('cold', '-', '-', '-', '-', '-'),
+  ('poison', '-', '-', '-', '-', '-'),
+  ('blood', '-', '-', '-', '-', '-'),
+  ('occult', '-', '-', '-', '-', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '맹고슈' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 축제의 손낫
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '축제의 손낫', 'weapon', c.id, 'base_game', E'색색의 천과 꽃으로 장식된 손낫.\n도미눌라의 축제에 사용되는 무희들의 제구.\n그 공격은 가드의 틈을 파고든다.\n\n인간의 뼈로 만들어졌으며\n공격 명중 시 매우 소량의 룬을 얻는다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '축제의 손낫' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 1.5, array['slash', 'pierce'], 'smithing_stone', s.id,
+  true, 193, 0, 0, 0, 0, 100,
+  35.0, 20.0, 20.0, 20.0, 20.0, 18, 0, 0, 0, 0,
+  6, 11, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '축제의 손낫' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'E', 'B', '-', '-', '-'),
+  ('heavy', 'B', '-', '-', '-', '-'),
+  ('keen', 'E', 'A', '-', '-', '-'),
+  ('quality', 'B', 'B', '-', '-', '-'),
+  ('fire', 'C', 'E', '-', '-', '-'),
+  ('flame_art', 'E', 'D', '-', 'B', '-'),
+  ('lightning', 'E', 'C', '-', '-', '-'),
+  ('sacred', 'E', 'D', '-', 'B', '-'),
+  ('magic', 'E', 'D', 'B', '-', '-'),
+  ('cold', 'E', 'B', 'C', '-', '-'),
+  ('poison', 'D', 'B', '-', '-', 'D'),
+  ('blood', 'D', 'B', '-', '-', 'D'),
+  ('occult', 'E', 'D', '-', '-', 'B')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '축제의 손낫' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 상아 손낫
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '상아 손낫', 'weapon', c.id, 'base_game', E'상아를 가공해 만든 손낫.\n늙은 백금의 사람들의 무기.\n\n그것은 본 적 없는 성수를\n섬긴다는 증표라고 한다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '상아 손낫' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  false, 147, 147, 0, 0, 0, 100,
+  26.0, 42.0, 15.0, 15.0, 15.0, 18, 0, 0, 0, 0,
+  6, 11, 13, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '상아 손낫' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'D', 'C', 'C', '-', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '상아 손낫' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 결정 나이프
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '결정 나이프', 'weapon', c.id, 'base_game', E'단단한 결정을 거칠게 간 나이프.\n휘석 광부들이 사용하는 무기.\n\n부순 바위에서 휘석을 깎아내는 도구이며\n미약하지만 마력을 띠고 있다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '결정 나이프' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'smithing_stone', s.id,
+  false, 200, 129, 0, 0, 0, 100,
+  32.0, 31.0, 18.0, 18.0, 18.0, 18, 0, 0, 0, 0,
+  8, 12, 9, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '결정 나이프' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'C', 'D', 'B', '-', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '결정 나이프' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 전갈의 침
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '연속 찌르기', E'몸을 회전시키고, 이어서\n단숨에 연속으로 찌르는 전투 기술.', '7'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '연속 찌르기' and description = E'몸을 회전시키고, 이어서\n단숨에 연속으로 찌르는 전투 기술.' and fp_cost_text = '7'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '전갈의 침', 'weapon', c.id, 'base_game', E'큰 전갈의 침을 칼날 삼은 단검.\n붉은 부패의 독이 흐른다.\n\n봉인된 외부의 신의 유물을 사용한\n이교도의 제구라고 한다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '전갈의 침' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.5, array['slash', 'pierce'], 'somber_smithing_stone', s.id,
+  false, 193, 0, 0, 0, 0, 110,
+  38.0, 22.0, 22.0, 22.0, 22.0, 16, 50, 0, 0, 0,
+  6, 12, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '연속 찌르기' and description = E'몸을 회전시키고, 이어서\n단숨에 연속으로 찌르는 전투 기술.' and fp_cost_text = '7'
+  order by id limit 1
+) s
+where i.name = '전갈의 침' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'D', 'B', '-', '-', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '전갈의 침' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 친퀘디아
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '퀵스텝', E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.', '3'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '친퀘디아', 'weapon', c.id, 'base_game', E'파름 아즈라에서\n고위 사제에게 주어지는 단검.\n짐승의 기도의 위력을 높인다.\n\n과거에 짐승들에게 주어진 지성의\n상징인 다섯 발가락을 본떴다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '친퀘디아' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 3.5, array['slash', 'pierce'], 'somber_smithing_stone', s.id,
+  false, 240, 0, 0, 0, 0, 110,
+  43.0, 25.0, 25.0, 25.0, 25.0, 19, 0, 0, 0, 0,
+  10, 10, 0, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '퀵스텝' and description = E'기민함과 교란으로 싸우는 자들의 전투 기술.\n재빠르게 스텝 이동한다.\n타깃 고정 상태라면 돌아 들어간다.' and fp_cost_text = '3'
+  order by id limit 1
+) s
+where i.name = '친퀘디아' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'B', 'D', '-', '-', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '친퀘디아' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 휘석 크리스
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '휘석의 혜성', E'「휘석 돌팔매」마술을 이용하는 전투 기술.\n차지 공격으로 「휘석의 혜성」이 되며\n강 공격으로 크게 파고드는 찌르기로 잇는다.', '10 ( - / 4 )'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '휘석의 혜성' and description = E'「휘석 돌팔매」마술을 이용하는 전투 기술.\n차지 공격으로 「휘석의 혜성」이 되며\n강 공격으로 크게 파고드는 찌르기로 잇는다.' and fp_cost_text = '10 ( - / 4 )'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '휘석 크리스', 'weapon', c.id, 'base_game', E'과거에 레아 루카리아 학원이\n로데일과의 화목을 축하한 보검.\n\n희소한 휘석을 황금 나무 풍으로 장식했으며\n흰 칼날은 옛 의식의 상징이기도 하다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '휘석 크리스' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 1.5, array['slash', 'pierce'], 'somber_smithing_stone', s.id,
+  false, 139, 166, 0, 0, 0, 110,
+  23.0, 45.0, 14.0, 14.0, 14.0, 15, 0, 0, 0, 0,
+  5, 12, 16, 0, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '휘석의 혜성' and description = E'「휘석 돌팔매」마술을 이용하는 전투 기술.\n차지 공격으로 「휘석의 혜성」이 되며\n강 공격으로 크게 파고드는 찌르기로 잇는다.' and fp_cost_text = '10 ( - / 4 )'
+  order by id limit 1
+) s
+where i.name = '휘석 크리스' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'E', 'C', 'C', '-', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '휘석 크리스' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 레두비아
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '레두비아의 혈인', E'톱니 칼날에 묻은 마르지 않는 피를\n출혈을 유발하는 칼날로 만들어 쏘는 전투 기술.\n연속으로 쏠 수도 있다.', '6'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '레두비아의 혈인' and description = E'톱니 칼날에 묻은 마르지 않는 피를\n출혈을 유발하는 칼날로 만들어 쏘는 전투 기술.\n연속으로 쏠 수도 있다.' and fp_cost_text = '6'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '레두비아', 'weapon', c.id, 'base_game', E'뒤틀린 톱니 칼날을 지닌 이형의 단도.\n피의 군주를 섬기는 귀족들의 무기.\n\n그 칼날은 상처를 헤집어 출혈을 유발하며\n그것을 자랑하듯 늘 피에 젖어 있다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '레두비아' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.5, array['slash', 'pierce'], 'somber_smithing_stone', s.id,
+  false, 193, 0, 0, 0, 0, 110,
+  38.0, 22.0, 22.0, 22.0, 22.0, 16, 0, 0, 30, 0,
+  5, 13, 0, 0, 13
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '레두비아의 혈인' and description = E'톱니 칼날에 묻은 마르지 않는 피를\n출혈을 유발하는 칼날로 만들어 쏘는 전투 기술.\n연속으로 쏠 수도 있다.' and fp_cost_text = '6'
+  order by id limit 1
+) s
+where i.name = '레두비아' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'E', 'C', '-', '-', 'B')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '레두비아' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 사명의 칼날
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '황금 칼날', E'공중에 도약하여 무기에 황금 불꽃을 두르고\n그것을 칼날 삼아 쏘는 전투 기술.\n신성 속성 대미지를 입힌다.', '17'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '황금 칼날' and description = E'공중에 도약하여 무기에 황금 불꽃을 두르고\n그것을 칼날 삼아 쏘는 전투 기술.\n신성 속성 대미지를 입힌다.' and fp_cost_text = '17'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '사명의 칼날', 'weapon', c.id, 'base_game', E'사명으로 여행하는 자에게 주어진 단검.\n이 한 자루에는 옛 주인인\n불씨의 소녀의 힘이 남아있다.\n\n불꽃과 함께 걷는 자여.\n언젠가 운명의 죽음을 보리라'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '사명의 칼날' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 1.5, array['slash', 'pierce'], 'somber_smithing_stone', s.id,
+  false, 173, 0, 0, 0, 105, 110,
+  31.0, 18.0, 18.0, 18.0, 30.0, 16, 0, 0, 0, 0,
+  6, 13, 0, 15, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '황금 칼날' and description = E'공중에 도약하여 무기에 황금 불꽃을 두르고\n그것을 칼날 삼아 쏘는 전투 기술.\n신성 속성 대미지를 입힌다.' and fp_cost_text = '17'
+  order by id limit 1
+) s
+where i.name = '사명의 칼날' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'D', 'C', '-', 'B', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '사명의 칼날' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;
+
+
+-- 검은 칼날
+insert into public.weapon_skills (name, description, fp_cost_text)
+select '죽음의 칼날', E'죽음의 룬의 힘을 해방해 칼날 삼아 쏘는\n전투 기술. 대미지를 입힘과 동시에 최대 HP를\n감소시키며 잠시 HP를 계속 깎는다.', '25'
+where not exists (
+  select 1 from public.weapon_skills
+  where name = '죽음의 칼날' and description = E'죽음의 룬의 힘을 해방해 칼날 삼아 쏘는\n전투 기술. 대미지를 입힘과 동시에 최대 HP를\n감소시키며 잠시 HP를 계속 깎는다.' and fp_cost_text = '25'
+);
+
+insert into public.game_items (name, type, category_id, content_code, game_description)
+select '검은 칼날', 'weapon', c.id, 'base_game', E'과거, 검은 칼날의 음모가 있던 밤에\n황금의 고드윈을 죽인 자객들의 단도.\n\n그 기묘하게 뒤틀린 칼날에는 의식으로\n훔쳐진 죽음의 룬의 힘을 품었다.'
+from public.game_item_categories c
+where c.type = 'weapon' and c.name = '단검'
+  and not exists (
+    select 1 from public.game_items
+    where name = '검은 칼날' and type = 'weapon' and category_id = c.id
+  );
+
+insert into public.weapon_details (
+  game_item_id, weight, physical_attack_types, upgrade_material, default_skill_id,
+  can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning,
+  attack_holy, critical, guard_physical, guard_magic, guard_fire, guard_lightning,
+  guard_holy, guard_boost, scarlet_rot, frostbite, bleed, poison,
+  required_strength, required_dexterity, required_intelligence, required_faith, required_arcane
+)
+select
+  i.id, 2.0, array['slash', 'pierce'], 'somber_smithing_stone', s.id,
+  false, 161, 0, 0, 0, 159, 110,
+  26.0, 15.0, 15.0, 15.0, 42.0, 15, 0, 0, 0, 0,
+  8, 12, 0, 18, 0
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+cross join lateral (
+  select id from public.weapon_skills
+  where name = '죽음의 칼날' and description = E'죽음의 룬의 힘을 해방해 칼날 삼아 쏘는\n전투 기술. 대미지를 입힘과 동시에 최대 HP를\n감소시키며 잠시 HP를 계속 깎는다.' and fp_cost_text = '25'
+  order by id limit 1
+) s
+where i.name = '검은 칼날' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id) do nothing;
+
+insert into public.weapon_scalings (
+  game_item_id, affinity, strength, dexterity, intelligence, faith, arcane
+)
+select i.id, v.*
+from public.game_items i
+join public.game_item_categories c on c.id = i.category_id
+join public.weapon_details d on d.game_item_id = i.id
+cross join (values
+  ('standard', 'E', 'B', '-', 'C', '-')
+) as v(affinity, strength, dexterity, intelligence, faith, arcane)
+where i.name = '검은 칼날' and i.type = 'weapon' and c.name = '단검'
+on conflict (game_item_id, affinity) do nothing;

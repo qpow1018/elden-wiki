@@ -1,14 +1,5 @@
 .page {
   font-size: 14px;
-  .pagination button {
-    color: $brass;
-    border: 1px solid $border-strong;
-    border-radius: $border-radius;
-    padding: 7px 12px;
-    &:hover:not(:disabled) {
-      background: $bg-light;
-    }
-  }
   :focus-visible {
     outline: 2px solid $focus-ring;
     outline-offset: 4px;
@@ -156,28 +147,6 @@
     }
     td {
       font-variant-numeric: tabular-nums;
-    }
-  }
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 28px;
-
-    button {
-      &[aria-current='page'] {
-        background: $brass;
-        color: $bg-dark;
-      }
-      &:disabled {
-        opacity: 0.45;
-        cursor: default;
-      }
-    }
-    span {
-      color: $text-secondary;
     }
   }
 }

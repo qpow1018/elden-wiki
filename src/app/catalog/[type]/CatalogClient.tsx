@@ -19,37 +19,45 @@ import {
 import EmptyState from '@/components/common/empty/EmptyState';
 import ErrorState from '@/components/common/error/ErrorState';
 import Header from '@/components/common/header/Header';
+import InfiniteScroll from '@/components/common/infiniteScroll/InfiniteScroll';
 import BoxLoading from '@/components/common/loading/BoxLoading';
 import CatalogFilters from './_component/CatalogFilters';
 import CatalogNavigation from './_component/CatalogNavigation';
 
 import styles from './CatalogClient.module.scss';
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 10;
 
 export default function CatalogClient(props: { type: TGameItemType }) {
   const { type } = props;
 
   const [params, setParams] = useState<{
-    page: number;
     categoryId: number | undefined;
   }>({
-    page: 1,
     categoryId: undefined,
   });
 
-  const { data, isLoading, isError, isSuccess, refetch } = gameItemQuery.useGetGameItems({
+  const {
+    data,
+    isLoading,
+    isError,
+    isSuccess,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    isFetchNextPageError,
+  } = gameItemQuery.useGetInfiniteGameItems({
     ...params,
     type,
     pageSize: PAGE_SIZE,
   });
 
-  const gameItems = data?.gameItems ?? [];
-  const totalCount = data?.totalCount ?? 0;
-  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+  const gameItems = data?.pages.flatMap((page) => page.gameItems) ?? [];
 
   function handleFilterChange(filters: { categoryId: number | undefined }) {
-    setParams((previous) => ({ ...previous, ...filters, page: 1 }));
+    setParams(filters);
   }
 
   return (
@@ -60,7 +68,7 @@ export default function CatalogClient(props: { type: TGameItemType }) {
       <CatalogFilters params={{ ...params, type }} onChange={handleFilterChange} />
 
       {isLoading && <BoxLoading />}
-      {isError && (
+      {isError && !data && (
         <ErrorState
           message="아이템 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요."
           onRetry={() => {
@@ -70,56 +78,21 @@ export default function CatalogClient(props: { type: TGameItemType }) {
       )}
       {isSuccess && gameItems.length === 0 && <EmptyState message="표시할 아이템이 없습니다." />}
 
-      {isSuccess && gameItems.length > 0 && (
-        <>
+      {gameItems.length > 0 && (
+        <InfiniteScroll
+          onLoadMore={fetchNextPage}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          isFetchNextPageError={isFetchNextPageError}
+          observerPositionFromBottom={100}
+          enabled={!isFetching && !isError}
+        >
           {gameItems.map((gameItem) => (
             <GameItemCard key={gameItem.id} gameItem={gameItem} />
           ))}
-          <Pagination
-            page={params.page}
-            totalPages={totalPages}
-            onPageChange={(page) => setParams((previous) => ({ ...previous, page }))}
-          />
-        </>
+        </InfiniteScroll>
       )}
     </main>
-  );
-}
-
-function Pagination(props: {
-  page: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}) {
-  const { page, totalPages, onPageChange } = props;
-  const firstPage = Math.floor((page - 1) / 5) * 5 + 1;
-  const pageNumbers = Array.from(
-    { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
-    (_, index) => firstPage + index,
-  );
-
-  return (
-    <nav className={styles['pagination']} aria-label="아이템 목록 페이지">
-      <button disabled={page === 1} onClick={() => onPageChange(page - 1)}>
-        이전
-      </button>
-      {pageNumbers.map((pageNumber) => (
-        <button
-          key={pageNumber}
-          aria-label={`${pageNumber}페이지`}
-          aria-current={pageNumber === page ? 'page' : undefined}
-          onClick={() => onPageChange(pageNumber)}
-        >
-          {pageNumber}
-        </button>
-      ))}
-      <button disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>
-        다음
-      </button>
-      <span>
-        {page} / {totalPages} 페이지
-      </span>
-    </nav>
   );
 }
 
