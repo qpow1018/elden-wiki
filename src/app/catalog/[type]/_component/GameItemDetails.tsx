@@ -27,27 +27,32 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
     <article className={styles['game-item-details']}>
       <header className={styles['identity']}>
         <div className={styles['image']}>
-          {gameItem.imageUrl ? (
+          {gameItem.imageUrl && (
             <Image
               src={gameItem.imageUrl}
               alt={gameItem.name}
-              width={96}
-              height={96}
+              width={92}
+              height={92}
               unoptimized
               referrerPolicy="no-referrer"
             />
-          ) : (
-            <span>이미지 없음</span>
           )}
         </div>
         <div className={styles['heading']}>
-          <p className={styles['category']}>
-            {gameItem.gameItemCategories?.name ?? GAME_ITEM_TYPES[gameItem.type]}
-          </p>
+          <div className={styles['classification']}>
+            <p className={styles['category']}>
+              {gameItem.gameItemCategories?.name ?? GAME_ITEM_TYPES[gameItem.type]}
+            </p>
+            {gameItem.contentCode !== 'base_game' && (
+              <>
+                <span aria-hidden="true">·</span>
+                <p className={styles['content']}>
+                  {CONTENTS[gameItem.contentCode] ?? gameItem.contentCode}
+                </p>
+              </>
+            )}
+          </div>
           <h2>{gameItem.name}</h2>
-          <p className={styles['content']}>
-            {CONTENTS[gameItem.contentCode] ?? gameItem.contentCode}
-          </p>
         </div>
       </header>
 

@@ -13,7 +13,7 @@ export const GAME_ITEM_TYPES: Record<TGameItemType, string> = {
 export const CONTENTS: Record<string, string> = {
   base_game: '본편',
   shadow_of_the_erdtree: '황금 나무의 그림자',
-  tarnished_pack: '빛바랜 자 팩',
+  tarnished_pack: '빛바랜 자 에디션',
 };
 export const AFFINITIES: Record<string, string> = {
   standard: '표준',
