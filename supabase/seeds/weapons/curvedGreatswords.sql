@@ -158,6 +158,7 @@ from source s
 join public.game_item_categories c on c.type = 'weapon' and c.name = '대곡검'
 join public.game_items i on i.type = 'weapon' and i.category_id = c.id and i.name = s.name
 join public.weapon_skills k on k.name = s.skill_name
+  and (s.skill_name <> '회전 베기' or k.fp_cost_text = '6 ( - / 12 )')
 on conflict (game_item_id) do nothing;
 
 with source (name, affinity, strength, dexterity, intelligence, faith, arcane) as (

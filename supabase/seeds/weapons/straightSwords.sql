@@ -251,6 +251,7 @@ from source s
 join public.game_item_categories c on c.type = 'weapon' and c.name = '직검'
 join public.game_items i on i.type = 'weapon' and i.category_id = c.id and i.name = s.name
 join public.weapon_skills k on k.name = s.skill_name
+  and (s.skill_name <> '회전 베기' or k.fp_cost_text = '6 ( - / 12 )')
   and (s.skill_name <> '막을 수 없는 칼날' or k.description = '비문자 칼날에 빛을 품어 길이를 늘리고
 단숨에 넓은 범위를 베는 전투 기술.
 이 공격은 가드할 수 없다.')
