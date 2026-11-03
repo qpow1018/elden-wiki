@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
-import type { TGameItem, TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
+import type { TGameItem, TGameItemType } from '@/api/gameItem/types';
 
 import {
   AFFINITIES,
@@ -16,46 +16,40 @@ import {
   GAME_ITEM_TYPES,
 } from '@/define/gameItems';
 
+import EmptyState from '@/components/common/empty/EmptyState';
+import ErrorState from '@/components/common/error/ErrorState';
 import Header from '@/components/common/header/Header';
+import BoxLoading from '@/components/common/loading/BoxLoading';
 import CatalogFilters from './_component/CatalogFilters';
 import CatalogNavigation from './_component/CatalogNavigation';
 
 import styles from './CatalogClient.module.scss';
 
+const PAGE_SIZE = 20;
+
 export default function CatalogClient(props: { type: TGameItemType }) {
   const { type } = props;
 
-  const [params, setParams] = useState<
-    Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'contentCode'>
-  >({
+  const [params, setParams] = useState<{
+    page: number;
+    categoryId: number | undefined;
+  }>({
     page: 1,
-    pageSize: 20,
+    categoryId: undefined,
   });
-  const { data, isPending, isError, isSuccess, refetch } = gameItemQuery.useGetGameItems({
+
+  const { data, isLoading, isError, isSuccess, refetch } = gameItemQuery.useGetGameItems({
     ...params,
     type,
+    pageSize: PAGE_SIZE,
   });
+
   const gameItems = data?.gameItems ?? [];
   const totalCount = data?.totalCount ?? 0;
-  const totalPages = Math.ceil(totalCount / params.pageSize);
-  const firstPage = Math.floor((params.page - 1) / 5) * 5 + 1;
-  const pageNumbers = Array.from(
-    { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
-    (_, index) => firstPage + index,
-  );
-  const selectedTypeLabel = GAME_ITEM_TYPES[type];
-  const hasFilters = params.categoryId !== undefined;
+  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
 
-  function handleFilterChange(
-    filters: Partial<
-      Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'contentCode' | 'page' | 'pageSize'>
-    >,
-  ) {
+  function handleFilterChange(filters: { categoryId: number | undefined }) {
     setParams((previous) => ({ ...previous, ...filters, page: 1 }));
-  }
-
-  function handleReset() {
-    setParams((previous) => ({ page: 1, pageSize: previous.pageSize }));
   }
 
   return (
@@ -63,79 +57,69 @@ export default function CatalogClient(props: { type: TGameItemType }) {
       <Header title="아이템 도감" />
 
       <CatalogNavigation type={type} />
+      <CatalogFilters params={{ ...params, type }} onChange={handleFilterChange} />
 
-      <CatalogFilters
-        params={{ ...params, type }}
-        typeLabel={selectedTypeLabel}
-        onChange={handleFilterChange}
-      />
-      <div className={styles['list-heading']}>
-        <h2>
-          {selectedTypeLabel} <span>{data ? totalCount : '—'}</span>
-        </h2>
-      </div>
-      <p className={styles['note']}>
-        공격력·가드·능력 보정은 최대 강화 기준입니다. 공격력·가드는 표준 변질(변질 불가 무기는 기본
-        상태), 부가 효과는 미강화 기준입니다. 0은 효과 없음, 미확인은 미등록 정보입니다.
-      </p>
-      <div aria-live="polite">
-        {isPending && <p className={styles['message']}>아이템을 불러오고 있습니다.</p>}
-        {isError && (
-          <div className={styles['message']}>
-            <p>아이템 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
-            <button
-              onClick={() => {
-                void refetch();
-              }}
-            >
-              다시 불러오기
-            </button>
-          </div>
-        )}
-        {isSuccess && gameItems.length === 0 && (
-          <div className={styles['message']}>
-            <p>
-              {hasFilters
-                ? '필터 조건에 맞는 아이템이 없습니다.'
-                : '아직 등록된 아이템이 없습니다.'}
-            </p>
-            {hasFilters && <button onClick={handleReset}>전체 목록 보기</button>}
-          </div>
-        )}
-        {isSuccess &&
-          gameItems.map((gameItem) => <GameItemCard key={gameItem.id} gameItem={gameItem} />)}
-      </div>
-      {isSuccess && totalPages > 0 && (
-        <nav className={styles['pagination']} aria-label="아이템 목록 페이지">
-          <button
-            disabled={params.page === 1}
-            onClick={() => setParams((previous) => ({ ...previous, page: previous.page - 1 }))}
-          >
-            이전
-          </button>
-          {pageNumbers.map((page) => (
-            <button
-              key={page}
-              aria-label={`${page}페이지`}
-              aria-current={page === params.page ? 'page' : undefined}
-              onClick={() => setParams((previous) => ({ ...previous, page }))}
-            >
-              {page}
-            </button>
-          ))}
-          <button
-            disabled={params.page >= totalPages}
-            onClick={() => setParams((previous) => ({ ...previous, page: previous.page + 1 }))}
-          >
-            다음
-          </button>
-          <span>
-            {params.page} / {totalPages} 페이지
-          </span>
-        </nav>
+      {isLoading && <BoxLoading />}
+      {isError && (
+        <ErrorState
+          message="아이템 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요."
+          onRetry={() => {
+            void refetch();
+          }}
+        />
       )}
-      <footer className={styles['footer']}>엘든링 위키 · 아이템 도감</footer>
+      {isSuccess && gameItems.length === 0 && <EmptyState message="표시할 아이템이 없습니다." />}
+
+      {isSuccess && gameItems.length > 0 && (
+        <>
+          {gameItems.map((gameItem) => (
+            <GameItemCard key={gameItem.id} gameItem={gameItem} />
+          ))}
+          <Pagination
+            page={params.page}
+            totalPages={totalPages}
+            onPageChange={(page) => setParams((previous) => ({ ...previous, page }))}
+          />
+        </>
+      )}
     </main>
+  );
+}
+
+function Pagination(props: {
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  const { page, totalPages, onPageChange } = props;
+  const firstPage = Math.floor((page - 1) / 5) * 5 + 1;
+  const pageNumbers = Array.from(
+    { length: Math.max(0, Math.min(5, totalPages - firstPage + 1)) },
+    (_, index) => firstPage + index,
+  );
+
+  return (
+    <nav className={styles['pagination']} aria-label="아이템 목록 페이지">
+      <button disabled={page === 1} onClick={() => onPageChange(page - 1)}>
+        이전
+      </button>
+      {pageNumbers.map((pageNumber) => (
+        <button
+          key={pageNumber}
+          aria-label={`${pageNumber}페이지`}
+          aria-current={pageNumber === page ? 'page' : undefined}
+          onClick={() => onPageChange(pageNumber)}
+        >
+          {pageNumber}
+        </button>
+      ))}
+      <button disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>
+        다음
+      </button>
+      <span>
+        {page} / {totalPages} 페이지
+      </span>
+    </nav>
   );
 }
 

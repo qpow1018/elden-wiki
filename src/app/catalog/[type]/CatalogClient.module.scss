@@ -1,6 +1,5 @@
 .page {
   font-size: 14px;
-  .message button,
   .pagination button {
     color: $brass;
     border: 1px solid $border-strong;
@@ -13,17 +12,6 @@
   :focus-visible {
     outline: 2px solid $focus-ring;
     outline-offset: 4px;
-  }
-  .list-heading {
-    margin-top: 32px;
-    h2 {
-      font-size: 19px;
-      span {
-        color: $brass;
-        margin-left: 8px;
-        font-weight: 400;
-      }
-    }
   }
   .note {
     color: $text-secondary;
@@ -170,13 +158,6 @@
       font-variant-numeric: tabular-nums;
     }
   }
-  .message {
-    text-align: center;
-    padding: 64px 20px;
-    color: $text-secondary;
-    border: 1px solid $border;
-    margin-top: 22px;
-  }
   .pagination {
     display: flex;
     justify-content: center;
@@ -198,10 +179,5 @@
     span {
       color: $text-secondary;
     }
-  }
-  .footer {
-    padding: 40px 0 24px;
-    color: $text-muted;
-    font-size: 12px;
   }
 }

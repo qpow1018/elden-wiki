@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
-import type { TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
+import type { TGameItemType } from '@/api/gameItem/types';
+import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import Button from '@/components/common/button/Button';
 import BottomModal from '@/components/common/modal/BottomModal';
@@ -17,18 +18,15 @@ const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = 
 };
 
 type TCatalogFiltersProps = {
-  params: Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'contentCode'> & {
+  params: {
     type: TGameItemType;
+    categoryId: number | undefined;
   };
-  onChange: (
-    filters: Partial<
-      Omit<TReqGetGameItems, 'signal' | 'type' | 'search' | 'contentCode' | 'page' | 'pageSize'>
-    >,
-  ) => void;
-  typeLabel: string;
+  onChange: (filters: { categoryId: number | undefined }) => void;
 };
 
-export default function CatalogFilters({ params, onChange, typeLabel }: TCatalogFiltersProps) {
+export default function CatalogFilters({ params, onChange }: TCatalogFiltersProps) {
+  const typeLabel = GAME_ITEM_TYPES[params.type];
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const categoriesQuery = gameItemQuery.useGetGameItemCategories();
   const categories = (categoriesQuery.data ?? []).filter(
