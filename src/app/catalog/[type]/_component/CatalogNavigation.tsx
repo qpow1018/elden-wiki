@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import type { TGameItemType } from '@/api/gameItem/types';
-import { GAME_ITEM_TYPES } from '@/app/catalog/[type]/_define/gameItems';
+import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import styles from './CatalogNavigation.module.scss';
 

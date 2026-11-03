@@ -24,13 +24,14 @@
 src/
   app/                      # 라우트·레이아웃·라우트 전용 화면
     (home)/                 # URL /에서 기본 도감으로 연결
-    catalog/[type]/           # 타입별 도감 페이지·클라이언트 화면·필터·상수
+    catalog/[type]/           # 타입별 도감 페이지·클라이언트 화면·필터
   api/
     index.ts                # 공통 API 연결·요청 처리
     <domain>/
       index.ts              # 도메인 API
       types.ts              # API 요청·응답과 관련 타입
       <domain>Query.ts      # Query 정의
+  define/                   # 화면에 종속되지 않는 공통 도메인 상수
   providers/                # 앱 전역 Provider
   components/common/        # 도메인과 무관한 공용 UI
   utils/                    # 공유 범용 함수와 React 훅
@@ -83,6 +84,7 @@ src/
 
 ### 공통 기반과 자원
 
+- `src/define/`은 화면에 종속되지 않는 공통 도메인 상수를 관리한다. 사용처가 한 라우트여도 게임 시스템 자체의 분류·표시명은 이곳에 둘 수 있다. 게임 아이템 종류·콘텐츠·변질·능력치·공격 속성·공격 유형·강화 재료 정의는 `gameItems.ts`에 둔다. 화면 구성·동작에만 쓰는 상수는 사용하는 파일이나 라우트의 `_define/`에 둔다.
 - `src/providers/`는 전역 Context와 라이브러리 Provider를 조립한다.
 - `src/lib/`는 외부 서비스·라이브러리 연동 기반을 둔다. 현재 `supabase/`에는 DB 생성 타입이 있다. 도메인 데이터 접근은 `src/api/`에서 관리한다.
 - `src/utils/`는 여러 곳에서 쓰는 범용 일반 함수와 React 훅을 함께 관리한다. 훅이라는 이유로 별도 `src/hooks/`를 만들지 않으며, API·Query나 라우트 전용 코드를 이곳에 모으지 않는다.

@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import type { TGameItemType } from '@/api/gameItem/types';
-
-import { GAME_ITEM_TYPES } from './_define/gameItems';
+import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import CatalogClient from './CatalogClient';
 

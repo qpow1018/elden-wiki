@@ -6,53 +6,21 @@ import Image from 'next/image';
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
 import type { TGameItem, TGameItemType, TReqGetGameItems } from '@/api/gameItem/types';
 
-import { CONTENTS, GAME_ITEM_TYPES } from './_define/gameItems';
+import {
+  AFFINITIES,
+  ATTRIBUTES,
+  ELEMENTS,
+  ATTACK_TYPES,
+  UPGRADE_MATERIALS,
+  CONTENTS,
+  GAME_ITEM_TYPES,
+} from '@/define/gameItems';
 
 import Header from '@/components/common/header/Header';
 import CatalogFilters from './_component/CatalogFilters';
 import CatalogNavigation from './_component/CatalogNavigation';
 
 import styles from './CatalogClient.module.scss';
-
-const AFFINITIES: Record<string, string> = {
-  standard: '표준',
-  heavy: '중후',
-  keen: '예리',
-  quality: '상질',
-  fire: '화염',
-  flame_art: '화염술',
-  lightning: '벼락',
-  sacred: '신성',
-  magic: '마력',
-  cold: '냉기',
-  poison: '독',
-  blood: '피',
-  occult: '신비',
-};
-const ATTRIBUTES = [
-  ['strength', '근력'],
-  ['dexterity', '기량'],
-  ['intelligence', '지력'],
-  ['faith', '신앙'],
-  ['arcane', '신비'],
-] as const;
-const ELEMENTS = [
-  ['physical', '물리'],
-  ['magic', '마력'],
-  ['fire', '화염'],
-  ['lightning', '벼락'],
-  ['holy', '신성'],
-] as const;
-const ATTACK_TYPES: Record<string, string> = {
-  standard: '표준',
-  slash: '참격',
-  strike: '타격',
-  pierce: '관통',
-};
-const UPGRADE_MATERIALS: Record<string, string> = {
-  smithing_stone: '단석',
-  somber_smithing_stone: '색 잃은 단석',
-};
 
 export default function CatalogClient(props: { type: TGameItemType }) {
   const { type } = props;
