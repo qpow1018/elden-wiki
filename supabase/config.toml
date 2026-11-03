@@ -69,7 +69,7 @@ schema_paths = []
 enabled = true
 # Specifies an ordered list of seed files to load during db reset.
 # Supports glob patterns relative to supabase directory: "./seeds/*.sql"
-sql_paths = ["./seed.sql", "./seeds/weapons/daggers.sql", "./seeds/weapons/throwingBlades.sql", "./seeds/weapons/whips.sql", "./seeds/weapons/fists.sql", "./seeds/weapons/handToHandArts.sql", "./seeds/weapons/claws.sql", "./seeds/weapons/beastClaws.sql", "./seeds/weapons/perfumeBottles.sql", "./seeds/weapons/straightSwords.sql", "./seeds/weapons/lightGreatswords.sql"]
+sql_paths = ["./seed.sql", "./seeds/weapons/daggers.sql", "./seeds/weapons/throwingBlades.sql", "./seeds/weapons/whips.sql", "./seeds/weapons/fists.sql", "./seeds/weapons/handToHandArts.sql", "./seeds/weapons/claws.sql", "./seeds/weapons/beastClaws.sql", "./seeds/weapons/perfumeBottles.sql", "./seeds/weapons/straightSwords.sql", "./seeds/weapons/lightGreatswords.sql", "./seeds/weapons/thrustingSwords.sql"]
 
 [db.network_restrictions]
 # Enable management of network restrictions.
