@@ -75,6 +75,8 @@ export type TWeapon = {
   frostbite: number | null;
   poison: number | null;
   scarletRot: number | null;
+  sleep: number | null;
+  madness: number | null;
   weaponSkills: TWeaponSkill | null;
   weaponScalings: TWeaponScaling[];
 };

@@ -53,4 +53,5 @@ export const ATTACK_TYPES: Record<string, string> = {
 export const UPGRADE_MATERIALS: Record<string, string> = {
   smithing_stone: '단석',
   somber_smithing_stone: '색 잃은 단석',
+  none: '강화 불가',
 };

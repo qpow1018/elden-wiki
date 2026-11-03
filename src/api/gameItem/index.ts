@@ -126,6 +126,8 @@ export async function getGameItems({
               frostbite: weapon.frostbite,
               poison: weapon.poison,
               scarletRot: weapon.scarlet_rot,
+              sleep: weapon.sleep,
+              madness: weapon.madness,
               weaponSkills: weapon.weapon_skills
                 ? {
                     name: weapon.weapon_skills.name,
