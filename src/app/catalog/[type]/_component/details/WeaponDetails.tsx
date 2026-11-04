@@ -1,5 +1,9 @@
+import { useState } from 'react';
+
 import type { TWeapon } from '@/api/gameItem/types';
 import { AFFINITIES, ATTACK_TYPES, ATTRIBUTES, UPGRADE_MATERIALS } from '@/define/gameItems';
+
+import Modal from '@/components/common/modal/Modal';
 
 import styles from './WeaponDetails.module.scss';
 
@@ -12,6 +16,9 @@ export default function WeaponDetails({
   name: string;
   effectDescription: string | null;
 }) {
+  const [isSkillOpen, setIsSkillOpen] = useState(false);
+  const upgradeMaterial = weapon.upgradeMaterial;
+
   const attackTypes = weapon.physicalAttackTypes
     ?.map((type) => ATTACK_TYPES[type] ?? type)
     .join(' / ');
@@ -36,48 +43,89 @@ export default function WeaponDetails({
 
   return (
     <div className={styles['weapon-details']}>
-      <section className={styles['overview']}>
-        <h3>무기 정보</h3>
-        <dl>
-          {(
-            [
-              ['중량', weapon.weight],
-              ['공격 속성', attackTypes === '' ? '없음' : attackTypes],
+      <div className={styles['overview']}>
+        <div className={styles['highlights']}>
+          <dl className={styles['attack-type']}>
+            <dt>공격 속성</dt>
+            <dd>{formatValue(attackTypes === '' ? '없음' : attackTypes)}</dd>
+          </dl>
+          <span
+            className={styles['material-badge']}
+            data-material={upgradeMaterial ?? 'unknown'}
+            aria-label={`강화 재료: ${formatValue(upgradeMaterial === null ? null : (UPGRADE_MATERIALS[upgradeMaterial] ?? upgradeMaterial))}`}
+          >
+            {formatValue(
+              upgradeMaterial === null
+                ? null
+                : (UPGRADE_MATERIALS[upgradeMaterial] ?? upgradeMaterial),
+            )}
+          </span>
+        </div>
+        <dl className={styles['summary-rows']}>
+          <div>
+            <dt>중량</dt>
+            <dd>{formatValue(weapon.weight)}</dd>
+          </div>
+          <div>
+            <dt>변질</dt>
+            <dd>{affinityAvailability}</dd>
+          </div>
+          <div>
+            <dt>전투 기술</dt>
+            <dd>
+              {weapon.weaponSkills ? (
+                <button
+                  type="button"
+                  className={styles['skill-button']}
+                  aria-haspopup="dialog"
+                  onClick={() => setIsSkillOpen(true)}
+                >
+                  {weapon.weaponSkills.name}
+                  <span aria-hidden="true">›</span>
+                </button>
+              ) : (
+                '미확인'
+              )}
+            </dd>
+          </div>
+        </dl>
+        <section className={styles['requirements']}>
+          <h3>필요 능력치</h3>
+          <dl>
+            {(
               [
-                '강화 재료',
-                weapon.upgradeMaterial === null
-                  ? null
-                  : (UPGRADE_MATERIALS[weapon.upgradeMaterial] ?? weapon.upgradeMaterial),
-              ],
-              ['변질', affinityAvailability],
-            ] as const
-          ).map(([label, value]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{formatValue(value)}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-      <section className={styles['requirements']}>
-        <h3>필요 능력치</h3>
-        <dl>
-          {(
-            [
-              ['근력', weapon.requiredStrength],
-              ['기량', weapon.requiredDexterity],
-              ['지력', weapon.requiredIntelligence],
-              ['신앙', weapon.requiredFaith],
-              ['신비', weapon.requiredArcane],
-            ] as const
-          ).map(([label, value]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{formatValue(value)}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
+                ['근력', weapon.requiredStrength],
+                ['기량', weapon.requiredDexterity],
+                ['지력', weapon.requiredIntelligence],
+                ['신앙', weapon.requiredFaith],
+                ['신비', weapon.requiredArcane],
+              ] as const
+            ).map(([label, value]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{formatValue(value)}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      </div>
+      {weapon.weaponSkills && (
+        <Modal
+          isOpen={isSkillOpen}
+          onClose={() => setIsSkillOpen(false)}
+          title={weapon.weaponSkills.name}
+          isCloseOnBackdropClick
+        >
+          <div className={styles['skill-details']}>
+            <p className={styles['skill-cost']}>
+              소비 FP <strong>{formatValue(weapon.weaponSkills.fpCostText)}</strong>
+            </p>
+            <p className={styles['description']}>
+              {weapon.weaponSkills.description ?? '기술 설명이 아직 등록되지 않았습니다.'}
+            </p>
+          </div>
+        </Modal>
+      )}
       <section className={styles['basic-scaling']}>
         <h3>기본 능력 보정</h3>
         <p className={styles['basis']}>
@@ -116,24 +164,6 @@ export default function WeaponDetails({
               </div>
             ))}
           </dl>
-        )}
-      </section>
-      <section className={styles['skill']}>
-        <h3>전투 기술</h3>
-        {weapon.weaponSkills ? (
-          <>
-            <div className={styles['skill-heading']}>
-              <h4>{weapon.weaponSkills.name}</h4>
-              <span>
-                소비 FP <strong>{formatValue(weapon.weaponSkills.fpCostText)}</strong>
-              </span>
-            </div>
-            <p className={styles['description']}>
-              {weapon.weaponSkills.description ?? '기술 설명이 아직 등록되지 않았습니다.'}
-            </p>
-          </>
-        ) : (
-          <p className={styles['muted']}>전투 기술이 아직 등록되지 않았습니다.</p>
         )}
       </section>
       <section className={styles['combat']}>
