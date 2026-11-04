@@ -44,5 +44,9 @@ values
   ('소형 방패', 'other_weapon', 390),
   ('중형 방패', 'other_weapon', 400),
   ('대형 방패', 'other_weapon', 410),
-  ('관통 방패', 'other_weapon', 420)
+  ('관통 방패', 'other_weapon', 420),
+  ('투구', 'armor', 10),
+  ('갑옷', 'armor', 20),
+  ('장갑', 'armor', 30),
+  ('각반', 'armor', 40)
 on conflict (type, name) do nothing;
