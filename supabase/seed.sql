@@ -51,5 +51,7 @@ values
   ('각반', 'armor', 40),
   ('탈리스만', 'talisman', 10),
   ('뼛가루', 'spirit_ash', 10),
-  ('전회', 'ash_of_war', 10)
+  ('전회', 'ash_of_war', 10),
+  ('마술', 'spell', 10),
+  ('기도', 'spell', 20)
 on conflict (type, name) do nothing;
