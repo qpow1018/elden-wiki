@@ -49,5 +49,6 @@ values
   ('갑옷', 'armor', 20),
   ('장갑', 'armor', 30),
   ('각반', 'armor', 40),
-  ('탈리스만', 'talisman', 10)
+  ('탈리스만', 'talisman', 10),
+  ('뼛가루', 'spirit_ash', 10)
 on conflict (type, name) do nothing;
