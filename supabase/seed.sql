@@ -53,5 +53,6 @@ values
   ('뼛가루', 'spirit_ash', 10),
   ('전회', 'ash_of_war', 10),
   ('마술', 'spell', 10),
-  ('기도', 'spell', 20)
+  ('기도', 'spell', 20),
+  ('결정 물방울', 'crystal_tear', 10)
 on conflict (type, name) do nothing;
