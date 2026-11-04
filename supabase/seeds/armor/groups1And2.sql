@@ -8,8 +8,8 @@ begin
     raise exception '방어구 부위 분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
-    select i.category_id, i.name from public.game_items i
-    where i.type = 'armor' group by i.category_id, i.name having count(*) > 1
+    select i.category_id, i.name, i.content_code from public.game_items i
+    where i.type = 'armor' group by i.category_id, i.name, i.content_code having count(*) > 1
   ) then raise exception '중복된 방어구를 확인해야 합니다.';
   end if;
 end;
@@ -918,4 +918,4 @@ HP와 맞바꿔 지력과 신앙을 높인다.
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description)
 select s.name, 'armor', c.id, s.sort_order, s.content_code, s.game_description
 from source s join public.game_item_categories c on c.type = 'armor' and c.name = s.category
-where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name);
+where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name and i.content_code = s.content_code);
