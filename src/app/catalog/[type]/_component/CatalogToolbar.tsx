@@ -7,7 +7,7 @@ import { GAME_ITEM_TYPES } from '@/define/gameItems';
 import Button from '@/components/common/button/Button';
 import BottomModal from '@/components/common/modal/BottomModal';
 
-import styles from './CatalogFilters.module.scss';
+import styles from './CatalogToolbar.module.scss';
 
 import { MdCheck, MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -19,7 +19,7 @@ const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = 
   spell: { categoryLabel: '주문 종류' },
 };
 
-type TCatalogFiltersProps = {
+type TCatalogToolbarProps = {
   params: {
     type: TGameItemType;
     categoryId: number | undefined;
@@ -27,7 +27,7 @@ type TCatalogFiltersProps = {
   onChange: (filters: { categoryId: number | undefined }) => void;
 };
 
-export default function CatalogFilters({ params, onChange }: TCatalogFiltersProps) {
+export default function CatalogToolbar({ params, onChange }: TCatalogToolbarProps) {
   const typeLabel = GAME_ITEM_TYPES[params.type];
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const categoriesQuery = gameItemQuery.useGetGameItemCategories();
@@ -43,7 +43,7 @@ export default function CatalogFilters({ params, onChange }: TCatalogFiltersProp
   }
 
   return (
-    <section className={styles['catalog-filters']} aria-label="아이템 분류">
+    <section className={styles['catalog-toolbar']} aria-label="아이템 분류">
       <div className={styles['toolbar']}>
         <div className={styles['classification']}>
           {typeFilter ? (

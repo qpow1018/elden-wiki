@@ -10,7 +10,7 @@ import ErrorState from '@/components/common/error/ErrorState';
 import Header from '@/components/common/header/Header';
 import InfiniteScroll from '@/components/common/infiniteScroll/InfiniteScroll';
 import BoxLoading from '@/components/common/loading/BoxLoading';
-import CatalogFilters from './_component/CatalogFilters';
+import CatalogToolbar from './_component/CatalogToolbar';
 import CatalogNavigation from './_component/CatalogNavigation';
 import GameItemDetails from './_component/GameItemDetails';
 
@@ -55,7 +55,7 @@ export default function CatalogClient(props: { type: TGameItemType }) {
       <Header title="아이템 도감" />
 
       <CatalogNavigation type={type} />
-      <CatalogFilters params={{ ...params, type }} onChange={handleFilterChange} />
+      <CatalogToolbar params={{ ...params, type }} onChange={handleFilterChange} />
 
       {isLoading && <BoxLoading />}
       {isError && !data && (
