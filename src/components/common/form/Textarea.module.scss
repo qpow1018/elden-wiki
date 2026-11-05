@@ -14,7 +14,7 @@
   }
 
   &.is-readonly {
-    background: $bg-light;
+    opacity: 0.7;
   }
 
   > textarea {

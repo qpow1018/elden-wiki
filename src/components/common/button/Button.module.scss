@@ -58,10 +58,22 @@
   }
 
   &.theme-gray {
-    @include button-theme($gray-600, $gray-300, $gray-500, rgba($gray-600, 0.1), $text-primary);
+    @include button-theme(
+      $gray-600,
+      $text-secondary,
+      $gray-500,
+      rgba($gray-600, 0.1),
+      $text-primary
+    );
 
-    &.fill-solid:hover:not(:disabled) {
-      color: $gray-900;
+    &.fill-solid {
+      background-color: $gray-700;
+      border-color: $gray-700;
+
+      &:hover:not(:disabled) {
+        background-color: $gray-600;
+        border-color: $gray-600;
+      }
     }
   }
 

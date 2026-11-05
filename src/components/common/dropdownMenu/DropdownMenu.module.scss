@@ -13,7 +13,7 @@
     list-style: none;
     min-width: 160px;
     border-radius: $border-radius;
-    background-color: $bg-light;
+    background-color: $bg;
     border: 1px solid $border;
     box-shadow: $shadow-popover;
 
@@ -31,7 +31,7 @@
       transition: background-color $transition;
 
       &:hover {
-        background-color: $bg-accent;
+        background-color: $bg-light;
       }
     }
   }

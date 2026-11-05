@@ -44,7 +44,7 @@
     align-items: flex-start;
     gap: 12px;
     padding-bottom: 16px;
-    border-bottom: 1px solid $border-soft;
+    border-bottom: 1px solid $border;
   }
 
   .attack-type {
@@ -133,7 +133,7 @@
 
   .requirements {
     padding-top: 16px;
-    border-top: 1px solid $border-soft;
+    border-top: 1px solid $border;
 
     h3 {
       color: $text-secondary;
@@ -147,7 +147,7 @@
 
     dl > div {
       text-align: center;
-      border-right: 1px solid $border-soft;
+      border-right: 1px solid $border;
 
       &:last-child {
         border-right: 0;
@@ -285,7 +285,7 @@
   }
 
   .description {
-    color: $gray-200;
+    color: $text-primary;
     white-space: pre-wrap;
   }
 }
@@ -304,7 +304,7 @@
   }
 
   .description {
-    color: $gray-200;
+    color: $text-primary;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
   }

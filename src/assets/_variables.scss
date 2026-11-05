@@ -3,14 +3,16 @@ $white: #fff;
 $black: #000;
 
 // Gray — steel-toned neutrals
+// OKLCH 기준: 100·900 유지, 중간 단계는 hue 약 250°의 저채도 색상.
+// 텍스트(100~500)와 어두운 표면(600~900)의 역할에 맞춰 명도 간격을 조정한다.
 $gray-100: #e4edf3;
-$gray-200: #d1dfe9;
-$gray-300: #b3c9dd;
-$gray-400: #9cabbc;
-$gray-500: #6f8499;
-$gray-600: #304253;
-$gray-700: #263e54;
-$gray-800: #1b2936;
+$gray-200: #cfd9e3;
+$gray-300: #b7c2cf;
+$gray-400: #9ca9b8;
+$gray-500: #8594a4;
+$gray-600: #536272;
+$gray-700: #364453;
+$gray-800: #202d39;
 $gray-900: #121b25;
 
 // Steel
@@ -94,13 +96,13 @@ $error-surface: #573236;
 
 // Text
 $text-primary: $gray-100;
-$text-secondary: $gray-400;
-$text-muted: $gray-500;
+$text-secondary: $gray-300;
+$text-muted: $gray-400;
 
 // Border
-$border-soft: $gray-700;
-$border: $gray-600;
-$border-strong: $gray-500;
+$border-soft: $gray-800;
+$border: $gray-700;
+$border-strong: $gray-600;
 
 // Focus
 $focus-ring: $steel-accent;

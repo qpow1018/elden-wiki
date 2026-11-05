@@ -48,7 +48,7 @@
     overflow-y: auto;
     border: 1px solid $border;
     border-radius: $border-radius;
-    background: $bg-light;
+    background: $bg;
     box-shadow: $shadow-popover;
     list-style: none;
     outline: none;
@@ -62,7 +62,7 @@
 
       &.is-active:not([aria-disabled='true']),
       &:hover:not([aria-disabled='true']) {
-        background: $bg-accent;
+        background: $bg-light;
       }
 
       &.is-selected {

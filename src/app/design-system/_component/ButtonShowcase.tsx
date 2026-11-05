@@ -5,7 +5,7 @@ import styles from '@/app/design-system/DesignSystem.module.scss';
 const BUTTON_THEMES: { theme: TButtonTheme; label: string; token: string }[] = [
   { theme: 'teal', label: 'Teal', token: '$teal' },
   { theme: 'steel', label: 'Steel', token: '$steel' },
-  { theme: 'gray', label: 'Gray', token: '$gray-600' },
+  { theme: 'gray', label: 'Gray', token: '$gray-700' },
   { theme: 'brass', label: 'Brass', token: '$brass' },
   { theme: 'lavender', label: 'Lavender', token: '$lavender' },
   { theme: 'error', label: 'Error', token: '$error' },
