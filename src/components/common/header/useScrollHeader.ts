@@ -26,7 +26,7 @@ export default function useScrollHeader() {
 
     function updateVisibility(nextIsHidden: boolean) {
       isHidden = nextIsHidden;
-      header.dataset.hidden = String(isHidden);
+      header.style.setProperty('--header-height', `${headerHeight}px`);
       container.style.setProperty('--header-offset', isHidden ? '0px' : `${headerHeight}px`);
     }
 
@@ -73,6 +73,7 @@ export default function useScrollHeader() {
       resizeObserver.disconnect();
       window.removeEventListener('scroll', handleScroll);
       header.removeEventListener('focusin', handleFocusIn);
+      header.style.removeProperty('--header-height');
       container.style.removeProperty('--header-offset');
     };
   }, []);

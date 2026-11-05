@@ -1,7 +1,11 @@
 .catalog-toolbar {
+  position: sticky;
+  top: var(--header-offset, #{$header-height});
+  z-index: $z-index-header - 1;
   padding: 0 16px;
   border-bottom: 1px solid $border;
   background: $bg;
+  transition: top $header-transition;
 
   .toolbar {
     display: flex;
@@ -61,6 +65,12 @@
     padding-bottom: 8px;
     color: $text-secondary;
     font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-toolbar {
+    transition: none;
   }
 }
 
