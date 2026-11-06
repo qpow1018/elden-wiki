@@ -6,239 +6,298 @@
   font-size: 13px;
   font-variant-numeric: tabular-nums;
 
-  section {
-    min-width: 0;
-  }
-
-  h3 {
-    margin-bottom: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    color: $text-primary;
-  }
-
-  dt,
-  .note,
-  .basis,
-  .muted {
-    color: $text-secondary;
-  }
-
-  .note,
-  .basis {
-    margin-top: -6px;
-    margin-bottom: 12px;
-    font-size: 12px;
-  }
-
-  .attack-type {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    min-width: 0;
-  }
-
-  .overview .label {
-    flex-shrink: 0;
-    color: $text-muted;
-  }
-
-  .attack-badge,
-  .material-badge {
-    padding: 6px 10px;
-    border-radius: $border-radius;
-    background: $steel-tint;
-    color: $text-primary;
-    font-size: 12px;
-    font-weight: 500;
-    overflow-wrap: anywhere;
-  }
-
-  .material-badge {
-    &[data-material='smithing_stone'],
-    &[data-material='somber_smithing_stone'] {
-      color: $brass-light;
-      background: $brass-tint;
-    }
-  }
-
-  .summary-rows {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 28px;
-    padding: 8px 0;
-
-    > div {
+  .overview {
+    .attack-type {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
       min-width: 0;
-      max-width: 100%;
-      min-height: 36px;
     }
 
-    .skill-row {
-      flex-basis: 100%;
+    .label {
+      flex-shrink: 0;
+      color: $text-muted;
     }
 
-    > div > span:last-child {
-      min-width: 0;
+    .attack-badge,
+    .material-badge {
+      padding: 6px 10px;
+      border-radius: $border-radius;
+      background: $steel-tint;
+      color: $text-primary;
+      font-size: 12px;
+      font-weight: 500;
       overflow-wrap: anywhere;
     }
+
+    .material-badge {
+      &[data-material='smithing_stone'],
+      &[data-material='somber_smithing_stone'] {
+        color: $brass-light;
+        background: $brass-tint;
+      }
+    }
+
+    .summary-rows {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0 28px;
+      padding: 8px 0;
+
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        max-width: 100%;
+        min-height: 36px;
+      }
+
+      .skill-row {
+        flex-basis: 100%;
+      }
+
+      > div > span:last-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+    }
+
+    .skill-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      max-width: 100%;
+      text-align: left;
+      overflow-wrap: anywhere;
+      cursor: pointer;
+
+      .skill-name {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .skill-icon {
+        flex-shrink: 0;
+        color: $text-secondary;
+      }
+
+      &:hover {
+        color: $steel-light;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: 3px;
+      }
+    }
+
+    .requirements {
+      h3 {
+        margin-bottom: 8px;
+        color: $text-muted;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .requirement-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        border: 1px solid $border;
+        border-radius: $border-radius;
+        overflow: hidden;
+      }
+
+      .requirement-grid > div {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        text-align: center;
+
+        & + div {
+          border-left: 1px solid $border;
+        }
+      }
+
+      .label {
+        padding: 6px 4px;
+        background: $steel-tint;
+        border-bottom: 1px solid $border;
+        font-size: 12px;
+      }
+
+      .requirement-value {
+        padding: 6px 4px;
+        color: $text-primary;
+        font-size: 14px;
+        overflow-wrap: anywhere;
+      }
+    }
   }
 
-  .skill-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    max-width: 100%;
-    text-align: left;
-    overflow-wrap: anywhere;
-    cursor: pointer;
-
-    .skill-name {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .skill-icon {
-      flex-shrink: 0;
-      color: $text-secondary;
-    }
-
-    &:hover {
-      color: $steel-light;
-    }
-
-    &:focus-visible {
-      outline: 2px solid $focus-ring;
-      outline-offset: 3px;
-    }
-  }
-
-  .requirements {
-    h3 {
-      margin-bottom: 8px;
+  .combat-stats {
+    .combat-basis {
+      margin-bottom: 12px;
       color: $text-muted;
       font-size: 12px;
     }
 
-    .requirement-grid {
+    .combat-columns {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      border: 1px solid $border;
-      border-radius: $border-radius;
-      overflow: hidden;
-    }
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
 
-    .requirement-grid > div {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      text-align: center;
+      > section {
+        min-width: 0;
+        border: 1px solid $border;
+        border-radius: $border-radius;
+        overflow: hidden;
+      }
 
-      & + div {
-        border-left: 1px solid $border;
+      h3 {
+        margin-bottom: 0;
+        padding: 10px 12px;
+        background: $steel-tint;
+        font-size: 13px;
+        font-weight: 500;
+        color: $text-primary;
+      }
+
+      .combat-values {
+        padding: 0 12px 4px;
       }
     }
 
-    .label {
-      padding: 6px 4px;
-      background: $steel-tint;
-      border-bottom: 1px solid $border;
-      font-size: 12px;
+    .combat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+
+      &:last-child {
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid $border;
+      }
     }
 
-    .requirement-value {
-      padding: 6px 4px;
-      color: $text-primary;
-      font-size: 14px;
-      overflow-wrap: anywhere;
-    }
-  }
-
-  .basic-scaling dl {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    text-align: center;
-    padding: 12px 0;
-    border-block: 1px solid $border-soft;
-
-    dt {
-      font-size: 12px;
-    }
-    dd {
-      margin-top: 6px;
-      color: $brass-light;
-      font-size: 18px;
-    }
-  }
-
-  .combat-basis {
-    margin-bottom: 12px;
-    color: $text-muted;
-    font-size: 12px;
-  }
-
-  .combat-columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-
-    > section {
-      border: 1px solid $border;
-      border-radius: $border-radius;
-      overflow: hidden;
-    }
-
-    h3 {
-      margin-bottom: 0;
-      padding: 10px 12px;
-      background: $steel-tint;
+    .combat-label {
+      color: $text-secondary;
       font-size: 13px;
     }
 
-    .combat-values {
-      padding: 0 12px 4px;
+    .combat-value {
+      min-width: 0;
+      text-align: right;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .attack-column .combat-value {
+      color: $brass-light;
     }
   }
 
-  .combat-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    min-height: 34px;
-
-    &:last-child {
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid $border;
-    }
-  }
-
-  .combat-label {
-    color: $text-secondary;
-    font-size: 13px;
-  }
-
-  .combat-value {
+  .basic-scaling {
     min-width: 0;
-    text-align: right;
-    font-size: 13px;
-    overflow-wrap: anywhere;
-  }
 
-  .attack-column .combat-value {
-    color: $brass-light;
+    h3 {
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-primary;
+    }
+
+    .basis {
+      margin-top: -6px;
+      margin-bottom: 12px;
+      color: $text-secondary;
+      font-size: 12px;
+    }
+
+    .muted {
+      color: $text-secondary;
+    }
+
+    dl {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      text-align: center;
+      padding: 12px 0;
+      border-block: 1px solid $border-soft;
+
+      dt {
+        color: $text-secondary;
+        font-size: 12px;
+      }
+      dd {
+        margin-top: 6px;
+        color: $brass-light;
+        font-size: 18px;
+      }
+    }
   }
 
   .effects {
+    min-width: 0;
     padding: 14px 16px;
     background: $teal-tint;
     border-left: 2px solid $teal;
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-primary;
+    }
+
+    .description {
+      color: $text-primary;
+      white-space: pre-wrap;
+    }
+  }
+
+  .buildup {
+    min-width: 0;
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-primary;
+    }
+
+    .note {
+      margin-top: -6px;
+      margin-bottom: 12px;
+      color: $text-secondary;
+      font-size: 12px;
+    }
+
+    .muted {
+      color: $text-secondary;
+    }
+
+    dl {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 10px 0;
+        border-bottom: 1px solid $border-soft;
+      }
+    }
+
+    dt {
+      color: $text-secondary;
+    }
   }
 
   .scaling {
@@ -258,68 +317,53 @@
     &[open] summary {
       margin-bottom: 12px;
     }
-  }
 
-  .scaling-scroll {
-    overflow-x: auto;
-    border: 1px solid $border-soft;
-    border-radius: $border-radius;
-
-    &:focus-visible {
-      outline: 2px solid $focus-ring;
-      outline-offset: 3px;
-    }
-
-    table {
-      width: 100%;
-      text-align: center;
-      font-size: 12px;
-    }
-
-    th,
-    td {
-      padding: 10px 6px;
-      white-space: nowrap;
-      border-bottom: 1px solid $border-soft;
-    }
-
-    thead th {
+    .muted {
       color: $text-secondary;
-      font-weight: 400;
-      background: $bg-dark;
     }
 
-    tbody th {
-      color: $brass-light;
-      font-weight: 500;
+    .scaling-scroll {
+      overflow-x: auto;
+      border: 1px solid $border-soft;
+      border-radius: $border-radius;
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: 3px;
+      }
+
+      table {
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      th,
+      td {
+        padding: 10px 6px;
+        white-space: nowrap;
+        border-bottom: 1px solid $border-soft;
+      }
+
+      thead th {
+        color: $text-secondary;
+        font-weight: 400;
+        background: $bg-dark;
+      }
+
+      tbody th {
+        color: $brass-light;
+        font-weight: 500;
+      }
+
+      tbody tr:nth-child(even) {
+        background: $steel-tint;
+      }
+
+      tbody tr:last-child > * {
+        border-bottom: 0;
+      }
     }
-
-    tbody tr:nth-child(even) {
-      background: $steel-tint;
-    }
-
-    tbody tr:last-child > * {
-      border-bottom: 0;
-    }
-  }
-
-  .buildup dl {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 24px;
-
-    div {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 10px 0;
-      border-bottom: 1px solid $border-soft;
-    }
-  }
-
-  .description {
-    color: $text-primary;
-    white-space: pre-wrap;
   }
 }
 
