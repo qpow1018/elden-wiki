@@ -34,6 +34,7 @@ export default function WeaponDetails({
   return (
     <div className={styles['weapon-details']}>
       <WeaponOverview weapon={weapon} />
+      <WeaponCombatStats weapon={weapon} />
 
       <section className={styles['basic-scaling']}>
         <h3>기본 능력 보정</h3>
@@ -74,52 +75,6 @@ export default function WeaponDetails({
             ))}
           </dl>
         )}
-      </section>
-      <section className={styles['combat']}>
-        <h3>공격력</h3>
-        <p className={styles['basis']}>
-          최대 강화 기준{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
-        </p>
-        <dl className={styles['values']}>
-          {(
-            [
-              ['물리', weapon.attackPhysical],
-              ['마력', weapon.attackMagic],
-              ['화염', weapon.attackFire],
-              ['벼락', weapon.attackLightning],
-              ['신성', weapon.attackHoly],
-              ['치명', weapon.critical],
-            ] as const
-          ).map(([label, value]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{formatValue(value)}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-      <section className={styles['guard']}>
-        <h3>가드 성능</h3>
-        <p className={styles['basis']}>
-          최대 강화 기준{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
-        </p>
-        <dl className={styles['values']}>
-          {(
-            [
-              ['물리 경감률', weapon.guardPhysical],
-              ['마력 경감률', weapon.guardMagic],
-              ['화염 경감률', weapon.guardFire],
-              ['벼락 경감률', weapon.guardLightning],
-              ['신성 경감률', weapon.guardHoly],
-              ['가드 강도', weapon.guardBoost],
-            ] as const
-          ).map(([label, value]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{formatValue(value)}</dd>
-            </div>
-          ))}
-        </dl>
       </section>
       {weapon.canChangeAffinity === true && (
         <details className={styles['scaling']}>
@@ -269,6 +224,61 @@ function WeaponOverview({ weapon }: { weapon: TWeapon }) {
         </Modal>
       )}
     </>
+  );
+}
+
+function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
+  const groups = [
+    {
+      title: '공격력',
+      className: 'attack-column',
+      values: [
+        ['물리', weapon.attackPhysical],
+        ['마력', weapon.attackMagic],
+        ['화염', weapon.attackFire],
+        ['벼락', weapon.attackLightning],
+        ['신성', weapon.attackHoly],
+        ['치명', weapon.critical],
+      ],
+    },
+    {
+      title: '가드 성능',
+      className: 'guard-column',
+      values: [
+        ['물리', weapon.guardPhysical],
+        ['마력', weapon.guardMagic],
+        ['화염', weapon.guardFire],
+        ['벼락', weapon.guardLightning],
+        ['신성', weapon.guardHoly],
+        ['가드 강도', weapon.guardBoost],
+      ],
+    },
+  ] as const;
+
+  return (
+    <div className={styles['combat-stats']}>
+      <p className={styles['combat-basis']}>
+        최대 강화{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
+      </p>
+      <div className={styles['combat-columns']}>
+        {groups.map((group) => (
+          <section className={styles[group.className]} key={group.title}>
+            <h3>{group.title}</h3>
+            <div className={styles['combat-values']}>
+              {group.values.map(([label, value], index) => (
+                <div className={styles['combat-row']} key={label}>
+                  <span className={styles['combat-label']}>{label}</span>
+                  <span className={styles['combat-value']}>
+                    {formatValue(value)}
+                    {group.className === 'guard-column' && index < 5 && value != null ? '%' : ''}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
   );
 }
 

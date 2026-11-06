@@ -176,23 +176,63 @@
     }
   }
 
-  .values {
+  .combat-basis {
+    margin-bottom: 12px;
+    color: $text-muted;
+    font-size: 12px;
+  }
+
+  .combat-columns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 24px;
+    gap: 12px;
 
-    div {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 10px 0;
-      border-bottom: 1px solid $border-soft;
+    > section {
+      border: 1px solid $border;
+      border-radius: $border-radius;
+      overflow: hidden;
+    }
+
+    h3 {
+      margin-bottom: 0;
+      padding: 10px 12px;
+      background: $steel-tint;
+      font-size: 13px;
+    }
+
+    .combat-values {
+      padding: 0 12px 4px;
     }
   }
 
-  .combat dd {
+  .combat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+
+    &:last-child {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid $border;
+    }
+  }
+
+  .combat-label {
+    color: $text-secondary;
+    font-size: 13px;
+  }
+
+  .combat-value {
+    min-width: 0;
+    text-align: right;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+
+  .attack-column .combat-value {
     color: $brass-light;
-    font-weight: 500;
   }
 
   .effects {
