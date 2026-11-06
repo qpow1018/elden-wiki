@@ -1,0 +1,30 @@
+.scroll-to-top {
+  position: fixed;
+  right: max(16px, calc((100% - $page-mobile-width) / 2 + 16px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: $z-index-popover;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid $border-strong;
+  border-radius: $border-radius;
+  background-color: $bg;
+  color: $text-primary;
+  cursor: pointer;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    background-color: $bg-light;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $focus-ring;
+    outline-offset: 2px;
+  }
+}

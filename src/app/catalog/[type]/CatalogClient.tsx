@@ -10,6 +10,7 @@ import ErrorState from '@/components/common/error/ErrorState';
 import Header from '@/components/common/header/Header';
 import InfiniteScroll from '@/components/common/infiniteScroll/InfiniteScroll';
 import BoxLoading from '@/components/common/loading/BoxLoading';
+import ScrollToTop from '@/components/common/scrollToTop/ScrollToTop';
 import CatalogToolbar from './_component/CatalogToolbar';
 import CatalogNavigation from './_component/CatalogNavigation';
 import GameItemDetails from './_component/GameItemDetails';
@@ -82,6 +83,7 @@ export default function CatalogClient(props: { type: TGameItemType }) {
           ))}
         </InfiniteScroll>
       )}
+      <ScrollToTop />
     </main>
   );
 }
