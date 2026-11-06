@@ -9,22 +9,13 @@ import styles from './WeaponDetails.module.scss';
 
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
-export default function WeaponDetails({
-  weapon,
-  name,
-  effectDescription,
-}: {
-  weapon: TWeapon;
-  name: string;
-  effectDescription: string | null;
-}) {
+export default function WeaponDetails({ weapon, name }: { weapon: TWeapon; name: string }) {
   return (
     <div className={styles['weapon-details']}>
       <WeaponOverview weapon={weapon} />
       <WeaponCombatStats weapon={weapon} />
       <WeaponStatusEffects weapon={weapon} />
       <WeaponScaling weapon={weapon} name={name} />
-      {effectDescription && <WeaponEffects description={effectDescription} />}
     </div>
   );
 }
@@ -299,15 +290,6 @@ function WeaponScaling({ weapon, name }: { weapon: TWeapon; name: string }) {
         <p className={styles['note']}>변질별 능력 보정 정보가 아직 등록되지 않았습니다.</p>
       )}
       {weapon.canChangeAffinity == null && <p className={styles['note']}>변질 가능 여부 미확인</p>}
-    </section>
-  );
-}
-
-function WeaponEffects({ description }: { description: string }) {
-  return (
-    <section className={styles['effects']}>
-      <h3>부가 효과</h3>
-      <p className={styles['description']}>{description}</p>
     </section>
   );
 }

@@ -340,6 +340,7 @@
       min-height: 44px;
       padding: 8px 12px;
       border-top: 1px solid $border;
+      background: transparent;
       color: $text-secondary;
       font-size: 13px;
       cursor: pointer;
@@ -350,7 +351,6 @@
 
       &:hover {
         color: $text-primary;
-        background: $steel-tint;
       }
 
       &:focus-visible {
@@ -363,25 +363,6 @@
       margin-top: 10px;
       color: $text-muted;
       font-size: 12px;
-    }
-  }
-
-  .effects {
-    min-width: 0;
-    padding: 14px 16px;
-    background: $teal-tint;
-    border-left: 2px solid $teal;
-
-    h3 {
-      margin-bottom: 12px;
-      font-size: 14px;
-      font-weight: 500;
-      color: $text-primary;
-    }
-
-    .description {
-      color: $text-primary;
-      white-space: pre-wrap;
     }
   }
 }

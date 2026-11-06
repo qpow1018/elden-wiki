@@ -49,11 +49,7 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
       </header>
 
       {hasWeaponDetails && gameItem.weaponDetails && (
-        <WeaponDetails
-          weapon={gameItem.weaponDetails}
-          name={gameItem.name}
-          effectDescription={gameItem.effectDescription}
-        />
+        <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
       )}
       {gameItem.type === 'armor' && gameItem.armorDetails && (
         <ArmorDetails armor={gameItem.armorDetails} />
@@ -68,8 +64,8 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
         <AshOfWarDetails ashOfWar={gameItem.ashOfWarDetails} />
       )}
 
-      {gameItem.effectDescription && !hasWeaponDetails && (
-        <Section title="고유 효과">
+      {gameItem.effectDescription && (
+        <Section title="부가 효과">
           <p className={styles['text']}>{gameItem.effectDescription}</p>
         </Section>
       )}
