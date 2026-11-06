@@ -31,77 +31,63 @@
     font-size: 12px;
   }
 
-  .overview {
-    padding: 16px;
-    background: $steel-tint;
-    border-radius: $border-radius;
-  }
-
-  .highlights {
+  .attack-type {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid $border;
+    gap: 8px;
+    min-width: 0;
   }
 
-  .attack-type {
-    min-width: 0;
+  .overview .label {
+    flex-shrink: 0;
+    color: $text-muted;
+  }
 
-    dt {
-      font-size: 12px;
-    }
-
-    dd {
-      margin-top: 6px;
-      color: $text-primary;
-      font-size: 18px;
-      font-weight: 500;
-      overflow-wrap: anywhere;
-    }
+  .attack-badge,
+  .material-badge {
+    padding: 6px 10px;
+    border-radius: $border-radius;
+    background: $steel-tint;
+    color: $text-primary;
+    font-size: 12px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
   }
 
   .material-badge {
-    padding: 6px 10px;
-    border: 1px solid $border;
-    border-radius: $border-radius;
-    color: $text-secondary;
-    font-size: 12px;
-    font-weight: 500;
-
     &[data-material='smithing_stone'] {
       color: $brass-light;
       background: $brass-tint;
-      border-color: rgba($brass, 0.4);
     }
 
     &[data-material='somber_smithing_stone'] {
       color: $lavender-light;
       background: $lavender-tint;
-      border-color: rgba($lavender, 0.4);
     }
   }
 
   .summary-rows {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 28px;
     padding: 8px 0;
 
     > div {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      min-height: 44px;
-    }
-
-    dt {
-      flex-shrink: 0;
-    }
-
-    dd {
+      gap: 12px;
       min-width: 0;
-      text-align: right;
+      max-width: 100%;
+      min-height: 36px;
+    }
+
+    .skill-row {
+      flex-basis: 100%;
+    }
+
+    > div > span:last-child {
+      min-width: 0;
       overflow-wrap: anywhere;
     }
   }
@@ -111,14 +97,19 @@
     align-items: center;
     gap: 8px;
     min-height: 44px;
-    text-align: right;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    max-width: 100%;
+    text-align: left;
+    overflow-wrap: anywhere;
     cursor: pointer;
 
-    span {
+    .skill-name {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .skill-icon {
+      flex-shrink: 0;
       color: $text-secondary;
-      text-decoration: none;
     }
 
     &:hover {
@@ -132,37 +123,43 @@
   }
 
   .requirements {
-    padding-top: 16px;
-    border-top: 1px solid $border;
-
     h3 {
-      color: $text-secondary;
+      margin-bottom: 8px;
+      color: $text-muted;
       font-size: 12px;
     }
 
-    dl {
+    .requirement-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
+      border: 1px solid $border;
+      border-radius: $border-radius;
+      overflow: hidden;
     }
 
-    dl > div {
+    .requirement-grid > div {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
       text-align: center;
-      border-right: 1px solid $border;
 
-      &:last-child {
-        border-right: 0;
+      & + div {
+        border-left: 1px solid $border;
       }
     }
 
-    dt {
+    .label {
+      padding: 6px 4px;
+      background: $steel-tint;
+      border-bottom: 1px solid $border;
       font-size: 12px;
     }
 
-    dd {
-      margin-top: 6px;
+    .requirement-value {
+      padding: 6px 4px;
       color: $text-primary;
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 14px;
+      overflow-wrap: anywhere;
     }
   }
 
@@ -291,7 +288,15 @@
 }
 
 .skill-details {
+  padding: 16px;
   font-size: 13px;
+
+  .skill-title {
+    margin-bottom: 8px;
+    color: $text-primary;
+    font-size: 15px;
+    font-weight: 500;
+  }
 
   .skill-cost {
     margin-bottom: 16px;
