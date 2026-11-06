@@ -261,43 +261,108 @@
     }
   }
 
-  .basic-scaling {
+  .scaling {
     min-width: 0;
 
-    h3 {
+    .scaling-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
       margin-bottom: 12px;
-      font-size: 14px;
-      font-weight: 500;
+    }
+
+    h3 {
       color: $text-primary;
+      font-size: 13px;
+      font-weight: 500;
     }
 
     .basis {
-      margin-top: -6px;
-      margin-bottom: 12px;
-      color: $text-secondary;
+      color: $text-muted;
       font-size: 12px;
     }
 
-    .muted {
-      color: $text-secondary;
+    .scaling-table {
+      border: 1px solid $border;
+      border-radius: $border-radius;
+      overflow: hidden;
     }
 
-    dl {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+    table {
+      width: 100%;
+      table-layout: fixed;
       text-align: center;
-      padding: 12px 0;
-      border-block: 1px solid $border-soft;
+    }
 
-      dt {
-        color: $text-secondary;
-        font-size: 12px;
-      }
-      dd {
-        margin-top: 6px;
+    th,
+    td {
+      padding: 8px 2px;
+      overflow-wrap: anywhere;
+    }
+
+    th {
+      color: $text-secondary;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    th:first-child {
+      width: 20%;
+      padding-left: 8px;
+      text-align: left;
+    }
+
+    thead {
+      background: $steel-tint;
+      border-bottom: 1px solid $border;
+    }
+
+    tbody + tbody tr {
+      border-top: 1px solid $border;
+    }
+
+    .basic-row {
+      background: $brass-tint;
+
+      td {
         color: $brass-light;
-        font-size: 18px;
       }
+    }
+
+    .scaling-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-top: 1px solid $border;
+      color: $text-secondary;
+      font-size: 13px;
+      cursor: pointer;
+
+      svg {
+        flex-shrink: 0;
+      }
+
+      &:hover {
+        color: $text-primary;
+        background: $steel-tint;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: -3px;
+      }
+    }
+
+    .note {
+      margin-top: 10px;
+      color: $text-muted;
+      font-size: 12px;
     }
   }
 
@@ -317,72 +382,6 @@
     .description {
       color: $text-primary;
       white-space: pre-wrap;
-    }
-  }
-
-  .scaling {
-    summary {
-      cursor: pointer;
-      padding: 14px 0;
-      border-block: 1px solid $border-soft;
-      font-size: 14px;
-      color: $brass-light;
-
-      &:focus-visible {
-        outline: 2px solid $focus-ring;
-        outline-offset: 3px;
-      }
-    }
-
-    &[open] summary {
-      margin-bottom: 12px;
-    }
-
-    .muted {
-      color: $text-secondary;
-    }
-
-    .scaling-scroll {
-      overflow-x: auto;
-      border: 1px solid $border-soft;
-      border-radius: $border-radius;
-
-      &:focus-visible {
-        outline: 2px solid $focus-ring;
-        outline-offset: 3px;
-      }
-
-      table {
-        width: 100%;
-        text-align: center;
-        font-size: 12px;
-      }
-
-      th,
-      td {
-        padding: 10px 6px;
-        white-space: nowrap;
-        border-bottom: 1px solid $border-soft;
-      }
-
-      thead th {
-        color: $text-secondary;
-        font-weight: 400;
-        background: $bg-dark;
-      }
-
-      tbody th {
-        color: $brass-light;
-        font-weight: 500;
-      }
-
-      tbody tr:nth-child(even) {
-        background: $steel-tint;
-      }
-
-      tbody tr:last-child > * {
-        border-bottom: 0;
-      }
     }
   }
 }

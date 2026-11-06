@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 import type { TWeapon } from '@/api/gameItem/types';
 import { AFFINITIES, ATTACK_TYPES, ATTRIBUTES, UPGRADE_MATERIALS } from '@/define/gameItems';
@@ -6,6 +6,8 @@ import { AFFINITIES, ATTACK_TYPES, ATTRIBUTES, UPGRADE_MATERIALS } from '@/defin
 import Modal from '@/components/common/modal/Modal';
 
 import styles from './WeaponDetails.module.scss';
+
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 export default function WeaponDetails({
   weapon,
@@ -21,9 +23,8 @@ export default function WeaponDetails({
       <WeaponOverview weapon={weapon} />
       <WeaponCombatStats weapon={weapon} />
       <WeaponStatusEffects weapon={weapon} />
-      <WeaponBasicScaling weapon={weapon} />
+      <WeaponScaling weapon={weapon} name={name} />
       {effectDescription && <WeaponEffects description={effectDescription} />}
-      {weapon.canChangeAffinity === true && <WeaponAffinityScaling weapon={weapon} name={name} />}
     </div>
   );
 }
@@ -224,27 +225,80 @@ function WeaponStatusEffects({ weapon }: { weapon: TWeapon }) {
   );
 }
 
-function WeaponBasicScaling({ weapon }: { weapon: TWeapon }) {
+function WeaponScaling({ weapon, name }: { weapon: TWeapon; name: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const affinityRowsId = useId();
   const standardScaling = weapon.weaponScalings.find((scaling) => scaling.affinity === 'standard');
+  const affinityScalings = Object.keys(AFFINITIES)
+    .filter((affinity) => affinity !== 'standard')
+    .flatMap((affinity) =>
+      weapon.weaponScalings.filter((scaling) => scaling.affinity === affinity),
+    );
+  const canChangeAffinity = weapon.canChangeAffinity === true;
 
   return (
-    <section className={styles['basic-scaling']}>
-      <h3>기본 능력 보정</h3>
-      <p className={styles['basis']}>
-        최대 강화 기준{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
-      </p>
-      {standardScaling ? (
-        <dl>
-          {Object.entries(ATTRIBUTES).map(([key, label]) => (
-            <div key={key}>
-              <dt>{label}</dt>
-              <dd>{formatValue(standardScaling[key as keyof typeof ATTRIBUTES])}</dd>
-            </div>
-          ))}
-        </dl>
-      ) : (
-        <p className={styles['muted']}>기본 능력 보정 정보가 아직 등록되지 않았습니다.</p>
+    <section className={styles['scaling']}>
+      <div className={styles['scaling-header']}>
+        <h3>능력 보정</h3>
+        <span className={styles['basis']}>최대 강화</span>
+      </div>
+      <div className={styles['scaling-table']}>
+        <table aria-label={`${name} 능력 보정`}>
+          <thead>
+            <tr>
+              <th scope="col">{canChangeAffinity ? '변질' : '구분'}</th>
+              {Object.entries(ATTRIBUTES).map(([key, label]) => (
+                <th scope="col" key={key}>
+                  {label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr className={styles['basic-row']}>
+              <th scope="row">{canChangeAffinity ? '표준' : '기본'}</th>
+              {Object.keys(ATTRIBUTES).map((key) => (
+                <td key={key}>{formatValue(standardScaling?.[key as keyof typeof ATTRIBUTES])}</td>
+              ))}
+            </tr>
+          </tbody>
+          {canChangeAffinity && affinityScalings.length > 0 && (
+            <tbody id={affinityRowsId} hidden={!isExpanded}>
+              {affinityScalings.map((scaling) => (
+                <tr key={scaling.affinity}>
+                  <th scope="row">{AFFINITIES[scaling.affinity]}</th>
+                  {Object.keys(ATTRIBUTES).map((key) => (
+                    <td key={key}>{formatValue(scaling[key as keyof typeof ATTRIBUTES])}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+        {canChangeAffinity && affinityScalings.length > 0 && (
+          <button
+            type="button"
+            className={styles['scaling-toggle']}
+            aria-expanded={isExpanded}
+            aria-controls={affinityRowsId}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            <span>변질별 보정</span>
+            {isExpanded ? (
+              <MdKeyboardArrowUp size={18} aria-hidden="true" />
+            ) : (
+              <MdKeyboardArrowDown size={18} aria-hidden="true" />
+            )}
+          </button>
+        )}
+      </div>
+      {!standardScaling && (
+        <p className={styles['note']}>기본 능력 보정 정보가 아직 등록되지 않았습니다.</p>
       )}
+      {canChangeAffinity && affinityScalings.length === 0 && (
+        <p className={styles['note']}>변질별 능력 보정 정보가 아직 등록되지 않았습니다.</p>
+      )}
+      {weapon.canChangeAffinity == null && <p className={styles['note']}>변질 가능 여부 미확인</p>}
     </section>
   );
 }
@@ -255,52 +309,6 @@ function WeaponEffects({ description }: { description: string }) {
       <h3>부가 효과</h3>
       <p className={styles['description']}>{description}</p>
     </section>
-  );
-}
-
-function WeaponAffinityScaling({ weapon, name }: { weapon: TWeapon; name: string }) {
-  const scalings = Object.keys(AFFINITIES).flatMap((affinity) =>
-    weapon.weaponScalings.filter((scaling) => scaling.affinity === affinity),
-  );
-
-  return (
-    <details className={styles['scaling']}>
-      <summary>변질별 능력 보정</summary>
-      {scalings.length === 0 && (
-        <p className={styles['muted']}>능력 보정 정보가 아직 등록되지 않았습니다.</p>
-      )}
-      {scalings.length > 0 && (
-        <div
-          className={styles['scaling-scroll']}
-          tabIndex={0}
-          role="region"
-          aria-label={`${name} 능력 보정`}
-        >
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">변질</th>
-                {Object.entries(ATTRIBUTES).map(([key, label]) => (
-                  <th scope="col" key={key}>
-                    {label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {scalings.map((scaling) => (
-                <tr key={scaling.affinity}>
-                  <th scope="row">{AFFINITIES[scaling.affinity]}</th>
-                  {Object.keys(ATTRIBUTES).map((key) => (
-                    <td key={key}>{formatValue(scaling[key as keyof typeof ATTRIBUTES])}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </details>
   );
 }
 
