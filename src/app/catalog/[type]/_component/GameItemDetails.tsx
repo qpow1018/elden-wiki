@@ -50,26 +50,18 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
       {hasWeaponDetails && gameItem.weaponDetails && (
         <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
       )}
-      {gameItem.effectDescription && <ItemEffects description={gameItem.effectDescription} />}
-      <ItemDescription description={gameItem.gameDescription} />
+
+      {gameItem.effectDescription && (
+        <section className={styles['effects']}>
+          <h3>부가 효과</h3>
+          <p>{gameItem.effectDescription}</p>
+        </section>
+      )}
+
+      <section className={styles['description']}>
+        <h3>아이템 설명</h3>
+        <p>{gameItem.gameDescription ?? '아이템 설명이 아직 등록되지 않았습니다.'}</p>
+      </section>
     </article>
-  );
-}
-
-function ItemEffects({ description }: { description: string }) {
-  return (
-    <section className={styles['effects']}>
-      <h3>부가 효과</h3>
-      <p>{description}</p>
-    </section>
-  );
-}
-
-function ItemDescription({ description }: { description: string | null }) {
-  return (
-    <section className={styles['description']}>
-      <h3>아이템 설명</h3>
-      <p>{description ?? '아이템 설명이 아직 등록되지 않았습니다.'}</p>
-    </section>
   );
 }
