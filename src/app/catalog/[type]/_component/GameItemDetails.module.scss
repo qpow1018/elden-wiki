@@ -16,8 +16,8 @@
     .image {
       display: grid;
       place-items: center;
-      flex: 0 0 92px;
-      height: 92px;
+      flex: 0 0 80px;
+      height: 80px;
       background-color: $steel-tint;
       img {
         width: 100%;
@@ -30,7 +30,7 @@
       min-width: 0;
       h2 {
         margin-top: 6px;
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 500;
         color: $brass-accent;
       }

@@ -23,8 +23,8 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
             <Image
               src={gameItem.imageUrl}
               alt={gameItem.name}
-              width={92}
-              height={92}
+              width={80}
+              height={80}
               unoptimized
               referrerPolicy="no-referrer"
             />
