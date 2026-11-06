@@ -39,7 +39,9 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
               <>
                 <span aria-hidden="true">·</span>
                 <p className={styles['content']}>
-                  {CONTENTS[gameItem.contentCode] ?? gameItem.contentCode}
+                  {Object.hasOwn(CONTENTS, gameItem.contentCode)
+                    ? CONTENTS[gameItem.contentCode as keyof typeof CONTENTS]
+                    : gameItem.contentCode}
                 </p>
               </>
             )}
@@ -145,19 +147,15 @@ function SpellDetails({ spell }: { spell: TSpell }) {
 }
 
 function AshOfWarDetails({ ashOfWar }: { ashOfWar: TAshOfWar }) {
+  const nativeAffinity = ashOfWar.nativeAffinity;
+  let nativeAffinityName = nativeAffinity;
+  if (nativeAffinity !== null && Object.hasOwn(AFFINITIES, nativeAffinity)) {
+    nativeAffinityName = AFFINITIES[nativeAffinity as keyof typeof AFFINITIES];
+  }
+
   return (
     <>
-      <StatList
-        title="전회 정보"
-        rows={[
-          [
-            '기본 변질',
-            ashOfWar.nativeAffinity === null
-              ? null
-              : (AFFINITIES[ashOfWar.nativeAffinity] ?? ashOfWar.nativeAffinity),
-          ],
-        ]}
-      />
+      <StatList title="전회 정보" rows={[['기본 변질', nativeAffinityName]]} />
       <SkillDetails skill={ashOfWar.weaponSkills} />
       <Section title="적용 가능 무기">
         <p className={styles['text']}>

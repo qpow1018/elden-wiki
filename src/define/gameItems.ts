@@ -1,6 +1,6 @@
 import type { TGameItemType } from '@/api/gameItem/types';
 
-export const GAME_ITEM_TYPES: Record<TGameItemType, string> = {
+export const GAME_ITEM_TYPES = {
   weapon: '무기',
   catalyst: '촉매',
   other_weapon: '기타 무기',
@@ -11,13 +11,13 @@ export const GAME_ITEM_TYPES: Record<TGameItemType, string> = {
   spell: '주문',
   crystal_tear: '물방울',
   other: '아이템',
-};
-export const CONTENTS: Record<string, string> = {
+} as const satisfies Record<TGameItemType, string>;
+export const CONTENTS = {
   base_game: '본편',
   shadow_of_the_erdtree: '황금 나무의 그림자',
   tarnished_pack: '빛바랜 자 에디션',
-};
-export const AFFINITIES: Record<string, string> = {
+} as const;
+export const AFFINITIES = {
   standard: '표준',
   heavy: '중후',
   keen: '예리',
@@ -31,7 +31,7 @@ export const AFFINITIES: Record<string, string> = {
   poison: '독',
   blood: '피',
   occult: '신비',
-};
+} as const;
 export const ATTRIBUTES = {
   strength: '근력',
   dexterity: '기량',
@@ -46,14 +46,22 @@ export const ELEMENTS = {
   lightning: '벼락',
   holy: '신성',
 } as const;
-export const ATTACK_TYPES: Record<string, string> = {
+export const STATUS_EFFECTS = {
+  bleed: '출혈',
+  frostbite: '동상',
+  poison: '독',
+  scarletRot: '붉은 부패',
+  sleep: '수면',
+  madness: '발광',
+} as const;
+export const ATTACK_TYPES = {
   standard: '표준',
   slash: '참격',
   strike: '타격',
   pierce: '관통',
-};
-export const UPGRADE_MATERIALS: Record<string, string> = {
+} as const;
+export const UPGRADE_MATERIALS = {
   smithing_stone: '단석',
   somber_smithing_stone: '색 잃은 단석',
   none: '강화 불가',
-};
+} as const;

@@ -1,7 +1,14 @@
 import { useId, useState } from 'react';
 
 import type { TWeapon } from '@/api/gameItem/types';
-import { AFFINITIES, ATTACK_TYPES, ATTRIBUTES, UPGRADE_MATERIALS } from '@/define/gameItems';
+import {
+  AFFINITIES,
+  ATTACK_TYPES,
+  ATTRIBUTES,
+  ELEMENTS,
+  STATUS_EFFECTS,
+  UPGRADE_MATERIALS,
+} from '@/define/gameItems';
 
 import Modal from '@/components/common/modal/Modal';
 
@@ -24,8 +31,14 @@ function WeaponOverview({ weapon }: { weapon: TWeapon }) {
   const [isSkillOpen, setIsSkillOpen] = useState(false);
 
   const upgradeMaterial = weapon.upgradeMaterial;
+  let upgradeMaterialName = upgradeMaterial;
+  if (upgradeMaterial !== null && Object.hasOwn(UPGRADE_MATERIALS, upgradeMaterial)) {
+    upgradeMaterialName = UPGRADE_MATERIALS[upgradeMaterial as keyof typeof UPGRADE_MATERIALS];
+  }
 
-  const attackTypes = weapon.physicalAttackTypes?.map((type) => ATTACK_TYPES[type] ?? type);
+  const attackTypes = weapon.physicalAttackTypes?.map((type) =>
+    Object.hasOwn(ATTACK_TYPES, type) ? ATTACK_TYPES[type as keyof typeof ATTACK_TYPES] : type,
+  );
   let affinityAvailability = '미확인';
   if (weapon.canChangeAffinity === true) affinityAvailability = '가능';
   if (weapon.canChangeAffinity === false) affinityAvailability = '불가';
@@ -46,13 +59,9 @@ function WeaponOverview({ weapon }: { weapon: TWeapon }) {
           <span
             className={styles['material-badge']}
             data-material={upgradeMaterial ?? 'unknown'}
-            aria-label={`강화 재료: ${formatValue(upgradeMaterial === null ? null : (UPGRADE_MATERIALS[upgradeMaterial] ?? upgradeMaterial))}`}
+            aria-label={`강화 재료: ${formatValue(upgradeMaterialName)}`}
           >
-            {formatValue(
-              upgradeMaterial === null
-                ? null
-                : (UPGRADE_MATERIALS[upgradeMaterial] ?? upgradeMaterial),
-            )}
+            {formatValue(upgradeMaterialName)}
           </span>
         </div>
         <div className={styles['summary-rows']}>
@@ -90,11 +99,11 @@ function WeaponOverview({ weapon }: { weapon: TWeapon }) {
           <div className={styles['requirement-grid']}>
             {(
               [
-                ['근력', weapon.requiredStrength],
-                ['기량', weapon.requiredDexterity],
-                ['지력', weapon.requiredIntelligence],
-                ['신앙', weapon.requiredFaith],
-                ['신비', weapon.requiredArcane],
+                [ATTRIBUTES.strength, weapon.requiredStrength],
+                [ATTRIBUTES.dexterity, weapon.requiredDexterity],
+                [ATTRIBUTES.intelligence, weapon.requiredIntelligence],
+                [ATTRIBUTES.faith, weapon.requiredFaith],
+                [ATTRIBUTES.arcane, weapon.requiredArcane],
               ] as const
             ).map(([label, value]) => (
               <div key={label}>
@@ -134,11 +143,11 @@ function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
       title: '공격력',
       className: 'attack-column',
       values: [
-        ['물리', weapon.attackPhysical],
-        ['마력', weapon.attackMagic],
-        ['화염', weapon.attackFire],
-        ['벼락', weapon.attackLightning],
-        ['신성', weapon.attackHoly],
+        [ELEMENTS.physical, weapon.attackPhysical],
+        [ELEMENTS.magic, weapon.attackMagic],
+        [ELEMENTS.fire, weapon.attackFire],
+        [ELEMENTS.lightning, weapon.attackLightning],
+        [ELEMENTS.holy, weapon.attackHoly],
         ['치명', weapon.critical],
       ],
     },
@@ -146,11 +155,11 @@ function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
       title: '가드 성능',
       className: 'guard-column',
       values: [
-        ['물리', weapon.guardPhysical],
-        ['마력', weapon.guardMagic],
-        ['화염', weapon.guardFire],
-        ['벼락', weapon.guardLightning],
-        ['신성', weapon.guardHoly],
+        [ELEMENTS.physical, weapon.guardPhysical],
+        [ELEMENTS.magic, weapon.guardMagic],
+        [ELEMENTS.fire, weapon.guardFire],
+        [ELEMENTS.lightning, weapon.guardLightning],
+        [ELEMENTS.holy, weapon.guardHoly],
         ['가드 강도', weapon.guardBoost],
       ],
     },
@@ -159,7 +168,7 @@ function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
   return (
     <div className={styles['combat-stats']}>
       <p className={styles['combat-basis']}>
-        최대 강화{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
+        최대 강화{weapon.canChangeAffinity === true ? ` · ${AFFINITIES.standard} 변질` : ''}
       </p>
       <div className={styles['combat-columns']}>
         {groups.map((group) => (
@@ -185,12 +194,12 @@ function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
 
 function WeaponStatusEffects({ weapon }: { weapon: TWeapon }) {
   const statusEffects = [
-    ['출혈', weapon.bleed],
-    ['동상', weapon.frostbite],
-    ['독', weapon.poison],
-    ['붉은 부패', weapon.scarletRot],
-    ['수면', weapon.sleep],
-    ['발광', weapon.madness],
+    [STATUS_EFFECTS.bleed, weapon.bleed],
+    [STATUS_EFFECTS.frostbite, weapon.frostbite],
+    [STATUS_EFFECTS.poison, weapon.poison],
+    [STATUS_EFFECTS.scarletRot, weapon.scarletRot],
+    [STATUS_EFFECTS.sleep, weapon.sleep],
+    [STATUS_EFFECTS.madness, weapon.madness],
   ] as const;
   const visibleStatusEffects = statusEffects.filter(([, value]) => value !== 0);
 
@@ -247,7 +256,7 @@ function WeaponScaling({ weapon, name }: { weapon: TWeapon; name: string }) {
           </thead>
           <tbody>
             <tr className={styles['basic-row']}>
-              <th scope="row">{canChangeAffinity ? '표준' : '기본'}</th>
+              <th scope="row">{canChangeAffinity ? AFFINITIES.standard : '기본'}</th>
               {Object.keys(ATTRIBUTES).map((key) => (
                 <td key={key}>{formatValue(standardScaling?.[key as keyof typeof ATTRIBUTES])}</td>
               ))}
@@ -257,7 +266,7 @@ function WeaponScaling({ weapon, name }: { weapon: TWeapon; name: string }) {
             <tbody id={affinityRowsId} hidden={!isExpanded}>
               {affinityScalings.map((scaling) => (
                 <tr key={scaling.affinity}>
-                  <th scope="row">{AFFINITIES[scaling.affinity]}</th>
+                  <th scope="row">{AFFINITIES[scaling.affinity as keyof typeof AFFINITIES]}</th>
                   {Object.keys(ATTRIBUTES).map((key) => (
                     <td key={key}>{formatValue(scaling[key as keyof typeof ATTRIBUTES])}</td>
                   ))}
