@@ -55,14 +55,10 @@
   }
 
   .material-badge {
-    &[data-material='smithing_stone'] {
+    &[data-material='smithing_stone'],
+    &[data-material='somber_smithing_stone'] {
       color: $brass-light;
       background: $brass-tint;
-    }
-
-    &[data-material='somber_smithing_stone'] {
-      color: $lavender-light;
-      background: $lavender-tint;
     }
   }
 
