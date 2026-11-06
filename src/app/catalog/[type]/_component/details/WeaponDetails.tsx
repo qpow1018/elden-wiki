@@ -16,107 +16,14 @@ export default function WeaponDetails({
   name: string;
   effectDescription: string | null;
 }) {
-  const scalings = Object.keys(AFFINITIES).flatMap((affinity) =>
-    weapon.weaponScalings.filter((scaling) => scaling.affinity === affinity),
-  );
-
-  const standardScaling = weapon.weaponScalings.find((scaling) => scaling.affinity === 'standard');
-  const buildups = [
-    ['출혈', weapon.bleed],
-    ['동상', weapon.frostbite],
-    ['독', weapon.poison],
-    ['붉은 부패', weapon.scarletRot],
-    ['수면', weapon.sleep],
-    ['발광', weapon.madness],
-  ] as const;
-  const visibleBuildups = buildups.filter(([, value]) => value !== 0);
-
   return (
     <div className={styles['weapon-details']}>
       <WeaponOverview weapon={weapon} />
       <WeaponCombatStats weapon={weapon} />
-      <section className={styles['buildup']}>
-        <div className={styles['buildup-header']}>
-          <h3>상태 이상 축적</h3>
-          <span className={styles['note']}>미강화 기본 수치</span>
-        </div>
-        <div className={styles['buildup-values']}>
-          {visibleBuildups.length === 0 ? (
-            <p className={styles['empty']}>없음</p>
-          ) : (
-            visibleBuildups.map(([label, value]) => (
-              <div className={styles['buildup-row']} key={label}>
-                <span className={styles['buildup-label']}>{label}</span>
-                <span className={styles['buildup-value']}>{formatValue(value)}</span>
-              </div>
-            ))
-          )}
-        </div>
-      </section>
-
-      <section className={styles['basic-scaling']}>
-        <h3>기본 능력 보정</h3>
-        <p className={styles['basis']}>
-          최대 강화 기준{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
-        </p>
-        {standardScaling ? (
-          <dl>
-            {Object.entries(ATTRIBUTES).map(([key, label]) => (
-              <div key={key}>
-                <dt>{label}</dt>
-                <dd>{formatValue(standardScaling[key as keyof typeof ATTRIBUTES])}</dd>
-              </div>
-            ))}
-          </dl>
-        ) : (
-          <p className={styles['muted']}>기본 능력 보정 정보가 아직 등록되지 않았습니다.</p>
-        )}
-      </section>
-      {effectDescription && (
-        <section className={styles['effects']}>
-          <h3>부가 효과</h3>
-          <p className={styles['description']}>{effectDescription}</p>
-        </section>
-      )}
-      {weapon.canChangeAffinity === true && (
-        <details className={styles['scaling']}>
-          <summary>변질별 능력 보정</summary>
-          {scalings.length === 0 && (
-            <p className={styles['muted']}>능력 보정 정보가 아직 등록되지 않았습니다.</p>
-          )}
-          {scalings.length > 0 && (
-            <div
-              className={styles['scaling-scroll']}
-              tabIndex={0}
-              role="region"
-              aria-label={`${name} 능력 보정`}
-            >
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col">변질</th>
-                    {Object.entries(ATTRIBUTES).map(([key, label]) => (
-                      <th scope="col" key={key}>
-                        {label}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {scalings.map((scaling) => (
-                    <tr key={scaling.affinity}>
-                      <th scope="row">{AFFINITIES[scaling.affinity]}</th>
-                      {Object.keys(ATTRIBUTES).map((key) => (
-                        <td key={key}>{formatValue(scaling[key as keyof typeof ATTRIBUTES])}</td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </details>
-      )}
+      <WeaponStatusEffects weapon={weapon} />
+      <WeaponBasicScaling weapon={weapon} />
+      {effectDescription && <WeaponEffects description={effectDescription} />}
+      {weapon.canChangeAffinity === true && <WeaponAffinityScaling weapon={weapon} name={name} />}
     </div>
   );
 }
@@ -281,6 +188,119 @@ function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
         ))}
       </div>
     </div>
+  );
+}
+
+function WeaponStatusEffects({ weapon }: { weapon: TWeapon }) {
+  const statusEffects = [
+    ['출혈', weapon.bleed],
+    ['동상', weapon.frostbite],
+    ['독', weapon.poison],
+    ['붉은 부패', weapon.scarletRot],
+    ['수면', weapon.sleep],
+    ['발광', weapon.madness],
+  ] as const;
+  const visibleStatusEffects = statusEffects.filter(([, value]) => value !== 0);
+
+  return (
+    <section className={styles['status-effects']}>
+      <div className={styles['status-header']}>
+        <h3>상태 이상</h3>
+        <span className={styles['note']}>미강화 기본 수치</span>
+      </div>
+      <div className={styles['status-values']}>
+        {visibleStatusEffects.length === 0 ? (
+          <p className={styles['empty']}>없음</p>
+        ) : (
+          visibleStatusEffects.map(([label, value]) => (
+            <div className={styles['status-row']} key={label}>
+              <span className={styles['status-label']}>{label}</span>
+              <span className={styles['status-value']}>{formatValue(value)}</span>
+            </div>
+          ))
+        )}
+      </div>
+    </section>
+  );
+}
+
+function WeaponBasicScaling({ weapon }: { weapon: TWeapon }) {
+  const standardScaling = weapon.weaponScalings.find((scaling) => scaling.affinity === 'standard');
+
+  return (
+    <section className={styles['basic-scaling']}>
+      <h3>기본 능력 보정</h3>
+      <p className={styles['basis']}>
+        최대 강화 기준{weapon.canChangeAffinity === true ? ' · 표준 변질' : ''}
+      </p>
+      {standardScaling ? (
+        <dl>
+          {Object.entries(ATTRIBUTES).map(([key, label]) => (
+            <div key={key}>
+              <dt>{label}</dt>
+              <dd>{formatValue(standardScaling[key as keyof typeof ATTRIBUTES])}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : (
+        <p className={styles['muted']}>기본 능력 보정 정보가 아직 등록되지 않았습니다.</p>
+      )}
+    </section>
+  );
+}
+
+function WeaponEffects({ description }: { description: string }) {
+  return (
+    <section className={styles['effects']}>
+      <h3>부가 효과</h3>
+      <p className={styles['description']}>{description}</p>
+    </section>
+  );
+}
+
+function WeaponAffinityScaling({ weapon, name }: { weapon: TWeapon; name: string }) {
+  const scalings = Object.keys(AFFINITIES).flatMap((affinity) =>
+    weapon.weaponScalings.filter((scaling) => scaling.affinity === affinity),
+  );
+
+  return (
+    <details className={styles['scaling']}>
+      <summary>변질별 능력 보정</summary>
+      {scalings.length === 0 && (
+        <p className={styles['muted']}>능력 보정 정보가 아직 등록되지 않았습니다.</p>
+      )}
+      {scalings.length > 0 && (
+        <div
+          className={styles['scaling-scroll']}
+          tabIndex={0}
+          role="region"
+          aria-label={`${name} 능력 보정`}
+        >
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">변질</th>
+                {Object.entries(ATTRIBUTES).map(([key, label]) => (
+                  <th scope="col" key={key}>
+                    {label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {scalings.map((scaling) => (
+                <tr key={scaling.affinity}>
+                  <th scope="row">{AFFINITIES[scaling.affinity]}</th>
+                  {Object.keys(ATTRIBUTES).map((key) => (
+                    <td key={key}>{formatValue(scaling[key as keyof typeof ATTRIBUTES])}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </details>
   );
 }
 

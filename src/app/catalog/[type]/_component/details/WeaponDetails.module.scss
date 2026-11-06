@@ -201,6 +201,66 @@
     }
   }
 
+  .status-effects {
+    min-width: 0;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    overflow: hidden;
+
+    .status-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 12px;
+      background: $steel-tint;
+    }
+
+    h3 {
+      font-size: 13px;
+      font-weight: 500;
+      color: $text-primary;
+    }
+
+    .note {
+      color: $text-muted;
+      font-size: 12px;
+    }
+
+    .status-values {
+      padding: 0 12px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 44px;
+
+      & + .status-row {
+        border-top: 1px solid $border;
+      }
+    }
+
+    .status-label,
+    .empty {
+      color: $text-secondary;
+    }
+
+    .status-value {
+      min-width: 0;
+      color: $text-primary;
+      overflow-wrap: anywhere;
+    }
+
+    .empty {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+
   .basic-scaling {
     min-width: 0;
 
@@ -257,68 +317,6 @@
     .description {
       color: $text-primary;
       white-space: pre-wrap;
-    }
-  }
-
-  .buildup {
-    min-width: 0;
-    border: 1px solid $border;
-    border-radius: $border-radius;
-    overflow: hidden;
-
-    .buildup-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-      padding: 10px 12px;
-      background: $steel-tint;
-    }
-
-    h3 {
-      font-size: 13px;
-      font-weight: 500;
-      color: $text-primary;
-    }
-
-    .note {
-      color: $text-muted;
-      font-size: 12px;
-    }
-
-    .buildup-values {
-      padding: 0 12px;
-    }
-
-    .buildup-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      min-height: 44px;
-
-      & + .buildup-row {
-        border-top: 1px solid $border;
-      }
-    }
-
-    .buildup-label,
-    .empty {
-      color: $text-secondary;
-    }
-
-    .buildup-value {
-      min-width: 0;
-      text-align: right;
-      color: $text-primary;
-      overflow-wrap: anywhere;
-    }
-
-    .empty {
-      display: flex;
-      align-items: center;
-      min-height: 44px;
     }
   }
 
