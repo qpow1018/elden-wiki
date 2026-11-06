@@ -262,41 +262,63 @@
 
   .buildup {
     min-width: 0;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    overflow: hidden;
+
+    .buildup-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 12px;
+      background: $steel-tint;
+    }
 
     h3 {
-      margin-bottom: 12px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       color: $text-primary;
     }
 
     .note {
-      margin-top: -6px;
-      margin-bottom: 12px;
-      color: $text-secondary;
+      color: $text-muted;
       font-size: 12px;
     }
 
-    .muted {
-      color: $text-secondary;
+    .buildup-values {
+      padding: 0 12px;
     }
 
-    dl {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 24px;
+    .buildup-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 44px;
 
-      div {
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 10px 0;
-        border-bottom: 1px solid $border-soft;
+      & + .buildup-row {
+        border-top: 1px solid $border;
       }
     }
 
-    dt {
+    .buildup-label,
+    .empty {
       color: $text-secondary;
+    }
+
+    .buildup-value {
+      min-width: 0;
+      text-align: right;
+      color: $text-primary;
+      overflow-wrap: anywhere;
+    }
+
+    .empty {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
     }
   }
 

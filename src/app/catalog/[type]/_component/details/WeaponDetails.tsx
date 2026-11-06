@@ -35,6 +35,24 @@ export default function WeaponDetails({
     <div className={styles['weapon-details']}>
       <WeaponOverview weapon={weapon} />
       <WeaponCombatStats weapon={weapon} />
+      <section className={styles['buildup']}>
+        <div className={styles['buildup-header']}>
+          <h3>상태 이상 축적</h3>
+          <span className={styles['note']}>미강화 기본 수치</span>
+        </div>
+        <div className={styles['buildup-values']}>
+          {visibleBuildups.length === 0 ? (
+            <p className={styles['empty']}>없음</p>
+          ) : (
+            visibleBuildups.map(([label, value]) => (
+              <div className={styles['buildup-row']} key={label}>
+                <span className={styles['buildup-label']}>{label}</span>
+                <span className={styles['buildup-value']}>{formatValue(value)}</span>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
 
       <section className={styles['basic-scaling']}>
         <h3>기본 능력 보정</h3>
@@ -60,22 +78,6 @@ export default function WeaponDetails({
           <p className={styles['description']}>{effectDescription}</p>
         </section>
       )}
-      <section className={styles['buildup']}>
-        <h3>상태 이상 축적</h3>
-        <p className={styles['note']}>미강화 기본 수치</p>
-        {visibleBuildups.length === 0 ? (
-          <p className={styles['muted']}>없음</p>
-        ) : (
-          <dl>
-            {visibleBuildups.map(([label, value]) => (
-              <div key={label}>
-                <dt>{label}</dt>
-                <dd>{formatValue(value)}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-      </section>
       {weapon.canChangeAffinity === true && (
         <details className={styles['scaling']}>
           <summary>변질별 능력 보정</summary>
