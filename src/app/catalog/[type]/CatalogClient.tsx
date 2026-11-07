@@ -83,6 +83,7 @@ export default function CatalogClient(props: { type: TGameItemType }) {
           ))}
         </InfiniteScroll>
       )}
+
       <ScrollToTop />
     </main>
   );
