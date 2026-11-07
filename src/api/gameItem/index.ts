@@ -7,8 +7,6 @@ import type {
 } from './types';
 
 export async function getGameItems({
-  page,
-  pageSize,
   search,
   type,
   categoryId,
@@ -16,7 +14,6 @@ export async function getGameItems({
   signal,
 }: TReqGetGameItems): Promise<TResGetGameItems> {
   const client = getApiClient();
-  const start = (page - 1) * pageSize;
   const request = client
     .from('game_items')
     .select(
@@ -26,15 +23,13 @@ export async function getGameItems({
     .order('game_item_categories(sort_order)')
     .order('category_id')
     .order('sort_order')
-    .order('id')
-    .range(start, start + pageSize - 1);
+    .order('id');
 
   if (search?.trim()) {
     const escapedSearch = search.trim().replace(/[\\%_]/g, '\\$&');
     request.ilike('name', `%${escapedSearch}%`);
   }
-  if (type) request.eq('type', type);
-  if (categoryId !== undefined) request.eq('category_id', categoryId);
+  request.eq('type', type).eq('category_id', categoryId);
   if (contentCode) request.eq('content_code', contentCode);
   if (signal) request.abortSignal(signal);
 

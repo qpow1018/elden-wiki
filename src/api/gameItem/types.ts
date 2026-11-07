@@ -11,11 +11,9 @@ export type TGameItemType =
   | 'crystal_tear';
 
 export type TReqGetGameItems = {
-  page: number;
-  pageSize: number;
   search?: string;
-  type?: TGameItemType;
-  categoryId?: number;
+  type: TGameItemType;
+  categoryId: number;
   contentCode?: string;
   signal?: AbortSignal;
 };
