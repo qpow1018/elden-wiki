@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
-import gameItemQuery from '@/api/gameItem/gameItemQuery';
-import type { TGameItemType } from '@/api/gameItem/types';
+import type { TGameItemType, TGameItemCategory } from '@/api/gameItem/types';
 import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
-import Button from '@/components/common/button/Button';
 import BottomModal from '@/components/common/modal/BottomModal';
 
 import styles from './CatalogToolbar.module.scss';
@@ -20,25 +18,26 @@ const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = 
 };
 
 type TCatalogToolbarProps = {
-  params: {
-    type: TGameItemType;
-    categoryId: number | undefined;
-  };
-  onChange: (filters: { categoryId: number | undefined }) => void;
+  type: TGameItemType;
+  categories: TGameItemCategory[];
+  categoryId: number | undefined;
+  onChange: (categoryId: number) => void;
 };
 
-export default function CatalogToolbar({ params, onChange }: TCatalogToolbarProps) {
-  const typeLabel = GAME_ITEM_TYPES[params.type];
+export default function CatalogToolbar({
+  type,
+  categories,
+  categoryId,
+  onChange,
+}: TCatalogToolbarProps) {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const categoriesQuery = gameItemQuery.useGetGameItemCategories();
-  const categories = (categoriesQuery.data ?? []).filter(
-    (category) => category.type === params.type,
-  );
-  const typeFilter = TYPE_FILTERS[params.type];
-  const selectedCategory = categories.find((category) => category.id === params.categoryId);
 
-  function handleCategoryChange(categoryId: number | undefined) {
-    onChange({ categoryId });
+  const typeFilter = TYPE_FILTERS[type];
+  const categoryLabel = typeFilter?.categoryLabel ?? '분류';
+  const selectedCategory = categories.find((category) => category.id === categoryId);
+
+  function handleCategoryChange(nextCategoryId: number) {
+    onChange(nextCategoryId);
     setIsCategoryOpen(false);
   }
 
@@ -46,70 +45,44 @@ export default function CatalogToolbar({ params, onChange }: TCatalogToolbarProp
     <section className={styles['catalog-toolbar']} aria-label="아이템 분류">
       <div className={styles['toolbar']}>
         <div className={styles['classification']}>
-          {typeFilter ? (
+          {categories.length > 1 ? (
             <button
               type="button"
-              className={styles['category-trigger']}
-              aria-label={`${typeFilter.categoryLabel}: ${selectedCategory?.name ?? `전체 ${typeLabel}`}`}
+              className={`${styles['category-label']} ${styles['category-trigger']}`}
+              aria-label={`${categoryLabel}: ${selectedCategory?.name}`}
               aria-haspopup="dialog"
               aria-expanded={isCategoryOpen}
-              disabled={categoriesQuery.isPending || categoriesQuery.isError}
               onClick={() => setIsCategoryOpen(true)}
             >
-              <span>
-                {categoriesQuery.isPending
-                  ? '분류 불러오는 중'
-                  : (selectedCategory?.name ?? `전체 ${typeLabel}`)}
-              </span>
+              <span>{selectedCategory?.name}</span>
               <MdKeyboardArrowDown aria-hidden="true" />
             </button>
           ) : (
-            <span className={styles['type-label']}>전체 {typeLabel}</span>
+            <span className={styles['category-label']}>
+              {selectedCategory?.name ?? GAME_ITEM_TYPES[type]}
+            </span>
           )}
         </div>
       </div>
-      {typeFilter && categoriesQuery.isError && (
-        <div className={styles['category-error']} role="status">
-          <p>분류를 불러오지 못했습니다.</p>
-          <Button
-            size="small"
-            fill="outline"
-            onClick={() => {
-              void categoriesQuery.refetch();
-            }}
-          >
-            다시 불러오기
-          </Button>
-        </div>
-      )}
 
-      {typeFilter && (
+      {categories.length > 1 && (
         <BottomModal
           isOpen={isCategoryOpen}
           onClose={() => setIsCategoryOpen(false)}
-          title={typeFilter.categoryLabel}
+          title={categoryLabel}
           isCloseOnBackdropClick
         >
           <div className={styles['category-options']}>
-            <button
-              type="button"
-              className={styles['category-option']}
-              aria-pressed={params.categoryId === undefined}
-              onClick={() => handleCategoryChange(undefined)}
-            >
-              전체 {typeLabel}
-              {params.categoryId === undefined && <MdCheck aria-hidden="true" />}
-            </button>
             {categories.map((category) => (
               <button
                 key={category.id}
                 type="button"
                 className={styles['category-option']}
-                aria-pressed={params.categoryId === category.id}
+                aria-pressed={categoryId === category.id}
                 onClick={() => handleCategoryChange(category.id)}
               >
                 {category.name}
-                {params.categoryId === category.id && <MdCheck aria-hidden="true" />}
+                {categoryId === category.id && <MdCheck aria-hidden="true" />}
               </button>
             ))}
           </div>

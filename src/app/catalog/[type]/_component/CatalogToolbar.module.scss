@@ -17,16 +17,20 @@
     min-width: 0;
   }
 
-  .category-trigger {
+  .category-label {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
     min-height: 40px;
     max-width: 100%;
     color: $text-primary;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     text-align: left;
+    overflow-wrap: anywhere;
+  }
+
+  .category-trigger {
+    gap: 6px;
 
     span {
       min-width: 0;
@@ -42,29 +46,6 @@
       outline: 2px solid $focus-ring;
       outline-offset: 2px;
     }
-
-    &:disabled {
-      color: $text-muted;
-    }
-  }
-
-  .type-label {
-    display: flex;
-    align-items: center;
-    min-height: 40px;
-    color: $text-secondary;
-    font-size: 13px;
-    overflow-wrap: anywhere;
-  }
-
-  .category-error {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 8px;
-    color: $text-secondary;
-    font-size: 13px;
   }
 }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
 import type { TGameItemType } from '@/api/gameItem/types';
@@ -19,15 +19,56 @@ import styles from './CatalogClient.module.scss';
 
 const PAGE_SIZE = 10;
 
-export default function CatalogClient(props: { type: TGameItemType }) {
-  const { type } = props;
+export default function CatalogClient(props: {
+  type: TGameItemType;
+  categoryId: number | undefined;
+}) {
+  const { type, categoryId } = props;
 
-  const [params, setParams] = useState<{
-    categoryId: number | undefined;
-  }>({
-    categoryId: undefined,
-  });
+  const router = useRouter();
+  const categoriesQuery = gameItemQuery.useGetGameItemCategories();
+  const categories = categoriesQuery.data?.filter((category) => category.type === type) ?? [];
+  const selectedCategory =
+    categories.find((category) => category.id === categoryId) ?? categories[0];
 
+  function handleCategoryChange(categoryId: number) {
+    if (categoryId === selectedCategory?.id) return;
+    const nextParams = new URLSearchParams(window.location.search);
+    nextParams.set('categoryId', String(categoryId));
+    router.push(`/catalog/${type}?${nextParams}`, { scroll: true });
+  }
+
+  return (
+    <main className={styles['page']}>
+      <Header title="아이템 도감" />
+      <CatalogNavigation type={type} />
+      <CatalogToolbar
+        type={type}
+        categories={categories}
+        categoryId={selectedCategory?.id}
+        onChange={handleCategoryChange}
+      />
+      {categoriesQuery.isPending && <BoxLoading />}
+      {categoriesQuery.isError && (
+        <ErrorState
+          message="분류를 불러오지 못했습니다."
+          onRetry={() => {
+            void categoriesQuery.refetch();
+          }}
+        />
+      )}
+      {categoriesQuery.isSuccess && !selectedCategory && (
+        <EmptyState message="표시할 아이템이 없습니다." />
+      )}
+      {categoriesQuery.isSuccess && selectedCategory && (
+        <CatalogList type={type} categoryId={selectedCategory.id} />
+      )}
+      <ScrollToTop />
+    </main>
+  );
+}
+
+function CatalogList({ type, categoryId }: { type: TGameItemType; categoryId: number }) {
   const {
     data,
     isLoading,
@@ -40,24 +81,15 @@ export default function CatalogClient(props: { type: TGameItemType }) {
     isFetchingNextPage,
     isFetchNextPageError,
   } = gameItemQuery.useGetInfiniteGameItems({
-    ...params,
+    categoryId,
     type,
     pageSize: PAGE_SIZE,
   });
 
   const gameItems = data?.pages.flatMap((page) => page.gameItems) ?? [];
 
-  function handleFilterChange(filters: { categoryId: number | undefined }) {
-    setParams(filters);
-  }
-
   return (
-    <main className={styles['page']}>
-      <Header title="아이템 도감" />
-
-      <CatalogNavigation type={type} />
-      <CatalogToolbar params={{ ...params, type }} onChange={handleFilterChange} />
-
+    <>
       {isLoading && <BoxLoading />}
       {isError && !data && (
         <ErrorState
@@ -83,8 +115,6 @@ export default function CatalogClient(props: { type: TGameItemType }) {
           ))}
         </InfiniteScroll>
       )}
-
-      <ScrollToTop />
-    </main>
+    </>
   );
 }
