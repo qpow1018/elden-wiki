@@ -108,7 +108,9 @@ function WeaponOverview({ weapon }: { weapon: TWeapon }) {
             ).map(([label, value]) => (
               <div key={label}>
                 <span className={styles['label']}>{label}</span>
-                <span className={styles['requirement-value']}>{formatValue(value)}</span>
+                <span className={styles['requirement-value']}>
+                  {value === 0 ? '-' : formatValue(value)}
+                </span>
               </div>
             ))}
           </div>
