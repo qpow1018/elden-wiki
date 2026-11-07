@@ -9,6 +9,8 @@
 
   .toolbar {
     display: flex;
+    justify-content: space-between;
+    gap: 16px;
     align-items: center;
     min-height: 49px;
   }
@@ -40,6 +42,24 @@
     svg {
       flex-shrink: 0;
       font-size: 18px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: 2px;
+    }
+  }
+  .toc-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    color: $text-secondary;
+    font-size: 13px;
+    font-weight: 400;
+
+    svg {
+      font-size: 16px;
     }
 
     &:focus-visible {
@@ -87,6 +107,59 @@
     &:focus-visible {
       outline: 2px solid $focus-ring;
       outline-offset: -2px;
+    }
+  }
+}
+
+.table-of-contents {
+  padding: 16px 16px 24px;
+
+  .summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: $text-secondary;
+    font-size: 12px;
+  }
+
+  .entries {
+    padding: 0;
+    list-style: none;
+
+    a {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 6px 0;
+      color: $text-primary;
+      font-size: 13px;
+      text-decoration: none;
+
+      &:hover .name {
+        color: $steel-light;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: 2px;
+      }
+    }
+
+    .number {
+      flex: 0 0 3ch;
+      color: $brass;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .name {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
     }
   }
 }

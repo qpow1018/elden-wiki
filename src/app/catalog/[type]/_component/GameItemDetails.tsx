@@ -13,7 +13,7 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
     gameItem.weaponDetails !== null;
 
   return (
-    <article className={styles['game-item-details']}>
+    <article id={`game-item-${gameItem.id}`} className={styles['game-item-details']}>
       <header className={styles['identity']}>
         <div className={styles['image']}>
           {gameItem.imageUrl && (
@@ -43,7 +43,7 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
               </>
             )}
           </div>
-          <h2>{gameItem.name}</h2>
+          <h2 tabIndex={-1}>{gameItem.name}</h2>
         </div>
       </header>
 

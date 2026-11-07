@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
+
+import gameItemQuery from '@/api/gameItem/gameItemQuery';
 
 import type { TGameItemType, TGameItemCategory } from '@/api/gameItem/types';
 import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import BottomModal from '@/components/common/modal/BottomModal';
+import Modal from '@/components/common/modal/Modal';
 
 import styles from './CatalogToolbar.module.scss';
 
-import { MdCheck, MdKeyboardArrowDown } from 'react-icons/md';
+import { MdCheck, MdKeyboardArrowDown, MdFormatListNumbered } from 'react-icons/md';
 
 const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = {
   weapon: { categoryLabel: '무기 종류' },
@@ -31,6 +34,7 @@ export default function CatalogToolbar({
   onChange,
 }: TCatalogToolbarProps) {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isTableOfContentsOpen, setIsTableOfContentsOpen] = useState(false);
 
   const typeFilter = TYPE_FILTERS[type];
   const categoryLabel = typeFilter?.categoryLabel ?? '분류';
@@ -63,31 +67,129 @@ export default function CatalogToolbar({
             </span>
           )}
         </div>
+        {selectedCategory && (
+          <button
+            type="button"
+            className={styles['toc-trigger']}
+            aria-haspopup="dialog"
+            aria-expanded={isTableOfContentsOpen}
+            onClick={() => setIsTableOfContentsOpen(true)}
+          >
+            목차
+            <MdFormatListNumbered aria-hidden="true" />
+          </button>
+        )}
       </div>
 
       {categories.length > 1 && (
-        <BottomModal
+        <CategoryModal
           isOpen={isCategoryOpen}
           onClose={() => setIsCategoryOpen(false)}
           title={categoryLabel}
-          isCloseOnBackdropClick
-        >
-          <div className={styles['category-options']}>
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                className={styles['category-option']}
-                aria-pressed={categoryId === category.id}
-                onClick={() => handleCategoryChange(category.id)}
-              >
-                {category.name}
-                {categoryId === category.id && <MdCheck aria-hidden="true" />}
-              </button>
-            ))}
-          </div>
-        </BottomModal>
+          categories={categories}
+          categoryId={categoryId}
+          onChange={handleCategoryChange}
+        />
+      )}
+      {selectedCategory && (
+        <TableOfContentsModal
+          key={selectedCategory.id}
+          isOpen={isTableOfContentsOpen}
+          onClose={() => setIsTableOfContentsOpen(false)}
+          type={type}
+          categoryId={selectedCategory.id}
+          categoryName={selectedCategory.name}
+        />
       )}
     </section>
+  );
+}
+
+function CategoryModal({
+  isOpen,
+  onClose,
+  title,
+  categories,
+  categoryId,
+  onChange,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  categories: TGameItemCategory[];
+  categoryId: number | undefined;
+  onChange: (categoryId: number) => void;
+}) {
+  return (
+    <BottomModal isOpen={isOpen} onClose={onClose} title={title} isCloseOnBackdropClick>
+      <div className={styles['category-options']}>
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            type="button"
+            className={styles['category-option']}
+            aria-pressed={categoryId === category.id}
+            onClick={() => onChange(category.id)}
+          >
+            {category.name}
+            {categoryId === category.id && <MdCheck aria-hidden="true" />}
+          </button>
+        ))}
+      </div>
+    </BottomModal>
+  );
+}
+
+function TableOfContentsModal({
+  isOpen,
+  onClose,
+  type,
+  categoryId,
+  categoryName,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  type: TGameItemType;
+  categoryId: number;
+  categoryName: string;
+}) {
+  const { data } = gameItemQuery.useGetGameItems({ categoryId, type });
+  const gameItems = data?.gameItems ?? [];
+
+  function handleItemClick(event: MouseEvent<HTMLAnchorElement>, id: number) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    onClose();
+    requestAnimationFrame(() => {
+      const item = document.getElementById(`game-item-${id}`);
+      item?.querySelector('h2')?.focus({ preventScroll: true });
+      item?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    });
+  }
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title="목차" isCloseOnBackdropClick>
+      <nav className={styles['table-of-contents']} aria-label={`${categoryName} 목차`}>
+        <div className={styles['summary']}>
+          <span>{categoryName}</span>
+          <span>{gameItems.length}개</span>
+        </div>
+        <ol className={styles['entries']}>
+          {gameItems.map((gameItem, index) => (
+            <li key={gameItem.id}>
+              <a
+                href={`#game-item-${gameItem.id}`}
+                onClick={(event) => handleItemClick(event, gameItem.id)}
+              >
+                <span className={styles['number']} aria-hidden="true">
+                  {index + 1}.
+                </span>
+                <span className={styles['name']}>{gameItem.name}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </Modal>
   );
 }

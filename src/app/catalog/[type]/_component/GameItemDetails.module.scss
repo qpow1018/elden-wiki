@@ -1,4 +1,5 @@
 .game-item-details {
+  scroll-margin-top: calc(#{$header-height} + 58px);
   padding: 24px 16px;
   overflow-wrap: anywhere;
   border-top: 16px solid $steel-tint;
