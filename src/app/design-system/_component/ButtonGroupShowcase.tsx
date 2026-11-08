@@ -15,8 +15,8 @@ const OPTIONS = [
 type TButtonGroupValue = (typeof OPTIONS)[number]['value'];
 
 const SIZES: { label: string; size: TButtonGroupSize }[] = [
-  { label: '36px', size: 'small' },
-  { label: '42px', size: 'medium' },
+  { label: '40px', size: 'small' },
+  { label: '44px', size: 'medium' },
   { label: '48px', size: 'large' },
 ];
 
@@ -27,7 +27,7 @@ export default function ButtonGroupShowcase() {
     <section className={styles['section']} aria-labelledby="button-group-title">
       <div className={styles['section-heading']}>
         <h2 id="button-group-title">Button Group</h2>
-        <p>같은 선택지를 36px, 42px, 48px 높이로 비교합니다.</p>
+        <p>같은 선택지를 40px, 44px, 48px 높이로 비교합니다.</p>
       </div>
 
       <div className={styles['state-card']}>

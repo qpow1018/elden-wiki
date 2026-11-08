@@ -56,6 +56,7 @@ export default function CatalogSearchClient({ initialSearch }: { initialSearch: 
       <section className={styles['search']} aria-label="아이템 검색">
         <TextInput
           type="search"
+          inputSize="large"
           startIcon={<MdSearch size={18} />}
           aria-label="아이템 이름"
           placeholder="아이템 이름으로 검색"

@@ -8,13 +8,14 @@ import { MdClose } from 'react-icons/md';
 
 export default function TextInput(
   props: Omit<ComponentProps<'input'>, 'onChange'> & {
+    inputSize?: 'medium' | 'large';
     startIcon?: ReactNode;
     onChange?: (value: string) => void;
     onClear?: () => void;
     onPressEnter?: () => void;
   },
 ) {
-  const { startIcon, onChange, onClear, onPressEnter, ...inputProps } = props;
+  const { inputSize = 'medium', startIcon, onChange, onClear, onPressEnter, ...inputProps } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const isClearable = onClear !== undefined && inputProps.value != null;
   const hasValue = String(inputProps.value ?? '').length > 0;
@@ -39,7 +40,7 @@ export default function TextInput(
   return (
     <div
       ref={containerRef}
-      className={`${styles['text-input']} ${inputProps.readOnly ? styles['is-readonly'] : ''} ${isClearable ? styles['is-clearable'] : ''}`}
+      className={`${styles['text-input']} ${inputSize === 'large' ? styles['size-large'] : ''} ${inputProps.readOnly ? styles['is-readonly'] : ''} ${isClearable ? styles['is-clearable'] : ''}`}
     >
       {startIcon && (
         <span className={styles['start-icon']} aria-hidden="true">
