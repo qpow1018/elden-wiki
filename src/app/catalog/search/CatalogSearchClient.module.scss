@@ -1,10 +1,17 @@
 .search {
   padding: 16px;
 
-  .count {
+  .count,
+  .hint {
     margin: 16px 0 4px;
     color: $text-secondary;
     font-size: 13px;
+  }
+
+  .count {
+    margin-bottom: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-strong;
   }
 
   .results {
@@ -17,25 +24,32 @@
     }
 
     a {
-      display: flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px 16px;
-      flex-wrap: wrap;
-      padding: 10px 4px;
+      display: grid;
+      gap: 2px;
+      padding: 10px 0;
       color: $text-primary;
+      text-decoration: none;
       overflow-wrap: anywhere;
 
       &:hover,
       &:focus-visible {
         background: $bg-light;
       }
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: -2px;
+      }
     }
+  }
+
+  .name {
+    font-size: 14px;
+    font-weight: 500;
   }
 
   .classification {
     color: $text-secondary;
-    font-size: 13px;
+    font-size: 12px;
   }
 }

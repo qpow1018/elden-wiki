@@ -20,8 +20,19 @@
     cursor: default;
   }
 
+  &.is-clearable > input::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  .start-icon {
+    display: flex;
+    flex-shrink: 0;
+    margin-inline-end: 8px;
+    color: $text-secondary;
+  }
+
   > input {
-    width: 100%;
+    flex: 1;
     min-width: 0;
     height: 100%;
     background: transparent;
@@ -29,16 +40,31 @@
     font-size: inherit;
     color: inherit;
 
-    &[type='search'] {
-      font-size: 16px;
-    }
-
     &[readonly] {
       cursor: default;
     }
 
     &:focus {
       outline: none;
+    }
+  }
+
+  .clear-button {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    place-items: center;
+    color: $text-secondary;
+
+    &:hover,
+    &:focus-visible {
+      color: $text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: -2px;
     }
   }
 }
