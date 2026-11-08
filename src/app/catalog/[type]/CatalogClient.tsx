@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
@@ -15,6 +17,8 @@ import CatalogNavigation from './_component/CatalogNavigation';
 import GameItemDetails from './_component/GameItemDetails';
 
 import styles from './CatalogClient.module.scss';
+
+import { MdSearch } from 'react-icons/md';
 
 export default function CatalogClient(props: {
   type: TGameItemType;
@@ -37,7 +41,14 @@ export default function CatalogClient(props: {
 
   return (
     <main className={styles['page']}>
-      <Header title="아이템 도감" />
+      <Header
+        title="아이템 도감"
+        rightComponents={
+          <Link href="/catalog/search" aria-label="도감 검색" className={styles['search-link']}>
+            <MdSearch aria-hidden="true" />
+          </Link>
+        }
+      />
       <CatalogNavigation type={type} />
       <CatalogToolbar
         type={type}
@@ -72,6 +83,23 @@ function CatalogList({ type, categoryId }: { type: TGameItemType; categoryId: nu
   });
 
   const gameItems = data?.gameItems ?? [];
+  const hasItems = gameItems.length > 0;
+
+  // 검색 결과의 해시 대상은 도감 목록이 렌더링된 뒤에 찾을 수 있습니다.
+  useEffect(() => {
+    if (!hasItems) return;
+
+    const { hash } = window.location;
+    if (!/^#game-item-\d+$/.test(hash)) return;
+
+    const frame = requestAnimationFrame(() => {
+      const item = document.getElementById(hash.slice(1));
+      item?.querySelector('h2')?.focus({ preventScroll: true });
+      item?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [categoryId, hasItems, type]);
 
   return (
     <>

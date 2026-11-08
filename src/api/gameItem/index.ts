@@ -1,5 +1,6 @@
 import { getApiClient } from '@/api';
 import type {
+  TGameItemSearchEntry,
   TReqGetGameItems,
   TReqGetGameItemCategories,
   TResGetGameItems,
@@ -166,4 +167,38 @@ export async function getGameItemCategories({
 
   const { data } = await request.throwOnError();
   return data;
+}
+
+export async function getGameItemSearchEntries({ signal }: { signal?: AbortSignal } = {}): Promise<
+  TGameItemSearchEntry[]
+> {
+  const client = getApiClient();
+  const entries: TGameItemSearchEntry[] = [];
+  let lastId: number | undefined;
+
+  while (true) {
+    const request = client
+      .from('game_items')
+      .select('id,name,type,category_id,game_item_categories(name)')
+      .order('id')
+      .limit(1000);
+    if (lastId !== undefined) request.gt('id', lastId);
+    if (signal) request.abortSignal(signal);
+
+    const { data } = await request.throwOnError();
+    const lastRow = data.at(-1);
+    if (!lastRow) return entries;
+
+    for (const row of data) {
+      entries.push({
+        id: row.id,
+        name: row.name,
+        type: row.type,
+        categoryId: row.category_id,
+        categoryName: row.game_item_categories?.name ?? null,
+      });
+    }
+
+    lastId = lastRow.id;
+  }
 }

@@ -10,6 +10,14 @@ export type TGameItemType =
   | 'other'
   | 'crystal_tear';
 
+export type TGameItemSearchEntry = {
+  id: number;
+  name: string;
+  type: TGameItemType;
+  categoryId: number;
+  categoryName: string | null;
+};
+
 export type TReqGetGameItems = {
   search?: string;
   type: TGameItemType;

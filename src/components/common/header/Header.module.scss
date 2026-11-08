@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  min-height: $header-height;
-  padding: 12px 16px;
+  height: $header-height;
+  padding-inline: 16px;
   background: $bg-dark;
   transition: top $header-transition;
 

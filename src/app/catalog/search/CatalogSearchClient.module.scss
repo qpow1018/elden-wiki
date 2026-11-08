@@ -1,0 +1,45 @@
+.search {
+  padding: 16px;
+
+  input {
+    font-size: 16px;
+  }
+
+  .count {
+    margin: 16px 0 4px;
+    color: $text-secondary;
+    font-size: 13px;
+  }
+
+  .results {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li + li {
+      border-top: 1px solid $border-soft;
+    }
+
+    a {
+      display: flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 16px;
+      flex-wrap: wrap;
+      padding: 10px 4px;
+      color: $text-primary;
+      overflow-wrap: anywhere;
+
+      &:hover,
+      &:focus-visible {
+        background: $bg-light;
+      }
+    }
+  }
+
+  .classification {
+    color: $text-secondary;
+    font-size: 13px;
+  }
+}

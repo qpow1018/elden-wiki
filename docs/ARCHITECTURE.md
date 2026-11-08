@@ -25,6 +25,7 @@ src/
   app/                      # 라우트·레이아웃·라우트 전용 화면
     (home)/                 # URL /에서 기본 도감으로 연결
     catalog/[type]/           # 타입별 도감 페이지·클라이언트 화면·필터
+    catalog/search/           # 도감 전체 이름 검색 페이지
   api/
     index.ts                # 공통 API 연결·요청 처리
     <domain>/

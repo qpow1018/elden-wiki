@@ -1,9 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getGameItems, getGameItemCategories } from '@/api/gameItem';
+import { getGameItems, getGameItemCategories, getGameItemSearchEntries } from '@/api/gameItem';
 import type { TReqGetGameItems } from './types';
 
 const gameItemQuery = {
+  useGetGameItemSearchEntries() {
+    return useQuery({
+      queryKey: ['gameItem', 'searchEntries'],
+      queryFn: ({ signal }) => getGameItemSearchEntries({ signal }),
+    });
+  },
   useGetGameItems(params: Omit<TReqGetGameItems, 'signal'>) {
     return useQuery({
       queryKey: ['gameItem', 'list', params],
