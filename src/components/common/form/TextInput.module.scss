@@ -29,6 +29,10 @@
     font-size: inherit;
     color: inherit;
 
+    &[type='search'] {
+      font-size: 16px;
+    }
+
     &[readonly] {
       cursor: default;
     }
