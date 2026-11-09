@@ -1,7 +1,6 @@
 .search {
   padding: 16px;
 
-  .count,
   .hint {
     margin: 16px 0 4px;
     color: $text-secondary;
@@ -9,9 +8,11 @@
   }
 
   .count {
-    margin-bottom: 0;
+    margin: 16px 0 0;
     padding-bottom: 8px;
     border-bottom: 1px solid $border-strong;
+    color: $text-secondary;
+    font-size: 13px;
   }
 
   .results {
@@ -26,7 +27,7 @@
     a {
       display: grid;
       gap: 2px;
-      padding: 10px 0;
+      padding: 12px 0;
       color: $text-primary;
       text-decoration: none;
       overflow-wrap: anywhere;
@@ -41,15 +42,15 @@
         outline-offset: -2px;
       }
     }
-  }
 
-  .name {
-    font-size: 14px;
-    font-weight: 500;
-  }
+    .classification {
+      color: $text-muted;
+      font-size: 12px;
+    }
 
-  .classification {
-    color: $text-secondary;
-    font-size: 12px;
+    .name {
+      font-size: 14px;
+      font-weight: 500;
+    }
   }
 }

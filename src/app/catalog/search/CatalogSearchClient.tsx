@@ -95,22 +95,28 @@ export default function CatalogSearchClient({ initialSearch }: { initialSearch: 
               검색 결과 {results.length}개
             </p>
             <ul className={styles['results']}>
-              {results.map((item) => (
-                <li key={item.id}>
-                  <Link
-                    href={`/catalog/${item.type}?categoryId=${item.categoryId}#game-item-${item.id}`}
-                    onNavigate={handleResultNavigate}
-                    prefetch={false}
-                    scroll={false}
-                  >
-                    <span className={styles['classification']}>
-                      {GAME_ITEM_TYPES[item.type]}
-                      {item.categoryName && ` / ${item.categoryName}`}
-                    </span>
-                    <span className={styles['name']}>{item.name}</span>
-                  </Link>
-                </li>
-              ))}
+              {results.map((item) => {
+                const typeName = GAME_ITEM_TYPES[item.type];
+                const hasDistinctCategory =
+                  Boolean(item.categoryName) && item.categoryName !== typeName;
+
+                return (
+                  <li key={item.id}>
+                    <Link
+                      href={`/catalog/${item.type}?categoryId=${item.categoryId}#game-item-${item.id}`}
+                      onNavigate={handleResultNavigate}
+                      prefetch={false}
+                      scroll={false}
+                    >
+                      <span className={styles['classification']}>
+                        {typeName}
+                        {hasDistinctCategory && ` / ${item.categoryName}`}
+                      </span>
+                      <span className={styles['name']}>{item.name}</span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </>
         )}
