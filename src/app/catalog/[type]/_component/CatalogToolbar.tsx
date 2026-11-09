@@ -10,7 +10,7 @@ import Modal from '@/components/common/modal/Modal';
 
 import styles from './CatalogToolbar.module.scss';
 
-import { MdCheck, MdKeyboardArrowDown, MdFormatListNumbered } from 'react-icons/md';
+import { MdCheck, MdKeyboardArrowDown, MdFormatListNumbered, MdChevronRight } from 'react-icons/md';
 
 const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = {
   weapon: { categoryLabel: '무기 종류' },
@@ -185,6 +185,7 @@ function TableOfContentsModal({
                   {index + 1}.
                 </span>
                 <span className={styles['name']}>{gameItem.name}</span>
+                <MdChevronRight className={styles['chevron']} size={14} aria-hidden="true" />
               </a>
             </li>
           ))}
