@@ -1,4 +1,5 @@
 -- 사용자 제공 창 19종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -38,7 +39,7 @@ with source (name, description, fp_cost_text) as (
 쏟아지는 수많은 영혼 창을 부르는 전투 기술.', '20 ( - / - )'),
   ('옛 벼락의 창', '고룡의 무기인 붉은 벼락을 무기에 두르고
 그것을 창 삼아 투척하는 전투 기술.
-차지 공격으로 강화된다.', '25 ( - / - )')
+차지 공격으로 강화된다.', '24 ( - / - )')
 )
 insert into public.weapon_skills (name, description, fp_cost_text)
 select s.name, s.description, s.fp_cost_text from source s
@@ -148,23 +149,23 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   values
   ('숏 스피어', '관통 찌르기', 4.0, '관통', 'smithing_stone', true, 274, 0, 0, 0, 0, 40.0, 25.0, 25.0, 25.0, 25.0, 100, 36, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0),
   ('철 창', '돌격', 4.5, '관통', 'smithing_stone', true, 279, 0, 0, 0, 0, 42.0, 26.0, 26.0, 26.0, 26.0, 100, 37, 0, 0, 0, 0, 0, 0, 13, 11, 0, 0, 0),
-  ('스피어', '관통 찌르기', 4.5, '관통', 'smithing_stone', true, 274, 0, 0, 0, 0, 42.0, 26.0, 26.0, 26.0, 26.0, 100, 37, 0, 0, 0, 0, 0, 0, 12, 15, 0, 0, 0),
+  ('스피어', '관통 찌르기', 4.5, '관통', 'smithing_stone', true, 279, 0, 0, 0, 0, 42.0, 26.0, 26.0, 26.0, 26.0, 100, 37, 0, 0, 0, 0, 0, 0, 12, 15, 0, 0, 0),
   ('파르티잔', '관통 찌르기', 6.5, '참격 / 관통', 'smithing_stone', true, 301, 0, 0, 0, 0, 48.0, 30.0, 30.0, 30.0, 30.0, 100, 43, 0, 0, 0, 0, 0, 0, 15, 12, 0, 0, 0),
   ('파이크', '돌격', 7.5, '관통', 'smithing_stone', true, 281, 0, 0, 0, 0, 53.0, 33.0, 33.0, 33.0, 33.0, 100, 46, 0, 0, 0, 0, 0, 0, 20, 14, 0, 0, 0),
-  ('속창', '관통 찌르기', null, null, 'smithing_stone', true, 242, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 10, 26, 0, 0, 0),
+  ('속창', '관통 찌르기', 3, '표준 / 관통', 'smithing_stone', true, 242, 0, 0, 0, 0, 40, 25, 25, 25, 25, 100, 36, 0, 0, 0, 0, 0, 0, 10, 26, 0, 0, 0),
   ('가시몽둥이', '관통 찌르기', 6.0, '타격 / 관통', 'smithing_stone', true, 294, 0, 0, 0, 0, 46.0, 28.0, 28.0, 28.0, 28.0, 100, 40, 0, 0, 50, 0, 0, 0, 14, 16, 0, 0, 0),
   ('십문자치도', '관통 찌르기', 8.0, '참격 / 관통', 'smithing_stone', true, 298, 0, 0, 0, 0, 52.0, 32.0, 32.0, 32.0, 32.0, 100, 46, 0, 0, 50, 0, 0, 0, 16, 20, 0, 0, 0),
   ('진흙 인간의 작살', '관통 찌르기', 5.5, '관통', 'smithing_stone', true, 242, 156, 0, 0, 0, 49.0, 38.0, 25.0, 25.0, 25.0, 100, 39, 0, 0, 0, 0, 0, 0, 12, 10, 12, 0, 0),
-  ('혈귀의 포크', '야만적인 포효', null, null, 'smithing_stone', true, 252, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 50, 0, 0, 0, 14, 8, 0, 0, 13),
+  ('혈귀의 포크', '야만적인 포효', 4.5, '표준 / 관통', 'smithing_stone', true, 252, 0, 0, 0, 0, 42, 26, 26, 26, 26, 100, 37, 0, 0, 50, 0, 0, 0, 14, 8, 0, 0, 13),
   ('축제 늑골 쇠스랑', '야만적인 포효', 5.0, '관통', 'smithing_stone', true, 267, 0, 0, 0, 0, 40.0, 25.0, 25.0, 25.0, 25.0, 100, 39, 0, 0, 0, 0, 0, 0, 8, 14, 0, 0, 0),
   ('막대기 토치', '돌격', 6.0, '관통', 'smithing_stone', false, 254, 0, 75, 0, 0, 48.0, 26.0, 33.0, 26.0, 26.0, 100, 40, 0, 0, 0, 0, 0, 0, 14, 15, 0, 0, 0),
-  ('유문 창', '관통 찌르기', null, null, 'smithing_stone', true, 262, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 9, 12, 11, 11, 0),
+  ('유문 창', '관통 찌르기', 4, '표준 / 관통', 'smithing_stone', true, 262, 0, 0, 0, 0, 38, 23, 23, 23, 23, 100, 33, 0, 0, 0, 0, 0, 0, 9, 12, 11, 11, 0),
   ('책문 촛대', '돌격', 7.5, '관통', 'somber_smithing_stone', false, 249, 0, 161, 0, 0, 56.0, 28.0, 43.0, 28.0, 28.0, 100, 40, 0, 0, 50, 0, 0, 0, 18, 15, 0, 16, 0),
   ('결정창', '관통 찌르기', 5.5, '관통', 'somber_smithing_stone', false, 269, 80, 0, 0, 0, 48.0, 33.0, 26.0, 26.0, 26.0, 100, 36, 0, 0, 0, 0, 0, 0, 10, 16, 16, 0, 0),
   ('부패한 결정창', '돌격', 5.5, '관통', 'somber_smithing_stone', false, 254, 75, 0, 0, 0, 48.0, 33.0, 26.0, 26.0, 26.0, 100, 36, 55, 0, 0, 0, 0, 0, 10, 16, 16, 0, 0),
   ('귀부기사의 창', '성창의 벽', 5.5, '관통', 'somber_smithing_stone', false, 249, 0, 0, 0, 161, 49.0, 25.0, 25.0, 25.0, 38.0, 100, 36, 0, 0, 0, 0, 0, 0, 16, 16, 0, 14, 0),
-  ('죽음 의례의 창', '창 부르기 의식', 6.5, '관통', 'somber_smithing_stone', false, 242, 156, 0, 0, 0, 54.0, 42.0, 27.0, 27.0, 27.0, 110, null, 0, 0, 0, 0, 0, 0, 14, 20, 18, 0, 0),
-  ('그랑삭스의 벼락', '옛 벼락의 창', 8.5, '관통', 'somber_smithing_stone', false, 240, 0, 0, 154, 0, 60.0, 31.0, 31.0, 47.0, 31.0, 100, 40, 0, 0, 0, 0, 0, 0, 20, 40, 0, 0, 0)
+  ('죽음 의례의 창', '창 부르기 의식', 6.5, '관통', 'somber_smithing_stone', false, 242, 156, 0, 0, 0, 54.0, 42.0, 27.0, 27.0, 27.0, 110, 39, 0, 0, 0, 0, 0, 0, 14, 20, 18, 0, 0),
+  ('그랑삭스의 벼락', '옛 벼락의 창', 8.5, '관통', 'somber_smithing_stone', false, 240, 0, 0, 154, 0, 60.0, 31.0, 31.0, 47.0, 31.0, 100, 44, 0, 0, 0, 0, 0, 0, 20, 40, 0, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격 / 관통' then array['strike','pierce']::text[] when '표준' then array['standard']::text[] when '관통' then array['pierce']::text[] when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

@@ -1,4 +1,5 @@
 -- 사용자 제공 자검 8종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -92,8 +93,8 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('귀부기사의 검', '관통 찌르기', 4.0, '표준 / 관통', 'smithing_stone', true, 267, 0, 0, 0, 0, 51.0, 34.0, 34.0, 34.0, 34.0, 100, 27, 0, 0, 0, 0, 0, 0, 11, 13, 0, 0, 0),
   ('로지에르의 자검', '연속 찌르기', 3.5, '표준 / 관통', 'smithing_stone', true, 227, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 110, 26, 0, 0, 0, 0, 0, 0, 8, 17, 0, 0, 0),
   ('개미가시 레이피어', '관통 찌르기', 3.0, '표준 / 관통', 'smithing_stone', true, 240, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 100, 25, 55, 0, 0, 0, 0, 0, 10, 20, 0, 0, 0),
-  ('빙결의 침', '관통 찌르기', 2.5, '표준 / 관통', 'somber_smithing_stone', false, 242, 0, 0, 0, 0, 40.0, 40.0, 28.0, 28.0, 28.0, 100, 20, 0, 60, 0, 0, 0, 0, 11, 18, 0, 0, 0),
-  ('카리아의 마술검', '관통 찌르기', 2.5, null, 'smithing_stone', false, 72, 131, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 10, 19, 16, 0, 0)
+  ('빙결의 침', '관통 찌르기', 2.5, '표준 / 관통', 'somber_smithing_stone', false, 242, 0, 0, 0, 0, 40.0, 40.0, 28.0, 28.0, 28.0, 100, 22, 0, 60, 0, 0, 0, 0, 11, 18, 0, 0, 0),
+  ('카리아의 마술검', '관통 찌르기', 2.5, '표준 / 관통', 'smithing_stone', false, 72, 131, 0, 0, 0, 34, 48, 24, 24, 24, 110, 22, 0, 0, 0, 0, 0, 0, 10, 19, 16, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

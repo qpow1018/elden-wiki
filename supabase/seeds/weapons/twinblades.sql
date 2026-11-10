@@ -1,4 +1,5 @@
 -- 사용자 제공 쌍날검 8종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -100,9 +101,9 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('흑철 쌍날검', '회전 베기', 8.0, '표준 / 관통', 'smithing_stone', true, 274, 0, 0, 0, 80, 42.0, 26.0, 26.0, 26.0, 47.0, 100, 37, 0, 0, 0, 0, 0, 0, 18, 15, 0, 13, 0),
   ('신의 살갗 쌍날검', '흑염의 회오리', 8.0, '표준 / 관통', 'smithing_stone', true, 296, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 100, 37, 0, 0, 0, 0, 0, 0, 17, 22, 0, 0, 0),
   ('가고일의 쌍날검', '회전 베기', 8.5, '표준 / 관통', 'smithing_stone', true, 301, 0, 0, 0, 0, 48.0, 32.0, 32.0, 32.0, 32.0, 100, 38, 0, 0, 0, 0, 0, 0, 18, 15, 0, 0, 0),
-  ('가고일의 흑쌍날검', '회전 베기', 8.5, '표준 / 관통', 'somber_smithing_stone', false, 198, 0, 0, 0, 237, 32.0, 26.0, 26.0, 26.0, 59.0, 100, 32, 0, 0, 0, 0, 0, 0, 18, 15, 0, 22, 0),
-  ('엘레오노라의 쌍치도', '혈인난무', 6.0, '표준 / 관통', 'somber_smithing_stone', false, 176, 0, 176, 0, 0, 33.0, 23.0, 47.0, 23.0, 23.0, 100, 28, 0, 0, 33, 0, 0, 0, 12, 21, 0, 0, 19),
-  ('에우포리에', '에우포리에의 소용돌이', 8.5, '표준 / 관통', 'somber_smithing_stone', false, 84, 0, 0, 0, 100, 32.0, 26.0, 26.0, 26.0, 59.0, 100, 32, 0, 0, 0, 0, 0, 0, 16, 16, 0, 24, 0)
+  ('가고일의 흑쌍날검', '회전 베기', 8.5, '표준 / 관통', 'somber_smithing_stone', false, 198, 0, 0, 0, 237, 32.0, 26.0, 26.0, 26.0, 59.0, 100, 35, 0, 0, 0, 0, 0, 0, 18, 15, 0, 22, 0),
+  ('엘레오노라의 쌍치도', '혈인난무', 6.0, '표준 / 관통', 'somber_smithing_stone', false, 176, 0, 176, 0, 0, 33.0, 23.0, 47.0, 23.0, 23.0, 100, 30, 0, 0, 55, 0, 0, 0, 12, 21, 0, 0, 19),
+  ('에우포리에', '에우포리에의 소용돌이', 8.5, '표준 / 관통', 'somber_smithing_stone', false, 205, 0, 0, 0, 245, 32.0, 26.0, 26.0, 26.0, 59.0, 100, 35, 0, 0, 0, 0, 0, 0, 16, 16, 0, 24, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '표준' then array['standard']::text[] when '타격 / 관통' then array['strike','pierce']::text[] when '관통' then array['pierce']::text[] when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
@@ -151,8 +152,8 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('흑철 쌍날검', 'sacred', 'E', 'D', '-', 'C', '-'),
   ('흑철 쌍날검', 'magic', 'E', 'E', 'C', 'D', '-'),
   ('흑철 쌍날검', 'cold', 'D', 'C', 'C', 'D', '-'),
-  ('흑철 쌍날검', 'poison', 'D', 'B', '-', '-', 'D'),
-  ('흑철 쌍날검', 'blood', 'D', 'B', '-', '-', 'D'),
+  ('흑철 쌍날검', 'poison', 'D', 'B', '-', 'D', 'D'),
+  ('흑철 쌍날검', 'blood', 'D', 'B', '-', 'D', 'D'),
   ('흑철 쌍날검', 'occult', 'E', 'E', '-', 'E', 'B'),
   ('신의 살갗 쌍날검', 'standard', 'D', 'B', '-', '-', '-'),
   ('신의 살갗 쌍날검', 'heavy', 'B', '-', '-', '-', '-'),

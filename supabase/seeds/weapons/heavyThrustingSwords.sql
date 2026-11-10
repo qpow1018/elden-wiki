@@ -1,4 +1,5 @@
 -- 사용자 제공 대자검 6종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -84,11 +85,11 @@ where not exists (select 1 from public.game_items i where i.type = 'weapon' and 
 
 with source (name, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
-  ('그레이트 에페', '관통 찌르기', 6.5, '표준 / 관통', 'smithing_stone', true, 303, 0, 0, 0, 0, 55.0, 36.0, 36.0, 36.0, 36.0, 100, 37, 0, 0, 0, 0, 0, 0, 15, 16, 0, 0, 0),
-  ('신의 살갗 대자검', '관통 찌르기', 7.0, '표준 / 관통', 'smithing_stone', true, 311, 0, 0, 0, 0, 52.0, 38.0, 38.0, 38.0, 38.0, 100, 39, 0, 0, 0, 0, 0, 0, 14, 17, 0, 0, 0),
+  ('그레이트 에페', '관통 찌르기', 6.5, '표준 / 관통', 'smithing_stone', true, 303, 0, 0, 0, 0, 52, 36.0, 36.0, 36.0, 36.0, 100, 37, 0, 0, 0, 0, 0, 0, 15, 16, 0, 0, 0),
+  ('신의 살갗 대자검', '관통 찌르기', 7.0, '표준 / 관통', 'smithing_stone', true, 311, 0, 0, 0, 0, 55, 38.0, 38.0, 38.0, 38.0, 100, 39, 0, 0, 0, 0, 0, 0, 14, 17, 0, 0, 0),
   ('퀼라인의 대검', '관통 찌르기', 7.5, '표준 / 관통', 'smithing_stone', true, 298, 0, 88, 0, 0, 50.0, 34.0, 45.0, 34.0, 34.0, 100, 39, 0, 0, 0, 0, 0, 0, 14, 18, 0, 12, 0),
   ('피의 헬리케', '왕조 검술', 8.0, '표준 / 관통', 'somber_smithing_stone', false, 296, 0, 0, 0, 0, 57.0, 40.0, 40.0, 40.0, 40.0, 100, 37, 0, 0, 55, 0, 0, 0, 16, 19, 0, 0, 17),
-  ('용왕의 바위검', '뇌운의 모습', 8.0, '표준 / 관통', 'somber_smithing_stone', false, 255, 0, 0, 144, 0, 46.0, 32.0, 32.0, 46.0, 32.0, 100, 37, 0, 0, 0, 0, 0, 0, 18, 37, 0, 0, 0),
+  ('용왕의 바위검', '뇌운의 모습', 8.0, '표준 / 관통', 'somber_smithing_stone', false, 225, 0, 0, 144, 0, 46.0, 32.0, 32.0, 46.0, 32.0, 100, 37, 0, 0, 0, 0, 0, 0, 18, 37, 0, 0, 0),
   ('소드랜스', '관통 찌르기', 9.0, '표준 / 관통', 'smithing_stone', true, 323, 0, 0, 0, 0, 73.0, 39.0, 39.0, 39.0, 39.0, 100, 50, 0, 0, 0, 0, 0, 0, 21, 11, 0, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)

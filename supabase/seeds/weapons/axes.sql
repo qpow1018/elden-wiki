@@ -1,4 +1,5 @@
 -- 사용자 제공 도끼 17종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -28,7 +29,7 @@ with source (name, description, fp_cost_text) as (
 타깃 고정 상태라면 돌아 들어간다.', '3 ( - / - )'),
   ('용 모습의 화염', '용 모양의 입에서 불을 뿜는 전투 기술.
 좌우로 흔들리며 전방을 불태운다.
-화염은 잠시 땅을 계속 불태운다.', null),
+화염은 잠시 땅을 계속 불태운다.', '14'),
   ('난격', '마구잡이로 무기를 휘두르는 전투 기술.
 길게 누르는 동안 계속 공격하며 일반 공격 및
 강 공격으로 추가 공격도 가능하다.', '2 ( 10 / 15 )'),
@@ -151,22 +152,22 @@ where not exists (select 1 from public.game_items i where i.type = 'weapon' and 
 with source (name, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
   ('핸드 액스', '퀵스텝', 3.5, '표준', 'smithing_stone', true, 286, 0, 0, 0, 0, 42.0, 28.0, 28.0, 28.0, 28.0, 100, 33, 0, 0, 0, 0, 0, 0, 9, 8, 0, 0, 0),
-  ('두갈래 손도끼', '퀵스텝', 2.5, '표준 / 관통', 'smithing_stone', true, 259, 0, 0, 0, 0, 40.0, 27.0, 27.0, 27.0, 27.0, 100, 32, 0, 0, 50, 0, 0, 0, 9, 14, 0, 0, 0),
-  ('두 갈래 혀 손도끼', '용 모습의 화염', null, '표준 / 관통', 'smithing_stone', false, 306, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 50, 0, 0, 0, 10, 13, 0, 0, 0),
+  ('두갈래 손도끼', '퀵스텝', 2.5, '표준 / 관통', 'smithing_stone', true, 276, 0, 0, 0, 0, 40.0, 27.0, 27.0, 27.0, 27.0, 100, 32, 0, 0, 50, 0, 0, 0, 9, 14, 0, 0, 0),
+  ('두 갈래 혀 손도끼', '용 모습의 화염', 4, '표준 / 관통', 'smithing_stone', false, 306, 0, 0, 0, 0, 45, 30, 30, 30, 30, 100, 36, 0, 0, 50, 0, 0, 0, 10, 13, 0, 0, 0),
   ('배틀 액스', '난격', 4.5, '표준', 'smithing_stone', true, 313, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 100, 37, 0, 0, 0, 0, 0, 0, 12, 8, 0, 0, 0),
   ('메스메르 병사의 도끼', '워 크라이', 5.5, '표준', 'smithing_stone', true, 325, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 39, 0, 0, 0, 0, 0, 0, 14, 10, 0, 0, 0),
   ('일그러진 도끼', '워 크라이', 7.5, '표준', 'smithing_stone', true, 303, 0, 0, 0, 0, 56.0, 37.0, 37.0, 37.0, 37.0, 100, 51, 0, 0, 0, 0, 0, 0, 24, 8, 0, 0, 0),
   ('치열 도끼', '난격', 5.5, '타격', 'smithing_stone', true, 318, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 43, 0, 0, 0, 0, 0, 0, 14, 8, 0, 0, 0),
   ('철 나대', '난격', 6.0, '표준', 'smithing_stone', true, 306, 0, 0, 0, 0, 51.0, 34.0, 34.0, 34.0, 34.0, 100, 40, 0, 0, 0, 0, 0, 0, 15, 7, 0, 0, 0),
   ('하이랜드 액스', '워 크라이', 4.5, '표준', 'smithing_stone', true, 313, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 110, 37, 0, 0, 0, 0, 0, 0, 12, 9, 0, 0, 0),
-  ('유문 도끼', '난격', null, null, 'smithing_stone', true, 320, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 13, 10, 11, 11, 0),
+  ('유문 도끼', '난격', 5, '표준', 'smithing_stone', true, 320, 0, 0, 0, 0, 48, 32, 32, 32, 32, 100, 38, 0, 0, 0, 0, 0, 0, 13, 10, 11, 11, 0),
   ('축제의 나대', '난격', 4.5, '표준', 'smithing_stone', true, 306, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 100, 39, 0, 0, 0, 0, 0, 0, 12, 8, 0, 0, 0),
   ('산 제물 도끼', '난격', 5.5, '표준', 'smithing_stone', true, 325, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 39, 0, 0, 0, 0, 0, 0, 16, 10, 0, 0, 0),
   ('빙각의 도끼', '서리 밟기', 3.0, '표준', 'somber_smithing_stone', false, 281, 0, 0, 0, 0, 40.0, 27.0, 27.0, 27.0, 27.0, 100, 29, 0, 65, 0, 0, 0, 0, 11, 16, 0, 0, 0),
   ('파문의 검', '난격', 4.5, '표준', 'smithing_stone', false, 183, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 100, 37, 0, 0, 0, 0, 0, 0, 11, 11, 0, 0, 20),
-  ('폭풍 매 도끼', '벼락 폭풍', 5.5, '표준', 'somber_smithing_stone', false, 318, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 33, 0, 0, 0, 0, 0, 0, 19, 15, 0, 0, 0),
-  ('로제스의 도끼', '로제스의 부름', 5.5, '표준', 'somber_smithing_stone', false, 274, 166, 0, 0, 0, 44.0, 44.0, 30.0, 30.0, 30.0, 100, 36, 0, 0, 0, 0, 0, 0, 18, 10, 18, 0, 0),
-  ('죽음 기사의 쌍도끼', '순뢰/쌍도끼', 5.5, '표준', 'somber_smithing_stone', false, 274, 0, 0, 159, 0, 44.0, 30.0, 30.0, 44.0, 30.0, 100, 33, 0, 0, 0, 0, 0, 0, 14, 12, 0, 16, 0)
+  ('폭풍 매 도끼', '벼락 폭풍', 5.5, '표준', 'somber_smithing_stone', false, 333, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 34, 0, 0, 0, 0, 0, 0, 19, 15, 0, 0, 0),
+  ('로제스의 도끼', '로제스의 부름', 5.5, '표준', 'somber_smithing_stone', false, 274, 176, 0, 0, 0, 44.0, 44.0, 30.0, 30.0, 30.0, 100, 36, 0, 0, 0, 0, 0, 0, 18, 10, 18, 0, 0),
+  ('죽음 기사의 쌍도끼', '순뢰/쌍도끼', 5.5, '표준', 'somber_smithing_stone', false, 247, 0, 0, 159, 0, 44.0, 30.0, 30.0, 44.0, 30.0, 100, 36, 0, 0, 0, 0, 0, 0, 14, 12, 0, 16, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '표준' then array['standard']::text[] when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
@@ -191,14 +192,14 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('핸드 액스', 'poison', 'D', 'B', '-', '-', 'D'),
   ('핸드 액스', 'blood', 'D', 'B', '-', '-', 'D'),
   ('핸드 액스', 'occult', 'E', 'D', '-', '-', 'B'),
-  ('두갈래 손도끼', 'standard', 'D', 'C', '-', '-', '-'),
+  ('두갈래 손도끼', 'standard', 'D', 'B', '-', '-', '-'),
   ('두갈래 손도끼', 'heavy', 'B', '-', '-', '-', '-'),
   ('두갈래 손도끼', 'keen', 'E', 'A', '-', '-', '-'),
   ('두갈래 손도끼', 'quality', 'B', 'B', '-', '-', '-'),
   ('두갈래 손도끼', 'fire', 'C', 'E', '-', '-', '-'),
-  ('두갈래 손도끼', 'flame_art', 'E', 'E', '-', 'C', '-'),
+  ('두갈래 손도끼', 'flame_art', 'E', 'E', '-', 'B', '-'),
   ('두갈래 손도끼', 'lightning', 'E', 'C', '-', '-', '-'),
-  ('두갈래 손도끼', 'sacred', 'E', 'E', '-', 'C', '-'),
+  ('두갈래 손도끼', 'sacred', 'E', 'E', '-', 'B', '-'),
   ('두갈래 손도끼', 'magic', 'E', 'E', 'B', '-', '-'),
   ('두갈래 손도끼', 'cold', 'D', 'B', 'C', '-', '-'),
   ('두갈래 손도끼', 'poison', 'D', 'B', '-', '-', 'D'),
@@ -233,7 +234,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('메스메르 병사의 도끼', 'occult', 'E', 'E', '-', '-', 'B'),
   ('일그러진 도끼', 'standard', 'B', '-', '-', '-', '-'),
   ('일그러진 도끼', 'heavy', 'S', '-', '-', '-', '-'),
-  ('일그러진 도끼', 'keen', 'D', 'B', '-', '-', '-'),
+  ('일그러진 도끼', 'keen', 'D', 'A', '-', '-', '-'),
   ('일그러진 도끼', 'quality', 'B', 'B', '-', '-', '-'),
   ('일그러진 도끼', 'fire', 'C', 'E', '-', '-', '-'),
   ('일그러진 도끼', 'flame_art', 'C', '-', '-', 'C', '-'),
@@ -244,7 +245,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('일그러진 도끼', 'poison', 'A', '-', '-', '-', 'D'),
   ('일그러진 도끼', 'blood', 'A', '-', '-', '-', 'D'),
   ('일그러진 도끼', 'occult', 'B', '-', '-', '-', 'B'),
-  ('치열 도끼', 'standard', 'C', 'D', '-', '-', '-'),
+  ('치열 도끼', 'standard', 'B', 'D', '-', '-', '-'),
   ('치열 도끼', 'heavy', 'A', '-', '-', '-', '-'),
   ('치열 도끼', 'keen', 'E', 'B', '-', '-', '-'),
   ('치열 도끼', 'quality', 'B', 'B', '-', '-', '-'),
@@ -265,7 +266,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('철 나대', 'flame_art', 'D', 'E', '-', 'B', '-'),
   ('철 나대', 'lightning', 'E', 'C', '-', '-', '-'),
   ('철 나대', 'sacred', 'D', 'E', '-', 'B', '-'),
-  ('철 나대', 'magic', 'D', '-', 'B', '-', '-'),
+  ('철 나대', 'magic', 'D', 'E', 'B', '-', '-'),
   ('철 나대', 'cold', 'B', 'D', 'C', '-', '-'),
   ('철 나대', 'poison', 'B', 'D', '-', '-', 'D'),
   ('철 나대', 'blood', 'B', 'D', '-', '-', 'D'),

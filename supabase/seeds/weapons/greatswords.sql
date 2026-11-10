@@ -1,4 +1,5 @@
 -- 사용자 제공 대검 25종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -389,7 +390,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('큰 도마뱀 대검', 'poison', 'D', 'C', '-', '-', 'D'),
   ('큰 도마뱀 대검', 'blood', 'D', 'C', '-', '-', 'D'),
   ('큰 도마뱀 대검', 'occult', 'E', 'D', '-', '-', 'B'),
-  ('플랑베르주', 'standard', 'D', 'C', '-', '-', '-'),
+  ('플랑베르주', 'standard', 'D', 'B', '-', '-', '-'),
   ('플랑베르주', 'heavy', 'B', '-', '-', '-', '-'),
   ('플랑베르주', 'keen', 'E', 'A', '-', '-', '-'),
   ('플랑베르주', 'quality', 'B', 'B', '-', '-', '-'),

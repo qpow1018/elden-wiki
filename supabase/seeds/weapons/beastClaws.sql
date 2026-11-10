@@ -1,4 +1,5 @@
 -- 사용자 제공 짐승 발톱 2종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -26,11 +27,11 @@ $$;
 with source (name, description, fp_cost_text) as (
   values
   ('짐승 발톱 공격', '짐승처럼 낮게 도약한 후 좌우 손톱으로
-격렬하게 적을 베어 가르는 전투 기술.', null),
+격렬하게 적을 베어 가르는 전투 기술.', '13'),
   ('붉은곰의 사냥', '팔을 크게 치켜들고 날카로운 발톱으로 사냥감을
 제압하는 전투 기술. 그 공격은 진공을 만들어
 연속으로 대미지를 입힌다.
-추가 입력으로 2회까지 추가 공격이 가능하다.', null)
+추가 입력으로 2회까지 추가 공격이 가능하다.', '8 ( - / 8 )')
 )
 insert into public.weapon_skills (name, description, fp_cost_text)
 select s.name, s.description, s.fp_cost_text from source s
@@ -58,8 +59,8 @@ where not exists (select 1 from public.game_items i where i.type = 'weapon' and 
 
 with source (name, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
-  ('짐승 발톱', '짐승 발톱 공격', null, '참격', 'smithing_stone', true, 240, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 45, 0, 0, 0, 13, 11, 0, 0, 0),
-  ('붉은곰의 발톱', '붉은곰의 사냥', null, null, 'somber_smithing_stone', false, 254, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 45, 0, 0, 0, 20, 10, 0, 0, 0)
+  ('짐승 발톱', '짐승 발톱 공격', 3, '참격', 'smithing_stone', true, 240, 0, 0, 0, 0, 35, 20, 20, 20, 20, 100, 24, 0, 0, 45, 0, 0, 0, 13, 11, 0, 0, 0),
+  ('붉은곰의 발톱', '붉은곰의 사냥', 4, '참격', 'somber_smithing_stone', false, 254, 0, 0, 0, 0, 38, 22, 22, 22, 22, 100, 24, 0, 0, 45, 0, 0, 0, 20, 10, 0, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight::numeric, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical::numeric, s.guard_magic::numeric, s.guard_fire::numeric, s.guard_lightning::numeric, s.guard_holy::numeric, s.critical::integer, s.guard_boost::integer, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

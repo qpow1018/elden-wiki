@@ -1,4 +1,5 @@
 -- 사용자 제공 도 10종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -44,7 +45,7 @@ with source (name, description, fp_cost_text) as (
 칼날에 두른 빙뢰는 잠시 지속된다.', '25'),
   ('온지의 연성', '아인 검성의 이름을 따온 전투 기술.
 늘어선 휘석에 마력을 담은 베기 공격.
-추가 입력으로 2회까지 추가 공격이 가능하며 추가 공격을 할 때마다 강화된다.', null),
+추가 입력으로 2회까지 추가 공격이 가능하며 추가 공격을 할 때마다 강화된다.', '10 ( - / 8 )'),
   ('물새 난격', '물새처럼 한 다리로 뛰어
 초고속 연속 베기를 잇는 전투 기술.
 추가 입력으로 2회까지 추가 공격이 가능하다.', '12( -/ 9)')
@@ -118,13 +119,13 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('타도', '거합', 5.5, '참격 / 관통', 'smithing_stone', true, 281, 0, 0, 0, 0, 45.0, 30.0, 30.0, 30.0, 30.0, 100, 36, 0, 0, 45, 0, 0, 0, 11, 15, 0, 0, 0),
   ('긴 이빨', '거합', 7.0, '참격 / 관통', 'smithing_stone', true, 281, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 39, 0, 0, 45, 0, 0, 0, 18, 22, 0, 0, 0),
   ('뱀 뼈의 도', '2연속 베기', 6.0, '참격 / 관통', 'smithing_stone', false, 294, 0, 0, 0, 0, 45.0, 30.0, 30.0, 30.0, 30.0, 100, 36, 0, 0, 0, 66, 0, 0, 11, 22, 0, 0, 0),
-  ('운철도', '그라비타스', 7.5, '참격 / 관통', 'somber_smithing_stone', false, 274, 176, 0, 0, 0, 50.0, 45.0, 31.0, 31.0, 31.0, 100, 30, 0, 0, 50, 0, 0, 0, 15, 14, 18, 0, 0),
-  ('명도 월은', '순간의 달그림자', 6.5, '참격 / 관통', 'somber_smithing_stone', false, 178, 213, 0, 0, 0, 31.0, 57.0, 26.0, 26.0, 26.0, 100, 31, 0, 0, 50, 0, 0, 0, 12, 18, 23, 0, 0),
+  ('운철도', '그라비타스', 7.5, '참격 / 관통', 'somber_smithing_stone', false, 274, 176, 0, 0, 0, 50.0, 45.0, 31.0, 31.0, 31.0, 100, 36, 0, 0, 50, 0, 0, 0, 15, 14, 18, 0, 0),
+  ('명도 월은', '순간의 달그림자', 6.5, '참격 / 관통', 'somber_smithing_stone', false, 178, 213, 0, 0, 0, 31.0, 57.0, 26.0, 26.0, 26.0, 100, 34, 0, 0, 50, 0, 0, 0, 12, 18, 23, 0, 0),
   ('밤의 칼날', '어두운 밤의 참격', 6.5, '참격 / 관통', 'somber_smithing_stone', false, 269, 80, 0, 0, 0, 43.0, 35.0, 27.0, 27.0, 27.0, 100, 33, 0, 0, 45, 0, 0, 0, 11, 20, 0, 0, 0),
   ('시산혈하', '시체더미', 6.5, '참격 / 관통', 'somber_smithing_stone', false, 186, 0, 186, 0, 0, 36.0, 26.0, 52.0, 26.0, 26.0, 100, 34, 0, 0, 50, 0, 0, 0, 12, 18, 0, 0, 20),
-  ('용비늘도', '빙뢰검', 5.5, '참격 / 관통', 'somber_smithing_stone', false, 269, 0, 0, 0, 0, 35.0, 25.0, 25.0, 50.0, 25.0, 100, 30, 0, 0, 0, 0, 0, 0, 12, 20, 0, 0, 0),
-  ('연성검', '온지의 연성', null, null, 'somber_smithing_stone', false, 200, 200, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 45, 0, 0, 0, 10, 23, 21, 0, 0),
-  ('말레니아의 의수도', '물새 난격', 7.0, '참격 / 관통', 'somber_smithing_stone', false, 286, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 33, 0, 0, 50, 0, 0, 0, 16, 48, 0, 0, 0)
+  ('용비늘도', '빙뢰검', 5.5, '참격 / 관통', 'somber_smithing_stone', false, 269, 0, 0, 0, 0, 35.0, 25.0, 25.0, 50.0, 25.0, 100, 33, 0, 0, 0, 0, 0, 0, 12, 20, 0, 0, 0),
+  ('연성검', '온지의 연성', 5, '참격 / 관통', 'somber_smithing_stone', false, 200, 200, 0, 0, 0, 34, 48, 24, 24, 24, 100, 31, 0, 0, 45, 0, 0, 0, 10, 23, 21, 0, 0),
+  ('말레니아의 의수도', '물새 난격', 7.0, '참격 / 관통', 'somber_smithing_stone', false, 286, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 36, 0, 0, 50, 0, 0, 0, 16, 48, 0, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

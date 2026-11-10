@@ -1,4 +1,5 @@
 -- 사용자 제공 역수검 4종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -72,7 +73,7 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('역날 곡검', '사각에서의 일격', 3.0, '참격 / 관통', 'smithing_stone', true, 281, 0, 0, 0, 0, 37.0, 28.0, 28.0, 28.0, 28.0, 100, 15, 0, 0, 0, 0, 0, 0, 9, 11, 0, 0, 0),
   ('역수검', '사각에서의 일격', 2.0, '참격 / 관통', 'smithing_stone', true, 257, 0, 0, 0, 0, 40.0, 30.0, 30.0, 30.0, 30.0, 100, 18, 0, 0, 0, 0, 0, 0, 10, 13, 0, 0, 0),
   ('유문 차크람', '사각에서의 일격', 2.0, '참격', 'smithing_stone', true, 245, 0, 0, 0, 0, 40.0, 30.0, 30.0, 30.0, 30.0, 100, 30, 0, 0, 0, 0, 0, 0, 9, 14, 11, 11, 0),
-  ('주검사의 차크람', '재앙의 춤', 4.5, '참격', 'somber_smithing_stone', false, 264, 0, 0, 0, 0, 55.0, 39.0, 39.0, 39.0, 39.0, 100, null, 0, 0, 45, 0, 0, 0, 9, 22, 0, 0, 0)
+  ('주검사의 차크람', '재앙의 춤', 4.5, '참격', 'somber_smithing_stone', false, 264, 0, 0, 0, 0, 55.0, 39.0, 39.0, 39.0, 39.0, 100, 49, 0, 0, 45, 0, 0, 0, 9, 22, 0, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

@@ -1,4 +1,5 @@
 -- 사용자 제공 곡검 19종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -38,10 +39,10 @@ with source (name, description, fp_cost_text) as (
 별 구름은 잠시 후 폭발해 사라진다.', '20 ( - / - )'),
   ('복수의 칼날', '적의 품으로 달려들어 좌우로 베는 전투 기술.
 길게 누르면 달려드는 거리가 길어진다.
-또한 강 공격으로 난도질로 이을 수 있다.', null),
+또한 강 공격으로 난도질로 이을 수 있다.', '15 ( - / 10 )'),
   ('끝 없는 춤', '격렬히 춤추며 연속으로 참격을 쓰는 전투 기술.
 길게 누르는 동안은 스태미나가 다할 때까지
-춤이 끝나지 않는다.', null),
+춤이 끝나지 않는다.', '2'),
   ('뿔내림', '도신에 혼각을 내리는 전투 기술.
 그대로 무기를 지면에 꽂아
 솟아오르는 뿔 가시를 생성한다.', '17 ( - / - )'),
@@ -166,13 +167,13 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('유수의 곡검', '회전 베기', 3.5, '참격', 'smithing_stone', true, 267, 0, 0, 0, 0, 42.0, 31.0, 31.0, 31.0, 31.0, 100, 31, 0, 0, 0, 0, 0, 0, 9, 17, 0, 0, 0),
   ('뱀신의 곡도', '회전 베기', 4.0, '참격', 'smithing_stone', true, 276, 0, 0, 0, 0, 44.0, 33.0, 33.0, 33.0, 33.0, 100, 32, 0, 0, 0, 0, 0, 0, 13, 9, 0, 0, 0),
   ('용암도', '용암 뿌리기', 4.0, '참격', 'somber_smithing_stone', false, 235, 0, 151, 0, 0, 44.0, 30.0, 44.0, 30.0, 30.0, 100, 29, 0, 0, 0, 0, 0, 0, 9, 15, 0, 16, 0),
-  ('영의 검', '원혼 베기', null, null, 'somber_smithing_stone', false, 225, 144, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 16, 16, 0, 0),
+  ('영의 검', '원혼 베기', 2.5, '참격', 'somber_smithing_stone', false, 225, 144, 0, 0, 0, 38, 38, 26, 26, 26, 100, 20, 0, 0, 0, 0, 0, 0, 8, 16, 16, 0, 0),
   ('녹스의 유체검', '유체화', 3.5, '참격', 'somber_smithing_stone', false, 274, 0, 0, 0, 0, 40.0, 30.0, 30.0, 30.0, 30.0, 100, 27, 0, 0, 0, 0, 0, 0, 8, 15, 0, 0, 0),
   ('아스테르의 날개', '별 구름', 2.5, '참격', 'somber_smithing_stone', false, 159, 191, 0, 0, 0, 28.0, 52.0, 23.0, 23.0, 23.0, 100, 25, 0, 0, 0, 0, 0, 0, 7, 17, 20, 0, 0),
-  ('팔스', '복수의 칼날', null, null, 'somber_smithing_stone', false, 262, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 55, 0, 0, 0, 12, 15, 0, 0, 0),
-  ('라나의 무도검', '끝 없는 춤', null, null, 'somber_smithing_stone', false, 215, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 9, 20, 0, 0, 0),
+  ('팔스', '복수의 칼날', 4, '참격', 'somber_smithing_stone', false, 262, 0, 0, 0, 0, 42, 31, 31, 31, 31, 100, 23, 0, 0, 55, 0, 0, 0, 12, 15, 0, 0, 0),
+  ('라나의 무도검', '끝 없는 춤', 3.5, '참격', 'somber_smithing_stone', false, 215, 0, 0, 0, 0, 37, 28, 29, 29, 27, 100, 22, 0, 0, 0, 0, 0, 0, 9, 20, 0, 0, 0),
   ('뿔 전사의 곡검', '뿔내림', 5.0, '참격', 'somber_smithing_stone', false, 264, 0, 0, 0, 0, 48.0, 36.0, 36.0, 36.0, 36.0, 100, 33, 0, 0, 0, 0, 0, 0, 11, 14, 0, 14, 0),
-  ('일식의 쇼텔', '죽음의 플레어', 4.0, '참격', 'somber_smithing_stone', false, 188, 0, 0, 0, 188, 35.0, 25.0, 25.0, 25.0, 50.0, 100, 27, 0, 0, 0, 0, 0, 0, 10, 25, 0, 30, 0)
+  ('일식의 쇼텔', '죽음의 플레어', 3, '참격', 'somber_smithing_stone', false, 188, 0, 0, 0, 188, 35.0, 25.0, 25.0, 25.0, 50.0, 100, 27, 0, 0, 0, 0, 0, 0, 10, 25, 0, 30, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
@@ -224,7 +225,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('샴시르', 'poison', 'C', 'C', '-', '-', 'D'),
   ('샴시르', 'blood', 'C', 'C', '-', '-', 'D'),
   ('샴시르', 'occult', 'E', 'D', '-', '-', 'B'),
-  ('그로스메서', 'standard', 'D', 'C', '-', '-', '-'),
+  ('그로스메서', 'standard', 'C', 'D', '-', '-', '-'),
   ('그로스메서', 'heavy', 'B', '-', '-', '-', '-'),
   ('그로스메서', 'keen', 'E', 'B', '-', '-', '-'),
   ('그로스메서', 'quality', 'B', 'B', '-', '-', '-'),
@@ -239,7 +240,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('그로스메서', 'occult', 'D', 'E', '-', '-', 'B'),
   ('산적의 곡도', 'standard', 'D', 'C', '-', '-', '-'),
   ('산적의 곡도', 'heavy', 'B', '-', '-', '-', '-'),
-  ('산적의 곡도', 'keen', 'E', 'A', '-', '-', '-'),
+  ('산적의 곡도', 'keen', 'E', 'B', '-', '-', '-'),
   ('산적의 곡도', 'quality', 'B', 'B', '-', '-', '-'),
   ('산적의 곡도', 'fire', 'C', 'E', '-', '-', '-'),
   ('산적의 곡도', 'flame_art', 'E', 'E', '-', 'B', '-'),
@@ -315,7 +316,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('유수의 곡검', 'poison', 'D', 'B', '-', '-', 'D'),
   ('유수의 곡검', 'blood', 'D', 'B', '-', '-', 'D'),
   ('유수의 곡검', 'occult', 'E', 'D', '-', '-', 'B'),
-  ('뱀신의 곡도', 'standard', 'D', 'C', '-', '-', '-'),
+  ('뱀신의 곡도', 'standard', 'C', 'D', '-', '-', '-'),
   ('뱀신의 곡도', 'heavy', 'A', '-', '-', '-', '-'),
   ('뱀신의 곡도', 'keen', 'E', 'B', '-', '-', '-'),
   ('뱀신의 곡도', 'quality', 'B', 'B', '-', '-', '-'),
@@ -329,7 +330,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('뱀신의 곡도', 'blood', 'B', 'D', '-', '-', 'D'),
   ('뱀신의 곡도', 'occult', 'D', 'E', '-', '-', 'B'),
   ('용암도', 'standard', 'C', 'D', '-', 'C', '-'),
-  ('영의 검', 'occult', 'E', 'C', 'C', '-', '-'),
+  ('영의 검', 'standard', 'E', 'C', 'C', '-', '-'),
   ('녹스의 유체검', 'standard', 'D', 'B', '-', '-', '-'),
   ('아스테르의 날개', 'standard', 'E', 'C', 'B', '-', '-'),
   ('팔스', 'standard', 'D', 'B', '-', '-', '-'),

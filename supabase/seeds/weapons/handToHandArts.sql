@@ -1,4 +1,5 @@
 -- 사용자 제공 격투 2종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -51,8 +52,8 @@ where not exists (select 1 from public.game_items i where i.category_id = c.id a
 
 with source (name, weight, attack_physical, critical, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, guard_boost) as (
   values
-  ('낙엽 격투', 1.0, 196, 100, 35.0, 20.0, 20.0, 20.0, 20.0, 24),
-  ('단류 발차기술', null, 210, null, null, null, null, null, null, null)
+  ('낙엽 격투', 1.0, 210, 100, 35.0, 20.0, 20.0, 20.0, 20.0, 24),
+  ('단류 발차기술', 1, 210, 100, 35, 20, 20, 20, 20, 24)
 )
 insert into public.weapon_details (
   game_item_id, type, default_skill_id, upgrade_material, can_change_affinity,
@@ -62,7 +63,7 @@ insert into public.weapon_details (
   scarlet_rot, frostbite, bleed, poison, sleep, madness
 )
 select i.id, 'weapon', k.id, 'smithing_stone', true,
-  s.weight, case when s.name = '낙엽 격투' then array['strike']::text[] else null end,
+  s.weight, array['strike']::text[],
   s.attack_physical, 0, 0, 0, 0,
   s.critical, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.guard_boost,
   8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0

@@ -1,4 +1,5 @@
 -- 사용자 제공 망치 16종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -34,7 +35,7 @@ with source (name, description, fp_cost_text) as (
 공격한 상대에게서 피와 함께 HP를 뺏는다.', '14 ( - / - )'),
   ('신탁의 거품', '피리를 불어 마력 거품을 쏘는 전투 기술.
 거품은 천천히 날아가면서
-둥실둥실 목표를 향한다.', '6 ( - / - )'),
+둥실둥실 목표를 향한다.', '6 ( - / 6 )'),
   ('유체화', '무기를 일시적으로 액체로 만드는 전투 기술.
 크게 휘둘러 주위를 쓸어버린 후
 물방울 모양 타격부를 내리친다.', '16 ( - / - )'),
@@ -46,7 +47,7 @@ with source (name, description, fp_cost_text) as (
   ('꽃의 용뢰', '대상에 고룡의 붉은 벼락을 내리는 전투 기술.
 벼락 속성 대미지를 줌과 동시에
 일시적으로 벼락 경감률을 저하시킨다 .
-차지 공격으로 강화된다.', null),
+차지 공격으로 강화된다.', '18'),
   ('황금 부수기', '가볍게 도약해 룬의 파편에 빛을 품고
 공중에서 힘껏 내리치는 전투 기술.
 라다곤의 영웅적 구타.', '26 ( - / - )')
@@ -155,9 +156,9 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('곤봉', '야만적인 포효', 3.5, '타격', 'smithing_stone', true, 252, 0, 0, 0, 0, 41.0, 27.0, 27.0, 27.0, 27.0, 100, 32, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0),
   ('굽은 곤봉', '야만적인 포효', 5.0, '타격', 'smithing_stone', true, 279, 0, 0, 0, 0, 45.0, 30.0, 30.0, 30.0, 30.0, 100, 36, 0, 0, 0, 0, 0, 0, 11, 7, 0, 0, 0),
   ('이빨 달린 곤봉', '야만적인 포효', 5.0, '타격', 'smithing_stone', true, 279, 0, 0, 0, 0, 45.0, 30.0, 30.0, 30.0, 30.0, 100, 36, 0, 0, 50, 0, 0, 0, 12, 7, 0, 0, 0),
-  ('돌 곤봉', '킥', 7.0, '타격', 'smithing_stone', true, 298, 0, 0, 0, 0, 52.0, 35.0, 35.0, 35.0, 35.0, 100, 42, 0, 0, 0, 0, 0, 0, 16, 8, 0, 0, 0),
+  ('돌 곤봉', '킥', 7.0, '타격', 'smithing_stone', true, 298, 0, 0, 0, 0, 52.0, 35.0, 35.0, 35.0, 35.0, 100, 43, 0, 0, 0, 0, 0, 0, 16, 8, 0, 0, 0),
   ('메이스', '킥', 4.5, '타격', 'smithing_stone', true, 281, 0, 0, 0, 0, 45.0, 30.0, 30.0, 30.0, 30.0, 100, 36, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0),
-  ('모닝스타', '킥', 5.0, '타격 / 관통', 'smithing_stone', true, 289, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 100, 37, 0, 0, 50, 0, 0, 0, 12, 8, 0, 0, 0),
+  ('모닝스타', '킥', 5.0, '타격', 'smithing_stone', true, 289, 0, 0, 0, 0, 47.0, 31.0, 31.0, 31.0, 31.0, 100, 37, 0, 0, 50, 0, 0, 0, 12, 8, 0, 0, 0),
   ('워 피크', '킥', 2.5, '관통', 'smithing_stone', true, 264, 0, 0, 0, 0, 40.0, 27.0, 27.0, 27.0, 27.0, 100, 32, 0, 0, 0, 0, 0, 0, 11, 9, 0, 0, 0),
   ('해머', '킥', 6.5, '타격', 'smithing_stone', true, 303, 0, 0, 0, 0, 51.0, 34.0, 34.0, 34.0, 34.0, 100, 43, 0, 0, 0, 0, 0, 0, 14, 7, 0, 0, 0),
   ('승병의 화염망치', '킥', 6.0, '타격', 'smithing_stone', true, 308, 0, 0, 0, 0, 49.0, 33.0, 33.0, 33.0, 33.0, 100, 39, 0, 0, 0, 0, 0, 0, 13, 13, 0, 0, 0),
@@ -165,8 +166,8 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('사자들의 피리', '신탁의 거품', 4.0, '타격', 'somber_smithing_stone', false, 235, 0, 0, 0, 151, 38.0, 26.0, 26.0, 26.0, 38.0, 100, 30, 0, 0, 0, 0, 0, 0, 10, 12, 0, 16, 0),
   ('녹스의 유체망치', '유체화', 6.5, '타격', 'somber_smithing_stone', false, 298, 0, 0, 0, 0, 51.0, 34.0, 34.0, 34.0, 34.0, 100, 37, 0, 0, 0, 0, 0, 0, 17, 7, 0, 0, 0),
   ('반지손가락', '지탄', 4.5, '타격', 'somber_smithing_stone', false, 296, 0, 0, 0, 0, 38.0, 26.0, 26.0, 26.0, 38.0, 100, 30, 0, 0, 0, 0, 0, 0, 15, 9, 0, 0, 0),
-  ('온 지혜의 왕홀', '온 지혜의 세계', 4.5, '타격 / 관통', 'somber_smithing_stone', false, 242, 156, 0, 0, 0, 36.0, 36.0, 25.0, 25.0, 25.0, 100, 27, 0, 0, 0, 0, 0, 0, 12, 18, 21, 0, 0),
-  ('꽃바위 망치', '꽃의 용뢰', null, '관통', 'somber_smithing_stone', false, 296, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 14, 8, 0, 0, 15),
+  ('온 지혜의 왕홀', '온 지혜의 세계', 4.5, '타격 / 관통', 'somber_smithing_stone', false, 242, 156, 0, 0, 0, 36.0, 36.0, 25.0, 25.0, 25.0, 100, 29, 0, 0, 0, 0, 0, 0, 12, 18, 21, 0, 0),
+  ('꽃바위 망치', '꽃의 용뢰', 6, '관통', 'somber_smithing_stone', false, 296, 0, 0, 0, 0, 49, 33, 33, 33, 33, 100, 36, 0, 0, 0, 0, 0, 0, 14, 8, 0, 0, 15),
   ('마리카의 망치', '황금 부수기', 6.0, '타격', 'somber_smithing_stone', false, 247, 0, 0, 0, 159, 44.0, 30.0, 30.0, 30.0, 44.0, 100, 36, 0, 0, 0, 0, 0, 0, 20, 12, 0, 19, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)

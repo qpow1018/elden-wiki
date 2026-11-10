@@ -1,4 +1,5 @@
 -- 사용자 제공 채찍 7종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -30,7 +31,7 @@ with source (name, description, fp_cost_text) as (
 단순하지만 실전적인 전투기술.', '- ( - / - )'),
   ('통타', '특히 아픔을 주기 위한 채찍의 일격.
 일시적으로 스태미나 회복 속도를 저하시킨다.
-그리고 아픔은 사람을 순종적으로 만든다.', null),
+그리고 아픔은 사람을 순종적으로 만든다.', '16'),
   ('용암 바다', '용암 채찍을 크게 휘둘러 일시적으로
 자신의 주위에 용암 바다를 만드는 전투기술.
 길게 누르는 동안 계속 채찍을 휘두른다.', '5 ( - / 5 )'),
@@ -93,13 +94,13 @@ where not exists (select 1 from public.game_items i where i.type = 'weapon' and 
 
 with source (name, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
-  ('채찍', '킥', 2.0, '타격', 'smithing_stone', true, 245, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 18, 0, 0, 0, 0, 0, 0, 8, 14, 0, 0, 0),
-  ('가시 채찍', '킥', 2.5, '타격', 'smithing_stone', true, 249, 0, 0, 0, 0, 26.0, 15.0, 15.0, 15.0, 15.0, 100, 18, 0, 0, 50, 0, 0, 0, 8, 16, 0, 0, 0),
+  ('채찍', '킥', 2.0, '타격', 'smithing_stone', true, 252, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 18, 0, 0, 0, 0, 0, 0, 8, 14, 0, 0, 0),
+  ('가시 채찍', '킥', 2.5, '타격', 'smithing_stone', true, 257, 0, 0, 0, 0, 26.0, 15.0, 15.0, 15.0, 15.0, 100, 18, 0, 0, 50, 0, 0, 0, 8, 16, 0, 0, 0),
   ('우루미', '킥', 3.0, '참격', 'smithing_stone', true, 247, 0, 0, 0, 0, 27.0, 16.0, 16.0, 16.0, 16.0, 100, 18, 0, 0, 0, 0, 0, 0, 10, 19, 0, 0, 0),
-  ('호슬로의 꽃잎', '킥', 3.5, '타격', 'smithing_stone', true, 269, 0, 0, 0, 0, 28.0, 17.0, 17.0, 17.0, 17.0, 100, 20, 0, 0, 55, 0, 0, 0, 10, 20, 0, 0, 0),
-  ('이빨 채찍', '통타', null, null, 'somber_smithing_stone', false, 267, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 66, 0, 0, 10, 24, 0, 0, 0),
-  ('용암 채찍의 촛대', '용암 바다', 2.5, '타격', 'somber_smithing_stone', false, 176, 0, 176, 0, 0, 21.0, 10.0, 36.0, 10.0, 10.0, 100, 16, 0, 0, 0, 0, 0, 0, 8, 16, 0, 18, 0),
-  ('거인의 적발', '화염무', 2.5, '타격', 'somber_smithing_stone', false, 200, 0, 129, 0, 0, 24.0, 12.0, 26.0, 12.0, 12.0, 100, 16, 0, 0, 0, 0, 0, 0, 18, 12, 0, 21, 0)
+  ('호슬로의 꽃잎', '킥', 3.5, '타격', 'smithing_stone', true, 276, 0, 0, 0, 0, 28.0, 17.0, 17.0, 17.0, 17.0, 100, 20, 0, 0, 55, 0, 0, 0, 10, 20, 0, 0, 0),
+  ('이빨 채찍', '통타', 3, '타격', 'somber_smithing_stone', false, 267, 0, 0, 0, 0, 27, 16, 16, 16, 16, 100, 17, 0, 0, 0, 66, 0, 0, 10, 24, 0, 0, 0),
+  ('용암 채찍의 촛대', '용암 바다', 2.5, '타격', 'somber_smithing_stone', false, 181, 0, 181, 0, 0, 21.0, 10.0, 36.0, 10.0, 10.0, 100, 16, 0, 0, 0, 0, 0, 0, 8, 16, 0, 18, 0),
+  ('거인의 적발', '화염무', 2.5, '타격', 'somber_smithing_stone', false, 205, 0, 132, 0, 0, 24.0, 12.0, 26.0, 12.0, 12.0, 100, 16, 0, 0, 0, 0, 0, 0, 18, 12, 0, 21, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

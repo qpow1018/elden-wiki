@@ -1,4 +1,5 @@
 -- 사용자 제공 대형 도끼 14종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -45,7 +46,7 @@ with source (name, description, fp_cost_text) as (
   ('회전 길로틴', '무기의 양 끝을 들고 몸을 뒤로 젖히며
 머리 위에서 수렁의 칼날을 내리치는 전투 기술.
 추가 입력으로 스태미나가 다할 때까지 공격하며
-강 공격은 도약 후 회전 공격으로 이을 수 있다.', '15 ( - / 15 )')
+강 공격은 도약 후 회전 공격으로 이을 수 있다.', '12 ( - / 7 )')
 )
 insert into public.weapon_skills (name, description, fp_cost_text)
 select s.name, s.description, s.fp_cost_text from source s
@@ -143,16 +144,16 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('초승달도끼', '워 크라이', 12.5, '표준', 'smithing_stone', true, 357, 0, 0, 0, 0, 68.0, 36.0, 36.0, 36.0, 36.0, 100, 52, 0, 0, 0, 0, 0, 0, 25, 15, 0, 0, 0),
   ('긴 자루 나대', '워 크라이', 12.5, '표준', 'smithing_stone', true, 357, 0, 0, 0, 0, 68.0, 36.0, 36.0, 36.0, 36.0, 100, 52, 0, 0, 0, 0, 0, 0, 24, 8, 0, 0, 0),
   ('요참의 큰 나대', '워 크라이', 15.0, '표준', 'smithing_stone', true, 367, 0, 0, 0, 0, 74.0, 40.0, 40.0, 40.0, 40.0, 115, 57, 0, 0, 0, 0, 0, 0, 34, 8, 0, 0, 0),
-  ('흉조잡이의 큰 나대', '난격', 11.0, '표준', 'smithing_stone', true, 347, 0, 0, 0, 0, 63.0, 33.0, 33.0, 33.0, 33.0, 100, 50, 0, 0, 55, 0, 0, 0, 23, 12, 0, 0, 0),
+  ('흉조잡이의 큰 나대', '난격', 11.0, '표준', 'smithing_stone', true, 347, 0, 0, 0, 0, 63.0, 33.0, 33.0, 33.0, 45, 100, 50, 0, 0, 55, 0, 0, 0, 23, 12, 0, 0, 0),
   ('녹슨 닻', '야만적인 포효', 12.5, '관통', 'smithing_stone', true, 360, 0, 0, 0, 0, 68.0, 36.0, 36.0, 36.0, 36.0, 100, 52, 0, 0, 0, 0, 0, 0, 26, 9, 0, 0, 0),
-  ('해체 식칼', '야만적인 포효', 12.5, '표준', 'smithing_stone', true, 328, 0, 0, 0, 0, 58.0, 31.0, 31.0, 31.0, 31.0, 100, 44, 0, 0, 0, 0, 0, 0, 16, 20, 0, 0, 0),
+  ('해체 식칼', '야만적인 포효', 8.5, '표준', 'smithing_stone', true, 328, 0, 0, 0, 0, 58.0, 31.0, 31.0, 31.0, 31.0, 100, 44, 0, 0, 0, 0, 0, 0, 16, 20, 0, 0, 0),
   ('보니의 부엌칼', '칼날 갈기', 8.5, '표준', 'somber_smithing_stone', false, 328, 0, 0, 0, 0, 58.0, 31.0, 31.0, 31.0, 31.0, 100, 40, 0, 0, 0, 0, 0, 0, 16, 20, 0, 0, 0),
   ('가고일의 대형 도끼', '워 크라이', 8.5, '표준', 'smithing_stone', true, 301, 0, 0, 0, 0, 58.0, 31.0, 31.0, 31.0, 31.0, 100, 44, 0, 0, 0, 0, 0, 0, 24, 8, 0, 0, 0),
-  ('가고일의 흑도끼', '워 크라이', 8.5, '표준', 'somber_smithing_stone', false, 245, 0, 0, 0, 294, 49.0, 27.0, 27.0, 27.0, 54.0, 100, 46, 0, 0, 0, 0, 0, 0, 24, 8, 0, 22, 0),
+  ('가고일의 흑도끼', '워 크라이', 8.5, '표준', 'somber_smithing_stone', false, 245, 0, 0, 0, 294, 49.0, 27.0, 27.0, 27.0, 54.0, 100, 40, 0, 0, 0, 0, 0, 0, 24, 8, 0, 22, 0),
   ('죽음 기사의 긴 자루 도끼', '순뢰/긴 자루 도끼', 11.5, '표준', 'somber_smithing_stone', false, 276, 0, 0, 178, 0, 61.0, 32.0, 32.0, 46.0, 32.0, 100, 47, 0, 0, 0, 0, 0, 0, 23, 10, 0, 18, 0),
-  ('날개의 큰 뿔', '악령 부르기', 11.0, '표준', 'somber_smithing_stone', false, 318, 150, 0, 0, 0, 65.0, 35.0, 35.0, 35.0, 35.0, 100, 42, 0, 0, 0, 0, 0, 0, 30, 20, 0, 0, 0),
+  ('날개의 큰 뿔', '악령 부르기', 11.0, '표준', 'somber_smithing_stone', false, 318, 0, 0, 0, 0, 65.0, 35.0, 35.0, 35.0, 35.0, 100, 46, 0, 0, 0, 0, 0, 0, 30, 20, 0, 0, 0),
   ('고드릭의 왕 도끼', '엎드려라!', 11.0, '표준', 'somber_smithing_stone', false, 347, 0, 0, 0, 0, 65.0, 35.0, 35.0, 35.0, 35.0, 100, 46, 0, 0, 0, 0, 0, 0, 34, 22, 0, 0, 0),
-  ('수렁의 큰 나대', '회전 길로틴', 11.0, '참격', 'somber_smithing_stone', false, 345, 102, 0, 0, 0, 66.0, 44.0, 38.0, 38.0, 38.0, 100, 46, 0, 55, 0, 0, 0, 0, 28, 10, 0, 0, 15)
+  ('수렁의 큰 나대', '회전 길로틴', 13.5, '참격', 'somber_smithing_stone', false, 345, 102, 0, 0, 0, 66.0, 44.0, 38.0, 38.0, 38.0, 100, 50, 0, 55, 0, 0, 0, 0, 28, 10, 0, 0, 15)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격 / 관통' then array['strike','pierce']::text[] when '표준' then array['standard']::text[] when '관통' then array['pierce']::text[] when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

@@ -1,4 +1,5 @@
 -- 사용자 제공 주먹 14종. 공통 기준: docs/DATABASE.md, 출처·변환: docs/DATA_SOURCES.md.
+-- 수치 출처: PC Regulation 1.17.3 게임 원본 CSV.
 -- 기존 아이템·상세·기술·보정·표시 순서는 덮어쓰지 않습니다.
 -- 보완 출처: https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
 -- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
@@ -42,13 +43,13 @@ with source (name, description, fp_cost_text) as (
 이 공격은 가드할 수 없다.', '17 ( - / - )'),
   ('독 관수', '손가락 끝을 앞을 향해 내밀어
 적의 몸을 푹 찌르는 전투 기술.
-대량의 맹독을 단번에 축적한다.', null),
+대량의 맹독을 단번에 축적한다.', '13'),
   ('발광 관수', '손가락 끝을 앞을 향해 내밀어
 적의 몸을 푹 찌르는 전투 기술.
-대량의 발광을 단번에 축적한다.', null),
+대량의 발광을 단번에 축적한다.', '13'),
   ('영원히 잠들라', '영면의 독침으로 적을 깊이 찌르는 전투 기술.
 이미 수면이나 영면 상태인 적에게 추가 공격을
-성공하면 단숨에 큰 대미지를 입힌다.', null),
+성공하면 단숨에 큰 대미지를 입힌다.', '16'),
   ('굽어 살피소서', '작은 용에 잠시 생명을 부여하고
 그것을 하늘에 치켜들어 용의 화염을
 전방 넓은 범위에 쏟아붓는 전투 기술.', '20 ( - / - )')
@@ -146,20 +147,20 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('세스타스', '참기', 1.5, '타격', 'smithing_stone', true, 220, 0, 0, 0, 0, 35.0, 20.0, 20.0, 20.0, 20.0, 100, 24, 0, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0),
   ('스파이크 세스타스', '참기', 2.0, '타격', 'smithing_stone', true, 222, 0, 0, 0, 0, 35.0, 20.0, 20.0, 20.0, 20.0, 100, 24, 0, 0, 45, 0, 0, 0, 8, 10, 0, 0, 0),
   ('카타르', '관통 찌르기', 2.5, '참격 / 관통', 'smithing_stone', true, 237, 0, 0, 0, 0, 36.0, 21.0, 21.0, 21.0, 21.0, 110, 25, 0, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0),
-  ('파타', '관통 찌르기', 4.0, '표준 / 관통', 'smithing_stone', true, 254, 0, 0, 0, 0, 45.0, 26.0, 26.0, 26.0, 26.0, 110, null, 0, 0, 0, 0, 0, 0, 11, 15, 0, 0, 0),
+  ('파타', '관통 찌르기', 4.0, '표준 / 관통', 'smithing_stone', true, 254, 0, 0, 0, 0, 45.0, 26.0, 26.0, 26.0, 26.0, 110, 31, 0, 0, 0, 0, 0, 0, 11, 15, 0, 0, 0),
   ('철구권', '참기', 2.5, '타격', 'smithing_stone', true, 247, 0, 0, 0, 0, 38.0, 22.0, 22.0, 22.0, 22.0, 100, 26, 0, 0, 0, 0, 0, 0, 11, 8, 0, 0, 0),
   ('가시 철구권', '참기', 3.0, '타격', 'smithing_stone', true, 257, 0, 0, 0, 0, 41.0, 23.0, 23.0, 23.0, 23.0, 100, 27, 0, 0, 45, 0, 0, 0, 12, 8, 0, 0, 0),
-  ('매달리는 손뼈', '명탈권', 2.5, '표준 / 관통', 'somber_smithing_stone', false, 196, 58, 0, 0, 0, 31.0, 36.0, 17.0, 17.0, 17.0, 100, 23, 0, 0, 0, 0, 0, 0, 8, 22, 0, 0, 16),
+  ('매달리는 손뼈', '명탈권', 3, '참격 / 관통', 'somber_smithing_stone', false, 196, 58, 0, 0, 0, 31.0, 36.0, 17.0, 17.0, 17.0, 100, 23, 0, 0, 0, 0, 0, 0, 8, 22, 0, 0, 16),
   ('노장의 의족', '폭풍 차기', 4.0, '참격 / 관통', 'somber_smithing_stone', false, 203, 0, 0, 129, 0, 30.0, 20.0, 20.0, 48.0, 20.0, 100, 26, 0, 0, 0, 0, 0, 0, 15, 12, 0, 0, 0),
   ('비문자의 파타', '막을 수 없는 칼날', 0.0, '참격 / 관통', 'somber_smithing_stone', false, 0, 0, 0, 0, 208, 9.0, 14.0, 14.0, 14.0, 61.0, 100, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0),
-  ('독의 손', '독 관수', null, null, 'somber_smithing_stone', false, 186, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 60, 0, 0, 8, 8, 0, 0, 28),
-  ('미친 손', '발광 관수', null, null, 'somber_smithing_stone', false, 129, 0, 154, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 55, 8, 8, 13, 20, 0),
-  ('티에리에의 숨긴 침', '영원히 잠들라', null, null, 'somber_smithing_stone', false, 171, 110, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 42, 0, 10, 22, 15, 0, 0),
-  ('골렘의 주먹', '참기', null, null, 'smithing_stone', true, 269, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 24, 8, 11, 11, 0),
+  ('독의 손', '독 관수', 1, '타격', 'somber_smithing_stone', false, 186, 0, 0, 0, 0, 33, 19, 19, 19, 19, 100, 20, 0, 0, 0, 60, 0, 0, 8, 8, 0, 0, 28),
+  ('미친 손', '발광 관수', 1, '타격', 'somber_smithing_stone', false, 129, 0, 154, 0, 0, 20, 15, 42, 15, 15, 100, 20, 0, 0, 0, 0, 0, 55, 8, 8, 13, 20, 0),
+  ('티에리에의 숨긴 침', '영원히 잠들라', 0.5, '관통', 'somber_smithing_stone', false, 171, 110, 0, 0, 0, 28, 27, 16, 16, 16, 100, 19, 0, 0, 0, 0, 42, 0, 10, 22, 15, 0, 0),
+  ('골렘의 주먹', '참기', 6, '타격', 'smithing_stone', true, 269, 0, 0, 0, 0, 58, 24, 24, 24, 24, 100, 43, 0, 0, 0, 0, 0, 0, 24, 8, 11, 11, 0),
   ('접목된 비룡', '굽어 살피소서', 2.5, '타격', 'somber_smithing_stone', false, 218, 0, 139, 0, 0, 27.0, 18.0, 44.0, 18.0, 18.0, 100, 24, 0, 0, 0, 0, 0, 0, 20, 14, 0, 16, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
-select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
+select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] when '관통' then array['pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
 from source s
 join public.game_item_categories c on c.type = 'weapon' and c.name = '주먹'
 join public.game_items i on i.type = 'weapon' and i.category_id = c.id and i.name = s.name
@@ -252,7 +253,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('독의 손', 'standard', 'E', '-', '-', '-', 'A'),
   ('미친 손', 'standard', 'D', 'D', 'D', 'D', '-'),
   ('티에리에의 숨긴 침', 'standard', 'D', 'B', 'C', '-', '-'),
-  ('골렘의 주먹', 'standard', 'C', 'E', 'E', 'E', '-'),
+  ('골렘의 주먹', 'standard', 'B', 'E', 'E', 'E', '-'),
   ('골렘의 주먹', 'heavy', 'A', '-', 'E', 'E', '-'),
   ('골렘의 주먹', 'keen', 'E', 'B', 'E', 'E', '-'),
   ('골렘의 주먹', 'quality', 'B', 'B', 'E', 'E', '-'),
