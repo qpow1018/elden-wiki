@@ -64,7 +64,17 @@ values
   ('격투·조향병', 'ash_of_war', 90),
   ('활', 'ash_of_war', 100),
   ('패리·방패 기술', 'ash_of_war', 110),
-  ('마술', 'sorcery', 10),
+  ('레아 루카리아 학원의 휘석 마술', 'sorcery', 10),
+  ('카리아 왕가의 휘석 마술', 'sorcery', 20),
+  ('밤의 마술', 'sorcery', 30),
+  ('용암 마술', 'sorcery', 40),
+  ('얼음 마술', 'sorcery', 50),
+  ('결정인의 마술', 'sorcery', 60),
+  ('중력 마술', 'sorcery', 70),
+  ('손가락 마술', 'sorcery', 80),
+  ('거품 마술', 'sorcery', 90),
+  ('가시 마술', 'sorcery', 100),
+  ('죽음의 마술', 'sorcery', 110),
   ('기도', 'incantation', 20),
   ('결정 물방울', 'crystal_tear', 10)
 on conflict (type, name) do nothing;
