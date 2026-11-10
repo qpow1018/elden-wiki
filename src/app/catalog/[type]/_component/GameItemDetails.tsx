@@ -3,6 +3,7 @@ import Image from 'next/image';
 import type { TGameItem } from '@/api/gameItem/types';
 import { CONTENTS, GAME_ITEM_TYPES } from '@/define/gameItems';
 
+import TalismanDetails from './details/TalismanDetails';
 import WeaponDetails from './details/WeaponDetails';
 
 import styles from './GameItemDetails.module.scss';
@@ -50,6 +51,8 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
       {hasWeaponDetails && gameItem.weaponDetails && (
         <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
       )}
+
+      {gameItem.type === 'talisman' && <TalismanDetails talisman={gameItem.talismanDetails} />}
 
       {gameItem.effectDescription && (
         <section className={styles['effects']}>

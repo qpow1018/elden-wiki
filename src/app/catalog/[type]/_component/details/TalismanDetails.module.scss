@@ -1,0 +1,16 @@
+.talisman-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+
+  dt {
+    color: $text-muted;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
