@@ -4,11 +4,11 @@
 -- 기존 아이템·표시 순서는 덮어쓰지 않습니다.
 do $$
 begin
-  if not exists (select 1 from public.game_item_categories where type = 'spell' and name = '기도') then
+  if not exists (select 1 from public.game_item_categories where type = 'incantation' and name = '기도') then
     raise exception '기도 분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
-    select category_id, name, content_code from public.game_items where type = 'spell'
+    select category_id, name, content_code from public.game_items where type = 'incantation'
     group by category_id, name, content_code having count(*) > 1
   ) then raise exception '중복된 기도을 확인해야 합니다.';
   end if;
@@ -1108,6 +1108,6 @@ HP를 조금씩 계속 깎는다.'),
 그 몸과 혼을 안에서부터 불태우리라.')
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description)
-select s.name, 'spell', c.id, s.sort_order, s.content_code, s.game_description
-from source s join public.game_item_categories c on c.type = 'spell' and c.name = '기도'
+select s.name, 'incantation', c.id, s.sort_order, s.content_code, s.game_description
+from source s join public.game_item_categories c on c.type = 'incantation' and c.name = '기도'
 where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name and i.content_code = s.content_code);

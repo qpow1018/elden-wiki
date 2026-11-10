@@ -12,8 +12,7 @@ import styles from './GameItemDetails.module.scss';
 
 export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
   const hasWeaponDetails =
-    ['weapon', 'catalyst', 'other_weapon'].includes(gameItem.type) &&
-    gameItem.weaponDetails !== null;
+    ['weapon', 'other_weapon'].includes(gameItem.type) && gameItem.weaponDetails !== null;
 
   return (
     <article id={`game-item-${gameItem.id}`} className={styles['game-item-details']}>

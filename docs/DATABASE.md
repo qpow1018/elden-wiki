@@ -100,19 +100,19 @@ erDiagram
 | 값             | 의미        |
 | -------------- | ----------- |
 | `weapon`       | 무기        |
-| `catalyst`     | 촉매        |
 | `other_weapon` | 기타 무기   |
 | `armor`        | 방어구      |
 | `talisman`     | 탈리스만    |
 | `ash_of_war`   | 전회        |
-| `spell`        | 주문        |
+| `sorcery`      | 마술        |
+| `incantation`  | 기도        |
 | `other`        | 아이템      |
 | `crystal_tear` | 결정 물방울 |
 | `spirit_ash`   | 뼛가루      |
 
 `20261102015026_replace_gesture_type_with_other.sql`에서 미사용 `gesture` 값을 `other`로 교체합니다. 표시명은 아이템이며 DB 키 `other`는 유지합니다. 도구·소모품·재료 등 세부 분류는 실제 등록 시 정의합니다.
 
-- 촉매·기타 무기는 우선 기존 `weapon_details`·`weapon_scalings`를 사용합니다. 촉매·기타 무기의 상세 등록 시 `type`을 부모와 동일하게 명시해야 합니다. 사거리·시전 보정 같은 전용 필드와 화면은 아직 구현하지 않았습니다.
+- 기타 무기는 기존 `weapon_details`·`weapon_scalings`를 사용합니다. 지팡이와 성인은 기타 무기의 첫 두 카테고리입니다. 상세 등록 시 `type`을 부모와 동일하게 명시해야 합니다. 사거리·시전 보정 같은 전용 필드와 화면은 아직 구현하지 않았습니다.
 
 ## `game_item_categories`: 세부 분류
 
@@ -188,7 +188,7 @@ erDiagram
 | 컬럼                    | 자료형           | 의미·제약                                                                                              |
 | ----------------------- | ---------------- | ------------------------------------------------------------------------------------------------------ |
 | `game_item_id`          | `bigint`         | 기본키. 아래 `type`과 함께 `game_items(id, type)` 참조                                                 |
-| `type`                  | `game_item_type` | 기본값 `weapon`, NULL 불가. `weapon`·`catalyst`·`other_weapon`만 허용. 부모 아이템과 타입 일치 필수    |
+| `type`                  | `game_item_type` | 기본값 `weapon`, NULL 불가. `weapon`·`other_weapon`만 허용. 부모 아이템과 타입 일치 필수               |
 | `weight`                | `numeric`        | 중량, 0 이상                                                                                           |
 | `can_change_affinity`   | `boolean`        | `true`: 변질 가능, `false`: 변질 불가, NULL: 미확인. 기본값 없음                                       |
 | `physical_attack_types` | `text[]`         | 물리 공격 방식 목록. 아래 값만 허용하며 배열 내부 NULL 금지                                            |
@@ -395,18 +395,18 @@ where i.id = $1;
 
 ## `spell_details`: 주문 상세
 
-`game_items.type`은 `spell`, 기본 분류는 `game_item_categories`의 마술·기도입니다.
+마술과 기도는 각각 `sorcery`, `incantation` 타입을 사용하며 같은 주문 상세 테이블을 참조합니다.
 요구 능력치로 분류를 추론하지 않습니다. 세부 계통은 추후 별도 관계로 확장하며 현재 저장하지 않습니다.
 
-| 컬럼                    | 자료형           | 의미                                                    |
-| ----------------------- | ---------------- | ------------------------------------------------------- |
-| `game_item_id`          | `bigint`         | 기본키. `type`과 함께 `game_items(id, type)` 참조       |
-| `type`                  | `game_item_type` | NULL 불가, 기본값 `spell`, `spell`만 허용               |
-| `fp_cost_text`          | `text`           | 소비 FP 표시용 문자열. 수치 정렬·계산에는 사용하지 않음 |
-| `slots_used`            | `integer`        | 사용 슬롯, 1 이상                                       |
-| `required_intelligence` | `integer`        | 필요 지력, 0 이상                                       |
-| `required_faith`        | `integer`        | 필요 신앙, 0 이상                                       |
-| `required_arcane`       | `integer`        | 필요 신비, 0 이상                                       |
+| 컬럼                    | 자료형           | 의미                                                             |
+| ----------------------- | ---------------- | ---------------------------------------------------------------- |
+| `game_item_id`          | `bigint`         | 기본키. `type`과 함께 `game_items(id, type)` 참조                |
+| `type`                  | `game_item_type` | NULL 불가. `sorcery`·`incantation`만 허용하며 부모 아이템과 일치 |
+| `fp_cost_text`          | `text`           | 소비 FP 표시용 문자열. 수치 정렬·계산에는 사용하지 않음          |
+| `slots_used`            | `integer`        | 사용 슬롯, 1 이상                                                |
+| `required_intelligence` | `integer`        | 필요 지력, 0 이상                                                |
+| `required_faith`        | `integer`        | 필요 신앙, 0 이상                                                |
+| `required_arcane`       | `integer`        | 필요 신비, 0 이상                                                |
 
 - 키·종류 외 모든 컬럼은 NULL을 허용합니다. 필요 능력치의 0은 요구 없음, NULL은 미확인입니다.
 - FP는 버프·장비에 의한 소비량 변경을 제외한 주문 자체의 표시 정보입니다. 추가·지속 비용은 확인한 표현을 문자열로 보존합니다.

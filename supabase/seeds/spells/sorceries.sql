@@ -4,11 +4,11 @@
 -- 기존 아이템·표시 순서는 덮어쓰지 않습니다.
 do $$
 begin
-  if not exists (select 1 from public.game_item_categories where type = 'spell' and name = '마술') then
+  if not exists (select 1 from public.game_item_categories where type = 'sorcery' and name = '마술') then
     raise exception '마술 분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
-    select category_id, name, content_code from public.game_items where type = 'spell'
+    select category_id, name, content_code from public.game_items where type = 'sorcery'
     group by category_id, name, content_code having count(*) > 1
   ) then raise exception '중복된 마술을 확인해야 합니다.';
   end if;
@@ -694,6 +694,6 @@ with source (name, sort_order, content_code, game_description) as (
 과거에 죽음은 똑같았던 것이리라.')
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description)
-select s.name, 'spell', c.id, s.sort_order, s.content_code, s.game_description
-from source s join public.game_item_categories c on c.type = 'spell' and c.name = '마술'
+select s.name, 'sorcery', c.id, s.sort_order, s.content_code, s.game_description
+from source s join public.game_item_categories c on c.type = 'sorcery' and c.name = '마술'
 where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name and i.content_code = s.content_code);

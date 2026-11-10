@@ -198,7 +198,7 @@ export type TDatabase = {
           required_faith?: number | null;
           required_intelligence?: number | null;
           slots_used?: number | null;
-          type?: TDatabase['public']['Enums']['game_item_type'];
+          type: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
           fp_cost_text?: string | null;
@@ -466,10 +466,10 @@ export type TDatabase = {
         | 'weapon'
         | 'armor'
         | 'talisman'
-        | 'spell'
+        | 'incantation'
         | 'other'
         | 'crystal_tear'
-        | 'catalyst'
+        | 'sorcery'
         | 'other_weapon';
     };
     CompositeTypes: {
@@ -590,10 +590,10 @@ export const DATABASE_CONSTANTS = {
         'weapon',
         'armor',
         'talisman',
-        'spell',
+        'incantation',
         'other',
         'crystal_tear',
-        'catalyst',
+        'sorcery',
         'other_weapon',
       ],
     },

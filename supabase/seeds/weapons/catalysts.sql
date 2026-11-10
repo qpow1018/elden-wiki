@@ -2,12 +2,12 @@
 -- 공통 기준: docs/DATABASE.md, 개별 출처·변환: docs/DATA_SOURCES.md.
 do $$
 begin
-  if (select count(*) from public.game_item_categories where type = 'catalyst' and name in ('지팡이','성인')) <> 2 then
+  if (select count(*) from public.game_item_categories where type = 'other_weapon' and name in ('지팡이','성인')) <> 2 then
     raise exception '촉매 2개 분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
     select i.category_id, i.name from public.game_items i join public.game_item_categories c on c.id = i.category_id
-    where c.type = 'catalyst' and c.name in ('지팡이','성인')
+    where c.type = 'other_weapon' and c.name in ('지팡이','성인')
     group by i.category_id, i.name having count(*) > 1
   ) or exists (
     select name, description from public.weapon_skills
@@ -210,8 +210,8 @@ with source (name, category, sort_order, content_code, game_description, effect_
 이 성인은 신비로도 기도를 보정한다.', '용찬 기도의 위력이 15% 증가한다.')
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)
-select s.name, 'catalyst', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description
-from source s join public.game_item_categories c on c.type = 'catalyst' and c.name = s.category
+select s.name, 'other_weapon', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description
+from source s join public.game_item_categories c on c.type = 'other_weapon' and c.name = s.category
 where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name);
 
 with source (name, category, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
@@ -250,9 +250,9 @@ with source (name, category, skill_name, weight, physical_attack_types, upgrade_
   ('용찬의 표식', '성인', null, 0.0, '타격', 'somber_smithing_stone', false, 61, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
-select i.id, k.id, 'catalyst', s.weight, case when s.physical_attack_types = '타격' then array['strike']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
+select i.id, k.id, 'other_weapon', s.weight, case when s.physical_attack_types = '타격' then array['strike']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
 from source s
-join public.game_item_categories c on c.type = 'catalyst' and c.name = s.category
+join public.game_item_categories c on c.type = 'other_weapon' and c.name = s.category
 join public.game_items i on i.category_id = c.id and i.name = s.name
 left join public.weapon_skills k on k.name = s.skill_name and k.fp_cost_text = '20'
 on conflict (game_item_id) do nothing;
@@ -294,6 +294,6 @@ with source (name, category, affinity, strength, dexterity, intelligence, faith,
 )
 insert into public.weapon_scalings (game_item_id, affinity, strength, dexterity, intelligence, faith, arcane)
 select i.id, s.affinity, s.strength, s.dexterity, s.intelligence, s.faith, s.arcane from source s
-join public.game_item_categories c on c.type = 'catalyst' and c.name = s.category
+join public.game_item_categories c on c.type = 'other_weapon' and c.name = s.category
 join public.game_items i on i.category_id = c.id and i.name = s.name
 on conflict (game_item_id, affinity) do nothing;

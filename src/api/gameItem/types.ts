@@ -2,11 +2,11 @@ export type TGameItemType =
   | 'spirit_ash'
   | 'ash_of_war'
   | 'weapon'
-  | 'catalyst'
   | 'other_weapon'
   | 'armor'
   | 'talisman'
-  | 'spell'
+  | 'sorcery'
+  | 'incantation'
   | 'other'
   | 'crystal_tear';
 
