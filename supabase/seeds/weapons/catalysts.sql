@@ -1,7 +1,5 @@
--- 사용자 제공 촉매 32종. 공통 기준: docs/DATABASE.md, 개별 출처·변환: docs/DATA_SOURCES.md.
--- 기존 행·순서는 보존합니다. 출처에 없는 수치는 NULL입니다.
--- https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
--- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
+-- 촉매 32종: SmithBox PC Regulation 1.17.3과 한국어 FMG.
+-- 공통 기준: docs/DATABASE.md, 개별 출처·변환: docs/DATA_SOURCES.md.
 do $$
 begin
   if (select count(*) from public.game_item_categories where type = 'catalyst' and name in ('지팡이','성인')) <> 2 then
@@ -24,7 +22,7 @@ with source (name, description, fp_cost_text) as (
   values
   ('돌아라 돌아라', '휘석에 마력을 담고 왕홀을 전방에 띄워
 고속으로 회전시키는 전투 기술.
-닿는 자에게 마력 연속 공격을 한다.', null)
+닿는 자에게 마력 연속 공격을 한다.', '20')
 )
 insert into public.weapon_skills (name, description, fp_cost_text)
 select s.name, s.description, s.fp_cost_text from source s
@@ -38,7 +36,7 @@ with source (name, category, sort_order, content_code, game_description, effect_
 
 마술을 사용하려면 지팡이를 장비하고
 축복에서 마술을 기억해 둬야 한다.', null),
-  ('휘석 지팡이', '지팡이', 20, 'base_game', '끝에 휘석을 박은 지팡이
+  ('휘석 지팡이', '지팡이', 20, 'base_game', '끝에 휘석을 박은 지팡이.
 마술을 사용하기 위한 촉매이다.
 
 마술을 사용하려면 지팡이를 장비하고
@@ -60,27 +58,27 @@ with source (name, category, sort_order, content_code, game_description, effect_
 학원에서는 바보가 이것을 비웃는다.', null),
   ('아줄의 휘석 지팡이', '지팡이', 60, 'base_game', '원류의 마술사 아줄의 휘석 지팡이.
 돌의 지혜, 그 아득한 너머에 닿은 자만이
-이것을 사용할 수 있다
+이것을 사용할 수 있다.
 
 모든 마술의 사용 속도를 빠르게 하나
-소비 FP도 증가한다', '마술·기도의 사용 속도가 기량 40에 해당하는 만큼 빨라진다. 마술의 소비 FP는 20% 증가하며 기도에는 FP 페널티가 없다.'),
+소비 FP도 증가한다.', '마술·기도의 사용 속도가 기량 40에 해당하는 만큼 빨라진다. 마술의 소비 FP는 20% 증가하며 기도에는 FP 페널티가 없다.'),
   ('루사트의 휘석 지팡이', '지팡이', 70, 'base_game', '원류의 마술사 루사트의 휘석 지팡이.
 돌의 지혜, 그 아득한 너머에 닿은 자만이
-이것을 사용할 수 있다
+이것을 사용할 수 있다.
 
 모든 마술의 위력을 높이나
-소비 FP도 증가한다', '마술 보정이 높으나 모든 마술의 소비 FP가 50% 증가한다.'),
+소비 FP도 증가한다.', '마술 보정이 높으나 모든 마술의 소비 FP가 50% 증가한다.'),
   ('카리아의 휘석 지팡이', '지팡이', 80, 'base_game', '파란색 휘석이 박힌 지팡이.
 두 개 있는 카리아 지팡이 중 하나.
 
-마술사를 기사로 만드는 지팡이이며,
+마술사를 기사로 만드는 지팡이이며
 카리아의 검 마술을 강화한다.', '카리아의 검 마술 위력이 15% 증가한다.'),
   ('카리아의 휘검 지팡이', '지팡이', 90, 'base_game', '파란색 휘석이 박힌 지팡이.
 두 개 있는 카리아 지팡이 중 하나.
 
 마술기사에게 선사하는 지팡이이며
 휘검 마술을 강화한다.', '휘검 마술 위력이 15% 증가한다.'),
-  ('카리아의 왕홀', '지팡이', 100, 'base_game', '만월의 여왕 레날라의 마술 왕홀
+  ('카리아의 왕홀', '지팡이', 100, 'base_game', '만월의 여왕 레날라의 마술 왕홀.
 그 휘석은 카리아의 파랑이라 불리며
 만월의 마술을 강화한다.
 
@@ -91,12 +89,12 @@ with source (name, category, sort_order, content_code, game_description, effect_
 
 백금의 사람에게는 비밀이 있다.
 그들은 신비로 마술을 사용한다.', null),
-  ('상실의 지팡이', '지팡이', 120, 'base_game', '휘석을 잃은 마술 지팡이
+  ('상실의 지팡이', '지팡이', 120, 'base_game', '휘석을 잃은 마술 지팡이.
 고행에서 탐구를 찾아내는 마술사들의 물건.
 
 다만 보이지 않는 마술과의 상성만은 좋아
 그것을 위해 이 지팡이를 고르는 자도 있다.', '밤의 혜성·밤의 돌팔매의 위력이 30% 증가한다.'),
-  ('겔미어의 휘석 지팡이', '지팡이', 130, 'base_game', '두 갈래로 나뉜 끝에 붉은 휘석을 박은 지팡이
+  ('겔미어의 휘석 지팡이', '지팡이', 130, 'base_game', '두 갈래로 나뉜 끝에 붉은 휘석을 박은 지팡이.
 용암 마술을 강화한다.
 
 겔미어의 뱀인간은 지력이 아닌
@@ -143,10 +141,10 @@ with source (name, category, sort_order, content_code, game_description, effect_
 어머니는 위대한 뜻의 파동을 수신했다.
 망가지고, 버려지고도 계속 그것을 기다렸다.', '마술과 기도 모두 사용할 수 있다.'),
   ('손가락의 성인', '성인', 10, 'base_game', '손가락 읽는 무녀가 주는 성인.
-신성한 기도를 사용하기 위한 촉매이다.
+기도를 사용하기 위한 촉매이다.
 
 기도를 사용하려면 성인을 장비하고
-잃어버린 축복에서 기도를 기억해 둬야 한다.', null),
+축복에서 기도를 기억해 둬야 한다.', null),
   ('황금 나무의 성인', '성인', 20, 'base_game', '황금 나무의 문장을 본뜬 환영 성인.
 틈새의 신앙, 과거에 그 중심에 있었던 것.
 
@@ -156,7 +154,7 @@ with source (name, category, sort_order, content_code, game_description, effect_
 황금률 원리주의 기도를 강화한다.
 
 원리주의는 즉 학문이기도 하며
-신앙과 지력 둘 다 기도를 보정한다', '황금률 원리주의 기도의 위력이 10% 증가한다.'),
+신앙과 지력 둘 다 기도를 보정한다.', '황금률 원리주의 기도의 위력이 10% 증가한다.'),
   ('낙엽의 성인', '성인', 40, 'shadow_of_the_erdtree', '낙엽파라 불리는 구도자들의 성인.
 
 황금 빛고리 기도를 강화한다.
@@ -194,10 +192,9 @@ with source (name, category, sort_order, content_code, game_description, effect_
 검은 불꽃의 주먹을 본떴다고 하며
 신 사냥의 기도를 강화한다.', '신 사냥의 기도 위력이 10% 증가한다. 귀족의 배짱 및 흑염의 지속 피해에는 적용되지 않는다.'),
   ('발톱 자국의 성인', '성인', 100, 'base_game', '짐승의 사제 그랭이 주는 성인.
-기도를 사용하기 위한 촉매의 일종.
 근력으로도 기도를 보정하는 희귀한 물건.
 
-그 손톱 자국은 그랭의 분노이며
+그 발톱 자국은 그랭의 분노이며
 그가 주는 짐승의 기도를 강화한다.', '짐승의 기도 위력이 10% 증가한다.'),
   ('미친 불의 성인', '성인', 110, 'base_game', '세 손가락의 무녀가 주는 환영 성인.
 미친 불의 기도를 강화한다.
@@ -219,32 +216,32 @@ where not exists (select 1 from public.game_items i where i.category_id = c.id a
 
 with source (name, category, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
-  ('별점 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 7, 0, 16, 0, 0),
-  ('휘석 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 0, 10, 0, 0),
-  ('학원의 휘석 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 0, 28, 0, 0),
-  ('채석 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 66, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 0, 12, 0, 0),
-  ('아인 여왕의 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 54, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 0, 10, 0, 0),
-  ('아줄의 휘석 지팡이', '지팡이', null, 4.0, '타격', 'somber_smithing_stone', false, 58, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 10, 0, 52, 0, 0),
-  ('루사트의 휘석 지팡이', '지팡이', null, 4.0, '타격', 'somber_smithing_stone', false, 58, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 10, 0, 52, 0, 0),
-  ('카리아의 휘석 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 8, 24, 0, 0),
-  ('카리아의 휘검 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 38, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 12, 22, 0, 0),
-  ('카리아의 왕홀', '지팡이', '돌아라 돌아라', null, null, 'somber_smithing_stone', false, 58, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 10, 60, 0, 0),
-  ('백금 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 29, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 0, 10, 0, 12),
-  ('상실의 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 38, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 12, 14, 0, 0),
-  ('겔미어의 휘석 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 50, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 0, 14, 14, 0),
-  ('결정 지팡이', '지팡이', null, null, null, 'somber_smithing_stone', false, 75, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 0, 48, 0, 0),
-  ('부패한 결정 지팡이', '지팡이', null, null, null, 'somber_smithing_stone', false, 102, 0, 0, 0, 0, null, null, null, null, null, null, null, 50, 0, 0, 0, 0, 0, 8, 0, 48, 0, 0),
-  ('운석 지팡이', '지팡이', null, null, null, null, false, 39, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 0, 18, 0, 0),
-  ('죄인의 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 66, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 45, 0, 0, 0, 8, 0, 0, 12, 0),
-  ('죽음의 왕자의 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 6, 0, 18, 18, 0),
-  ('어머니의 지팡이', '지팡이', null, null, null, 'smithing_stone', false, 45, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 7, 0, 21, 0, 21),
-  ('위대한 저편의 지팡이', '지팡이', null, null, null, 'somber_smithing_stone', false, 66, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 7, 0, 25, 25, 0),
+  ('별점 지팡이', '지팡이', null, 3, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 7, 0, 16, 0, 0),
+  ('휘석 지팡이', '지팡이', null, 3, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 6, 0, 10, 0, 0),
+  ('학원의 휘석 지팡이', '지팡이', null, 3, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 6, 0, 28, 0, 0),
+  ('채석 지팡이', '지팡이', null, 4.5, '타격', 'smithing_stone', false, 66, 0, 0, 0, 0, 28, 17, 17, 17, 17, 100, 17, 0, 0, 0, 0, 0, 0, 8, 0, 12, 0, 0),
+  ('아인 여왕의 지팡이', '지팡이', null, 3, '타격', 'smithing_stone', false, 54, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 6, 0, 10, 0, 0),
+  ('아줄의 휘석 지팡이', '지팡이', null, 4, '타격', 'somber_smithing_stone', false, 58, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 10, 0, 52, 0, 0),
+  ('루사트의 휘석 지팡이', '지팡이', null, 4, '타격', 'somber_smithing_stone', false, 58, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 10, 0, 52, 0, 0),
+  ('카리아의 휘석 지팡이', '지팡이', null, 3, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 6, 8, 24, 0, 0),
+  ('카리아의 휘검 지팡이', '지팡이', null, 2.5, '타격', 'smithing_stone', false, 38, 0, 0, 0, 0, 23, 14, 14, 14, 14, 100, 14, 0, 0, 0, 0, 0, 0, 6, 12, 22, 0, 0),
+  ('카리아의 왕홀', '지팡이', '돌아라 돌아라', 3, '타격', 'somber_smithing_stone', false, 58, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 8, 10, 60, 0, 0),
+  ('백금 지팡이', '지팡이', null, 2.5, '타격', 'smithing_stone', false, 29, 0, 0, 0, 0, 23, 14, 14, 14, 14, 100, 14, 0, 0, 0, 0, 0, 0, 6, 0, 10, 0, 12),
+  ('상실의 지팡이', '지팡이', null, 2.5, '타격', 'smithing_stone', false, 38, 0, 0, 0, 0, 23, 14, 14, 14, 14, 100, 14, 0, 0, 0, 0, 0, 0, 6, 12, 14, 0, 0),
+  ('겔미어의 휘석 지팡이', '지팡이', null, 2.5, '타격', 'smithing_stone', false, 50, 0, 0, 0, 0, 23, 14, 14, 14, 14, 100, 14, 0, 0, 0, 0, 0, 0, 6, 0, 14, 14, 0),
+  ('결정 지팡이', '지팡이', null, 4.5, '타격', 'somber_smithing_stone', false, 75, 0, 0, 0, 0, 28, 17, 17, 17, 17, 100, 17, 0, 0, 0, 0, 0, 0, 8, 0, 48, 0, 0),
+  ('부패한 결정 지팡이', '지팡이', null, 4.5, '타격', 'somber_smithing_stone', false, 102, 0, 0, 0, 0, 28, 17, 17, 17, 17, 100, 17, 50, 0, 0, 0, 0, 0, 8, 0, 48, 0, 0),
+  ('운석 지팡이', '지팡이', null, 4.5, '타격', null, false, 39, 0, 0, 0, 0, 28, 17, 17, 17, 17, 100, 17, 0, 0, 0, 0, 0, 0, 6, 0, 18, 0, 0),
+  ('죄인의 지팡이', '지팡이', null, 4.5, '타격', 'smithing_stone', false, 66, 0, 0, 0, 0, 28, 17, 17, 17, 17, 100, 17, 0, 0, 45, 0, 0, 0, 8, 0, 0, 12, 0),
+  ('죽음의 왕자의 지팡이', '지팡이', null, 3, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25, 15, 15, 15, 15, 100, 15, 0, 0, 0, 0, 0, 0, 6, 0, 18, 18, 0),
+  ('어머니의 지팡이', '지팡이', null, 2.5, '타격', 'smithing_stone', false, 45, 0, 0, 0, 0, 22, 14, 14, 14, 14, 100, 13, 0, 0, 0, 0, 0, 0, 7, 0, 21, 0, 21),
+  ('위대한 저편의 지팡이', '지팡이', null, 2.5, '타격', 'somber_smithing_stone', false, 66, 0, 0, 0, 0, 26, 16, 16, 16, 16, 100, 15, 0, 0, 0, 0, 0, 0, 7, 0, 25, 25, 0),
   ('손가락의 성인', '성인', null, 1.5, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 4, 0, 0, 10, 0),
   ('황금 나무의 성인', '성인', null, 0.0, '타격', 'somber_smithing_stone', false, 61, 0, 0, 0, 36, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0),
   ('황금률의 성인', '성인', null, 0.0, '타격', 'somber_smithing_stone', false, 58, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 0),
-  ('낙엽의 성인', '성인', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 0, 0, 27, 0),
-  ('불의 기사의 성인', '성인', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 0, 0, 23, 0),
-  ('나선 나무의 성인', '성인', null, null, null, 'smithing_stone', false, 43, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 0, 0, 17, 0),
+  ('낙엽의 성인', '성인', null, 1.5, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 8, 0, 0, 27, 0),
+  ('불의 기사의 성인', '성인', null, 1.5, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 8, 0, 0, 23, 0),
+  ('나선 나무의 성인', '성인', null, 1.5, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 8, 0, 0, 17, 0),
   ('조약돌의 성인', '성인', null, 1.5, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 4, 0, 0, 18, 0),
   ('거인의 성인', '성인', null, 1.5, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 4, 0, 0, 14, 0),
   ('신 사냥의 성인', '성인', null, 1.5, '타격', 'smithing_stone', false, 43, 0, 0, 0, 0, 25.0, 15.0, 15.0, 15.0, 15.0, 100, 15, 0, 0, 0, 0, 0, 0, 4, 0, 0, 27, 0),
@@ -272,7 +269,7 @@ with source (name, category, affinity, strength, dexterity, intelligence, faith,
   ('카리아의 휘석 지팡이', '지팡이', 'standard', 'D', '-', 'S', '-', '-'),
   ('카리아의 휘검 지팡이', '지팡이', 'standard', 'D', 'D', 'S', '-', '-'),
   ('카리아의 왕홀', '지팡이', 'standard', 'D', 'D', 'S', '-', '-'),
-  ('백금 지팡이', '지팡이', 'standard', 'D', '-', 'C', '-', 'S'),
+  ('백금 지팡이', '지팡이', 'standard', 'D', '-', 'B', '-', 'S'),
   ('상실의 지팡이', '지팡이', 'standard', 'D', 'D', 'S', '-', '-'),
   ('겔미어의 휘석 지팡이', '지팡이', 'standard', 'D', '-', 'B', 'B', '-'),
   ('결정 지팡이', '지팡이', 'standard', 'C', '-', 'S', '-', '-'),
