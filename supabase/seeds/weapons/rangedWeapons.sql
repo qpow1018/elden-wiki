@@ -1,7 +1,5 @@
--- 사용자 제공 원거리 무기 31종. 공통 기준: docs/DATABASE.md, 개별 출처·변환: docs/DATA_SOURCES.md.
--- 기존 행·순서는 보존합니다. 출처에 없는 수치는 NULL입니다.
--- https://github.com/ThomasJClark/elden-ring-weapon-calculator/blob/master/public/regulation-vanilla-v1.17.js
--- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
+-- 원거리 무기 31종은 SmithBox PC Regulation 1.17.3과 한국어 FMG를 따릅니다.
+-- 공통 기준은 docs/DATABASE.md, 출처와 변환 기준은 docs/DATA_SOURCES.md에 기록합니다.
 do $$
 begin
   if (select count(*) from public.game_item_categories where type = 'other_weapon' and name in ('소형 활','활','대궁','석궁','발리스타')) <> 5 then
@@ -24,27 +22,27 @@ with source (name, description, fp_cost_text) as (
   values
   ('연속 사격', '수평으로 활을 드는 사수의 전투 기술.
 자세를 잡으며 잘 보이지 않을 만큼 빠르게
-연속으로 화살을 쏠 수 있다.', '2 ( - / - )'),
+연속으로 화살을 쏠 수 있다.', '2'),
   ('강화 사격', '활을 비스듬히 드는, 사수의 전투 기술.
 활시위를 쥐어짜듯 당기고 쏜 그 화살은
-위력이 강해지고 가드를 뚫는다.', null),
+위력이 강해지고 가드를 뚫는다.', '6'),
   ('원혼 쏘기', '화살에 원혼을 불러 연속으로 쏘는 전투 기술.
-원혼 화살은 적을 쫓아다니듯 날아간다.', '3 ( - / - )'),
+원혼 화살은 적을 쫓아다니듯 날아간다.', '3'),
   ('부채꼴 쏘기', '수평으로 활을 잡는 전투 기술.
 8개의 화살을 동시에 걸고
-부채꼴로 쏠 수 있다.', null),
+부채꼴로 쏠 수 있다.', '12'),
   ('관통 사격', '대궁을 비스듬히 드는, 강력한 사수의 전투
 기술. 시위를 당기며 대형 화살을 비틀어 쏜
-그 화살은 적의 몸을 관통한다.', null),
-  ('라단의 소나기', '낮은 자세에서 활 시위를 당기는 전투 기술.
+그 화살은 적의 몸을 관통한다.', '9'),
+  ('라단의 소나기', '낮은 자세에서 활시위를 당기는 전투 기술.
 자세를 잡고 많은 화살을 단번에 하늘에 쏜다.
-그 화살들은 소나기처럼 적에게 쏟아진다.', null),
+그 화살들은 소나기처럼 적에게 쏟아진다.', '32'),
   ('킥', '다리를 높이 들어 차는 기술.
 가드에 유효하고 자세를 무너뜨릴 수 있다.
 단순하지만 실전적인 전투 기술.', '- ( - / - )'),
   ('연노 연사', '연사용 기구를 작동시키는 전투 기술.
 자세를 잡고 앞쪽 핸들을 돌려서
-연속으로 볼트를 쏠 수 있다.', null)
+연속으로 볼트를 쏠 수 있다.', '26')
 )
 insert into public.weapon_skills (name, description, fp_cost_text)
 select s.name, s.description, s.fp_cost_text from source s
@@ -93,10 +91,9 @@ with source (name, category, sort_order, content_code, game_description, effect_
 능숙하게 다루기 가장 어려운 활 중 하나.
 
 칼날 활대는 가볍고 바람을 갈라
-마치 소형 활처럼 다룰 수 있다.', '소형 활처럼 달리기·점프·착지·구르기 후 퀵샷을 사용할 수 있다.'),
-  ('안스바흐의 장궁', '활', 40, 'shadow_of_the_erdtree', '엘든 링 안스바흐의 장궁
-노병 안스바흐의 무기
-활 몸체 두 개와 현 두 개를 조합한 장궁
+활이지만 마치 소형 활처럼 다룰 수 있다.', '소형 활처럼 달리기·점프·착지·구르기 후 퀵샷을 사용할 수 있다.'),
+  ('안스바흐의 장궁', '활', 40, 'shadow_of_the_erdtree', '노병 안스바흐의 무기.
+활 몸체 두 개와 현 두 개를 조합한 장궁.
 
 사용자의 기량이 탁월할 것을 전제로
 소형 활처럼 다룰 수 있다.', '소형 활처럼 구르기·달리기 후 퀵샷을 사용할 수 있다.'),
@@ -119,7 +116,7 @@ with source (name, category, sort_order, content_code, game_description, effect_
 모습 없는 뱀이라고도 불린다.', '모든 화살에 기본 독 축적 15를 추가한다. 신비 보정은 무기 공격력 대신 상태 이상 축적에 영향을 준다.'),
   ('황금 나무의 활', '활', 80, 'base_game', '황금 나무 의장이 새겨진 활.
 옛 시대, 신앙이 싸움과 함께 있었던 시절
-[황금 화살] 과 함께 만들어진 무기.
+「황금 화살」과 함께 만들어진 무기.
 
 화살의 공격력을 신앙으로도 보정하며
 신성 속성 화살을 쏠 때 진가를 발휘한다.', '화살 공격력을 신앙으로도 보정하며 신성 속성 화살과 함께 사용할 때 위력이 높아진다.'),
@@ -133,9 +130,9 @@ with source (name, category, sort_order, content_code, game_description, effect_
 
 가장 무겁고 쥐어짜는 힘이 필요한 대궁.
 애초에 인간이 다룰 물건은 아닐 것이다.', null),
-  ('황금 나무의 대궁', '대궁', 30, 'base_game', '황금 나무 의장이 새겨진 대궁
+  ('황금 나무의 대궁', '대궁', 30, 'base_game', '황금 나무 의장이 새겨진 대궁.
 옛 시대, 신앙이 싸움과 함께 있었던 시절
-''황금 대형 화살''과 함께 만들어진 무기.
+「황금 대형 화살」과 함께 만들어진 무기.
 
 화살의 공격력을 신앙으로도 보정하며
 신성 속성 화살을 쏠 때 진가를 발휘한다.', '화살 공격력을 신앙으로도 보정하며 신성 속성 화살과 함께 사용할 때 위력이 높아진다.'),
@@ -144,14 +141,14 @@ with source (name, category, sort_order, content_code, game_description, effect_
 수많은 발톱 자국이 새겨져 있다.
 
 배어든 에이곤의 집념이
-「에이곤의 작살」 의 위력을 높인다.', '에이곤의 작살로 주는 피해가 20% 증가한다.'),
+「에이곤의 작살」의 위력을 높인다.', '에이곤의 작살로 주는 피해가 20% 증가한다.'),
   ('사자의 대궁', '대궁', 50, 'base_game', '장군 라단이 사용했던 흑철 대궁.
 사자 갈기가 장식된 무기.
 
 별 부수는 중력의 힘을 품고 있으며
 「라단의 창」과 함께 사용할 때
 그야말로 영웅의 무기가 된다.', '라단의 창으로 주는 피해가 20% 증가한다.'),
-  ('병사의 석궁', '석궁', 10, 'base_game', '간소한 만듦새의 석궁
+  ('병사의 석궁', '석궁', 10, 'base_game', '간소한 만듦새의 석궁.
 사용자를 가리지 않는 무기이나
 강도, 정확도 모두 그리 높지는 않다.
 
@@ -159,7 +156,7 @@ with source (name, category, sort_order, content_code, game_description, effect_
 볼트를 미리 장비해야 한다.', null),
   ('라이트 크로스보우', '석궁', 20, 'base_game', '받침대에 활을 고정한 원거리 무기.
 다루기 쉽고 공격력도 높으나
-사격후 볼트를 장전해야 한다.
+사격 후 볼트를 장전해야 한다.
 
 석궁을 사용하려면
 볼트를 미리 장비해야 한다.', null),
@@ -189,23 +186,23 @@ with source (name, category, sort_order, content_code, game_description, effect_
 금속 파츠는 장전 기구로,
 전용 전투 기술을 통해 사용할 수 있다.', null),
   ('산탄 크로스보우', '석궁', 80, 'shadow_of_the_erdtree', '크로스보우 두 개를 조합한
-개조 크로스보우
+개조 크로스보우.
 
 다수의 볼트를 장전할 수 있으며
-이를 동시에 산탄처럼 사출한다.', '한 번의 사격으로 볼트를 10발 소모해 산탄처럼 동시에 발사한다.'),
+이를 동시에 산탄처럼 사출한다.', '여러 볼트를 산탄처럼 동시에 발사한다.'),
   ('월륜의 석궁', '석궁', 90, 'base_game', '황금 나무와 만월, 로데일과 레아 루카리아의
 화목과 혼인을 축하하여 만들어진
-하나뿐인 석궁. 정밀한 마술 공예품
+하나뿐인 석궁. 정밀한 마술 공예품.
 
 장전 시 두 고리가 춤추며
 마력 속성 볼트를 쏠 때 진가를 발휘한다.', '마력 속성 볼트와 함께 사용할 때 위력이 높아진다.'),
-  ('핸디 발리스타', '발리스타', 10, 'base_game', '공성병기를 바탕으로 한 규격 외의 사격무기.
+  ('핸디 발리스타', '발리스타', 10, 'base_game', '공성병기를 바탕으로 한 규격 외의 사격 무기.
 전용 대형 볼트를 사용한다.
 
 단신으로 성에, 혹은 군대에 맞서는
-그 무모함에야말로 어울릴것이다.', '전용 대형 볼트를 사용한다. 사정거리 50.'),
+그 무모함에야말로 어울릴 것이다.', '전용 대형 볼트를 사용한다. 사정거리 50.'),
   ('대포 항아리', '발리스타', 20, 'base_game', '폭발로 대형 볼트를 쏘는 항아리 대포.
-공격력은 높으나 장전에 시간이 걸린다.
+공격력을 높으나 장전에 시간이 걸린다.
 
 화산관 공략전에 반입된 시험작 무기이나
 사용할 사람을 얻지 못한듯하다.', '폭발로 대형 볼트를 발사하며 장전에 시간이 걸린다.'),
@@ -223,37 +220,37 @@ where not exists (select 1 from public.game_items i where i.category_id = c.id a
 
 with source (name, category, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
-  ('숏 보우', '소형 활', '연속 사격', null, null, 'smithing_stone', false, 159, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0),
-  ('컴포지트 보우', '소형 활', '강화 사격', null, null, 'smithing_stone', false, 159, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0),
-  ('붉은 나무 숏 보우', '소형 활', '연속 사격', null, null, 'smithing_stone', false, 159, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 16, 0, 0, 0),
-  ('혼종의 숏 보우', '소형 활', '연속 사격', null, null, 'smithing_stone', false, 166, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 16, 8, 0, 0, 0),
-  ('하프 보우', '소형 활', '연속 사격', null, null, 'somber_smithing_stone', false, 151, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 9, 9, 0, 0, 0),
-  ('뼈 활', '소형 활', '원혼 쏘기', null, null, 'smithing_stone', false, 161, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 11, 0, 0, 0),
-  ('롱보우', '활', '강화 사격', null, null, 'smithing_stone', false, 196, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 9, 14, 0, 0, 0),
-  ('백금의 활', '활', '강화 사격', null, null, 'smithing_stone', false, 200, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 7, 18, 0, 0, 0),
-  ('검은 활', '활', '연속 사격', null, null, 'somber_smithing_stone', false, 171, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 9, 20, 0, 0, 0),
-  ('안스바흐의 장궁', '활', '부채꼴 쏘기', null, null, 'somber_smithing_stone', false, 181, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 9, 43, 0, 0, 0),
-  ('도르래 활', '활', '강화 사격', 5, null, 'somber_smithing_stone', false, 188, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 11, 11, 0, 0, 0),
-  ('뿔 활', '활', '강화 사격', null, null, 'smithing_stone', false, 159, 73, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 10, 14, 12, 0, 0),
-  ('뱀 활', '활', '강화 사격', null, null, 'somber_smithing_stone', false, 183, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 15, 0, 0, 11),
-  ('황금 나무의 활', '활', '강화 사격', null, null, 'somber_smithing_stone', false, 98, 0, 0, 0, 122, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 8, 12, 0, 14, 0),
-  ('대궁', '대궁', '관통 사격', null, null, 'smithing_stone', false, 306, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0),
-  ('골렘의 대궁', '대궁', '관통 사격', null, null, 'somber_smithing_stone', false, 318, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 24, 18, 0, 0, 0),
-  ('황금 나무의 대궁', '대궁', '관통 사격', null, null, 'somber_smithing_stone', false, 147, 0, 0, 0, 159, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 20, 14, 0, 14, 0),
-  ('에이곤의 대궁', '대궁', '관통 사격', null, null, 'smithing_stone', false, 294, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 23, 16, 0, 0, 0),
-  ('사자의 대궁', '대궁', '라단의 소나기', null, null, 'somber_smithing_stone', false, 294, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 22, 18, 0, 0, 0),
-  ('병사의 석궁', '석궁', '킥', null, null, 'smithing_stone', false, 240, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 10, 8, 0, 0, 0),
-  ('라이트 크로스보우', '석궁', '킥', null, null, 'smithing_stone', false, 260, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 12, 8, 0, 0, 0),
-  ('헤비 크로스보우', '석궁', '킥', null, null, 'smithing_stone', false, 288, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 14, 10, 0, 0, 0),
-  ('아바레스트', '석궁', '킥', null, null, 'smithing_stone', false, 308, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 18, 12, 0, 0, 0),
-  ('크레푸스의 흑건', '석궁', '킥', null, null, 'somber_smithing_stone', false, 238, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 14, 16, 0, 0, 0),
-  ('도르래 석궁', '석궁', '킥', null, null, 'somber_smithing_stone', false, 146, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 16, 16, 0, 0, 0),
-  ('연노', '석궁', '연노 연사', null, null, 'somber_smithing_stone', false, 259, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 13, 15, 0, 0, 0),
-  ('산탄 크로스보우', '석궁', null, null, null, 'smithing_stone', false, 197, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 11, 17, 0, 0, 0),
-  ('월륜의 석궁', '석궁', '킥', null, null, 'somber_smithing_stone', false, 175, 175, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 10, 10, 14, 0, 0),
-  ('핸디 발리스타', '발리스타', '킥', 10.0, '없음', 'smithing_stone', false, 600, 0, 0, 0, 0, 31.0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 30, 14, 0, 0, 0),
-  ('대포 항아리', '발리스타', '킥', null, null, 'somber_smithing_stone', false, 672, 0, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 34, 12, 0, 0, 0),
-  ('라바스의 대포', '발리스타', '킥', null, null, 'somber_smithing_stone', false, 378, 378, 0, 0, 0, null, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 28, 16, 0, 0, 0)
+  ('숏 보우', '소형 활', '연속 사격', 2.5, '없음', 'smithing_stone', false, 159, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0),
+  ('컴포지트 보우', '소형 활', '강화 사격', 3, '없음', 'smithing_stone', false, 159, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0),
+  ('붉은 나무 숏 보우', '소형 활', '연속 사격', 2.5, '없음', 'smithing_stone', false, 159, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 8, 16, 0, 0, 0),
+  ('혼종의 숏 보우', '소형 활', '연속 사격', 3, '없음', 'smithing_stone', false, 166, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 16, 8, 0, 0, 0),
+  ('하프 보우', '소형 활', '연속 사격', 2, '없음', 'somber_smithing_stone', false, 151, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 9, 9, 0, 0, 0),
+  ('뼈 활', '소형 활', '원혼 쏘기', 3, '없음', 'smithing_stone', false, 161, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 8, 11, 0, 0, 0),
+  ('롱보우', '활', '강화 사격', 4, '없음', 'smithing_stone', false, 196, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 9, 14, 0, 0, 0),
+  ('백금의 활', '활', '강화 사격', 4.5, '없음', 'smithing_stone', false, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 7, 18, 0, 0, 0),
+  ('검은 활', '활', '연속 사격', 4, '없음', 'somber_smithing_stone', false, 171, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 9, 20, 0, 0, 0),
+  ('안스바흐의 장궁', '활', '부채꼴 쏘기', 4.5, '없음', 'somber_smithing_stone', false, 181, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 9, 43, 0, 0, 0),
+  ('도르래 활', '활', '강화 사격', 5, '없음', 'somber_smithing_stone', false, 188, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 11, 0, 0, 0),
+  ('뿔 활', '활', '강화 사격', 4.5, '없음', 'smithing_stone', false, 159, 73, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 10, 14, 12, 0, 0),
+  ('뱀 활', '활', '강화 사격', 3.5, '없음', 'somber_smithing_stone', false, 183, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 8, 15, 0, 0, 11),
+  ('황금 나무의 활', '활', '강화 사격', 4, '없음', 'somber_smithing_stone', false, 98, 0, 0, 0, 122, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 8, 12, 0, 14, 0),
+  ('대궁', '대궁', '관통 사격', 10, '없음', 'smithing_stone', false, 306, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0),
+  ('골렘의 대궁', '대궁', '관통 사격', 14.5, '없음', 'somber_smithing_stone', false, 318, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 24, 18, 0, 0, 0),
+  ('황금 나무의 대궁', '대궁', '관통 사격', 11, '없음', 'somber_smithing_stone', false, 147, 0, 0, 0, 159, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 20, 14, 0, 14, 0),
+  ('에이곤의 대궁', '대궁', '관통 사격', 12.5, '없음', 'smithing_stone', false, 294, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 23, 16, 0, 0, 0),
+  ('사자의 대궁', '대궁', '라단의 소나기', 9.5, '없음', 'somber_smithing_stone', false, 294, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 22, 18, 0, 0, 0),
+  ('병사의 석궁', '석궁', '킥', 3.5, '없음', 'smithing_stone', false, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 10, 8, 0, 0, 0),
+  ('라이트 크로스보우', '석궁', '킥', 4, '없음', 'smithing_stone', false, 260, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, 8, 0, 0, 0),
+  ('헤비 크로스보우', '석궁', '킥', 5.5, '없음', 'smithing_stone', false, 288, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 14, 10, 0, 0, 0),
+  ('아바레스트', '석궁', '킥', 6, '없음', 'smithing_stone', false, 308, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 18, 12, 0, 0, 0),
+  ('크레푸스의 흑건', '석궁', '킥', 5, '없음', 'somber_smithing_stone', false, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 14, 16, 0, 0, 0),
+  ('도르래 석궁', '석궁', '킥', 4, '없음', 'somber_smithing_stone', false, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 16, 16, 0, 0, 0),
+  ('연노', '석궁', '연노 연사', 6, '없음', 'somber_smithing_stone', false, 259, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 13, 15, 0, 0, 0),
+  ('산탄 크로스보우', '석궁', '킥', 5, '없음', 'smithing_stone', false, 197, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 17, 0, 0, 0),
+  ('월륜의 석궁', '석궁', '킥', 4, '없음', 'somber_smithing_stone', false, 175, 175, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 10, 10, 14, 0, 0),
+  ('핸디 발리스타', '발리스타', '킥', 10, '없음', 'smithing_stone', false, 600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 30, 14, 0, 0, 0),
+  ('대포 항아리', '발리스타', '킥', 15, '없음', 'somber_smithing_stone', false, 672, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 34, 12, 0, 0, 0),
+  ('라바스의 대포', '발리스타', '킥', 15, '없음', 'somber_smithing_stone', false, 378, 378, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 28, 16, 0, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'other_weapon', s.weight, case when s.physical_attack_types = '없음' then array[]::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
