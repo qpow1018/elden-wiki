@@ -1,5 +1,4 @@
--- 2026-11-03 사용자 제공 유문 단검 설명 + 공개 게임 추출 데이터의 수치 보완.
--- 이미지와 GitHub 데이터에 없는 수치는 미반영입니다.
+-- 사용자 제공 유문 단검 설명과 PC Regulation 1.17.3 CSV(EquipParamWeapon ID 63500000).
 -- 기본 등록은 기존 행을 보존하고, 보완 수치는 NULL인 칸만 채웁니다.
 do $$
 begin
@@ -21,7 +20,7 @@ $$;
 insert into public.weapon_skills (name, description, fp_cost_text)
 select '관통 투척', '무기에 세게 회전을 주어 투척하는 전투 기술.
 투척한 무기는 평소보다 긴 거리를 날아가
-적의 몸을 관통한다.', null
+적의 몸을 관통한다.', '8'
 where not exists (select 1 from public.weapon_skills where name = '관통 투척');
 
 insert into public.game_items (
@@ -52,13 +51,18 @@ join public.weapon_skills k on k.name = '관통 투척'
 where i.type = 'weapon' and c.type = 'weapon' and c.name = '투척검' and i.name = '유문 단검'
 on conflict (game_item_id) do nothing;
 
--- 수치 출처: ThomasJClark/elden-ring-weapon-calculator
--- public/regulation-vanilla-v1.17.js (일반 게임 데이터, 모드 데이터 아님)
--- SHA-256: 6ae98b99429cf63f3f2c6a737cf90f6e7507fa67c1dd7e45cad5937a2f3824a5
--- src/regulationData.ts의 강화 계수 적용 방식과 원본 scalingTiers를 사용합니다.
--- 표준 +25 기본 공격력은 소수점 아래를 버리고 캐릭터 능력치 보너스는 더하지 않습니다.
+-- 표준 +25 기본 공격력과 가드 성능, 미강화 기본 상태 이상을 기록합니다.
 update public.weapon_details d
 set
+  weight = coalesce(d.weight, 1.5),
+  physical_attack_types = coalesce(d.physical_attack_types, array['pierce']::text[]),
+  critical = coalesce(d.critical, 100),
+  guard_physical = coalesce(d.guard_physical, 35),
+  guard_magic = coalesce(d.guard_magic, 20),
+  guard_fire = coalesce(d.guard_fire, 20),
+  guard_lightning = coalesce(d.guard_lightning, 20),
+  guard_holy = coalesce(d.guard_holy, 20),
+  guard_boost = coalesce(d.guard_boost, 18),
   attack_physical = coalesce(d.attack_physical, 151),
   attack_magic = coalesce(d.attack_magic, 0),
   attack_fire = coalesce(d.attack_fire, 0),
