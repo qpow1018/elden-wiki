@@ -219,6 +219,36 @@ export type TDatabase = {
           },
         ];
       };
+      spirit_ash_details: {
+        Row: {
+          fp_cost: number;
+          game_item_id: number;
+          hp_cost: number;
+          type: TDatabase['public']['Enums']['game_item_type'];
+        };
+        ComputedFields: never;
+        Insert: {
+          fp_cost: number;
+          game_item_id: number;
+          hp_cost: number;
+          type?: TDatabase['public']['Enums']['game_item_type'];
+        };
+        Update: {
+          fp_cost?: number;
+          game_item_id?: number;
+          hp_cost?: number;
+          type?: TDatabase['public']['Enums']['game_item_type'];
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'spirit_ash_details_game_item_id_type_fkey';
+            columns: ['game_item_id', 'type'];
+            isOneToOne: false;
+            referencedRelation: 'game_items';
+            referencedColumns: ['id', 'type'];
+          },
+        ];
+      };
       talisman_details: {
         Row: {
           game_item_id: number;

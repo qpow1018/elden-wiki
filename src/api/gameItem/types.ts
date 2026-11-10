@@ -139,6 +139,7 @@ export type TGameItem = {
   armorDetails: TArmor | null;
   talismanDetails: TTalisman | null;
   spellDetails: TSpell | null;
+  spiritAshDetails: { fpCost: number; hpCost: number } | null;
   ashOfWarDetails: TAshOfWar | null;
 };
 

@@ -18,7 +18,7 @@ export async function getGameItems({
   const request = client
     .from('game_items')
     .select(
-      'id,name,type,image_url,content_code,game_description,effect_description,game_item_categories(name,sort_order),armor_details(*),talisman_details(*),spell_details(*),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,effect_description,game_item_categories(name,sort_order),armor_details(*),talisman_details(*),spell_details(*),spirit_ash_details(fp_cost,hp_cost),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
     .order('game_item_categories(sort_order)')
@@ -43,6 +43,7 @@ export async function getGameItems({
       const armor = row.armor_details[0];
       const talisman = row.talisman_details[0];
       const spell = row.spell_details[0];
+      const spiritAsh = row.spirit_ash_details[0];
       const ashOfWar = row.ash_of_war_details[0];
 
       return {
@@ -54,6 +55,9 @@ export async function getGameItems({
         gameDescription: row.game_description,
         effectDescription: row.effect_description,
         talismanDetails: talisman ? { weight: talisman.weight } : null,
+        spiritAshDetails: spiritAsh
+          ? { fpCost: spiritAsh.fp_cost, hpCost: spiritAsh.hp_cost }
+          : null,
         spellDetails: spell
           ? {
               fpCostText: spell.fp_cost_text,

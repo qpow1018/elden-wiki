@@ -78,6 +78,7 @@ erDiagram
   game_items ||--o| ash_of_war_details : "전회 상세"
   weapon_skills o|--o{ ash_of_war_details : "부여 기술"
   game_items ||--o| spell_details : "주문 상세"
+  game_items ||--o| spirit_ash_details : "뼛가루 상세"
   game_items ||--o| talisman_details : "탈리스만 상세"
   game_items ||--o| armor_details : "방어구 상세"
   game_items ||--o| weapon_details : "무기 상세"
@@ -386,6 +387,12 @@ where i.id = $1;
 - +1·+2 등의 변형은 별도 아이템으로 등록합니다. 변형 연결·동시 장착 제한·사용자 장착 상태는 현재 저장하지 않습니다.
 - 외래키는 UPDATE·DELETE RESTRICT이며, RLS와 공개 SELECT만 허용하는 정책을 따릅니다.
 
+## `spirit_ash_details` 뼛가루 상세
+
+- `game_item_id`를 기본키로 사용하며 `type = 'spirit_ash'`와 함께 `game_items(id, type)`을 참조합니다.
+- `fp_cost`와 `hp_cost`는 소환에 드는 FP·HP의 0 이상 정수입니다. 두 값이 0이면 비용 없음이며, 상세 행이 없으면 미확인으로 표시합니다.
+- RLS를 활성화하고 `anon`과 `authenticated`에 공개 조회만 허용합니다.
+
 ## `spell_details`: 주문 상세
 
 `game_items.type`은 `spell`, 기본 분류는 `game_item_categories`의 마술·기도입니다.
@@ -437,6 +444,6 @@ where i.id = $1;
 
 ## 아직 구현하지 않은 범위
 
-- 뼛가루 등 다른 종류의 상세 테이블, 일반 해설·댓글, 변질별 공격력, 강화 단계별 능력치는 구현하지 않았습니다.
+- 그 밖의 종류의 상세 테이블, 일반 해설·댓글, 변질별 공격력, 강화 단계별 능력치는 구현하지 않았습니다.
 - 전회 교체 가능 여부(`can_change_ash_of_war`)는 별도 필드로 두지 않습니다. `can_change_affinity`나 강화 재료로 대신 추론하지 않습니다.
 - 촉매의 마술·기도 보정은 캐릭터 능력치에 따라 달라지는 수치이며 현재 `weapon_scalings`의 등급과는 다른 정보입니다. 전용 저장·표시 기준은 아직 설계하지 않았습니다.

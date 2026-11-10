@@ -4,7 +4,7 @@
 -- 기존 아이템·표시 순서는 덮어쓰지 않습니다.
 do $$
 begin
-  if not exists (select 1 from public.game_item_categories where type = 'spirit_ash' and name = '뼛가루') then
+  if not exists (select 1 from public.game_item_categories where type = 'spirit_ash' and name = '일반 뼛가루') then
     raise exception '뼛가루 분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
@@ -21,7 +21,7 @@ with source (name, sort_order, content_code, game_description) as (
 헤매는 귀인의 영체를 5체 소환한다.
 
 틈새의 땅 각지를 헤매는 귀인들의 영체.
-그들은 무언가를 찾고 있었을테지만
+그들은 무언가를 찾고 있었을 테지만
 지금은 이미 완전히 잊어버렸다.'),
   ('귀인 마술사의 뼛가루', 20, 'base_game', '영혼이 깃든 뼛가루.
 귀인 마술사의 영체를 소환한다.
@@ -61,13 +61,13 @@ with source (name, sort_order, content_code, game_description) as (
 
 덩치가 크고 옆돌기가 특기인 영체 듀오.
 파문의 검을 쓰며 찬 입김을 뱉는다.
-짓눌린 머리가 언뜻 개구리를 닮은 듯한 그들은
+짓눌린 머리가 언뜻 개구리를 닮은듯한 그들은
 백금 일족의 2세대이다.'),
   ('날개 혼종의 뼛가루', 80, 'base_game', '영혼이 깃든 뼛가루.
 날개 혼종의 영체를 소환한다.
 
 날개 형상을 지니고 날면서 활을 쏘는 영체.
-혼종은 도가니에 닿은 벌을 받는 존재라고 하며
+혼종은 도가니에 닿은 벌을 받은 존재라고 하며
 나면서부터 노예, 더럽혀진 자이다.'),
   ('아인단의 뼛가루', 90, 'base_game', '영혼이 깃든 뼛가루.
 아인의 영체를 5체 소환한다.
@@ -90,6 +90,7 @@ with source (name, sort_order, content_code, game_description) as (
 징조로 나타나며 신탁의 피리를 분다고 한다.'),
   ('인간파리의 뼛가루', 120, 'shadow_of_the_erdtree', '영혼이 깃든 뼛가루.
 인간파리의 영체를 3체 소환한다.
+
 2체는 날면서 적을 공격하고
 1체는 그 후방에서 독 타액을 뱉는다.
 
@@ -108,11 +109,13 @@ with source (name, sort_order, content_code, game_description) as (
 작지만 매우 날렵하고 흉포하며
 그 더러운 엄니에는 부패의 독이 있다.'),
   ('큰쥐의 뼛가루', 150, 'base_game', '영혼이 깃든 뼛가루.
-큰쥐의 영체를 3-4체 소환한다.
+큰쥐의 영체를 3체 소환한다.
 
 소환할 때 FP를 소비하지 않는 영체.
-떨어진 곳에 소환되어 싸우기 시작하는 짐승 무리.
-영체가 되어서도 번식력이 왕성한지 강화하면 수가 늘어나기도 한다.'),
+떨어진 곳에 소환되어 싸우기 시작하는
+짐승 무리.
+영체가 되어서도 번식력이 왕성한지
+강화하면 수가 늘어나기도 한다.'),
   ('전쟁매의 뼛가루', 160, 'base_game', '영혼이 깃든 뼛가루.
 전쟁매의 영체를 소환한다.
 
@@ -123,9 +126,10 @@ with source (name, sort_order, content_code, game_description) as (
 폭풍은 그들의 요람인 것이다.'),
   ('육지멍게의 뼛가루', 170, 'base_game', '영혼이 깃든 뼛가루.
 육지멍게의 영체를 3체 소환한다.
+소환에 FP가 아닌 HP를 소비한다.
 
 소환자와 떨어진 곳에 소환되는 영체.
-동그란 표피는 딱딱하고 별로 움직이지 않으며
+동그란 표피는 딱딱하고 거의 움직이지 않으며
 주위에 독 체액을 흩뿌린다.'),
   ('영해파리의 뼛가루', 180, 'base_game', '영혼이 깃든 뼛가루.
 영해파리의 영체를 소환한다.
@@ -188,7 +192,7 @@ with source (name, sort_order, content_code, game_description) as (
 불꽃에 닿아도 바로 폭발한다.
 
 고향의 모두에게 전해줘.
-우리의, 화염 항아리의 삶을...'),
+우리의, 화염 항아리의 삶을…'),
   ('궁병의 뼛가루', 260, 'base_game', '영혼이 깃든 뼛가루.
 궁병의 영체를 3체 소환한다.
 
@@ -209,7 +213,7 @@ with source (name, sort_order, content_code, game_description) as (
 시종의 영체를 소환한다.
 
 귀인을 섬기며 함께 여행한 시종의 영체.
-주인을 섬기기 위해 자검과 석궁에 능했다.
+주인을 지키기 위해 자검과 석궁에 능했다.
 능력, 재능 또는 의지와는 상관없이
 그저 작게 태어났기에 시종이 된다.'),
   ('천한 병사의 뼛가루', 290, 'base_game', '영혼이 깃든 뼛가루.
@@ -227,10 +231,11 @@ with source (name, sort_order, content_code, game_description) as (
 하지만 이것은 거의 망가져서
 제멋대로 싸우기 시작한다.'),
   ('새 인형 병사의 뼛가루', 310, 'base_game', '영혼이 깃든 뼛가루.
-새 인형 병사 2체를 소환한다.
+새 인형 병사의 영체를 2체 소환한다.
 
 마술사의 종으로 만들어진 새 인형 병사 영체.
-자루가 긴 낫을 들고 하늘에서 화염 항아리를 던진다.
+자루가 긴 낫을 들고
+하늘에서 화염 항아리를 던진다.
 상처가 나면 고장나기도 해서 주의해야 한다.'),
   ('카이덴 용병의 뼛가루', 320, 'base_game', '영혼이 깃든 뼛가루.
 카이덴 용병의 영체를 소환한다.
@@ -277,7 +282,7 @@ with source (name, sort_order, content_code, game_description) as (
   ('뱀인간의 뼛가루', 380, 'base_game', '영혼이 깃든 뼛가루.
 뱀인간의 영체를 소환한다.
 
-용암채찍을 휘두르는 이형의 뱀인간의 영체.
+용암 채찍을 휘두르는 이형의 뱀인간의 영체.
 먼 옛날부터, 겔미어 화산에 도사린 늙은 뱀은
 데미갓을 먹고 뱀인간들을 낳았다고 한다.'),
   ('결정인의 뼛가루', 390, 'base_game', '영혼이 깃든 뼛가루.
@@ -384,5 +389,5 @@ with source (name, sort_order, content_code, game_description) as (
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description)
 select s.name, 'spirit_ash', c.id, s.sort_order, s.content_code, s.game_description
-from source s join public.game_item_categories c on c.type = 'spirit_ash' and c.name = '뼛가루'
+from source s join public.game_item_categories c on c.type = 'spirit_ash' and c.name = '일반 뼛가루'
 where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name and i.content_code = s.content_code);
