@@ -22,14 +22,14 @@ export const AFFINITIES = {
   heavy: '중후',
   keen: '예리',
   quality: '상질',
+  magic: '마력',
   fire: '화염',
   flame_art: '화염술',
   lightning: '벼락',
   sacred: '신성',
-  magic: '마력',
-  cold: '냉기',
   poison: '독',
   blood: '피',
+  cold: '냉기',
   occult: '신비',
 } as const;
 export const ATTRIBUTES = {

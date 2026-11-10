@@ -157,11 +157,11 @@ function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
       title: '가드 성능',
       className: 'guard-column',
       values: [
-        [ELEMENTS.physical, weapon.guardPhysical],
-        [ELEMENTS.magic, weapon.guardMagic],
-        [ELEMENTS.fire, weapon.guardFire],
-        [ELEMENTS.lightning, weapon.guardLightning],
-        [ELEMENTS.holy, weapon.guardHoly],
+        [ELEMENTS.physical, weapon.guardPhysical?.toFixed(1)],
+        [ELEMENTS.magic, weapon.guardMagic?.toFixed(1)],
+        [ELEMENTS.fire, weapon.guardFire?.toFixed(1)],
+        [ELEMENTS.lightning, weapon.guardLightning?.toFixed(1)],
+        [ELEMENTS.holy, weapon.guardHoly?.toFixed(1)],
         ['가드 강도', weapon.guardBoost],
       ],
     },
@@ -177,13 +177,10 @@ function WeaponCombatStats({ weapon }: { weapon: TWeapon }) {
           <section className={styles[group.className]} key={group.title}>
             <h3>{group.title}</h3>
             <div className={styles['combat-values']}>
-              {group.values.map(([label, value], index) => (
+              {group.values.map(([label, value]) => (
                 <div className={styles['combat-row']} key={label}>
                   <span className={styles['combat-label']}>{label}</span>
-                  <span className={styles['combat-value']}>
-                    {formatValue(value)}
-                    {group.className === 'guard-column' && index < 5 && value != null ? '%' : ''}
-                  </span>
+                  <span className={styles['combat-value']}>{formatValue(value)}</span>
                 </div>
               ))}
             </div>
