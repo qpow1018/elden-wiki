@@ -43,3 +43,4 @@ next-env.d.ts
 
 # Local game data exports
 /reference-data/elden-ring/*/*.csv
+/reference-data/elden-ring/*/item_dlc02.json

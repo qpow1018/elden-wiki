@@ -13,8 +13,14 @@
 
 - 로컬 경로는 `reference-data/elden-ring/regulation-1.17.3/`입니다. 사용자가 PC판 엘든 링(App Ver. 1.17.2, Regulation Ver. 1.17.3)에서 Smithbox로 내보낸 원본이며, CSV는 Git에서 제외합니다.
 - `EquipParamWeapon.csv`와 `ReinforceParamWeapon.csv`는 무기·변질별 원시 값과 강화 계수, `MenuValueTableParam.csv`는 보정 등급 경계를 제공합니다.
-- `SpEffectParam.csv`는 상태 이상 축적, `SwordArtsParam.csv`는 전투 기술 FP, `EquipMtrlSetParam.csv`는 강화 재료 참조에 사용합니다. 한국어 기술명과 설명은 별도 텍스트 자료를 확인합니다.
+- `SpEffectParam.csv`는 상태 이상 축적, `SwordArtsParam.csv`는 전투 기술 FP, `EquipMtrlSetParam.csv`는 강화 재료 참조에 사용합니다. 한국어 기술명과 설명은 [게임 원문 텍스트](#한국어-게임-원문-텍스트)를 확인합니다.
 - 상태 이상은 미강화·캐릭터 보정 전 기본 축적을 비교합니다. 장비 요구치 또는 캐릭터 보정이 반영된 인게임 표시값은 관측 조건과 함께 구분합니다.
+
+### 무기 부가 효과 대조
+
+- `EquipParamWeapon.csv`의 `residentSpEffectId` 계열에서 장착 효과를 찾아 `SpEffectParam.csv`의 배율과 적용 조건을 확인합니다. 공격에 연결된 효과는 장착 효과와 구분합니다.
+- 같은 Regulation 1.17.3 자료의 `AtkParam_Pc.csv`는 타격의 적용 분류, `BehaviorParam_PC.csv`는 동작이 참조하는 타격·발사체, `Bullet.csv`는 발사체가 참조하는 타격, `Magic.csv`는 주문이 참조하는 발사체·효과를 대조하는 데 사용합니다.
+- 하이랜드 액스는 무기 ID `14100000`에서 효과 ID `5141000`을 참조합니다. 공격 배율 `1.1`과 적용 분류 `106`, `116`을 확인했고, 확인한 용찬 브레스의 타격에는 두 코드가 없었습니다. 샤브리리의 외침 피해 타격 `73300`에는 `106`이 있어 주문 전체를 제외하는 문구의 근거로 삼을 수 없습니다. CSV만으로 동작 연결이나 실제 적용을 확정하기 어려우면 애니메이션 이벤트 또는 인게임에서 확인합니다.
 
 ### 무기 상세 대조 기준
 
@@ -38,6 +44,12 @@
 대조 결과에는 무기 ID, 변질, 강화 단계, 기존값, 계산값, 근거 필드를 남깁니다. 인게임으로 확인한 값과 CSV로 계산한 값을 구분하고, 이름 연결이 모호하거나 표시 규칙이 확인되지 않은 항목은 [데이터 확인 목록](DATA_VERIFICATION.md)에 남깁니다. 단검에서 검증한 계산을 다른 장비군에 적용할 때는 장비군별 표본을 먼저 확인합니다.
 
 경대검부터 조향병까지는 PC Regulation 1.17.3 CSV로 목록·순서·수치·기본 기술을 대조했습니다. 해당 분류의 현재 수치는 시드 SQL을 기준으로 합니다. 아래 절에 남은 제공 표와 계산기 기록은 최초 등록 근거이며, 한국어 이름·설명과 부가 효과의 출처도 각 절에서 확인할 수 있습니다.
+
+## 한국어 게임 원문 텍스트
+
+- `reference-data/elden-ring/regulation-1.17.3/item_dlc02.json`은 사용자가 Smithbox Text Editor에서 내보낸 한국어 아이템 텍스트 컨테이너입니다. 파일에는 본편 FMG와 실제 DLC 항목이 들어 있는 `_dlc01` FMG가 함께 있습니다. 로컬 참조용으로 보관하며 Git에서 제외합니다.
+- `FmgWrappers`의 테이블 이름과 `Fmg.Entries`의 텍스트 ID로 연결합니다. 무기·방어구·탈리스만·일반 아이템은 각각 `Weapon`·`Protector`·`Accessory`·`Goods`의 이름 및 설명 테이블을 확인합니다. 전회 아이템은 `GemName`·`GemCaption`, 전투 기술은 `ArtsName`·`ArtsCaption`을 사용합니다.
+- `WeaponEffect`에는 일부 공식 효과 문구가 있습니다. 도감의 부가 효과 설명을 작성할 때 게임 원문에 명시된 내용과 [파라미터로 확인한 수치·적용 조건](#무기-부가-효과-대조)을 근거로 사용합니다.
 
 ## 무기 도감 등록 범위
 
