@@ -1,0 +1,67 @@
+.spell-details {
+  display: grid;
+  gap: 16px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 8px 12px;
+
+    > div {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
+      align-items: baseline;
+    }
+
+    dt {
+      color: $text-muted;
+    }
+
+    dd {
+      min-width: 0;
+      white-space: pre-wrap;
+    }
+  }
+
+  .requirements {
+    h3 {
+      margin-bottom: 8px;
+      color: $text-muted;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+
+  .requirement-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    text-align: center;
+
+    > div + div {
+      border-left: 1px solid $border;
+    }
+
+    dt {
+      padding: 6px 4px;
+      border-bottom: 1px solid $border;
+      background: $steel-tint;
+      color: $text-muted;
+      font-size: 12px;
+    }
+
+    dd {
+      padding: 6px 4px;
+    }
+  }
+}

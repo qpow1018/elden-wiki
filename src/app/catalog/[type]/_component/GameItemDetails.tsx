@@ -4,6 +4,7 @@ import type { TGameItem } from '@/api/gameItem/types';
 import { CONTENTS, GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import AshOfWarDetails from './details/AshOfWarDetails';
+import SpellDetails from './details/SpellDetails';
 import SpiritAshDetails from './details/SpiritAshDetails';
 import TalismanDetails from './details/TalismanDetails';
 import WeaponDetails from './details/WeaponDetails';
@@ -58,6 +59,8 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
       {gameItem.type === 'spirit_ash' && <SpiritAshDetails spiritAsh={gameItem.spiritAshDetails} />}
 
       {gameItem.type === 'ash_of_war' && <AshOfWarDetails ashOfWar={gameItem.ashOfWarDetails} />}
+
+      {gameItem.type === 'sorcery' && <SpellDetails spell={gameItem.spellDetails} />}
 
       {gameItem.effectDescription && (
         <section className={styles['effects']}>
