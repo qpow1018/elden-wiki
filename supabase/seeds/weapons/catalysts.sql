@@ -254,7 +254,7 @@ select i.id, k.id, 'catalyst', s.weight, case when s.physical_attack_types = 'íƒ
 from source s
 join public.game_item_categories c on c.type = 'catalyst' and c.name = s.category
 join public.game_items i on i.category_id = c.id and i.name = s.name
-left join public.weapon_skills k on k.name = s.skill_name
+left join public.weapon_skills k on k.name = s.skill_name and k.fp_cost_text = '20'
 on conflict (game_item_id) do nothing;
 
 with source (name, category, affinity, strength, dexterity, intelligence, faith, arcane) as (
