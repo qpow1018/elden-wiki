@@ -1,8 +1,7 @@
 -- 2026-11-03 사용자 제공 나무위키 단검 18종 자료.
 -- 공격력·가드·보정: 최대 강화 기준. 상태 이상: 미강화 기본 수치.
--- 패리 소비 FP는 사용자 확인에 따라 3으로 통일합니다.
+-- 게임 CSV(PC Regulation 1.17.3)로 수치를 대조하고 패리 소비 FP는 0으로 기록합니다.
 -- 표에 수면·발광이 없으면 사용자 기준에 따라 0으로 저장합니다.
--- 불의 기사 단검·맹고슈의 표준 외 보정은 NULL입니다.
 -- 출처·해석·미확인 범위는 docs/DATA_SOURCES.md의 단검 등록 자료를 참고합니다.
 -- 기존 행은 갱신하지 않습니다. 이름은 이번 등록 자료 조회에만 사용합니다.
 
@@ -35,7 +34,7 @@ with source (name, description, fp_cost_text) as (
 타깃 고정 상태라면 돌아 들어간다.', '3'),
   ('패리', '근접 공격의 타이밍에 맞춰 사용해 공격을
 피하고 적의 자세를 무너뜨리는 전투 기술.
-치명적인 일격을 가할 기회가 된다.', '3'),
+치명적인 일격을 가할 기회가 된다.', '0'),
   ('연속 찌르기', '몸을 회전시키고, 이어서
 단숨에 연속으로 찌르는 전투 기술.', '7'),
   ('휘석의 혜성', '「휘석 돌팔매」마술을 이용하는 전투 기술.
@@ -167,7 +166,7 @@ where not exists (
 
 with source (name, skill_name, type, weight, physical_attack_types, upgrade_material, attack_physical, guard_physical, attack_magic, guard_magic, attack_fire, guard_fire, attack_lightning, guard_lightning, attack_holy, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, can_change_affinity, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
-  ('대거', '퀵스텝', 'weapon', 1.5, array['slash', 'pierce']::text[], 'smithing_stone', 181, 35.0, 0, 20.0, 0, 20.0, 0, 20.0, 0, 20.0, 130, 15, 0, 0, 0, 0, 0, 0, true, 5, 9, 0, 0, 0),
+  ('대거', '퀵스텝', 'weapon', 1.5, array['slash', 'pierce']::text[], 'smithing_stone', 181, 35.0, 0, 20.0, 0, 20.0, 0, 20.0, 0, 20.0, 130, 18, 0, 0, 0, 0, 0, 0, true, 5, 9, 0, 0, 0),
   ('패링 대거', '패리', 'weapon', 1.5, array['slash', 'pierce']::text[], 'smithing_stone', 183, 35.0, 0, 20.0, 0, 20.0, 0, 20.0, 0, 20.0, 110, 18, 0, 0, 0, 0, 0, 0, true, 5, 14, 0, 0, 0),
   ('자비의 단검', '퀵스텝', 'weapon', 2.0, array['slash', 'pierce']::text[], 'smithing_stone', 225, 36.0, 0, 21.0, 0, 21.0, 0, 21.0, 0, 21.0, 140, 18, 0, 0, 0, 0, 0, 0, true, 7, 12, 0, 0, 0),
   ('대형 나이프', '퀵스텝', 'weapon', 1.5, array['slash', 'pierce']::text[], 'smithing_stone', 183, 35.0, 0, 20.0, 0, 20.0, 0, 20.0, 0, 20.0, 110, 18, 0, 0, 38, 0, 0, 0, true, 6, 12, 0, 0, 0),
@@ -179,12 +178,12 @@ with source (name, skill_name, type, weight, physical_attack_types, upgrade_mate
   ('축제의 손낫', '퀵스텝', 'weapon', 1.5, array['slash', 'pierce']::text[], 'smithing_stone', 193, 35.0, 0, 20.0, 0, 20.0, 0, 20.0, 0, 20.0, 100, 18, 0, 0, 0, 0, 0, 0, true, 6, 11, 0, 0, 0),
   ('상아 손낫', '퀵스텝', 'weapon', 2.0, array['slash', 'pierce']::text[], 'smithing_stone', 147, 26.0, 147, 42.0, 0, 15.0, 0, 15.0, 0, 15.0, 100, 18, 0, 0, 0, 0, 0, 0, false, 6, 11, 13, 0, 0),
   ('결정 나이프', '퀵스텝', 'weapon', 2.0, array['slash', 'pierce']::text[], 'smithing_stone', 200, 32.0, 129, 31.0, 0, 18.0, 0, 18.0, 0, 18.0, 100, 18, 0, 0, 0, 0, 0, 0, false, 8, 12, 9, 0, 0),
-  ('전갈의 침', '연속 찌르기', 'weapon', 2.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 193, 38.0, 0, 22.0, 0, 22.0, 0, 22.0, 0, 22.0, 110, 16, 50, 0, 0, 0, 0, 0, false, 6, 12, 0, 0, 0),
-  ('친퀘디아', '퀵스텝', 'weapon', 3.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 240, 43.0, 0, 25.0, 0, 25.0, 0, 25.0, 0, 25.0, 110, 19, 0, 0, 0, 0, 0, 0, false, 10, 10, 0, 0, 0),
-  ('휘석 크리스', '휘석의 혜성', 'weapon', 1.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 139, 23.0, 166, 45.0, 0, 14.0, 0, 14.0, 0, 14.0, 110, 15, 0, 0, 0, 0, 0, 0, false, 5, 12, 16, 0, 0),
-  ('레두비아', '레두비아의 혈인', 'weapon', 2.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 193, 38.0, 0, 22.0, 0, 22.0, 0, 22.0, 0, 22.0, 110, 16, 0, 0, 30, 0, 0, 0, false, 5, 13, 0, 0, 13),
-  ('사명의 칼날', '황금 칼날', 'weapon', 1.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 173, 31.0, 0, 18.0, 0, 18.0, 0, 18.0, 105, 30.0, 110, 16, null, null, null, null, 0, 0, false, 6, 13, 0, 15, 0),
-  ('검은 칼날', '죽음의 칼날', 'weapon', 2.0, array['slash', 'pierce']::text[], 'somber_smithing_stone', 161, 26.0, 0, 15.0, 0, 15.0, 0, 15.0, 159, 42.0, 110, 15, null, null, null, null, 0, 0, false, 8, 12, 0, 18, 0)
+  ('전갈의 침', '연속 찌르기', 'weapon', 2.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 193, 38.0, 0, 22.0, 0, 22.0, 0, 22.0, 0, 22.0, 110, 17, 50, 0, 0, 0, 0, 0, false, 6, 12, 0, 0, 0),
+  ('친퀘디아', '퀵스텝', 'weapon', 3.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 240, 43.0, 0, 25.0, 0, 25.0, 0, 25.0, 0, 25.0, 100, 19, 0, 0, 0, 0, 0, 0, false, 10, 10, 0, 0, 0),
+  ('휘석 크리스', '휘석의 혜성', 'weapon', 1.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 139, 23.0, 166, 45.0, 0, 14.0, 0, 14.0, 0, 14.0, 110, 16, 0, 0, 0, 0, 0, 0, false, 5, 12, 16, 0, 0),
+  ('레두비아', '레두비아의 혈인', 'weapon', 2.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 193, 38.0, 0, 22.0, 0, 22.0, 0, 22.0, 0, 22.0, 110, 17, 0, 0, 50, 0, 0, 0, false, 5, 13, 0, 0, 13),
+  ('사명의 칼날', '황금 칼날', 'weapon', 1.5, array['slash', 'pierce']::text[], 'somber_smithing_stone', 173, 31.0, 0, 18.0, 0, 18.0, 0, 18.0, 105, 30.0, 110, 16, 0, 0, 0, 0, 0, 0, false, 6, 13, 0, 15, 0),
+  ('검은 칼날', '죽음의 칼날', 'weapon', 2.0, array['slash', 'pierce']::text[], 'somber_smithing_stone', 161, 26.0, 0, 15.0, 0, 15.0, 0, 15.0, 159, 42.0, 110, 16, 0, 0, 0, 0, 0, 0, false, 8, 12, 0, 18, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, attack_physical, guard_physical, attack_magic, guard_magic, attack_fire, guard_fire, attack_lightning, guard_lightning, attack_holy, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, can_change_affinity, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, s.type::public.game_item_type, s.weight, s.physical_attack_types, s.upgrade_material, s.attack_physical, s.guard_physical, s.attack_magic, s.guard_magic, s.attack_fire, s.guard_fire, s.attack_lightning, s.guard_lightning, s.attack_holy, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep::integer, s.madness::integer, s.can_change_affinity, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
@@ -199,7 +198,7 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   values
   ('대거', 'standard', 'D', 'B', '-', '-', '-'),
   ('대거', 'heavy', 'A', '-', '-', '-', '-'),
-  ('대거', 'keen', 'D', 'A', '-', '-', '-'),
+  ('대거', 'keen', 'D', 'S', '-', '-', '-'),
   ('대거', 'quality', 'B', 'B', '-', '-', '-'),
   ('대거', 'fire', 'B', 'E', '-', '-', '-'),
   ('대거', 'flame_art', 'E', 'D', '-', 'B', '-'),
@@ -276,18 +275,18 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('황동 단도', 'blood', 'D', 'D', '-', 'D', 'D'),
   ('황동 단도', 'occult', 'E', 'E', '-', 'D', 'A'),
   ('불의 기사 단검', 'standard', 'D', 'C', '-', 'D', '-'),
-  ('불의 기사 단검', 'heavy', null, null, null, null, null),
-  ('불의 기사 단검', 'keen', null, null, null, null, null),
-  ('불의 기사 단검', 'quality', null, null, null, null, null),
-  ('불의 기사 단검', 'fire', null, null, null, null, null),
-  ('불의 기사 단검', 'flame_art', null, null, null, null, null),
-  ('불의 기사 단검', 'lightning', null, null, null, null, null),
-  ('불의 기사 단검', 'sacred', null, null, null, null, null),
-  ('불의 기사 단검', 'magic', null, null, null, null, null),
-  ('불의 기사 단검', 'cold', null, null, null, null, null),
-  ('불의 기사 단검', 'poison', null, null, null, null, null),
-  ('불의 기사 단검', 'blood', null, null, null, null, null),
-  ('불의 기사 단검', 'occult', null, null, null, null, null),
+  ('불의 기사 단검', 'heavy', 'A', '-', '-', 'D', '-'),
+  ('불의 기사 단검', 'keen', 'D', 'A', '-', 'D', '-'),
+  ('불의 기사 단검', 'quality', 'B', 'B', '-', 'D', '-'),
+  ('불의 기사 단검', 'fire', 'C', 'D', '-', 'D', '-'),
+  ('불의 기사 단검', 'flame_art', 'E', 'E', '-', 'B', '-'),
+  ('불의 기사 단검', 'lightning', 'D', 'B', '-', 'D', '-'),
+  ('불의 기사 단검', 'sacred', 'E', 'E', '-', 'B', '-'),
+  ('불의 기사 단검', 'magic', 'E', 'E', 'A', 'D', '-'),
+  ('불의 기사 단검', 'cold', 'D', 'C', 'B', 'D', '-'),
+  ('불의 기사 단검', 'poison', 'D', 'B', '-', 'D', 'D'),
+  ('불의 기사 단검', 'blood', 'D', 'B', '-', 'D', 'D'),
+  ('불의 기사 단검', 'occult', 'E', 'D', '-', 'E', 'A'),
   ('협차', 'standard', 'D', 'C', '-', '-', '-'),
   ('협차', 'heavy', 'B', '-', '-', '-', '-'),
   ('협차', 'keen', 'E', 'B', '-', '-', '-'),
@@ -302,18 +301,18 @@ with source (name, affinity, strength, dexterity, intelligence, faith, arcane) a
   ('협차', 'blood', 'C', 'C', '-', '-', 'D'),
   ('협차', 'occult', 'E', 'D', '-', '-', 'B'),
   ('맹고슈', 'standard', 'D', 'B', '-', '-', '-'),
-  ('맹고슈', 'heavy', null, null, null, null, null),
-  ('맹고슈', 'keen', null, null, null, null, null),
-  ('맹고슈', 'quality', null, null, null, null, null),
-  ('맹고슈', 'fire', null, null, null, null, null),
-  ('맹고슈', 'flame_art', null, null, null, null, null),
-  ('맹고슈', 'lightning', null, null, null, null, null),
-  ('맹고슈', 'sacred', null, null, null, null, null),
-  ('맹고슈', 'magic', null, null, null, null, null),
-  ('맹고슈', 'cold', null, null, null, null, null),
-  ('맹고슈', 'poison', null, null, null, null, null),
-  ('맹고슈', 'blood', null, null, null, null, null),
-  ('맹고슈', 'occult', null, null, null, null, null),
+  ('맹고슈', 'heavy', 'B', '-', '-', '-', '-'),
+  ('맹고슈', 'keen', 'E', 'A', '-', '-', '-'),
+  ('맹고슈', 'quality', 'B', 'B', '-', '-', '-'),
+  ('맹고슈', 'fire', 'C', 'E', '-', '-', '-'),
+  ('맹고슈', 'flame_art', 'E', 'D', '-', 'B', '-'),
+  ('맹고슈', 'lightning', 'E', 'C', '-', '-', '-'),
+  ('맹고슈', 'sacred', 'E', 'D', '-', 'B', '-'),
+  ('맹고슈', 'magic', 'E', 'E', 'B', '-', '-'),
+  ('맹고슈', 'cold', 'D', 'B', 'B', '-', '-'),
+  ('맹고슈', 'poison', 'D', 'B', '-', '-', 'D'),
+  ('맹고슈', 'blood', 'D', 'B', '-', '-', 'D'),
+  ('맹고슈', 'occult', 'E', 'D', '-', '-', 'B'),
   ('축제의 손낫', 'standard', 'E', 'B', '-', '-', '-'),
   ('축제의 손낫', 'heavy', 'B', '-', '-', '-', '-'),
   ('축제의 손낫', 'keen', 'E', 'A', '-', '-', '-'),
