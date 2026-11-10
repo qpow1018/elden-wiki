@@ -37,7 +37,7 @@ with source (name, description, fp_cost_text) as (
 치명적인 일격을 가할 기회가 된다.', '0'),
   ('연속 찌르기', '몸을 회전시키고, 이어서
 단숨에 연속으로 찌르는 전투 기술.', '7'),
-  ('휘석의 혜성', '「휘석 돌팔매」마술을 이용하는 전투 기술.
+  ('휘석의 혜성', '「휘석 돌팔매」 마술을 이용하는 전투 기술.
 차지 공격으로 「휘석의 혜성」이 되며
 강 공격으로 크게 파고드는 찌르기로 잇는다.', '10 ( - / 4 )'),
   ('레두비아의 혈인', '톱니 칼날에 묻은 마르지 않는 피를
@@ -64,13 +64,13 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('패링 대거', 20, 'base_game', '독특하게 굽은 날밑을 지닌 단검.
 패리를 노리는 무기.
 
-적의 공격을 간파해 카운터를 체현한다
+적의 공격을 간파해 카운터를 체현한다.
 달인에게는 이 무기만 있으면 된다.', null),
   ('자비의 단검', 30, 'base_game', '백의의 종군 의사들이 쓰는 단검.
 굳고 날카로우며 치명적인 일격에 뛰어나다.
 
 의료는 자비이며
-전장에서 자비는 편히 죽게 해 주는 것이다.
+전장에서 자비는 편히 죽게 해주는 것이다.
 그렇기에 의사들은 두려운 살인자가 된다.', null),
   ('대형 나이프', 40, 'base_game', '폭이 넓고 굽은 칼날을 지닌 큰 나이프.
 
@@ -89,7 +89,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('불의 기사 단검', 70, 'shadow_of_the_erdtree', '불의 기사들이 사용하는 단검.
 가는 검신은 불을 본떠 파도친다.
 
-미리 화염의 기도를 담았으며
+미리 화염 기도를 담았으며
 어떠한 방법으로 화염 공격력을 부여할 시
 상승 효과로 크게 위력이 높아진다.', '화염 공격력을 부여하면 상승 효과로 위력이 높아진다.'),
   ('협차', 80, 'base_game', '담금질되어 무늬가 생긴 칼날을 지닌 단검.
@@ -98,7 +98,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 오른손에 도, 왼손에 협차를 드는
 이도류로도 알려져 있다.
-「노인」 이라 불리는 한 수라가 쓰는 검이다.', null),
+「노인」이라 불리는 한 수라가 쓰는 검이다.', null),
   ('맹고슈', 90, 'shadow_of_the_erdtree', '대형 주먹보호대가 붙은 단검.
 
 왼손으로 쓰는 것을 상정한 무기이며
@@ -135,7 +135,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 로데일과의 화목을 축하한 보검.
 
 희소한 휘석을 황금 나무 풍으로 장식했으며
-흰 칼날은 옛 의식의 상징이기도 하다.', null),
+휜 칼날은 옛 의식의 상징이기도 하다.', null),
   ('레두비아', 160, 'base_game', '뒤틀린 톱니 칼날을 지닌 이형의 단도.
 피의 군주를 섬기는 귀족들의 무기.
 
@@ -146,7 +146,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 불씨의 소녀의 힘이 남아있다.
 
 불꽃과 함께 걷는 자여.
-언젠가 운명의 죽음을 보리라', null),
+언젠가 운명의 죽음을 보리라.', null),
   ('검은 칼날', 180, 'base_game', '과거, 검은 칼날의 음모가 있던 밤에
 황금의 고드윈을 죽인 자객들의 단도.
 

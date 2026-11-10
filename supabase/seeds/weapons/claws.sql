@@ -16,7 +16,7 @@ begin
     where c.type = 'weapon' and c.name = '손톱'
     group by i.name having count(*) > 1
   ) or exists (
-    select 1 from public.weapon_skills where name in ('퀵스텝', '사냥개의 스텝', '산탄 투척')
+    select 1 from public.weapon_skills where name in ('퀵스텝', '사냥개의 스텝', '산탄 투척/손톱')
     group by name having count(*) > 1
   ) then
     raise exception '손톱 시드를 적용하기 전에 중복된 아이템·전투 기술 이름을 확인해야 합니다.';
@@ -32,7 +32,7 @@ with source (name, description, fp_cost_text) as (
   ('사냥개의 스텝', '순간 모습을 감추고 스텝 이동하는 전투 기술.
 고속이며 이동 거리도 길다.
 타깃 고정 상태라면 돌아 들어간다.', '5 ( - / - )'),
-  ('산탄 투척', '단조술로 양손에 무기를 복제해
+  ('산탄 투척/손톱', '단조술로 양손에 손톱을 복제해
 여러 개를 동시에 투척하는 전투 기술.
 추가 입력으로 한 번 더 투척한다.', '11 ( - / 11 )')
 )
@@ -48,7 +48,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 손톱 무기는 두 개가 한 쌍이며
 양손 잡기 시 좌우 양 주먹에 장비된다.', null),
-  ('사냥개의 발톱', 20, 'base_game', '크고 흰 대형 갈고리 손톱.
+  ('사냥개의 발톱', 20, 'base_game', '크게 휜 대형 갈고리 손톱.
 사냥개기사들이 쓰는 무기.
 
 휜 손톱은 가드의 틈을 파고든다.', '가드의 틈을 파고든다.'),
@@ -61,7 +61,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 암살자가 죽음의 맹금으로 위장하기 위한 무기.
 
 공중에서의 공격에 뛰어나며
-차지 공격도 맹금류의 습격을 연상시킨다', '점프 공격 배율이 다른 손톱 무기보다 약 13% 높다.'),
+차지 공격도 맹금류의 습격을 연상시킨다.', '점프 공격 배율이 다른 손톱 무기보다 약 13% 높다.'),
   ('밤의 손톱', 50, 'shadow_of_the_erdtree', '빛마저도 빨아들이는 칠흑의 손톱.
 밤의 기사 안나의 무기.
 
@@ -82,7 +82,7 @@ with source (name, skill_name, weight, physical_attack_types, upgrade_material, 
   ('사냥개의 발톱', '사냥개의 스텝', 3.0, '참격 / 관통', 'smithing_stone', true, 242, 0, 0, 0, 0, 38.0, 22.0, 22.0, 22.0, 22.0, 110, 26, 0, 0, 60, 0, 0, 0, 10, 15, 0, 0, 0),
   ('독사의 이빨', '퀵스텝', 2.5, '참격 / 관통', 'smithing_stone', true, 237, 0, 0, 0, 0, 36.0, 21.0, 21.0, 21.0, 21.0, 100, 22, 0, 0, 0, 72, 0, 0, 9, 9, 0, 0, 0),
   ('맹금의 발톱', '퀵스텝', 1.5, '참격 / 관통', 'smithing_stone', true, 210, 0, 0, 0, 0, 33.0, 19.0, 19.0, 19.0, 19.0, 110, 22, 0, 0, 60, 0, 0, 0, 6, 14, 0, 0, 0),
-  ('밤의 손톱', '산탄 투척', 3, '참격 / 관통', 'somber_smithing_stone', false, 193, 124, 0, 0, 0, 33, 31, 18, 18, 18, 110, 23, 0, 0, 45, 0, 0, 0, 8, 20, 0, 0, 0)
+  ('밤의 손톱', '산탄 투척/손톱', 3, '참격 / 관통', 'somber_smithing_stone', false, 193, 124, 0, 0, 0, 33, 31, 18, 18, 18, 110, 23, 0, 0, 45, 0, 0, 0, 8, 20, 0, 0, 0)
 )
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'weapon', s.weight, case s.physical_attack_types when '타격' then array['strike']::text[] when '참격' then array['slash']::text[] when '참격 / 관통' then array['slash', 'pierce']::text[] when '표준 / 관통' then array['standard', 'pierce']::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane

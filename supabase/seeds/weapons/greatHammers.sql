@@ -39,11 +39,10 @@ with source (name, description, fp_cost_text) as (
   ('솟아나는 신앙', '존안의 술잔에 비라크의 신앙의 불꽃을 태우고
 그것을 치켜들어 대량의 불을 뿜는 전투 기술.
 추가 입력으로 몇 번이든 치켜든다.', '15 ( - / 15 )'),
-  ('짐승왕의 발톱', '큰 망치를 땅에 내리쳐
-짐승왕의 다섯 발톱으로
-대지를 크게 가르는 전투기술.', '20 ( - / - )'),
+  ('짐승왕의 발톱', '큰 망치를 땅에 내리쳐 짐승왕의 다섯 발톱으로
+대지를 크게 가르는 전투 기술.', '20 ( - / - )'),
   ('세계 먹는 자', '마력을 담은 왕홀을 땅에 두어
-주위 모든 적에게서 HP를 빼앗는 기술.', '35 ( - / - )')
+주위 모든 적에게서 HP를 뺏는 전투 기술.', '35 ( - / - )')
 )
 insert into public.weapon_skills (name, description, fp_cost_text)
 select s.name, s.description, s.fp_cost_text from source s
@@ -51,12 +50,13 @@ where not exists (select 1 from public.weapon_skills k where k.name = s.name and
 
 with source (name, sort_order, content_code, game_description, effect_description) as (
   values
-  ('라지 클럽', 10, 'base_game', '크고 단단한 거대한 나무 막대기
-기량이 필요없는 타격 무기
+  ('라지 클럽', 10, 'base_game', '크고 단단한 거대한 나무 막대기.
+기량이 필요없는 타격 무기.
 
-단순하고 원시적인 무시이며
+단순하고 원시적인 무기이며
 힘껏 붕붕 휘두른다.', null),
-  ('큰 굽은 곤봉', 20, 'base_game', '포물선 형태로 된 흰 단단하고 큰 곤봉
+  ('큰 굽은 곤봉', 20, 'base_game', '포물선 형태로 휜 단단하고 큰 곤봉.
+
 기량이 부족한 백금의 사람이
 곡검 대신 휘두르는 물건이지만
 곡검에는 없는 무게와 위력이 있다.', null),
@@ -82,12 +82,12 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 갑옷째 적을 짓누를 만큼의 무게가 있다.', null),
   ('부패한 배틀 해머', 70, 'base_game', '과거에 검투를 위해 만들어진 철제 대형 망치가
-붉은 부패에 잠식된 것
+붉은 부패에 잠식된 것.
 
 갑옷째 적을 짓누를 만큼의 무게가 있다.', null),
   ('축제의 큰 두개', 80, 'base_game', '색색의 천과 꽃으로 장식된 대형 망치.
 풍차 마을 도미눌라의 축제에 사용되는
-무녀들의 제구.
+무희들의 제구.
 
 인간이라기에는 너무 큰 두개골로 만들어졌으며
 공격 명중 시 약간의 룬을 얻는다.', '공격 명중 시 룬 20을 얻는다.'),
@@ -99,7 +99,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('흑철 대형 망치', 100, 'shadow_of_the_erdtree', '가시공 메스메르를 섬기는 흑기사들의 무기.
 흑철에 황금 의장을 더한 대형 망치.
 
-미리 황금나무의 기도를 담았으며
+미리 황금 나무의 기도를 담았으며
 신성 공격력 부여 시 크게 위력이 높아진다.
 또한, 가드 카운터로 그 힘을 해방한다.', '신성 공격력 부여 시 위력이 크게 높아지며 가드 카운터로 신성 추가 공격을 일으킨다.'),
   ('유문의 대형 망치', 110, 'shadow_of_the_erdtree', '유문문자가 새겨진 대형 망치.
@@ -110,11 +110,11 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 전투 기술에 속성이 있는 전회를 사용할 수 없다.', null),
   ('큰 뿔 망치', 120, 'base_game', '나이테처럼 주름이 새겨진
-굵은 뿔로 때리는 무기
+굵은 뿔로 때리는 무기.
 선조령의 백성 전사가 사용한다.
 
 오래된 뿔에는 선조령의 힘이 깃든다고 여기며
-적을 쓰러뜨리면 HP를 조금 회복한다.', '적 처치 시 최대 HP의 3%를 회복한다. 두 자루를 들어도 회복량은 중첩되지 않는다.'),
+적을 쓰러뜨리면 HP를 조금 회복한다.', '적 처치 시 최대 HP의 2%와 HP 20을 회복한다.'),
   ('사자들의 긴 피리', 130, 'base_game', '신탁의 사자가 쓰는 황금 긴 피리.
 묵직해서 때리는 무기도 된다.
 
@@ -124,10 +124,10 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('존안의 촛대', 140, 'base_game', '가장 위대한 거인의 불 주교, 비라크.
 그 존안을 모시기 위한 촛대.
 
-승병들의 불을 향한 방심을 우려한 비라크는.
-스스로 목을 베어 훈계의 촛대로 만들었다..
+승병들의 불을 향한 방심을 우려한 비라크는
+스스로 목을 베어 훈계의 촛대로 만들었다.
 그 머리에는 지금도 그의 신앙이 맴돈다.', null),
-  ('짐승 발톱 대형 망치', 150, 'base_game', '자루 끝에 짐승 발톱 5개를 단 대형 망치
+  ('짐승 발톱 대형 망치', 150, 'base_game', '자루 끝에 짐승 발톱 5개를 단 대형 망치.
 
 황금 갈기를 덮는 검은 발톱은
 훗날 고드프리 왕의 재상이 된

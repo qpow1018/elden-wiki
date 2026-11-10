@@ -33,7 +33,8 @@ with source (name, description, fp_cost_text) as (
   ('혈인난무', '도약한 후 선풍처럼 연속 공격을 하는
 전투 기술. 추가 입력으로
 추가 공격 후 물러나 거리를 둔다.', '11 ( - / 6 )'),
-  ('에우포리에의 소용돌이', '소용돌이의 힘으로 무기 전체를 격렬히 회전시켜 그대로 전방을 연속으로 베는 전투 기술.
+  ('에우포리에의 소용돌이', '소용돌이의 힘으로 무기 전체를 격렬히 회전시켜
+그대로 전방을 연속으로 베는 전투 기술.
 반짝임을 되찾을수록 위력이 높아진다.
 전투 기술을 사용하면 반짝임을 잃는다.', '28 ( - / - )')
 )
@@ -43,11 +44,11 @@ where not exists (select 1 from public.weapon_skills k where k.name = s.name and
 
 with source (name, sort_order, content_code, game_description, effect_description) as (
   values
-  ('트윈 블레이드', 10, 'base_game', '자루 양 끝에 검신이 달린 쌍날검.
+  ('트윈 블레이드', 10, 'base_game', '자루 양 끝에 도신이 달린 쌍날검.
 높은 기량을 요구하는, 다루기 어려운 무기.
 
 한 손으로 휘두를 수도 있지만
-양손으로 들고 회전을 이용한 공격에서
+양손으로 들고 회전해 구사하는 공격에서
 그 진가를 발휘한다.', null),
   ('트윈 나이트소드', 20, 'base_game', '기사의 형식을 중시한 쌍날검.
 아름답고 질 좋은 무기.
@@ -81,12 +82,13 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 한바탕 부는 선풍 같은 탁월한 전투 기술은
 지금은 저주받은 피에 더럽혀졌다.', null),
-  ('에우포리에', 80, 'shadow_of_the_erdtree', '풍양의 상징으로 여겨진 쌍날검.
-탑의 비보.
+  ('에우포리에', 80, 'shadow_of_the_erdtree', '풍양의 상징으로 여겨진 쌍날검. 탑의 비보.
 
-황금의 싹인 그 칼날은 반쯤 검게 시들었으나 적에게 상처를 입힐 때마다 반짝임을 되찾는다.
+황금의 싹인 그 칼날은 반쯤 검게 시들었으나
+적에게 상처를 입힐 때마다 반짝임을 되찾는다.
 
-단, 죽음에 사는 자들만은 상처입혀도 반짝임이 돌아오지 않는다.', '살아 있는 적을 공격하면 반짝임이 2단계에 걸쳐 강화되어 신성 공격력이 증가한다. 죽음에 사는 자를 공격하면 반짝임이 회복되지 않는다. 전투 기술을 사용하면 반짝임을 잃는다.')
+단, 죽음에 사는 자들만은
+상처입혀도 반짝임이 돌아오지 않는다.', '살아 있는 적을 공격하면 반짝임이 2단계에 걸쳐 강화되어 신성 공격력이 증가한다. 죽음에 사는 자를 공격하면 반짝임이 회복되지 않는다. 전투 기술을 사용하면 반짝임을 잃는다.')
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)
 select s.name, 'weapon', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description

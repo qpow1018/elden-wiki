@@ -49,6 +49,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 피범벅이 되는 사투 끝에 붉은곰을 쓰러뜨린
 전사는 매료되었다. 맨몸의 힘, 그 순수함에.
+
 나는 그저 곰이 되고 싶다.', null)
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)

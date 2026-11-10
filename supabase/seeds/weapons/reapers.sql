@@ -51,7 +51,8 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 높은 기량을 가진 자가 휘두르면
 상대에게 공포를 새길 것이다.', '공격이 적의 가드를 파고든다.'),
   ('묘지의 대낫', 20, 'base_game', '휜 가지에 큰 칼날을 붙인 대낫.
-틈새의 땅 각지에 있는 버려진 묘지의 늙은 묘지기가 쓰는 무기.
+틈새의 땅 각지에 있는 버려진 묘지의
+늙은 묘지기가 쓰는 무기.
 
 과거에는 악귀를 쫓는 의미도 있었다고 한다.', '장착 시 죽음 내성이 35 증가한다. 쌍수 장착 시 중첩되지 않는다.'),
   ('광륜의 대낫', 30, 'base_game', '미켈라의 칼날 말레니아와 함께 싸운
@@ -60,7 +61,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 기사들의 지휘관이 사용한 무기이며
 반쪽짜리 빛고리의 칼날은 신성 속성 공격력을
 지닌다.', null),
-  ('날개낫', 40, 'base_game', '흰 날개를 본뜬 성스러운 낫
+  ('날개낫', 40, 'base_game', '흰 날개를 본뜬 성스러운 낫.
 신성 속성 공격력을 지녔다.
 
 흰 날개를 지닌 소녀들
@@ -68,8 +69,8 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('흑요의 라미나', 50, 'shadow_of_the_erdtree', '순혈기사 안스바흐의 무기.
 날카롭게 벼려진, 가는 전쟁 낫.
 
-흑요석 칼날에 장치는 없으며
-그저 탁월한 검 기술로 적수를 베어
+흑요석 날에 장치는 없으며
+그저 갈고닦은 기술로 적수를 베어
 피의 꽃을 피운다.', null)
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)

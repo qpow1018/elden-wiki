@@ -29,12 +29,11 @@ with source (name, description, fp_cost_text) as (
   ('침 찌르기', '침의 기사 레다의 전투 기술.
 황금 침 10개를 만들어 대상을 동시에 찌른다.
 또한 찌른 대상의 모든 상태 이상과
-특수한 효과를 지운다.
-', '19 ( - / - )'),
-  ('달과 불의 자세', '검 두 자루에 마력을 담고 마술로 잇는 전투 기술.
-일반 공격은 휘석 광파를 연속으로 쏘고 강 공격은 회전하며 주위를 불로 쓸어버린다.
-추가 입력으로 2회까지 광파 추가 공격이 가능하다.
-', '- ( 10 / 25 )')
+특수한 효과를 지운다.', '19 ( - / - )'),
+  ('달과 불의 자세', '검 두 자루에 마력을 담고 마술로 잇는 전투
+기술. 일반 공격은 휘석 광파를 연속으로 쏘고
+강 공격은 회전하며 주위를 불로 쓸어버린다.
+추가 입력으로 2회까지 광파 추가 공격이 가능하다.', '- ( 10 / 25 )')
 )
 insert into public.weapon_skills (name, description, fp_cost_text)
 select s.name, s.description, s.fp_cost_text from source s
@@ -42,7 +41,7 @@ where not exists (select 1 from public.weapon_skills k where k.name = s.name and
 
 with source (name, sort_order, content_code, game_description, effect_description) as (
   values
-  ('이데스의 검', 10, 'tarnished_pack', '대검에 맞먹는 긴 검신을 지녔으면서
+  ('이데스의 검', 10, 'tarnished_pack', '대검에 맞먹는 긴 검신을 지녔음에도
 높은 기술로 가볍게 만들어진 경대검.
 
 이데스 땅의 독특한 무기.
@@ -66,7 +65,8 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('렐라나의 쌍검', 40, 'shadow_of_the_erdtree', '푸른 휘석이 박힌 카리아의 경대검.
 쌍월의 기사 렐라나의 무기.
 
-두 자루가 한 쌍을 이루며, 양손 잡기로 들면 황금의 불이 새겨진 직검을 왼손에 든다.
+두 자루가 한 쌍을 이루며, 양손 잡기로 들면
+황금의 불이 새겨진 직검을 왼손에 든다.
 
 달과 불은 이곳에서 언제나 함께였다.', null)
 )

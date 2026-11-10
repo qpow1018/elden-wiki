@@ -27,7 +27,8 @@ with source (name, description, fp_cost_text) as (
   ('회전 베기', '기량이 뛰어난 검사들의 전투 기술.
 크게 몸을 회전시켜 적을 벤다.
 또한 추가 입력으로 추가 공격도 가능하다.', '6 ( - / 12 )'),
-  ('용암 뿌리기', '몸을 회전시켜 적을 베면서 주위에 용암을 흩뿌리는 전투 기술.
+  ('용암 뿌리기', '몸을 회전시켜 적을 베면서 주위에
+용암을 흩뿌리는 전투 기술.
 추가 입력으로 추가 공격도 가능하다.', '12 ( - / 12 )'),
   ('원혼 베기', '몸을 회전시켜서 적을 베며
 매달리는 원혼을 부르는 전투 기술.
@@ -58,12 +59,17 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   values
   ('시미터', 10, 'base_game', '검신이 휜 외날 곡검.
 날카로운 칼날로 참격 공격을 하지만
-갑옷이나 단단한 비늘에는 효과가 낮다.
+단단한 갑옷이나 비늘에는 효과가 낮다.
 
 곡검 중에는 소형에 속하며
 작고 빠르게 적을 난도질하듯 공격한다.', null),
-  ('펄션', 20, 'base_game', null, null),
-  ('샴시르', 30, 'base_game', '가늘고 긴 칼날을 가진 곡검.
+  ('펄션', 20, 'base_game', '검신이 휜 외날 곡검.
+날카로운 칼날로 참격 공격을 하지만
+단단한 갑옷이나 비늘에는 효과가 낮다.
+
+이 검의 기술은 독특하여
+몸을 회전해 공격력을 높인다.', null),
+  ('샴시르', 30, 'base_game', '가늘고 긴 칼날을 지닌 곡검.
 크지만 가볍고, 연속 공격으로 벤다.
 
 특히 탁월한 검사가 들면
@@ -87,7 +93,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 그 칼날은 심하게 날이 빠져 울퉁불퉁하고
 피가 흠뻑 눌어붙었다.
-생명이란 이렇게까지 꺼림찍할 수 있을까.', null),
+생명이란 이렇게까지 꺼림칙할 수 있을까.', null),
   ('당랑도', 80, 'base_game', '반으로 접히는 칼날을 지닌 곡검.
 벌레 품은 묘지기, 묘소 그림자의 무기.
 
@@ -107,7 +113,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 겔미어의 잃어버린 신앙의 제구.
 
 산 제물을 바치기 위해 사용되었다고 하며
-적을 쓰러뜨렸을 때 HP를 회복한다.', '적을 쓰러뜨렸을 때 HP를 회복한다.'),
+적을 쓰러뜨렸을 때 HP를 회복한다.', '적 처치 시 최대 HP의 2.5%와 HP 25를 회복한다.'),
   ('용암도', 120, 'base_game', '겔미어의 용암을 칼날 삼은 곡검.
 인간은 만들 수 없는 뱀인간들의 무구.
 
@@ -117,7 +123,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 영과 교신하기 위한 촉매라고 한다.', null),
   ('녹스의 유체검', 140, 'base_game', '영원한 도읍의 검사들이 쓰는 이형의 검.
-바늘처럼 가는 칼날을 가진 쇼텔.
+바늘처럼 가는 칼날을 지닌 쇼텔.
 
 은 물방울에서 유래한 액체 금속을
 단단하게 벼렸다.', '기본 공격이 가드를 관통한다.'),
@@ -134,7 +140,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('라나의 무도검', 170, 'shadow_of_the_erdtree', '열정의 붉은색으로 장식한 장식검.
 양손 잡기로 이도류가 되는 한 쌍의 무기.
 
-라나의 무희들의 무기이며
+라나의 무희들의 무기이며,
 강 공격은 춤으로 연속 공격을 한다.', null),
   ('뿔 전사의 곡검', 180, 'shadow_of_the_erdtree', '탑의 수호자인 뿔 전사의 곡검.
 

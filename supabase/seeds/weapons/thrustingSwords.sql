@@ -77,7 +77,9 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
   ('카리아의 마술검', 80, 'shadow_of_the_erdtree', '카리아 왕가의 휘석검 중 하나.
 가는 칼날을 지닌 소형 자검.
 
-마술', null)
+마술 전투 기술이 번성하기 전
+옛 카리아 기사들이 쓰던 무기이며
+강 공격으로 휘석 마술 매개가 된다.', '강 공격으로 휘석 마술을 사용할 수 있다.')
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)
 select s.name, 'weapon', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description

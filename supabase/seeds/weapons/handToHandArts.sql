@@ -26,7 +26,7 @@ $$;
 insert into public.weapon_skills (name, description, fp_cost_text)
 select '발경', '낙엽파라 불리는 구도자들의 전투 기술.
 기를 담은 손바닥을 내지른 뒤 폭발시킨다.
-위력도 충격도 크며 차지공격으로 강화된다.', '14 ( - / - )'
+위력도 충격도 크며 차지 공격으로 강화된다.', '14 ( - / - )'
 where not exists (select 1 from public.weapon_skills where name = '발경');
 
 with source (name, sort_order, game_description) as (
@@ -35,7 +35,7 @@ with source (name, sort_order, game_description) as (
 손바닥치기와 발차기를 조합한 무술.
 
 낙엽파라 불리는 구도자들의 기술이며
-무와 예를 인정받는 자에게만 전승된다.
+무와 예를 인정받은 자에게만 전승된다.
 그것은 금욕적인 수행의 시작이기도 하다.'),
   ('단류 발차기술', 20, '무기를 들지 않고 싸우는 격투술 중 하나.
 발차기가 중심인 무술.

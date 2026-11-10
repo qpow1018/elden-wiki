@@ -60,7 +60,7 @@ with source (name, sort_order, content_code, game_description, effect_descriptio
 
 과거에는 제구로 쓰였으며
 토지신이 되려 한 수행자가
-극기의 무용에 사용했다고 헌다.', null)
+극기의 무용에 사용했다고 한다.', null)
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)
 select s.name, 'weapon', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description
