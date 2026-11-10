@@ -1,0 +1,24 @@
+.ash-of-war-details {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+
+  > div {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  dt {
+    flex-shrink: 0;
+    color: $text-muted;
+  }
+
+  dd {
+    min-width: 0;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import type { TGameItem } from '@/api/gameItem/types';
 import { CONTENTS, GAME_ITEM_TYPES } from '@/define/gameItems';
 
+import AshOfWarDetails from './details/AshOfWarDetails';
 import SpiritAshDetails from './details/SpiritAshDetails';
 import TalismanDetails from './details/TalismanDetails';
 import WeaponDetails from './details/WeaponDetails';
@@ -56,6 +57,8 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
       {gameItem.type === 'talisman' && <TalismanDetails talisman={gameItem.talismanDetails} />}
 
       {gameItem.type === 'spirit_ash' && <SpiritAshDetails spiritAsh={gameItem.spiritAshDetails} />}
+
+      {gameItem.type === 'ash_of_war' && <AshOfWarDetails ashOfWar={gameItem.ashOfWarDetails} />}
 
       {gameItem.effectDescription && (
         <section className={styles['effects']}>
