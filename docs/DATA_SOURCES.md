@@ -1162,7 +1162,7 @@
 
 - 출처: 사용자가 제공한 나무위키 마술 문서 발췌(레아 루카리아 학원의 휘석 마술부터 죽음의 마술까지).
 - 등록 파일: `supabase/seeds/spells/sorceries.sql`.
-- 종류는 `sorcery`이며 아래 목차 대응표의 11개 학파·계통을 카테고리로 사용합니다. SmithBox PC Regulation 1.17.3의 `EquipParamGoods.csv`에서 `goodsType` 5·17의 마술 84종을 `Magic.csv`와 한국어 `GoodsName`에 동일 ID로 연결해 목록을 대조합니다.
+- 종류는 `sorcery`이며 아래 목차 대응표의 11개 학파·계통을 카테고리로 사용합니다. 레아 루카리아 학원의 휘석 마술과 카리아 왕가의 휘석 마술은 도감에서 각각 ‘레아 루카리아 마술’, ‘카리아 왕가 마술’로 표시합니다. SmithBox PC Regulation 1.17.3의 `EquipParamGoods.csv`에서 `goodsType` 5·17의 마술 84종을 `Magic.csv`와 한국어 `GoodsName`에 동일 ID로 연결해 목록을 대조합니다.
 - 이름과 게임 내 설명은 한국어 `GoodsName`·`GoodsCaption`을 사용합니다. 카테고리와 항목의 순서는 `EquipParamGoods`의 `sortGroupId`와 `sortId`를 기준으로 하며 기존 목록과 일치합니다. 본편과 DLC 소속은 최초 등록 기준을 유지합니다.
 - 소비 FP는 `Magic.mp`를 사용하며, `consumeLoopMP_forMenu`가 있는 8종은 `기본 (지속 값)` 형식으로 저장합니다. `mp_charge`는 차지 비용으로 일괄 해석하지 않습니다.
 - 기억 슬롯은 `slotLength`, 요구 지력·신앙·신비는 각각 `requirementIntellect`·`requirementFaith`·`requirementLuck`에서 가져옵니다. 요구 능력치 0은 요구 없음입니다.
