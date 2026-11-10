@@ -4,10 +4,17 @@
 
 ## 출처 선택 원칙
 
-- 기본 출처는 사용자가 제공한 나무위키 복사 자료입니다. 원문에 없는 수치는 [ThomasJClark 무기 계산기](https://github.com/ThomasJClark/elden-ring-weapon-calculator)의 일반 게임 데이터로 보완합니다.
+- 무기 수치의 신규 등록과 재검증은 [게임 원본 CSV](#무기-수치-원본-csv)를 우선합니다. 기존 시드의 항목별 출처는 아래 등록 기록을 따릅니다. 기존 등록에는 사용자 제공 나무위키 복사 자료와 [ThomasJClark 무기 계산기](https://github.com/ThomasJClark/elden-ring-weapon-calculator)의 일반 게임 데이터를 사용했습니다.
 - 보완 출처가 제공하지 않는 필드는 미확인으로 유지하고, 충돌하는 값은 자동으로 덮어쓰지 않습니다. 채택한 근거를 해당 자료 절에 기록합니다.
 - 서비스는 최신 게임 상태를 목표로 갱신하며 별도 적용 버전은 관리하지 않습니다. 재현에 필요한 원본 URL·파일 식별 정보는 보존합니다.
 - 새 자료는 관련 절에 통합합니다. 시드의 전체 수치표·설명·등록 완료 건수를 복제하지 않습니다.
+
+## 무기 수치 원본 CSV
+
+- 로컬 경로는 `reference-data/elden-ring/regulation-1.17.3/`입니다. 사용자가 PC판 엘든 링(App Ver. 1.17.2, Regulation Ver. 1.17.3)에서 Smithbox로 내보낸 원본이며, CSV는 Git에서 제외합니다.
+- `EquipParamWeapon.csv`와 `ReinforceParamWeapon.csv`는 무기·변질별 원시 값과 강화 계수, `MenuValueTableParam.csv`는 보정 등급 경계를 제공합니다.
+- `SpEffectParam.csv`는 상태 이상 축적, `SwordArtsParam.csv`는 전투 기술 FP, `EquipMtrlSetParam.csv`는 강화 재료 참조에 사용합니다. 한국어 기술명과 설명은 별도 텍스트 자료를 확인합니다.
+- 상태 이상은 미강화·캐릭터 보정 전 기본 축적을 비교합니다. 장비 요구치 또는 캐릭터 보정이 반영된 인게임 표시값은 관측 조건과 함께 구분합니다.
 
 ## 무기 도감 등록 범위
 
