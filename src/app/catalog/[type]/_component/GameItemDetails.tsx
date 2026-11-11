@@ -3,6 +3,7 @@ import Image from 'next/image';
 import type { TGameItem } from '@/api/gameItem/types';
 import { CONTENTS, GAME_ITEM_TYPES } from '@/define/gameItems';
 
+import ArmorDetails from './details/ArmorDetails';
 import AshOfWarDetails from './details/AshOfWarDetails';
 import SpellDetails from './details/SpellDetails';
 import SpiritAshDetails from './details/SpiritAshDetails';
@@ -47,6 +48,8 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
         {['weapon', 'other_weapon'].includes(gameItem.type) && gameItem.weaponDetails && (
           <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
         )}
+
+        {gameItem.type === 'armor' && <ArmorDetails armor={gameItem.armorDetails} />}
 
         {gameItem.type === 'talisman' && <TalismanDetails talisman={gameItem.talismanDetails} />}
 
