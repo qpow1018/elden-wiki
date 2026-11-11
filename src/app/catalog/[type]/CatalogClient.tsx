@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
 import type { TGameItemType } from '@/api/gameItem/types';
+import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import EmptyState from '@/components/common/empty/EmptyState';
 import ErrorState from '@/components/common/error/ErrorState';
@@ -20,6 +21,14 @@ import styles from './CatalogClient.module.scss';
 
 import { MdSearch } from 'react-icons/md';
 
+// 전체 보기를 제공하고 기본 화면으로 사용하는 도감 종류입니다.
+const VIEW_ALL_TYPES: readonly TGameItemType[] = [
+  'spirit_ash', // 뼛가루
+  'ash_of_war', // 전회
+  'sorcery', // 마술
+  'incantation', // 기도
+];
+
 export default function CatalogClient(props: {
   type: TGameItemType;
   categoryId: number | undefined;
@@ -27,16 +36,26 @@ export default function CatalogClient(props: {
   const { type, categoryId } = props;
 
   const router = useRouter();
+
   const categoriesQuery = gameItemQuery.useGetGameItemCategories();
   const categories = categoriesQuery.data?.filter((category) => category.type === type) ?? [];
-  const selectedCategory =
-    categories.find((category) => category.id === categoryId) ?? categories[0];
 
-  function handleCategoryChange(categoryId: number) {
-    if (categoryId === selectedCategory?.id) return;
+  const canViewAll = VIEW_ALL_TYPES.includes(type);
+  const categoryOptions =
+    canViewAll && categories.length > 0
+      ? [{ id: undefined, name: `${GAME_ITEM_TYPES[type]} 전체` }, ...categories]
+      : categories;
+  const defaultCategory = categoryOptions[0];
+  const selectedCategory =
+    categoryOptions.find((option) => option.id === categoryId) ?? defaultCategory;
+
+  function handleCategoryChange(nextCategoryId: number | undefined) {
+    if (nextCategoryId === selectedCategory?.id && nextCategoryId === categoryId) return;
     const nextParams = new URLSearchParams(window.location.search);
-    nextParams.set('categoryId', String(categoryId));
-    router.push(`/catalog/${type}?${nextParams}`, { scroll: true });
+    if (nextCategoryId === undefined) nextParams.delete('categoryId');
+    else nextParams.set('categoryId', String(nextCategoryId));
+    const query = nextParams.toString();
+    router.push(`/catalog/${type}${query ? `?${query}` : ''}`, { scroll: true });
   }
 
   return (
@@ -52,9 +71,9 @@ export default function CatalogClient(props: {
       <CatalogNavigation type={type} />
       <CatalogToolbar
         type={type}
-        categories={categories}
+        categoryOptions={categoryOptions}
         categoryId={selectedCategory?.id}
-        onChange={handleCategoryChange}
+        onCategoryChange={handleCategoryChange}
       />
       {categoriesQuery.isPending && <BoxLoading />}
       {categoriesQuery.isError && (
@@ -65,18 +84,24 @@ export default function CatalogClient(props: {
           }}
         />
       )}
-      {categoriesQuery.isSuccess && !selectedCategory && (
+      {categoriesQuery.isSuccess && categories.length === 0 && (
         <EmptyState message="표시할 아이템이 없습니다." />
       )}
-      {categoriesQuery.isSuccess && selectedCategory && (
-        <CatalogList type={type} categoryId={selectedCategory.id} />
+      {categoriesQuery.isSuccess && categories.length > 0 && (
+        <CatalogList type={type} categoryId={selectedCategory?.id} />
       )}
       <ScrollToTop />
     </main>
   );
 }
 
-function CatalogList({ type, categoryId }: { type: TGameItemType; categoryId: number }) {
+function CatalogList({
+  type,
+  categoryId,
+}: {
+  type: TGameItemType;
+  categoryId: number | undefined;
+}) {
   const { data, isLoading, isError, isSuccess, refetch } = gameItemQuery.useGetGameItems({
     categoryId,
     type,

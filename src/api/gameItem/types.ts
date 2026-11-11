@@ -21,7 +21,7 @@ export type TGameItemSearchEntry = {
 export type TReqGetGameItems = {
   search?: string;
   type: TGameItemType;
-  categoryId: number;
+  categoryId?: number;
   contentCode?: string;
   signal?: AbortSignal;
 };

@@ -30,7 +30,8 @@ export async function getGameItems({
     const escapedSearch = search.trim().replace(/[\\%_]/g, '\\$&');
     request.ilike('name', `%${escapedSearch}%`);
   }
-  request.eq('type', type).eq('category_id', categoryId);
+  request.eq('type', type);
+  if (categoryId !== undefined) request.eq('category_id', categoryId);
   if (contentCode) request.eq('content_code', contentCode);
   if (signal) request.abortSignal(signal);
 
