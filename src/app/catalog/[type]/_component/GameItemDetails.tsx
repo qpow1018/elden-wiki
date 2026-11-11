@@ -12,9 +12,6 @@ import WeaponDetails from './details/WeaponDetails';
 import styles from './GameItemDetails.module.scss';
 
 export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
-  const hasWeaponDetails =
-    ['weapon', 'other_weapon'].includes(gameItem.type) && gameItem.weaponDetails !== null;
-
   return (
     <article id={`game-item-${gameItem.id}`} className={styles['game-item-details']}>
       <header className={styles['identity']}>
@@ -50,7 +47,7 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
         </div>
       </header>
 
-      {hasWeaponDetails && gameItem.weaponDetails && (
+      {['weapon', 'other_weapon'].includes(gameItem.type) && gameItem.weaponDetails && (
         <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
       )}
 
@@ -60,7 +57,9 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
 
       {gameItem.type === 'ash_of_war' && <AshOfWarDetails ashOfWar={gameItem.ashOfWarDetails} />}
 
-      {gameItem.type === 'sorcery' && <SpellDetails spell={gameItem.spellDetails} />}
+      {['sorcery', 'incantation'].includes(gameItem.type) && (
+        <SpellDetails spell={gameItem.spellDetails} />
+      )}
 
       {gameItem.effectDescription && (
         <section className={styles['effects']}>
