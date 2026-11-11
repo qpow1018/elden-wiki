@@ -29,18 +29,14 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
         </div>
         <div className={styles['heading']}>
           <div className={styles['classification']}>
-            <p className={styles['category']}>
-              {gameItem.gameItemCategories?.name ?? GAME_ITEM_TYPES[gameItem.type]}
-            </p>
+            <p>{gameItem.gameItemCategories?.name ?? GAME_ITEM_TYPES[gameItem.type]}</p>
             {gameItem.contentCode !== 'base_game' && (
-              <>
-                <span aria-hidden="true">·</span>
-                <p className={styles['content']}>
-                  {Object.hasOwn(CONTENTS, gameItem.contentCode)
-                    ? CONTENTS[gameItem.contentCode as keyof typeof CONTENTS]
-                    : gameItem.contentCode}
-                </p>
-              </>
+              <p>
+                <span aria-hidden="true">·&nbsp;</span>
+                {Object.hasOwn(CONTENTS, gameItem.contentCode)
+                  ? CONTENTS[gameItem.contentCode as keyof typeof CONTENTS]
+                  : gameItem.contentCode}
+              </p>
             )}
           </div>
           <h2 tabIndex={-1}>{gameItem.name}</h2>
