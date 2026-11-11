@@ -124,9 +124,29 @@
     font-size: 12px;
   }
 
+  .contents-group + .contents-group {
+    margin-top: 12px;
+    border-top: 1px solid $border;
+  }
+
+  .group-title {
+    padding: 8px 0;
+    color: $text-secondary;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
   .entries {
     padding: 0;
     list-style: none;
+
+    .group-title + & {
+      padding-inline-start: 12px;
+
+      .number {
+        flex-basis: 5ch;
+      }
+    }
 
     a {
       display: flex;

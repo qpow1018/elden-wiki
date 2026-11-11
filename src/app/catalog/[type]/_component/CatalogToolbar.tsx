@@ -1,7 +1,7 @@
 import { useState, type MouseEvent } from 'react';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
-import type { TGameItemType } from '@/api/gameItem/types';
+import type { TGameItem, TGameItemType } from '@/api/gameItem/types';
 
 import BottomModal from '@/components/common/modal/BottomModal';
 import Modal from '@/components/common/modal/Modal';
@@ -16,6 +16,11 @@ const TYPE_FILTERS: Partial<Record<TGameItemType, { categoryLabel: string }>> = 
   armor: { categoryLabel: '장착 부위' },
   sorcery: { categoryLabel: '마술 종류' },
   incantation: { categoryLabel: '기도 종류' },
+};
+
+type TContentsGroup = {
+  name?: string;
+  items: TGameItem[];
 };
 
 type TCategoryOption = {
@@ -160,6 +165,8 @@ function TableOfContentsModal({
 }) {
   const { data } = gameItemQuery.useGetGameItems({ categoryId, type });
   const gameItems = data?.gameItems ?? [];
+  const groups: TContentsGroup[] =
+    categoryId === undefined ? groupContentsByCategory(gameItems) : [{ items: gameItems }];
 
   function handleItemClick(event: MouseEvent<HTMLAnchorElement>, id: number) {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -179,23 +186,49 @@ function TableOfContentsModal({
           <span>{categoryName}</span>
           <span>{gameItems.length}개</span>
         </div>
-        <ol className={styles['entries']}>
-          {gameItems.map((gameItem, index) => (
-            <li key={gameItem.id}>
-              <a
-                href={`#game-item-${gameItem.id}`}
-                onClick={(event) => handleItemClick(event, gameItem.id)}
-              >
-                <span className={styles['number']} aria-hidden="true">
-                  {index + 1}.
-                </span>
-                <span className={styles['name']}>{gameItem.name}</span>
-                <MdChevronRight className={styles['chevron']} size={14} aria-hidden="true" />
-              </a>
-            </li>
-          ))}
-        </ol>
+        {groups.map(({ name, items }, groupIndex) => (
+          <div key={name ?? categoryName} className={styles['contents-group']}>
+            {name && (
+              <h2 className={styles['group-title']}>
+                {groupIndex + 1}. {name}
+              </h2>
+            )}
+            <ol className={styles['entries']}>
+              {items.map((gameItem, index) => (
+                <li key={gameItem.id}>
+                  <a
+                    href={`#game-item-${gameItem.id}`}
+                    onClick={(event) => handleItemClick(event, gameItem.id)}
+                  >
+                    <span className={styles['number']} aria-hidden="true">
+                      {name ? `${groupIndex + 1}.${index + 1}` : `${index + 1}.`}
+                    </span>
+                    <span className={styles['name']}>{gameItem.name}</span>
+                    <MdChevronRight className={styles['chevron']} size={14} aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
       </nav>
     </Modal>
   );
+}
+
+function groupContentsByCategory(gameItems: TGameItem[]): TContentsGroup[] {
+  const groups: TContentsGroup[] = [];
+
+  gameItems.forEach((item) => {
+    const name = item.gameItemCategories?.name ?? '분류 없음';
+    const lastGroup = groups.at(-1);
+
+    if (lastGroup?.name === name) {
+      lastGroup.items.push(item);
+    } else {
+      groups.push({ name, items: [item] });
+    }
+  });
+
+  return groups;
 }
