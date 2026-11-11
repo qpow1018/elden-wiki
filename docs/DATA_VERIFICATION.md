@@ -68,3 +68,7 @@
 ## 전회 방패 공격의 소비 FP
 
 - SmithBox PC Regulation 1.17.3의 `SwordArtsParam` ID 8000은 소비 FP 필드가 모두 -1입니다. 소비 FP는 인게임 확인 전까지 미확인으로 둡니다.
+
+## 기도 모두 불태워라!의 차지 소비 FP
+
+- SmithBox PC Regulation 1.17.3 `Magic` ID 6120의 `mp`는 26, `mp_charge`는 30입니다. 기본 FP 26을 저장하며 차지 시 실제 비용과 표시 방법은 추가 확인 대상으로 둡니다.
