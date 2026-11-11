@@ -12,7 +12,6 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    padding-bottom: 16px;
 
     .image {
       display: grid;
@@ -45,9 +44,15 @@
     }
   }
 
+  .content {
+    display: grid;
+    gap: 24px;
+    min-width: 0;
+    margin-top: 16px;
+  }
+
   .effects {
     min-width: 0;
-    margin-top: 28px;
     overflow: hidden;
     border: 1px solid $border;
     border-radius: $border-radius;
@@ -70,7 +75,6 @@
 
   .description {
     min-width: 0;
-    margin-top: 28px;
 
     h3 {
       margin-bottom: 14px;

@@ -47,31 +47,35 @@ export default function GameItemDetails({ gameItem }: { gameItem: TGameItem }) {
         </div>
       </header>
 
-      {['weapon', 'other_weapon'].includes(gameItem.type) && gameItem.weaponDetails && (
-        <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
-      )}
+      <div className={styles['content']}>
+        {['weapon', 'other_weapon'].includes(gameItem.type) && gameItem.weaponDetails && (
+          <WeaponDetails weapon={gameItem.weaponDetails} name={gameItem.name} />
+        )}
 
-      {gameItem.type === 'talisman' && <TalismanDetails talisman={gameItem.talismanDetails} />}
+        {gameItem.type === 'talisman' && <TalismanDetails talisman={gameItem.talismanDetails} />}
 
-      {gameItem.type === 'spirit_ash' && <SpiritAshDetails spiritAsh={gameItem.spiritAshDetails} />}
+        {gameItem.type === 'spirit_ash' && (
+          <SpiritAshDetails spiritAsh={gameItem.spiritAshDetails} />
+        )}
 
-      {gameItem.type === 'ash_of_war' && <AshOfWarDetails ashOfWar={gameItem.ashOfWarDetails} />}
+        {gameItem.type === 'ash_of_war' && <AshOfWarDetails ashOfWar={gameItem.ashOfWarDetails} />}
 
-      {['sorcery', 'incantation'].includes(gameItem.type) && (
-        <SpellDetails spell={gameItem.spellDetails} />
-      )}
+        {['sorcery', 'incantation'].includes(gameItem.type) && (
+          <SpellDetails spell={gameItem.spellDetails} />
+        )}
 
-      {gameItem.effectDescription && (
-        <section className={styles['effects']}>
-          <h3>부가 효과</h3>
-          <p>{gameItem.effectDescription}</p>
+        {gameItem.effectDescription && (
+          <section className={styles['effects']}>
+            <h3>부가 효과</h3>
+            <p>{gameItem.effectDescription}</p>
+          </section>
+        )}
+
+        <section className={styles['description']}>
+          <h3>아이템 설명</h3>
+          <p>{gameItem.gameDescription ?? '아이템 설명이 아직 등록되지 않았습니다.'}</p>
         </section>
-      )}
-
-      <section className={styles['description']}>
-        <h3>아이템 설명</h3>
-        <p>{gameItem.gameDescription ?? '아이템 설명이 아직 등록되지 않았습니다.'}</p>
-      </section>
+      </div>
     </article>
   );
 }
