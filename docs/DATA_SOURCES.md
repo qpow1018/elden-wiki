@@ -742,7 +742,7 @@
 ## 탈리스만 한국어 원문 대조
 
 - 기존 탈리스만 154종을 SmithBox 한국어 FMG의 `AccessoryName`·`AccessoryCaption`·`AccessoryInfo`에 같은 ID로 연결합니다. 세 시드의 이름, 게임 내 설명, 별도 부가 효과 문구는 해당 테이블을 따릅니다. 강화형의 `+1` 등은 원문처럼 이름에 붙여 씁니다.
-- 아래 제공 자료의 목차는 초기 분류·순서·콘텐츠 소속의 근거입니다. 게임 정렬 순서, 중량, 효과 수치는 동일 버전의 `EquipParamAccessory.csv`로 장비 행과 `SpEffectParam.csv`를 연결해 확인할 항목입니다.
+- 아래 제공 자료의 목차는 초기 분류·순서·콘텐츠 소속의 근거입니다. 중량은 SmithBox PC Regulation 1.17.3 `EquipParamAccessory.csv`의 `weight`를 한국어 `AccessoryName`과 같은 ID로 연결해 154종 모두 `talisman_details.weight`에 저장합니다. 효과 수치는 `SpEffectParam.csv`를 연결해 별도로 확인합니다.
 
 ## 탈리스만 2.1~2.22 초기 등록 자료
 
