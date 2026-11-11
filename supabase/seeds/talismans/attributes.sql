@@ -2,7 +2,7 @@
 -- 콘텐츠 소속과 표시 순서는 기존 등록 기준을 따릅니다.
 do $$
 begin
-  if not exists (select 1 from public.game_item_categories where type = 'talisman' and name = '탈리스만') then
+  if not exists (select 1 from public.game_item_categories where type = 'talisman' and name = '능력치') then
     raise exception '탈리스만 분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
@@ -284,5 +284,5 @@ FP의 최대치를 가장 크게 높인다.
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)
 select s.name, 'talisman', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description
-from source s join public.game_item_categories c on c.type = 'talisman' and c.name = '탈리스만'
+from source s join public.game_item_categories c on c.type = 'talisman' and c.name = '능력치'
 where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name and i.content_code = s.content_code);

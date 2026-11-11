@@ -2,7 +2,8 @@
 -- 콘텐츠 소속과 표시 순서는 기존 등록 기준을 따릅니다.
 do $$
 begin
-  if not exists (select 1 from public.game_item_categories where type = 'talisman' and name = '탈리스만') then
+  if (select count(*) from public.game_item_categories
+      where type = 'talisman' and name in ('무기', '주문', '전투 기술', '전투 보조', '조건부 효과·보상', '특수 효과')) <> 6 then
     raise exception '탈리스만 분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
@@ -592,7 +593,16 @@ HP가 최대일 때 방어력을 높인다.
 )
 insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)
 select s.name, 'talisman', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description
-from source s join public.game_item_categories c on c.type = 'talisman' and c.name = '탈리스만'
+from source s
+join public.game_item_categories c on c.type = 'talisman'
+  and c.name = case
+    when s.sort_order <= 920 then '무기'
+    when s.sort_order <= 1010 then '주문'
+    when s.sort_order <= 1130 then '전투 기술'
+    when s.sort_order <= 1250 then '전투 보조'
+    when s.sort_order <= 1460 then '조건부 효과·보상'
+    when s.sort_order <= 1540 then '특수 효과'
+  end
 where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name and i.content_code = s.content_code);
 
 -- SmithBox PC Regulation 1.17.3 EquipParamAccessory의 중량입니다.

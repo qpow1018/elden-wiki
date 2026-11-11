@@ -23,6 +23,7 @@ import { MdSearch } from 'react-icons/md';
 
 // 전체 보기를 제공하고 기본 화면으로 사용하는 도감 종류입니다.
 const VIEW_ALL_TYPES: readonly TGameItemType[] = [
+  'talisman', // 탈리스만
   'spirit_ash', // 뼛가루
   'ash_of_war', // 전회
   'sorcery', // 마술
