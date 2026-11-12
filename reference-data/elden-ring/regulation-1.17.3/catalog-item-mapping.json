@@ -1,0 +1,3747 @@
+[
+  {
+    "id": "tools",
+    "name": "사용 도구·소모품",
+    "items": [
+      {
+        "name": "붉은 물방울의 성배병",
+        "sourceIds": [
+          1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014,
+          1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025
+        ]
+      },
+      {
+        "name": "푸른 물방울의 성배병",
+        "sourceIds": [
+          1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064,
+          1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075
+        ]
+      },
+      {
+        "name": "축복의 기억",
+        "sourceIds": [115]
+      },
+      {
+        "name": "영마의 손가락 피리",
+        "sourceIds": [130]
+      },
+      {
+        "name": "영마의 손가락 피리",
+        "sourceIds": [181]
+      },
+      {
+        "name": "룬의 호",
+        "sourceIds": [190]
+      },
+      {
+        "name": "별빛 조각",
+        "sourceIds": [1290]
+      },
+      {
+        "name": "선잠의 가지",
+        "sourceIds": [2000910]
+      },
+      {
+        "name": "마리카의 축복",
+        "sourceIds": [2000900]
+      },
+      {
+        "name": "문서 「교수의 비밀」",
+        "sourceIds": [8226]
+      },
+      {
+        "name": "매우 낡은 지도",
+        "sourceIds": [8227]
+      },
+      {
+        "name": "독 이끼약",
+        "sourceIds": [900]
+      },
+      {
+        "name": "부패 이끼약",
+        "sourceIds": [940]
+      },
+      {
+        "name": "출혈 이끼약",
+        "sourceIds": [910]
+      },
+      {
+        "name": "동상 이끼약",
+        "sourceIds": [920]
+      },
+      {
+        "name": "수면 이끼약",
+        "sourceIds": [930]
+      },
+      {
+        "name": "발광 이끼약",
+        "sourceIds": [960]
+      },
+      {
+        "name": "죽음 이끼약",
+        "sourceIds": [950]
+      },
+      {
+        "name": "항마의 말린 간",
+        "sourceIds": [1150]
+      },
+      {
+        "name": "항마의 간 절임",
+        "sourceIds": [2001120]
+      },
+      {
+        "name": "항염의 말린 간",
+        "sourceIds": [1160]
+      },
+      {
+        "name": "항염의 간 절임",
+        "sourceIds": [2001130]
+      },
+      {
+        "name": "항뢰의 말린 간",
+        "sourceIds": [1170]
+      },
+      {
+        "name": "항뢰의 간 절임",
+        "sourceIds": [2001140]
+      },
+      {
+        "name": "항성의 말린 간",
+        "sourceIds": [1180]
+      },
+      {
+        "name": "항성의 간 절임",
+        "sourceIds": [2001150]
+      },
+      {
+        "name": "진주색의 간 절임",
+        "sourceIds": [2001160]
+      },
+      {
+        "name": "면역의 육포",
+        "sourceIds": [1110]
+      },
+      {
+        "name": "강건의 육포",
+        "sourceIds": [1120]
+      },
+      {
+        "name": "이성의 육포",
+        "sourceIds": [1130]
+      },
+      {
+        "name": "얼룩색 육포",
+        "sourceIds": [1140]
+      },
+      {
+        "name": "면역의 흰 육포",
+        "sourceIds": [1310]
+      },
+      {
+        "name": "강건의 흰 육포",
+        "sourceIds": [1320]
+      },
+      {
+        "name": "이성의 흰 육포",
+        "sourceIds": [1330]
+      },
+      {
+        "name": "얼룩색 흰 육포",
+        "sourceIds": [1340]
+      },
+      {
+        "name": "거북 목 절임",
+        "sourceIds": [1100]
+      },
+      {
+        "name": "거북 목 묵은 절임",
+        "sourceIds": [2001170]
+      },
+      {
+        "name": "용사의 고깃덩어리",
+        "sourceIds": [1210]
+      },
+      {
+        "name": "용찬의 고기 덩어리",
+        "sourceIds": [2001100]
+      },
+      {
+        "name": "역린의 고기 덩어리",
+        "sourceIds": [2001105]
+      },
+      {
+        "name": "지문의 비약",
+        "sourceIds": [2001110]
+      },
+      {
+        "name": "새 다리 백은 절임",
+        "sourceIds": [1190]
+      },
+      {
+        "name": "새 다리 황금 절임",
+        "sourceIds": [1200]
+      },
+      {
+        "name": "백은 뿔 화폐",
+        "sourceIds": [2001220]
+      },
+      {
+        "name": "황금 뿔 화폐",
+        "sourceIds": [2001230]
+      },
+      {
+        "name": "삶은 새우",
+        "sourceIds": [830]
+      },
+      {
+        "name": "삶은 게",
+        "sourceIds": [820]
+      },
+      {
+        "name": "전갈조림",
+        "sourceIds": [2001200]
+      },
+      {
+        "name": "호화로운 전갈조림",
+        "sourceIds": [2001201]
+      },
+      {
+        "name": "전갈조림",
+        "sourceIds": [2001202]
+      },
+      {
+        "name": "호화로운 전갈조림",
+        "sourceIds": [2001203]
+      },
+      {
+        "name": "날고기경단",
+        "sourceIds": [1235]
+      },
+      {
+        "name": "성스러운 피와 살",
+        "sourceIds": [2001210]
+      },
+      {
+        "name": "화염 항아리",
+        "sourceIds": [300]
+      },
+      {
+        "name": "붉은 사자의 화염 항아리",
+        "sourceIds": [301]
+      },
+      {
+        "name": "거인 불의 화염 항아리",
+        "sourceIds": [302]
+      },
+      {
+        "name": "큰 화염 항아리",
+        "sourceIds": [2000300]
+      },
+      {
+        "name": "큰 소각로 항아리",
+        "sourceIds": [2000680]
+      },
+      {
+        "name": "기름 항아리",
+        "sourceIds": [380]
+      },
+      {
+        "name": "큰 기름 항아리",
+        "sourceIds": [2000380]
+      },
+      {
+        "name": "마력 항아리",
+        "sourceIds": [660]
+      },
+      {
+        "name": "학원의 마력 항아리",
+        "sourceIds": [661]
+      },
+      {
+        "name": "큰 마력 항아리",
+        "sourceIds": [2000660]
+      },
+      {
+        "name": "벼락 항아리",
+        "sourceIds": [320]
+      },
+      {
+        "name": "고룡의 벼락 항아리",
+        "sourceIds": [321]
+      },
+      {
+        "name": "큰 벼락 항아리",
+        "sourceIds": [2000320]
+      },
+      {
+        "name": "붉은 벼락 항아리",
+        "sourceIds": [2000700]
+      },
+      {
+        "name": "큰 붉은 벼락 항아리",
+        "sourceIds": [2000690]
+      },
+      {
+        "name": "성수 항아리",
+        "sourceIds": [350]
+      },
+      {
+        "name": "성률 항아리",
+        "sourceIds": [351]
+      },
+      {
+        "name": "독 항아리",
+        "sourceIds": [370]
+      },
+      {
+        "name": "큰 독 항아리",
+        "sourceIds": [2000370]
+      },
+      {
+        "name": "대변 항아리",
+        "sourceIds": [330]
+      },
+      {
+        "name": "큰 대변 항아리",
+        "sourceIds": [2000330]
+      },
+      {
+        "name": "부패 항아리",
+        "sourceIds": [670]
+      },
+      {
+        "name": "큰 부패 항아리",
+        "sourceIds": [2000670]
+      },
+      {
+        "name": "파리 항아리",
+        "sourceIds": [340]
+      },
+      {
+        "name": "큰 파리 항아리",
+        "sourceIds": [2000340]
+      },
+      {
+        "name": "빙결 항아리",
+        "sourceIds": [360]
+      },
+      {
+        "name": "큰 빙결 항아리",
+        "sourceIds": [2000360]
+      },
+      {
+        "name": "수면 항아리",
+        "sourceIds": [640]
+      },
+      {
+        "name": "영면 항아리",
+        "sourceIds": [2000740]
+      },
+      {
+        "name": "미친 불 항아리",
+        "sourceIds": [2000710]
+      },
+      {
+        "name": "큰 미친 불 항아리",
+        "sourceIds": [2000620]
+      },
+      {
+        "name": "큰 암석 항아리",
+        "sourceIds": [2000310]
+      },
+      {
+        "name": "화산 항아리",
+        "sourceIds": [600]
+      },
+      {
+        "name": "큰 화산 항아리",
+        "sourceIds": [2000600]
+      },
+      {
+        "name": "원혼 항아리",
+        "sourceIds": [650]
+      },
+      {
+        "name": "큰 원혼 항아리",
+        "sourceIds": [2000650]
+      },
+      {
+        "name": "흡혈 항아리",
+        "sourceIds": [630]
+      },
+      {
+        "name": "유인 항아리",
+        "sourceIds": [390]
+      },
+      {
+        "name": "짐승 유인 항아리",
+        "sourceIds": [391]
+      },
+      {
+        "name": "백금 항아리",
+        "sourceIds": [610]
+      },
+      {
+        "name": "끈 달린 화염 항아리",
+        "sourceIds": [400]
+      },
+      {
+        "name": "끈 달린 기름 항아리",
+        "sourceIds": [450]
+      },
+      {
+        "name": "끈 달린 마력 항아리",
+        "sourceIds": [460]
+      },
+      {
+        "name": "끈 달린 벼락 항아리",
+        "sourceIds": [420]
+      },
+      {
+        "name": "끈 달린 성수 항아리",
+        "sourceIds": [510]
+      },
+      {
+        "name": "끈 달린 독 항아리",
+        "sourceIds": [440]
+      },
+      {
+        "name": "끈 달린 대변 항아리",
+        "sourceIds": [430]
+      },
+      {
+        "name": "끈 달린 파리 항아리",
+        "sourceIds": [470]
+      },
+      {
+        "name": "끈 달린 미친 불 항아리",
+        "sourceIds": [2000760]
+      },
+      {
+        "name": "끈 달린 화산 항아리",
+        "sourceIds": [490]
+      },
+      {
+        "name": "불꽃의 향기",
+        "sourceIds": [3510]
+      },
+      {
+        "name": "고양의 향기",
+        "sourceIds": [3500]
+      },
+      {
+        "name": "독 분무",
+        "sourceIds": [3580]
+      },
+      {
+        "name": "산 분무",
+        "sourceIds": [3610]
+      },
+      {
+        "name": "광열의 향약",
+        "sourceIds": [3550]
+      },
+      {
+        "name": "철 항아리 향약",
+        "sourceIds": [3520]
+      },
+      {
+        "name": "투척 뼈화살",
+        "sourceIds": [1710]
+      },
+      {
+        "name": "투척 독 뼈화살",
+        "sourceIds": [1720]
+      },
+      {
+        "name": "결정 투척 화살",
+        "sourceIds": [1740]
+      },
+      {
+        "name": "투척 단검",
+        "sourceIds": [1700]
+      },
+      {
+        "name": "쿠쿠리",
+        "sourceIds": [1730]
+      },
+      {
+        "name": "부채 투척 나이프",
+        "sourceIds": [1750]
+      },
+      {
+        "name": "용찬의 작살",
+        "sourceIds": [2001710]
+      },
+      {
+        "name": "유적석",
+        "sourceIds": [1760]
+      },
+      {
+        "name": "둥근 바위",
+        "sourceIds": [2020027]
+      },
+      {
+        "name": "독석",
+        "sourceIds": [1840]
+      },
+      {
+        "name": "독석 덩어리",
+        "sourceIds": [1841]
+      },
+      {
+        "name": "폭발석",
+        "sourceIds": [1830]
+      },
+      {
+        "name": "폭발석 덩어리",
+        "sourceIds": [1831]
+      },
+      {
+        "name": "부스러기 휘석",
+        "sourceIds": [3050]
+      },
+      {
+        "name": "큰 부스러기 휘석",
+        "sourceIds": [3051]
+      },
+      {
+        "name": "뻐꾸기의 휘석",
+        "sourceIds": [3030]
+      },
+      {
+        "name": "빛나는 손톱",
+        "sourceIds": [2003200]
+      },
+      {
+        "name": "중력석 파편",
+        "sourceIds": [3060]
+      },
+      {
+        "name": "중력석 덩어리",
+        "sourceIds": [3070]
+      },
+      {
+        "name": "화령석",
+        "sourceIds": [2003190]
+      },
+      {
+        "name": "정령석",
+        "sourceIds": [2003001]
+      },
+      {
+        "name": "불의 똬리",
+        "sourceIds": [2003180]
+      },
+      {
+        "name": "내뿜는 미친 불",
+        "sourceIds": [2003160]
+      },
+      {
+        "name": "내용물이 된 살",
+        "sourceIds": [2001700]
+      },
+      {
+        "name": "티비아의 부름",
+        "sourceIds": [2003150]
+      },
+      {
+        "name": "말의 돌",
+        "sourceIds": [3320]
+      },
+      {
+        "name": "따스함의 돌",
+        "sourceIds": [3310]
+      },
+      {
+        "name": "양지석",
+        "sourceIds": [2003310]
+      },
+      {
+        "name": "미친 불의 돌",
+        "sourceIds": [3311]
+      },
+      {
+        "name": "유혹의 나뭇가지",
+        "sourceIds": [3350]
+      },
+      {
+        "name": "매료의 나뭇가지",
+        "sourceIds": [2003350]
+      },
+      {
+        "name": "황금 나무에 맹세코",
+        "sourceIds": [2003170]
+      },
+      {
+        "name": "주령을 부르는 종",
+        "sourceIds": [3080]
+      },
+      {
+        "name": "어린 선조령의 머리",
+        "sourceIds": [3000]
+      },
+      {
+        "name": "흉조의 태아",
+        "sourceIds": [3010]
+      },
+      {
+        "name": "왕가의 흉조의 태아",
+        "sourceIds": [3011]
+      },
+      {
+        "name": "뿔인간 사산아",
+        "sourceIds": [2003130]
+      },
+      {
+        "name": "라나의 향유병",
+        "sourceIds": [2003140]
+      },
+      {
+        "name": "유대석",
+        "sourceIds": [2003000]
+      },
+      {
+        "name": "의태의 베일",
+        "sourceIds": [3040]
+      },
+      {
+        "name": "휘장의 은총",
+        "sourceIds": [3360]
+      },
+      {
+        "name": "빛 비치는 휘장의 은총",
+        "sourceIds": [3361]
+      },
+      {
+        "name": "고룡의 은총",
+        "sourceIds": [2002100]
+      },
+      {
+        "name": "멀기트의 구속구",
+        "sourceIds": [2140]
+      },
+      {
+        "name": "모그의 구속구",
+        "sourceIds": [2150]
+      },
+      {
+        "name": "모독의 손톱",
+        "sourceIds": [2080]
+      },
+      {
+        "name": "불기름",
+        "sourceIds": [1400]
+      },
+      {
+        "name": "메스메르의 불기름",
+        "sourceIds": [2001400]
+      },
+      {
+        "name": "마력기름",
+        "sourceIds": [1420]
+      },
+      {
+        "name": "왕가의 마력기름",
+        "sourceIds": [2001420]
+      },
+      {
+        "name": "벼락기름",
+        "sourceIds": [1410]
+      },
+      {
+        "name": "용뢰기름",
+        "sourceIds": [2001410]
+      },
+      {
+        "name": "신성기름",
+        "sourceIds": [1430]
+      },
+      {
+        "name": "황금기름",
+        "sourceIds": [2001430]
+      },
+      {
+        "name": "축제기름",
+        "sourceIds": [2001600]
+      },
+      {
+        "name": "독기름",
+        "sourceIds": [1460]
+      },
+      {
+        "name": "부패기름",
+        "sourceIds": [1490]
+      },
+      {
+        "name": "피기름",
+        "sourceIds": [1440]
+      },
+      {
+        "name": "빙결기름",
+        "sourceIds": [1470]
+      },
+      {
+        "name": "수면기름",
+        "sourceIds": [1450]
+      },
+      {
+        "name": "영면기름",
+        "sourceIds": [2001450]
+      },
+      {
+        "name": "용상기름",
+        "sourceIds": [1480]
+      },
+      {
+        "name": "용찬기름",
+        "sourceIds": [2001480]
+      },
+      {
+        "name": "방패기름",
+        "sourceIds": [1690]
+      },
+      {
+        "name": "끈 달린 불기름",
+        "sourceIds": [1500]
+      },
+      {
+        "name": "끈 달린 메스메르의 불기름",
+        "sourceIds": [2001500]
+      },
+      {
+        "name": "끈 달린 마력기름",
+        "sourceIds": [1520]
+      },
+      {
+        "name": "끈 달린 왕가의 마력 기름",
+        "sourceIds": [2001520]
+      },
+      {
+        "name": "끈 달린 벼락기름",
+        "sourceIds": [1510]
+      },
+      {
+        "name": "끈 달린 용뢰기름",
+        "sourceIds": [2001510]
+      },
+      {
+        "name": "끈 달린 신성기름",
+        "sourceIds": [1530]
+      },
+      {
+        "name": "끈 달린 황금기름",
+        "sourceIds": [2001530]
+      },
+      {
+        "name": "끈 달린 독기름",
+        "sourceIds": [1560]
+      },
+      {
+        "name": "끈 달린 부패기름",
+        "sourceIds": [1590]
+      },
+      {
+        "name": "끈 달린 피기름",
+        "sourceIds": [1540]
+      },
+      {
+        "name": "끈 달린 수면기름",
+        "sourceIds": [1550]
+      },
+      {
+        "name": "끈 달린 영면기름",
+        "sourceIds": [2001550]
+      },
+      {
+        "name": "로어 레이즌",
+        "sourceIds": [810]
+      },
+      {
+        "name": "스위트 레이즌",
+        "sourceIds": [811]
+      },
+      {
+        "name": "프로즌 레이즌",
+        "sourceIds": [812]
+      },
+      {
+        "name": "스피릿 레이즌",
+        "sourceIds": [2000800]
+      },
+      {
+        "name": "무지개석",
+        "sourceIds": [2020]
+      },
+      {
+        "name": "등불 돌",
+        "sourceIds": [2030]
+      },
+      {
+        "name": "사람소리 돌",
+        "sourceIds": [2002000]
+      },
+      {
+        "name": "폭신한 면",
+        "sourceIds": [2100]
+      },
+      {
+        "name": "비누",
+        "sourceIds": [2120]
+      },
+      {
+        "name": "유사 축복",
+        "sourceIds": [2050]
+      },
+      {
+        "name": "유리조각",
+        "sourceIds": [10000]
+      },
+      {
+        "name": "랜턴",
+        "sourceIds": [2070]
+      },
+      {
+        "name": "망원경",
+        "sourceIds": [2040]
+      },
+      {
+        "name": "말하는 머리 \"안녕\"",
+        "sourceIds": [2200]
+      },
+      {
+        "name": "말하는 머리 \"고마워\"",
+        "sourceIds": [2201]
+      },
+      {
+        "name": "말하는 머리 \"미안해\"",
+        "sourceIds": [2202]
+      },
+      {
+        "name": "말하는 머리 \"대단해!\"",
+        "sourceIds": [2203]
+      },
+      {
+        "name": "말하는 머리 \"도와줘…\"",
+        "sourceIds": [2204]
+      },
+      {
+        "name": "말하는 머리 \"사랑해\"",
+        "sourceIds": [2205]
+      },
+      {
+        "name": "말하는 머리 \"시작할까?\"",
+        "sourceIds": [2206]
+      },
+      {
+        "name": "말하는 머리 \"너는 아름다워\"",
+        "sourceIds": [2207]
+      },
+      {
+        "name": "말하는 머리 \"한탄\"",
+        "sourceIds": [2002150]
+      },
+      {
+        "name": "바위 심장",
+        "sourceIds": [2002010]
+      },
+      {
+        "name": "무녀의 심장",
+        "sourceIds": [2002020]
+      },
+      {
+        "name": "한탄하는 사람의 가면",
+        "sourceIds": [2002030]
+      },
+      {
+        "name": "순혈기사훈장",
+        "sourceIds": [2160]
+      },
+      {
+        "name": "미켈라의 침",
+        "sourceIds": [2190]
+      },
+      {
+        "name": "축복의 눈동자막",
+        "sourceIds": [2002120]
+      },
+      {
+        "name": "어둠의 눈동자막",
+        "sourceIds": [2002130]
+      },
+      {
+        "name": "티에리에의 비약",
+        "sourceIds": [2002140]
+      },
+      {
+        "name": "황금의 룬 [1]",
+        "sourceIds": [2900]
+      },
+      {
+        "name": "황금의 룬 [2]",
+        "sourceIds": [2901]
+      },
+      {
+        "name": "황금의 룬 [3]",
+        "sourceIds": [2902]
+      },
+      {
+        "name": "황금의 룬 [4]",
+        "sourceIds": [2903]
+      },
+      {
+        "name": "황금의 룬 [5]",
+        "sourceIds": [2904]
+      },
+      {
+        "name": "황금의 룬 [6]",
+        "sourceIds": [2905]
+      },
+      {
+        "name": "황금의 룬 [7]",
+        "sourceIds": [2906]
+      },
+      {
+        "name": "황금의 룬 [8]",
+        "sourceIds": [2907]
+      },
+      {
+        "name": "틈새의 땅의 룬",
+        "sourceIds": [2990]
+      },
+      {
+        "name": "황금의 룬 [9]",
+        "sourceIds": [2908]
+      },
+      {
+        "name": "황금의 룬 [10]",
+        "sourceIds": [2909]
+      },
+      {
+        "name": "황금의 룬 [11]",
+        "sourceIds": [2910]
+      },
+      {
+        "name": "황금의 룬 [12]",
+        "sourceIds": [2911]
+      },
+      {
+        "name": "황금의 룬 [13]",
+        "sourceIds": [2912]
+      },
+      {
+        "name": "희인의 룬",
+        "sourceIds": [2913]
+      },
+      {
+        "name": "영웅의 룬 [1]",
+        "sourceIds": [2914]
+      },
+      {
+        "name": "영웅의 룬 [2]",
+        "sourceIds": [2915]
+      },
+      {
+        "name": "영웅의 룬 [3]",
+        "sourceIds": [2916]
+      },
+      {
+        "name": "영웅의 룬 [4]",
+        "sourceIds": [2917]
+      },
+      {
+        "name": "영웅의 룬 [5]",
+        "sourceIds": [2918]
+      },
+      {
+        "name": "왕의 룬",
+        "sourceIds": [2919]
+      },
+      {
+        "name": "망가진 룬",
+        "sourceIds": [2002951]
+      },
+      {
+        "name": "그림자의 땅의 룬 [1]",
+        "sourceIds": [2002952]
+      },
+      {
+        "name": "그림자의 땅의 룬 [2]",
+        "sourceIds": [2002953]
+      },
+      {
+        "name": "그림자의 땅의 룬 [3]",
+        "sourceIds": [2002954]
+      },
+      {
+        "name": "그림자의 땅의 룬 [4]",
+        "sourceIds": [2002955]
+      },
+      {
+        "name": "그림자의 땅의 룬 [5]",
+        "sourceIds": [2002956]
+      },
+      {
+        "name": "그림자의 땅의 룬 [6]",
+        "sourceIds": [2002957]
+      },
+      {
+        "name": "그림자의 땅의 룬 [7]",
+        "sourceIds": [2002958]
+      },
+      {
+        "name": "레다의 룬",
+        "sourceIds": [2002950]
+      },
+      {
+        "name": "칭송받지 못할 영웅의 룬",
+        "sourceIds": [2002959]
+      },
+      {
+        "name": "마리카의 룬",
+        "sourceIds": [2002960]
+      },
+      {
+        "name": "갈고리를 부르는 손가락약",
+        "sourceIds": [150]
+      },
+      {
+        "name": "갈고리를 부르는 손가락약",
+        "sourceIds": [182]
+      },
+      {
+        "name": "빛바랜 자의 갈고리 손가락",
+        "sourceIds": [100]
+      },
+      {
+        "name": "빛바랜 자의 갈고리 손가락",
+        "sourceIds": [170]
+      },
+      {
+        "name": "작은 금 우상",
+        "sourceIds": [109]
+      },
+      {
+        "name": "작은 금 우상",
+        "sourceIds": [179]
+      },
+      {
+        "name": "투사의 갈고리 손가락",
+        "sourceIds": [101]
+      },
+      {
+        "name": "투사의 갈고리 손가락",
+        "sourceIds": [171]
+      },
+      {
+        "name": "작은 붉은 우상",
+        "sourceIds": [110]
+      },
+      {
+        "name": "작은 붉은 우상",
+        "sourceIds": [180]
+      },
+      {
+        "name": "피 묻은 손가락",
+        "sourceIds": [102]
+      },
+      {
+        "name": "피 묻은 손가락",
+        "sourceIds": [172]
+      },
+      {
+        "name": "배율의 손가락",
+        "sourceIds": [112]
+      },
+      {
+        "name": "배율의 손가락",
+        "sourceIds": [184]
+      },
+      {
+        "name": "문드러진 피손가락",
+        "sourceIds": [111]
+      },
+      {
+        "name": "문드러진 피손가락",
+        "sourceIds": [183]
+      },
+      {
+        "name": "피손가락의 환영",
+        "sourceIds": [107]
+      },
+      {
+        "name": "배율 손가락의 환영",
+        "sourceIds": [114]
+      },
+      {
+        "name": "피손가락의 환영",
+        "sourceIds": [113]
+      },
+      {
+        "name": "거대한 룬의 환영",
+        "sourceIds": [135]
+      },
+      {
+        "name": "하얀 비문자 반지",
+        "sourceIds": [104]
+      },
+      {
+        "name": "하얀 비문자 반지",
+        "sourceIds": [174]
+      },
+      {
+        "name": "푸른 비문자 반지",
+        "sourceIds": [105]
+      },
+      {
+        "name": "푸른 비문자 반지",
+        "sourceIds": [175]
+      },
+      {
+        "name": "조롱자의 혀",
+        "sourceIds": [108]
+      },
+      {
+        "name": "조롱자의 혀",
+        "sourceIds": [178]
+      },
+      {
+        "name": "손가락 끊기",
+        "sourceIds": [103]
+      },
+      {
+        "name": "빛바랜 자의 늙은 손가락",
+        "sourceIds": [106]
+      },
+      {
+        "name": "영약의 성배병",
+        "sourceIds": [250, 251]
+      }
+    ]
+  },
+  {
+    "id": "materials",
+    "name": "제작 재료",
+    "isConfirmed": true,
+    "sections": [
+      {
+        "name": "수렵 재료",
+        "items": [
+          {
+            "name": "저민 고기",
+            "sourceIds": [15000]
+          },
+          {
+            "name": "흰 저민 고기",
+            "sourceIds": [15160]
+          },
+          {
+            "name": "짐승 간",
+            "sourceIds": [15010]
+          },
+          {
+            "name": "짐승 고기 덩어리",
+            "sourceIds": [15020]
+          },
+          {
+            "name": "거북 목 고기",
+            "sourceIds": [15090]
+          },
+          {
+            "name": "짐승 피",
+            "sourceIds": [15030]
+          },
+          {
+            "name": "백금의 응혈",
+            "sourceIds": [15420]
+          },
+          {
+            "name": "뿔의 싹",
+            "sourceIds": [15050]
+          },
+          {
+            "name": "옛 엄니",
+            "sourceIds": [15040]
+          },
+          {
+            "name": "날개깃",
+            "sourceIds": [15060]
+          },
+          {
+            "name": "폭풍 매의 깃털",
+            "sourceIds": [15430]
+          },
+          {
+            "name": "네 발가락 새다리",
+            "sourceIds": [15080]
+          },
+          {
+            "name": "잠알",
+            "sourceIds": [15120]
+          },
+          {
+            "name": "게알",
+            "sourceIds": [15130]
+          },
+          {
+            "name": "문어알",
+            "sourceIds": [15140]
+          },
+          {
+            "name": "가는 짐승 뼈",
+            "sourceIds": [15340]
+          },
+          {
+            "name": "굵은 짐승 뼈",
+            "sourceIds": [15341]
+          },
+          {
+            "name": "인골 조각",
+            "sourceIds": [15100]
+          },
+          {
+            "name": "큰 잠자리 머리",
+            "sourceIds": [15110]
+          },
+          {
+            "name": "금색 반딧불",
+            "sourceIds": [20811]
+          },
+          {
+            "name": "은색 반딧불",
+            "sourceIds": [20810]
+          },
+          {
+            "name": "휘석 반딧불",
+            "sourceIds": [20812]
+          },
+          {
+            "name": "연기나비",
+            "sourceIds": [20802]
+          },
+          {
+            "name": "에오니아나비",
+            "sourceIds": [20801]
+          },
+          {
+            "name": "유생나비",
+            "sourceIds": [20800]
+          },
+          {
+            "name": "황금지네",
+            "sourceIds": [20820]
+          },
+          {
+            "name": "산 항아리 파편",
+            "sourceIds": [15410]
+          },
+          {
+            "name": "은 물방울 껍질",
+            "sourceIds": [20825]
+          },
+          {
+            "name": "금 배설물",
+            "sourceIds": [20830]
+          },
+          {
+            "name": "피 섞인 배설물",
+            "sourceIds": [20831]
+          },
+          {
+            "name": "노란 잔불",
+            "sourceIds": [20845]
+          }
+        ]
+      },
+      {
+        "name": "수렵 재료(DLC)",
+        "items": [
+          {
+            "name": "짐승 뿔",
+            "sourceIds": [2015000]
+          },
+          {
+            "name": "영결석",
+            "sourceIds": [2015010]
+          },
+          {
+            "name": "전갈 간",
+            "sourceIds": [2015030]
+          },
+          {
+            "name": "파리곰팡이",
+            "sourceIds": [2015040]
+          },
+          {
+            "name": "진주색 비늘",
+            "sourceIds": [2015020]
+          },
+          {
+            "name": "메스메르의 잔불",
+            "sourceIds": [2020030]
+          },
+          {
+            "name": "검은불나비",
+            "sourceIds": [2020006]
+          },
+          {
+            "name": "휘석 덩어리 반딧불",
+            "sourceIds": [2020007]
+          },
+          {
+            "name": "독이끼벌레",
+            "sourceIds": [2020010]
+          },
+          {
+            "name": "얼어붙은 구더기",
+            "sourceIds": [2020013]
+          },
+          {
+            "name": "꽈리벌레",
+            "sourceIds": [2020016]
+          },
+          {
+            "name": "묘방울벌레",
+            "sourceIds": [2020022]
+          },
+          {
+            "name": "묘지기의 두개골",
+            "sourceIds": [2020018]
+          },
+          {
+            "name": "응고한 수렁",
+            "sourceIds": [2020026]
+          },
+          {
+            "name": "축복받은 뼛조각",
+            "sourceIds": [2020031]
+          },
+          {
+            "name": "뿔 섞인 배설물",
+            "sourceIds": [2020019]
+          },
+          {
+            "name": "부푼 포도",
+            "sourceIds": [2020017]
+          }
+        ]
+      },
+      {
+        "name": "채집 재료",
+        "items": [
+          {
+            "name": "로어 열매",
+            "sourceIds": [20720]
+          },
+          {
+            "name": "황금 로어",
+            "sourceIds": [20721]
+          },
+          {
+            "name": "로어 원종",
+            "sourceIds": [20722]
+          },
+          {
+            "name": "헬바",
+            "sourceIds": [20690]
+          },
+          {
+            "name": "밤 이슬의 헬바",
+            "sourceIds": [20710]
+          },
+          {
+            "name": "아르테리아의 잎",
+            "sourceIds": [20691]
+          },
+          {
+            "name": "버섯",
+            "sourceIds": [20760]
+          },
+          {
+            "name": "독곰팡이버섯",
+            "sourceIds": [20770]
+          },
+          {
+            "name": "녹은 버섯",
+            "sourceIds": [20761]
+          },
+          {
+            "name": "낙엽꽃",
+            "sourceIds": [20680]
+          },
+          {
+            "name": "변색한 낙엽꽃",
+            "sourceIds": [20660]
+          },
+          {
+            "name": "불의 꽃",
+            "sourceIds": [20682]
+          },
+          {
+            "name": "독꽃",
+            "sourceIds": [20650]
+          },
+          {
+            "name": "벼락꽃",
+            "sourceIds": [20652]
+          },
+          {
+            "name": "알타스 꽃",
+            "sourceIds": [20681]
+          },
+          {
+            "name": "피의 장미",
+            "sourceIds": [20723]
+          },
+          {
+            "name": "묘의 보라",
+            "sourceIds": [20654]
+          },
+          {
+            "name": "빛바랜 금륜초",
+            "sourceIds": [20685]
+          },
+          {
+            "name": "금륜초",
+            "sourceIds": [20683]
+          },
+          {
+            "name": "트리나의 수련",
+            "sourceIds": [20651]
+          },
+          {
+            "name": "미켈라의 수련",
+            "sourceIds": [20653]
+          },
+          {
+            "name": "결정의 나무 싹",
+            "sourceIds": [20750]
+          },
+          {
+            "name": "얼음 결정의 나무 싹",
+            "sourceIds": [20751]
+          },
+          {
+            "name": "성혈의 나무 싹",
+            "sourceIds": [20753]
+          },
+          {
+            "name": "이엘로의 눈동자",
+            "sourceIds": [20740]
+          },
+          {
+            "name": "미란다 파우더",
+            "sourceIds": [15150]
+          },
+          {
+            "name": "뿌리기름",
+            "sourceIds": [20775]
+          },
+          {
+            "name": "동굴이끼",
+            "sourceIds": [20840]
+          },
+          {
+            "name": "동굴이끼 꽃눈",
+            "sourceIds": [20841]
+          },
+          {
+            "name": "동굴이끼 결정",
+            "sourceIds": [20842]
+          }
+        ]
+      },
+      {
+        "name": "채집 재료(DLC)",
+        "items": [
+          {
+            "name": "라다 열매",
+            "sourceIds": [2020001]
+          },
+          {
+            "name": "옥로",
+            "sourceIds": [2020005]
+          },
+          {
+            "name": "붉은살버섯",
+            "sourceIds": [2020002]
+          },
+          {
+            "name": "흰살버섯",
+            "sourceIds": [2020003]
+          },
+          {
+            "name": "모조 손가락",
+            "sourceIds": [2020024]
+          },
+          {
+            "name": "노란 벼락꽃",
+            "sourceIds": [2020008]
+          },
+          {
+            "name": "붉은 벼락꽃",
+            "sourceIds": [2020032]
+          },
+          {
+            "name": "영혼 불 꽃",
+            "sourceIds": [2020021]
+          },
+          {
+            "name": "영륜초",
+            "sourceIds": [2020009]
+          },
+          {
+            "name": "붉은 꽃봉오리",
+            "sourceIds": [2020011]
+          },
+          {
+            "name": "피 아마릴리스",
+            "sourceIds": [2020012]
+          },
+          {
+            "name": "용열꽃",
+            "sourceIds": [2020023]
+          },
+          {
+            "name": "암자색 수련꽃",
+            "sourceIds": [2020014]
+          },
+          {
+            "name": "밀혈의 나무 싹",
+            "sourceIds": [2020015]
+          },
+          {
+            "name": "신혈의 나무 싹",
+            "sourceIds": [2020025]
+          },
+          {
+            "name": "혹기름",
+            "sourceIds": [2020004]
+          }
+        ]
+      },
+      {
+        "name": "기타 재료",
+        "items": [
+          {
+            "name": "끈",
+            "sourceIds": [15400]
+          },
+          {
+            "name": "신전석",
+            "sourceIds": [20795]
+          },
+          {
+            "name": "망가진 결정",
+            "sourceIds": [20780]
+          },
+          {
+            "name": "화산석",
+            "sourceIds": [20850]
+          },
+          {
+            "name": "의산석",
+            "sourceIds": [20852]
+          },
+          {
+            "name": "조약돌",
+            "sourceIds": [20855]
+          }
+        ]
+      },
+      {
+        "name": "기타 재료(DLC)",
+        "items": [
+          {
+            "name": "영묘석",
+            "sourceIds": [2020028]
+          },
+          {
+            "name": "가스석",
+            "sourceIds": [2020020]
+          },
+          {
+            "name": "손톱돌",
+            "sourceIds": [2020033]
+          },
+          {
+            "name": "뾰족한 조약돌",
+            "sourceIds": [2020034]
+          },
+          {
+            "name": "라우프의 둥지돌",
+            "sourceIds": [2020029]
+          },
+          {
+            "name": "소각로 가면",
+            "sourceIds": [2020035]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "upgrades",
+    "name": "강화 재료",
+    "isConfirmed": true,
+    "sections": [
+      {
+        "name": "성배병 강화",
+        "items": [
+          {
+            "name": "성배의 물방울",
+            "sourceIds": [10020]
+          },
+          {
+            "name": "황금 종자",
+            "sourceIds": [10010]
+          }
+        ]
+      },
+      {
+        "name": "그림자의 땅 가호 강화",
+        "items": [
+          {
+            "name": "그림자 나무 파편",
+            "sourceIds": [2010000]
+          },
+          {
+            "name": "영혼 재",
+            "sourceIds": [2010100]
+          }
+        ]
+      },
+      {
+        "name": "단석",
+        "items": [
+          {
+            "name": "단석 [1]",
+            "sourceIds": [10100]
+          },
+          {
+            "name": "단석 [2]",
+            "sourceIds": [10101]
+          },
+          {
+            "name": "단석 [3]",
+            "sourceIds": [10102]
+          },
+          {
+            "name": "단석 [4]",
+            "sourceIds": [10103]
+          },
+          {
+            "name": "단석 [5]",
+            "sourceIds": [10104]
+          },
+          {
+            "name": "단석 [6]",
+            "sourceIds": [10105]
+          },
+          {
+            "name": "단석 [7]",
+            "sourceIds": [10106]
+          },
+          {
+            "name": "단석 [8]",
+            "sourceIds": [10107]
+          },
+          {
+            "name": "고룡암의 단석",
+            "sourceIds": [10140]
+          }
+        ]
+      },
+      {
+        "name": "색 잃은 단석",
+        "items": [
+          {
+            "name": "색 잃은 단석 [1]",
+            "sourceIds": [10160]
+          },
+          {
+            "name": "색 잃은 단석 [2]",
+            "sourceIds": [10161]
+          },
+          {
+            "name": "색 잃은 단석 [3]",
+            "sourceIds": [10162]
+          },
+          {
+            "name": "색 잃은 단석 [4]",
+            "sourceIds": [10163]
+          },
+          {
+            "name": "색 잃은 단석 [5]",
+            "sourceIds": [10164]
+          },
+          {
+            "name": "색 잃은 단석 [6]",
+            "sourceIds": [10165]
+          },
+          {
+            "name": "색 잃은 단석 [7]",
+            "sourceIds": [10166]
+          },
+          {
+            "name": "색 잃은 단석 [8]",
+            "sourceIds": [10167]
+          },
+          {
+            "name": "색 잃은 단석 [9]",
+            "sourceIds": [10200]
+          },
+          {
+            "name": "고룡의 색 잃은 단석",
+            "sourceIds": [10168]
+          }
+        ]
+      },
+      {
+        "name": "묘 은방울꽃",
+        "items": [
+          {
+            "name": "묘 은방울꽃 [1]",
+            "sourceIds": [10900]
+          },
+          {
+            "name": "묘 은방울꽃 [2]",
+            "sourceIds": [10901]
+          },
+          {
+            "name": "묘 은방울꽃 [3]",
+            "sourceIds": [10902]
+          },
+          {
+            "name": "묘 은방울꽃 [4]",
+            "sourceIds": [10903]
+          },
+          {
+            "name": "묘 은방울꽃 [5]",
+            "sourceIds": [10904]
+          },
+          {
+            "name": "묘 은방울꽃 [6]",
+            "sourceIds": [10905]
+          },
+          {
+            "name": "묘 은방울꽃 [7]",
+            "sourceIds": [10906]
+          },
+          {
+            "name": "묘 은방울꽃 [8]",
+            "sourceIds": [10907]
+          },
+          {
+            "name": "묘 은방울꽃 [9]",
+            "sourceIds": [10908]
+          },
+          {
+            "name": "큰 묘 은방울꽃",
+            "sourceIds": [10909]
+          }
+        ]
+      },
+      {
+        "name": "영혼 묘 은방울꽃",
+        "items": [
+          {
+            "name": "영혼 묘 은방울꽃 [1]",
+            "sourceIds": [10910]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [2]",
+            "sourceIds": [10911]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [3]",
+            "sourceIds": [10912]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [4]",
+            "sourceIds": [10913]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [5]",
+            "sourceIds": [10914]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [6]",
+            "sourceIds": [10915]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [7]",
+            "sourceIds": [10916]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [8]",
+            "sourceIds": [10917]
+          },
+          {
+            "name": "영혼 묘 은방울꽃 [9]",
+            "sourceIds": [10918]
+          },
+          {
+            "name": "큰 영혼 묘 은방울꽃",
+            "sourceIds": [10919]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "key-items",
+    "name": "중요 아이템",
+    "sections": [
+      {
+        "name": "열쇠·부절",
+        "items": [
+          {
+            "name": "석검 열쇠",
+            "sourceIds": [8000]
+          },
+          {
+            "name": "휘석검 열쇠",
+            "sourceIds": [8186]
+          },
+          {
+            "name": "녹슨 열쇠",
+            "sourceIds": [8010]
+          },
+          {
+            "name": "객실 열쇠",
+            "sourceIds": [8134]
+          },
+          {
+            "name": "하수 감옥 열쇠",
+            "sourceIds": [8197]
+          },
+          {
+            "name": "버려진 왕가의 열쇠",
+            "sourceIds": [8199]
+          },
+          {
+            "name": "학원의 휘석 열쇠",
+            "sourceIds": [8109]
+          },
+          {
+            "name": "사리아의 봉인 열쇠",
+            "sourceIds": [8169]
+          },
+          {
+            "name": "카리아의 뒤집힌 동상",
+            "sourceIds": [8111]
+          },
+          {
+            "name": "덱타스의 부절(좌)",
+            "sourceIds": [8105]
+          },
+          {
+            "name": "덱타스의 부절(우)",
+            "sourceIds": [8106]
+          },
+          {
+            "name": "로르드의 부절",
+            "sourceIds": [8107]
+          },
+          {
+            "name": "성수의 비부절(좌)",
+            "sourceIds": [8175]
+          },
+          {
+            "name": "성수의 비부절(우)",
+            "sourceIds": [8176]
+          },
+          {
+            "name": "우물 바닥의 열쇠",
+            "sourceIds": [2008004]
+          },
+          {
+            "name": "창고 열쇠",
+            "sourceIds": [2008013]
+          },
+          {
+            "name": "기도실 열쇠",
+            "sourceIds": [2008036]
+          },
+          {
+            "name": "감옥 상층의 열쇠",
+            "sourceIds": [2008005]
+          },
+          {
+            "name": "감옥 하층의 열쇠",
+            "sourceIds": [2008006]
+          },
+          {
+            "name": "성벽 문 열쇠",
+            "sourceIds": [2008023]
+          }
+        ]
+      },
+      {
+        "name": "수복 룬",
+        "items": [
+          {
+            "name": "완전률의 수복 룬",
+            "sourceIds": [8182]
+          },
+          {
+            "name": "죽음의 왕자의 수복 룬",
+            "sourceIds": [8183]
+          },
+          {
+            "name": "흉악한 저주의 수복 룬",
+            "sourceIds": [8184]
+          }
+        ]
+      },
+      {
+        "name": "기타 중요 아이템",
+        "items": [
+          {
+            "name": "메모리 스톤",
+            "sourceIds": [10030]
+          },
+          {
+            "name": "부적주머니",
+            "sourceIds": [10040]
+          },
+          {
+            "name": "번데기들의 유품",
+            "sourceIds": [8171]
+          },
+          {
+            "name": "폭풍 매의 옛 왕",
+            "sourceIds": [8194]
+          },
+          {
+            "name": "일레나의 편지",
+            "sourceIds": [8131]
+          },
+          {
+            "name": "샤브리리의 포도",
+            "sourceIds": [1240]
+          },
+          {
+            "name": "손가락 자국의 포도",
+            "sourceIds": [8126]
+          },
+          {
+            "name": "라야의 목걸이",
+            "sourceIds": [8136]
+          },
+          {
+            "name": "뱀의 양막",
+            "sourceIds": [8129]
+          },
+          {
+            "name": "망각의 비약",
+            "sourceIds": [8128]
+          },
+          {
+            "name": "무희의 타악기",
+            "sourceIds": [8168]
+          },
+          {
+            "name": "무구한 금의 침",
+            "sourceIds": [8196]
+          },
+          {
+            "name": "무구한 금의 침",
+            "sourceIds": [8975]
+          },
+          {
+            "name": "무구한 금의 침",
+            "sourceIds": [8976]
+          },
+          {
+            "name": "전쟁 처녀의 의수",
+            "sourceIds": [8977]
+          },
+          {
+            "name": "알렉산더의 내용물",
+            "sourceIds": [8222]
+          },
+          {
+            "name": "피의 군주의 서포",
+            "sourceIds": [8154]
+          },
+          {
+            "name": "피의 군주의 서포",
+            "sourceIds": [8155]
+          },
+          {
+            "name": "삼켜진 단검",
+            "sourceIds": [8980]
+          },
+          {
+            "name": "검은 칼날의 각인",
+            "sourceIds": [8172]
+          },
+          {
+            "name": "죽음의 주흔",
+            "sourceIds": [8191]
+          },
+          {
+            "name": "모판의 저주",
+            "sourceIds": [8193]
+          },
+          {
+            "name": "학원의 휘석 열쇠",
+            "sourceIds": [8174]
+          },
+          {
+            "name": "셀렌의 원휘석",
+            "sourceIds": [8144]
+          },
+          {
+            "name": "셀브스의 정약",
+            "sourceIds": [8164]
+          },
+          {
+            "name": "셀브스의 소개장",
+            "sourceIds": [8143]
+          },
+          {
+            "name": "호박색 별빛",
+            "sourceIds": [8142]
+          },
+          {
+            "name": "호박색 정약",
+            "sourceIds": [8166]
+          },
+          {
+            "name": "손가락 죽임의 칼날",
+            "sourceIds": [8159]
+          },
+          {
+            "name": "작은 라니",
+            "sourceIds": [8146]
+          },
+          {
+            "name": "작은 라니",
+            "sourceIds": [8187]
+          },
+          {
+            "name": "암월의 반지",
+            "sourceIds": [8121]
+          },
+          {
+            "name": "사근",
+            "sourceIds": [2090]
+          },
+          {
+            "name": "짐승의 눈동자",
+            "sourceIds": [8979]
+          },
+          {
+            "name": "용의 심장",
+            "sourceIds": [10060]
+          },
+          {
+            "name": "베일의 심장",
+            "sourceIds": [2008011]
+          },
+          {
+            "name": "상실의 전회",
+            "sourceIds": [10070]
+          },
+          {
+            "name": "별의 물방울",
+            "sourceIds": [2130]
+          },
+          {
+            "name": "물방울 유생",
+            "sourceIds": [8185]
+          },
+          {
+            "name": "물방울 유생",
+            "sourceIds": [2008033]
+          },
+          {
+            "name": "프레이야에게 쓴 편지",
+            "sourceIds": [2008015]
+          },
+          {
+            "name": "비밀 의식의 두루마리",
+            "sourceIds": [2008014]
+          },
+          {
+            "name": "검은 시럽",
+            "sourceIds": [2008019]
+          },
+          {
+            "name": "구멍난 돌 목걸이",
+            "sourceIds": [2008008]
+          },
+          {
+            "name": "에이곤의 갈고리 손가락",
+            "sourceIds": [2008003]
+          },
+          {
+            "name": "메스메르의 불씨",
+            "sourceIds": [2008021]
+          },
+          {
+            "name": "도구 가방",
+            "sourceIds": [8500]
+          },
+          {
+            "name": "방랑 전사의 제작서 [1]",
+            "sourceIds": [9300]
+          },
+          {
+            "name": "방랑 전사의 제작서 [2]",
+            "sourceIds": [9311]
+          },
+          {
+            "name": "방랑 전사의 제작서 [3]",
+            "sourceIds": [9301]
+          },
+          {
+            "name": "방랑 전사의 제작서 [4]",
+            "sourceIds": [9380]
+          },
+          {
+            "name": "방랑 전사의 제작서 [5]",
+            "sourceIds": [9383]
+          },
+          {
+            "name": "방랑 전사의 제작서 [6]",
+            "sourceIds": [9302]
+          },
+          {
+            "name": "방랑 전사의 제작서 [7]",
+            "sourceIds": [9305]
+          },
+          {
+            "name": "방랑 전사의 제작서 [8]",
+            "sourceIds": [9388]
+          },
+          {
+            "name": "방랑 전사의 제작서 [9]",
+            "sourceIds": [9343]
+          },
+          {
+            "name": "방랑 전사의 제작서 [10]",
+            "sourceIds": [9303]
+          },
+          {
+            "name": "방랑 전사의 제작서 [11]",
+            "sourceIds": [9322]
+          },
+          {
+            "name": "방랑 전사의 제작서 [12]",
+            "sourceIds": [9306]
+          },
+          {
+            "name": "방랑 전사의 제작서 [13]",
+            "sourceIds": [9308]
+          },
+          {
+            "name": "방랑 전사의 제작서 [14]",
+            "sourceIds": [9387]
+          },
+          {
+            "name": "방랑 전사의 제작서 [15]",
+            "sourceIds": [9390]
+          },
+          {
+            "name": "방랑 전사의 제작서 [16]",
+            "sourceIds": [9329]
+          },
+          {
+            "name": "방랑 전사의 제작서 [17]",
+            "sourceIds": [9310]
+          },
+          {
+            "name": "방랑 전사의 제작서 [18]",
+            "sourceIds": [9327]
+          },
+          {
+            "name": "방랑 전사의 제작서 [19]",
+            "sourceIds": [9307]
+          },
+          {
+            "name": "방랑 전사의 제작서 [20]",
+            "sourceIds": [9323]
+          },
+          {
+            "name": "방랑 전사의 제작서 [21]",
+            "sourceIds": [9312]
+          },
+          {
+            "name": "방랑 전사의 제작서 [22]",
+            "sourceIds": [9389]
+          },
+          {
+            "name": "방랑 전사의 제작서 [23]",
+            "sourceIds": [9309]
+          },
+          {
+            "name": "방랑 전사의 제작서 [24]",
+            "sourceIds": [9391]
+          },
+          {
+            "name": "무구 장인의 제작서 [1]",
+            "sourceIds": [9320]
+          },
+          {
+            "name": "무구 장인의 제작서 [2]",
+            "sourceIds": [9321]
+          },
+          {
+            "name": "무구 장인의 제작서 [3]",
+            "sourceIds": [9328]
+          },
+          {
+            "name": "무구 장인의 제작서 [4]",
+            "sourceIds": [9326]
+          },
+          {
+            "name": "무구 장인의 제작서 [5]",
+            "sourceIds": [9331]
+          },
+          {
+            "name": "무구 장인의 제작서 [6]",
+            "sourceIds": [9330]
+          },
+          {
+            "name": "무구 장인의 제작서 [7]",
+            "sourceIds": [9325]
+          },
+          {
+            "name": "휘석 장인의 제작서 [1]",
+            "sourceIds": [9341]
+          },
+          {
+            "name": "휘석 장인의 제작서 [2]",
+            "sourceIds": [9345]
+          },
+          {
+            "name": "휘석 장인의 제작서 [3]",
+            "sourceIds": [9348]
+          },
+          {
+            "name": "휘석 장인의 제작서 [4]",
+            "sourceIds": [9340]
+          },
+          {
+            "name": "휘석 장인의 제작서 [5]",
+            "sourceIds": [9342]
+          },
+          {
+            "name": "휘석 장인의 제작서 [6]",
+            "sourceIds": [9346]
+          },
+          {
+            "name": "휘석 장인의 제작서 [7]",
+            "sourceIds": [9347]
+          },
+          {
+            "name": "휘석 장인의 제작서 [8]",
+            "sourceIds": [9344]
+          },
+          {
+            "name": "선교사의 제작서 [1]",
+            "sourceIds": [9361]
+          },
+          {
+            "name": "선교사의 제작서 [2]",
+            "sourceIds": [9360]
+          },
+          {
+            "name": "선교사의 제작서 [3]",
+            "sourceIds": [9365]
+          },
+          {
+            "name": "선교사의 제작서 [4]",
+            "sourceIds": [9364]
+          },
+          {
+            "name": "선교사의 제작서 [5]",
+            "sourceIds": [9363]
+          },
+          {
+            "name": "선교사의 제작서 [6]",
+            "sourceIds": [9313]
+          },
+          {
+            "name": "선교사의 제작서 [7]",
+            "sourceIds": [9423]
+          },
+          {
+            "name": "고룡 신도의 제작서 [1]",
+            "sourceIds": [9400]
+          },
+          {
+            "name": "고룡 신도의 제작서 [2]",
+            "sourceIds": [9401]
+          },
+          {
+            "name": "고룡 신도의 제작서 [3]",
+            "sourceIds": [9403]
+          },
+          {
+            "name": "고룡 신도의 제작서 [4]",
+            "sourceIds": [9402]
+          },
+          {
+            "name": "조향사의 제작서 [1]",
+            "sourceIds": [9384]
+          },
+          {
+            "name": "조향사의 제작서 [2]",
+            "sourceIds": [9385]
+          },
+          {
+            "name": "조향사의 제작서 [3]",
+            "sourceIds": [9386]
+          },
+          {
+            "name": "조향사의 제작서 [4]",
+            "sourceIds": [9392]
+          },
+          {
+            "name": "파리스의 제작서 [1]",
+            "sourceIds": [9420]
+          },
+          {
+            "name": "파리스의 제작서 [2]",
+            "sourceIds": [9422]
+          },
+          {
+            "name": "파리스의 제작서 [3]",
+            "sourceIds": [9421]
+          },
+          {
+            "name": "병자의 제작서 [1]",
+            "sourceIds": [9440]
+          },
+          {
+            "name": "병자의 제작서 [2]",
+            "sourceIds": [9441]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [1]",
+            "sourceIds": [2009309]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [2]",
+            "sourceIds": [2009323]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [3]",
+            "sourceIds": [2009319]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [4]",
+            "sourceIds": [2009310]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [5]",
+            "sourceIds": [2009311]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [6]",
+            "sourceIds": [2009322]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [7]",
+            "sourceIds": [2009313]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [8]",
+            "sourceIds": [2009318]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [9]",
+            "sourceIds": [2009314]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [10]",
+            "sourceIds": [2009315]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [11]",
+            "sourceIds": [2009316]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [12]",
+            "sourceIds": [2009312]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [13]",
+            "sourceIds": [2009320]
+          },
+          {
+            "name": "큰 항아리 도공의 제작서 [14]",
+            "sourceIds": [2009321]
+          },
+          {
+            "name": "종기사의 제작서",
+            "sourceIds": [2009329]
+          },
+          {
+            "name": "불 기사의 제작서 [1]",
+            "sourceIds": [2009327]
+          },
+          {
+            "name": "불 기사의 제작서 [2]",
+            "sourceIds": [2009340]
+          },
+          {
+            "name": "종군사제의 제작서 [1]",
+            "sourceIds": [2009330]
+          },
+          {
+            "name": "종군사제의 제작서 [2]",
+            "sourceIds": [2009332]
+          },
+          {
+            "name": "종군사제의 제작서 [3]",
+            "sourceIds": [2009339]
+          },
+          {
+            "name": "종군사제의 제작서 [4]",
+            "sourceIds": [2009343]
+          },
+          {
+            "name": "고룡 기사의 제작서 [1]",
+            "sourceIds": [2009324]
+          },
+          {
+            "name": "고룡 기사의 제작서 [2]",
+            "sourceIds": [2009328]
+          },
+          {
+            "name": "트리나 신도의 제작서 [1]",
+            "sourceIds": [2009326]
+          },
+          {
+            "name": "트리나 신도의 제작서 [2]",
+            "sourceIds": [2009345]
+          },
+          {
+            "name": "트리나 신도의 제작서 [3]",
+            "sourceIds": [2009334]
+          },
+          {
+            "name": "미친 장인의 제작서 [1]",
+            "sourceIds": [2009325]
+          },
+          {
+            "name": "미친 장인의 제작서 [2]",
+            "sourceIds": [2009317]
+          },
+          {
+            "name": "미친 장인의 제작서 [3]",
+            "sourceIds": [2009338]
+          },
+          {
+            "name": "묘지기의 제작서 [1]",
+            "sourceIds": [2009344]
+          },
+          {
+            "name": "묘지기의 제작서 [2]",
+            "sourceIds": [2009335]
+          },
+          {
+            "name": "티비아의 제작서",
+            "sourceIds": [2009337]
+          },
+          {
+            "name": "손가락 추종자의 제작서 [1]",
+            "sourceIds": [2009342]
+          },
+          {
+            "name": "손가락 추종자의 제작서 [2]",
+            "sourceIds": [2009308]
+          },
+          {
+            "name": "고고학자의 제작서 [1]",
+            "sourceIds": [2009341]
+          },
+          {
+            "name": "고고학자의 제작서 [2]",
+            "sourceIds": [2009336]
+          },
+          {
+            "name": "수집벌레의 제작서 [1]",
+            "sourceIds": [2009302]
+          },
+          {
+            "name": "수집벌레의 제작서 [2]",
+            "sourceIds": [2009303]
+          },
+          {
+            "name": "수집벌레의 제작서 [3]",
+            "sourceIds": [2009304]
+          },
+          {
+            "name": "수집벌레의 제작서 [4]",
+            "sourceIds": [2009305]
+          },
+          {
+            "name": "수집벌레의 제작서 [5]",
+            "sourceIds": [2009306]
+          },
+          {
+            "name": "수집벌레의 제작서 [6]",
+            "sourceIds": [2009301]
+          },
+          {
+            "name": "수집벌레의 제작서 [7]",
+            "sourceIds": [2009333]
+          },
+          {
+            "name": "에이곤의 제작서 [1]",
+            "sourceIds": [2009331]
+          },
+          {
+            "name": "에이곤의 제작서 [2]",
+            "sourceIds": [2009307]
+          },
+          {
+            "name": "환혼의 종",
+            "sourceIds": [8158]
+          },
+          {
+            "name": "숫돌 소도",
+            "sourceIds": [8590]
+          },
+          {
+            "name": "철의 숫돌 칼날",
+            "sourceIds": [8970]
+          },
+          {
+            "name": "휘석의 숫돌 칼날",
+            "sourceIds": [8973]
+          },
+          {
+            "name": "불탄 숫돌 칼날",
+            "sourceIds": [8971]
+          },
+          {
+            "name": "성스러운 숫돌 칼날",
+            "sourceIds": [8972]
+          },
+          {
+            "name": "검은 숫돌 칼날",
+            "sourceIds": [8974]
+          },
+          {
+            "name": "재봉 바늘",
+            "sourceIds": [8161]
+          },
+          {
+            "name": "황금 재봉 바늘",
+            "sourceIds": [8162]
+          },
+          {
+            "name": "재봉도구",
+            "sourceIds": [8163]
+          },
+          {
+            "name": "황금의 재봉도구",
+            "sourceIds": [8188]
+          },
+          {
+            "name": "영마의 복장 「트리 가드」",
+            "sourceIds": [2009600]
+          },
+          {
+            "name": "영마의 복장 「카리아의 은빛 말」",
+            "sourceIds": [2009610]
+          },
+          {
+            "name": "영마의 복장 「장송의 밤빛 말」",
+            "sourceIds": [2009620]
+          },
+          {
+            "name": "지도 조각(림그레이브 서부)",
+            "sourceIds": [8600]
+          },
+          {
+            "name": "지도 조각(림그레이브 동부)",
+            "sourceIds": [8602]
+          },
+          {
+            "name": "지도 조각(흐느낌의 반도)",
+            "sourceIds": [8601]
+          },
+          {
+            "name": "지도 조각(리에니에 서부)",
+            "sourceIds": [8605]
+          },
+          {
+            "name": "지도 조각(리에니에 동부)",
+            "sourceIds": [8603]
+          },
+          {
+            "name": "지도 조각(리에니에 북부)",
+            "sourceIds": [8604]
+          },
+          {
+            "name": "지도 조각(알터 고원)",
+            "sourceIds": [8606]
+          },
+          {
+            "name": "지도 조각(도읍 로데일)",
+            "sourceIds": [8607]
+          },
+          {
+            "name": "지도 조각(겔미어 화산)",
+            "sourceIds": [8608]
+          },
+          {
+            "name": "지도 조각(케일리드)",
+            "sourceIds": [8609]
+          },
+          {
+            "name": "지도 조각(용총)",
+            "sourceIds": [8610]
+          },
+          {
+            "name": "지도 조각(거인 산령 서부)",
+            "sourceIds": [8611]
+          },
+          {
+            "name": "지도 조각(거인 산령 동부)",
+            "sourceIds": [8612]
+          },
+          {
+            "name": "지도 조각(구별된 설원)",
+            "sourceIds": [8618]
+          },
+          {
+            "name": "지도 조각(에인세르 강)",
+            "sourceIds": [8613]
+          },
+          {
+            "name": "지도 조각(부패한 호수)",
+            "sourceIds": [8614]
+          },
+          {
+            "name": "지도 조각(시프라 강)",
+            "sourceIds": [8615]
+          },
+          {
+            "name": "지도 조각(모그윈 왕조)",
+            "sourceIds": [8616]
+          },
+          {
+            "name": "지도 조각(깊은 뿌리 밑바닥)",
+            "sourceIds": [8617]
+          },
+          {
+            "name": "지도 조각(묘지 평원)",
+            "sourceIds": [2008600]
+          },
+          {
+            "name": "지도 조각(그림자 알터)",
+            "sourceIds": [2008601]
+          },
+          {
+            "name": "지도 조각(남쪽 해안)",
+            "sourceIds": [2008602]
+          },
+          {
+            "name": "지도 조각(라우프의 옛 유적)",
+            "sourceIds": [2008603]
+          },
+          {
+            "name": "지도 조각(나락)",
+            "sourceIds": [2008604]
+          },
+          {
+            "name": "칼레의 방울",
+            "sourceIds": [8920]
+          },
+          {
+            "name": "방랑 상인의 방울 [1]",
+            "sourceIds": [8921]
+          },
+          {
+            "name": "방랑 상인의 방울 [2]",
+            "sourceIds": [8922]
+          },
+          {
+            "name": "방랑 상인의 방울 [3]",
+            "sourceIds": [8923]
+          },
+          {
+            "name": "방랑 상인의 방울 [4]",
+            "sourceIds": [8924]
+          },
+          {
+            "name": "방랑 상인의 방울 [5]",
+            "sourceIds": [8925]
+          },
+          {
+            "name": "방랑 상인의 방울 [6]",
+            "sourceIds": [8928]
+          },
+          {
+            "name": "방랑 상인의 방울 [7]",
+            "sourceIds": [8930]
+          },
+          {
+            "name": "방랑 상인의 방울 [8]",
+            "sourceIds": [8931]
+          },
+          {
+            "name": "방랑 상인의 방울 [9]",
+            "sourceIds": [8932]
+          },
+          {
+            "name": "방랑 상인의 방울 [10]",
+            "sourceIds": [8933]
+          },
+          {
+            "name": "은둔 상인의 방울 [1]",
+            "sourceIds": [8926]
+          },
+          {
+            "name": "은둔 상인의 방울 [2]",
+            "sourceIds": [8927]
+          },
+          {
+            "name": "은둔 상인의 방울 [3]",
+            "sourceIds": [8935]
+          },
+          {
+            "name": "속세를 떠난 상인의 방울 [1]",
+            "sourceIds": [8929]
+          },
+          {
+            "name": "속세를 떠난 상인의 방울 [2]",
+            "sourceIds": [8936]
+          },
+          {
+            "name": "속세를 떠난 상인의 방울 [3]",
+            "sourceIds": [8938]
+          },
+          {
+            "name": "남겨진 상인의 방울",
+            "sourceIds": [8937]
+          },
+          {
+            "name": "붙잡힌 상인의 방울",
+            "sourceIds": [8939]
+          },
+          {
+            "name": "단석 채석꾼의 방울 [1]",
+            "sourceIds": [8951]
+          },
+          {
+            "name": "단석 채석꾼의 방울 [2]",
+            "sourceIds": [8952]
+          },
+          {
+            "name": "단석 채석꾼의 방울 [3]",
+            "sourceIds": [8953]
+          },
+          {
+            "name": "단석 채석꾼의 방울 [4]",
+            "sourceIds": [8954]
+          },
+          {
+            "name": "색 잃은 채석꾼의 방울 [1]",
+            "sourceIds": [8955]
+          },
+          {
+            "name": "색 잃은 채석꾼의 방울 [2]",
+            "sourceIds": [8956]
+          },
+          {
+            "name": "색 잃은 채석꾼의 방울 [3]",
+            "sourceIds": [8957]
+          },
+          {
+            "name": "색 잃은 채석꾼의 방울 [4]",
+            "sourceIds": [8958]
+          },
+          {
+            "name": "색 잃은 채석꾼의 방울 [5]",
+            "sourceIds": [8959]
+          },
+          {
+            "name": "은방울꽃 채취자의 방울 [1]",
+            "sourceIds": [8960]
+          },
+          {
+            "name": "은방울꽃 채취자의 방울 [2]",
+            "sourceIds": [8961]
+          },
+          {
+            "name": "은방울꽃 채취자의 방울 [3]",
+            "sourceIds": [8962]
+          },
+          {
+            "name": "영혼 꽃 채취자의 방울 [1]",
+            "sourceIds": [8963]
+          },
+          {
+            "name": "영혼 꽃 채취자의 방울 [2]",
+            "sourceIds": [8964]
+          },
+          {
+            "name": "영혼 꽃 채취자의 방울 [3]",
+            "sourceIds": [8965]
+          },
+          {
+            "name": "뼈 장사꾼의 방울",
+            "sourceIds": [8945]
+          },
+          {
+            "name": "고기 장사꾼의 방울",
+            "sourceIds": [8946]
+          },
+          {
+            "name": "약 장사꾼의 방울",
+            "sourceIds": [8947]
+          },
+          {
+            "name": "중력 장사꾼의 방울",
+            "sourceIds": [8948]
+          },
+          {
+            "name": "풀 장사꾼의 방울",
+            "sourceIds": [2008902]
+          },
+          {
+            "name": "버섯 장사꾼의 방울 [1]",
+            "sourceIds": [2008903]
+          },
+          {
+            "name": "버섯 장사꾼의 방울 [2]",
+            "sourceIds": [2008904]
+          },
+          {
+            "name": "곰팡이 장사꾼의 방울",
+            "sourceIds": [2008906]
+          },
+          {
+            "name": "기름 장사꾼의 방울",
+            "sourceIds": [2008905]
+          },
+          {
+            "name": "끈 장사꾼의 방울",
+            "sourceIds": [2008909]
+          },
+          {
+            "name": "마술기사의 방울",
+            "sourceIds": [2008908]
+          },
+          {
+            "name": "셀렌의 방울",
+            "sourceIds": [8913]
+          },
+          {
+            "name": "셀브스의 방울",
+            "sourceIds": [8911]
+          },
+          {
+            "name": "토푸스의 방울",
+            "sourceIds": [8919]
+          },
+          {
+            "name": "콜린의 방울",
+            "sourceIds": [8943]
+          },
+          {
+            "name": "미리엘의 방울",
+            "sourceIds": [8917]
+          },
+          {
+            "name": "D의 방울",
+            "sourceIds": [8915]
+          },
+          {
+            "name": "고리의 방울",
+            "sourceIds": [8944]
+          },
+          {
+            "name": "로지에르의 방울",
+            "sourceIds": [8941]
+          },
+          {
+            "name": "베르나르의 방울",
+            "sourceIds": [8916]
+          },
+          {
+            "name": "이지의 방울",
+            "sourceIds": [8940]
+          },
+          {
+            "name": "고스토크의 방울",
+            "sourceIds": [8918]
+          },
+          {
+            "name": "피디의 방울",
+            "sourceIds": [8910]
+          },
+          {
+            "name": "패치의 방울",
+            "sourceIds": [8912]
+          },
+          {
+            "name": "불량배의 방울",
+            "sourceIds": [8942]
+          },
+          {
+            "name": "무아의 방울",
+            "sourceIds": [2008900]
+          },
+          {
+            "name": "유미르의 방울",
+            "sourceIds": [2008901]
+          },
+          {
+            "name": "에이곤의 방울",
+            "sourceIds": [2008907]
+          },
+          {
+            "name": "학원의 스크롤",
+            "sourceIds": [8866]
+          },
+          {
+            "name": "교실의 스크롤",
+            "sourceIds": [8850]
+          },
+          {
+            "name": "왕가의 스크롤",
+            "sourceIds": [8851]
+          },
+          {
+            "name": "두 손가락의 기도서",
+            "sourceIds": [8858]
+          },
+          {
+            "name": "암부의 기도서",
+            "sourceIds": [8859]
+          },
+          {
+            "name": "황금률원론",
+            "sourceIds": [8862]
+          },
+          {
+            "name": "용신앙의 기도서",
+            "sourceIds": [8864]
+          },
+          {
+            "name": "옛 용의 기도서",
+            "sourceIds": [8865]
+          },
+          {
+            "name": "불의 승병의 기도서",
+            "sourceIds": [8855]
+          },
+          {
+            "name": "거인의 기도서",
+            "sourceIds": [8856]
+          },
+          {
+            "name": "신의 살갗의 기도서",
+            "sourceIds": [8857]
+          },
+          {
+            "name": "금 간 항아리",
+            "sourceIds": [9500]
+          },
+          {
+            "name": "의식 항아리",
+            "sourceIds": [9501]
+          },
+          {
+            "name": "금 간 큰 항아리",
+            "sourceIds": [2009500]
+          },
+          {
+            "name": "조향병",
+            "sourceIds": [9510]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "remembrances-and-runes",
+    "name": "추억·거대한 룬",
+    "isConfirmed": true,
+    "sections": [
+      {
+        "name": "추억",
+        "items": [
+          {
+            "name": "선조령의 왕의 추억",
+            "sourceIds": [2962]
+          },
+          {
+            "name": "암흑의 부산물의 추억",
+            "sourceIds": [2964]
+          },
+          {
+            "name": "사룡의 추억",
+            "sourceIds": [2960]
+          },
+          {
+            "name": "불의 거인의 추억",
+            "sourceIds": [2961]
+          },
+          {
+            "name": "접목의 추억",
+            "sourceIds": [2950]
+          },
+          {
+            "name": "만월의 여왕의 추억",
+            "sourceIds": [2959]
+          },
+          {
+            "name": "모독의 군주의 추억",
+            "sourceIds": [2953]
+          },
+          {
+            "name": "별 부수기의 추억",
+            "sourceIds": [2951]
+          },
+          {
+            "name": "흉조의 왕의 추억",
+            "sourceIds": [2952]
+          },
+          {
+            "name": "피의 군주의 추억",
+            "sourceIds": [2955]
+          },
+          {
+            "name": "부패의 여신의 추억",
+            "sourceIds": [2954]
+          },
+          {
+            "name": "흑검의 추억",
+            "sourceIds": [2956]
+          },
+          {
+            "name": "호라 루의 추억",
+            "sourceIds": [2957]
+          },
+          {
+            "name": "용왕의 추억",
+            "sourceIds": [2958]
+          },
+          {
+            "name": "엘데의 추억",
+            "sourceIds": [2963]
+          },
+          {
+            "name": "사자무의 추억",
+            "sourceIds": [2002905]
+          },
+          {
+            "name": "쌍월의 기사의 추억",
+            "sourceIds": [2002903]
+          },
+          {
+            "name": "수렁의 추억",
+            "sourceIds": [2002910]
+          },
+          {
+            "name": "멧돼지 탄 자의 추억",
+            "sourceIds": [2002900]
+          },
+          {
+            "name": "영륜초의 추억",
+            "sourceIds": [2002902]
+          },
+          {
+            "name": "꽃봉오리의 성녀의 추억",
+            "sourceIds": [2002904]
+          },
+          {
+            "name": "미친 불의 왕의 추억",
+            "sourceIds": [2002908]
+          },
+          {
+            "name": "손가락의 어머니의 추억",
+            "sourceIds": [2002909]
+          },
+          {
+            "name": "가시공의 추억",
+            "sourceIds": [2002901]
+          },
+          {
+            "name": "신과 왕의 추억",
+            "sourceIds": [2002907]
+          }
+        ]
+      },
+      {
+        "name": "거대한 룬",
+        "items": [
+          {
+            "name": "태어나지 않는 자의 거대한 룬",
+            "sourceIds": [10080]
+          },
+          {
+            "name": "고드릭의 거대한 룬",
+            "sourceIds": [8148, 191]
+          },
+          {
+            "name": "라이커드의 거대한 룬",
+            "sourceIds": [8151, 194]
+          },
+          {
+            "name": "라단의 거대한 룬",
+            "sourceIds": [8149, 192]
+          },
+          {
+            "name": "모르고트의 거대한 룬",
+            "sourceIds": [8150, 193]
+          },
+          {
+            "name": "모그의 거대한 룬",
+            "sourceIds": [8152, 195]
+          },
+          {
+            "name": "말레니아의 거대한 룬",
+            "sourceIds": [8153, 196]
+          },
+          {
+            "name": "미켈라의 거대한 룬",
+            "sourceIds": [2008000]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "documents",
+    "name": "문서·정보",
+    "items": [
+      {
+        "name": "문서 「영약의 성배병」",
+        "sourceIds": [8702]
+      },
+      {
+        "name": "문서 「역참터」",
+        "sourceIds": [8712]
+      },
+      {
+        "name": "문서 「전송문」",
+        "sourceIds": [8713]
+      },
+      {
+        "name": "문서 「숨겨진 동굴」",
+        "sourceIds": [8700]
+      },
+      {
+        "name": "문서 「교수의 비밀」",
+        "sourceIds": [8224]
+      },
+      {
+        "name": "문서 「도읍 지하」",
+        "sourceIds": [8717]
+      },
+      {
+        "name": "문서 「중력의 힘」",
+        "sourceIds": [8710]
+      },
+      {
+        "name": "문서 「아인들」",
+        "sourceIds": [8708]
+      },
+      {
+        "name": "문서 「육지멍게」",
+        "sourceIds": [8709]
+      },
+      {
+        "name": "문서 「채석꾼 트롤」",
+        "sourceIds": [8703]
+      },
+      {
+        "name": "문서 「망령」",
+        "sourceIds": [8711]
+      },
+      {
+        "name": "문서 「불의 전차」",
+        "sourceIds": [8707]
+      },
+      {
+        "name": "문서 「걷는 영묘」",
+        "sourceIds": [8704]
+      },
+      {
+        "name": "문서 「모습 없는 자객」",
+        "sourceIds": [8705]
+      },
+      {
+        "name": "문서 「임프들의 그림자」",
+        "sourceIds": [8701]
+      },
+      {
+        "name": "문서 「미친 불 마을」",
+        "sourceIds": [8715]
+      },
+      {
+        "name": "문서 「미친 불의 주인」",
+        "sourceIds": [8716]
+      },
+      {
+        "name": "문서 「미켈라의 침」",
+        "sourceIds": [8714]
+      },
+      {
+        "name": "화산관의 초대장",
+        "sourceIds": [8137]
+      },
+      {
+        "name": "화산관에서 보낸 편지",
+        "sourceIds": [8127]
+      },
+      {
+        "name": "화산관에서 보낸 편지",
+        "sourceIds": [8132]
+      },
+      {
+        "name": "붉은 편지",
+        "sourceIds": [8133]
+      },
+      {
+        "name": "패치에게 보내는 편지",
+        "sourceIds": [8167]
+      },
+      {
+        "name": "베르나르에게 보내는 편지",
+        "sourceIds": [8173]
+      },
+      {
+        "name": "조라야스의 편지",
+        "sourceIds": [8221]
+      },
+      {
+        "name": "약속 장소 지도",
+        "sourceIds": [8198]
+      },
+      {
+        "name": "사리아 도시의 비밀",
+        "sourceIds": [8978]
+      },
+      {
+        "name": "신기루의 수수께끼",
+        "sourceIds": [8660]
+      },
+      {
+        "name": "매우 낡은 지도",
+        "sourceIds": [8225]
+      },
+      {
+        "name": "각인의 단서",
+        "sourceIds": [8190]
+      },
+      {
+        "name": "로지에르의 편지",
+        "sourceIds": [8223]
+      },
+      {
+        "name": "그림 「귀소」",
+        "sourceIds": [8200]
+      },
+      {
+        "name": "그림 「날지 못하는 새」",
+        "sourceIds": [8205]
+      },
+      {
+        "name": "그림 「재탄」",
+        "sourceIds": [8201]
+      },
+      {
+        "name": "그림 「예언」",
+        "sourceIds": [8204]
+      },
+      {
+        "name": "그림 「영웅의 노래」",
+        "sourceIds": [8202]
+      },
+      {
+        "name": "그림 「붉은 사자」",
+        "sourceIds": [8206]
+      },
+      {
+        "name": "그림 「마술사」",
+        "sourceIds": [8203]
+      },
+      {
+        "name": "십자의 지도",
+        "sourceIds": [2008007]
+      },
+      {
+        "name": "새로운 십자의 지도",
+        "sourceIds": [2008012]
+      },
+      {
+        "name": "유적의 지도",
+        "sourceIds": [2008016]
+      },
+      {
+        "name": "유적의 지도(두번째 장)",
+        "sourceIds": [2008017]
+      },
+      {
+        "name": "유적의 지도(세번째 장)",
+        "sourceIds": [2008018]
+      },
+      {
+        "name": "그림자의 탑에 남긴 편지",
+        "sourceIds": [2008037]
+      },
+      {
+        "name": "성채 십자에 남긴 편지",
+        "sourceIds": [2008027]
+      },
+      {
+        "name": "보관고 십자에 남긴 편지",
+        "sourceIds": [2008030]
+      },
+      {
+        "name": "옛 유적 십자에 남긴 편지",
+        "sourceIds": [2008028]
+      },
+      {
+        "name": "레다가 남긴 편지",
+        "sourceIds": [2008034]
+      },
+      {
+        "name": "승려의 편지",
+        "sourceIds": [2008029]
+      },
+      {
+        "name": "문서 「영기류 봉인」",
+        "sourceIds": [2008031]
+      },
+      {
+        "name": "소각로 장인의 메모",
+        "sourceIds": [2008025]
+      },
+      {
+        "name": "버려진 일기",
+        "sourceIds": [2008032]
+      },
+      {
+        "name": "그림 「침공」",
+        "sourceIds": [2008200]
+      },
+      {
+        "name": "그림 「신의 탑」",
+        "sourceIds": [2008201]
+      },
+      {
+        "name": "그림 「용의 경지」",
+        "sourceIds": [2008202]
+      },
+      {
+        "name": "설명 「배움의 동굴」",
+        "sourceIds": [9142]
+      },
+      {
+        "name": "설명 「축복」",
+        "sourceIds": [9100]
+      },
+      {
+        "name": "설명 「축복의 인도」",
+        "sourceIds": [9108]
+      },
+      {
+        "name": "설명 「지도」",
+        "sourceIds": [9107]
+      },
+      {
+        "name": "설명 「축복으로 이동」",
+        "sourceIds": [9130]
+      },
+      {
+        "name": "설명 「원탁」",
+        "sourceIds": [9132]
+      },
+      {
+        "name": "설명 「사망」",
+        "sourceIds": [9110]
+      },
+      {
+        "name": "설명 「마리카의 쐐기」",
+        "sourceIds": [9105]
+      },
+      {
+        "name": "설명 「가드」",
+        "sourceIds": [9112]
+      },
+      {
+        "name": "설명 「회피」",
+        "sourceIds": [9138]
+      },
+      {
+        "name": "설명 「무기 바꿔 들기」",
+        "sourceIds": [9140]
+      },
+      {
+        "name": "설명 「자세 무너뜨리기」",
+        "sourceIds": [9104]
+      },
+      {
+        "name": "설명 「가드 카운터」",
+        "sourceIds": [9106]
+      },
+      {
+        "name": "설명 「활」",
+        "sourceIds": [9102]
+      },
+      {
+        "name": "설명 「전투 기술」",
+        "sourceIds": [9129]
+      },
+      {
+        "name": "설명 「마술과 기도」",
+        "sourceIds": [9101]
+      },
+      {
+        "name": "설명 「영체 소환」",
+        "sourceIds": [9111]
+      },
+      {
+        "name": "설명 「비문 아이콘」",
+        "sourceIds": [9127]
+      },
+      {
+        "name": "설명 「승마」",
+        "sourceIds": [9109]
+      },
+      {
+        "name": "설명 「영기류 점프」",
+        "sourceIds": [9118]
+      },
+      {
+        "name": "설명 「웅크리기」",
+        "sourceIds": [9103]
+      },
+      {
+        "name": "설명 「새의 망원경」",
+        "sourceIds": [9117]
+      },
+      {
+        "name": "설명 「물방울 스카라베」",
+        "sourceIds": [9120]
+      },
+      {
+        "name": "설명 「적 집단 격파」",
+        "sourceIds": [9119]
+      },
+      {
+        "name": "설명 「아이템 제작」",
+        "sourceIds": [9113]
+      },
+      {
+        "name": "설명 「소재 아이템」",
+        "sourceIds": [9134]
+      },
+      {
+        "name": "설명 「그릇 아이템」",
+        "sourceIds": [9135]
+      },
+      {
+        "name": "설명 「영약의 성배병」",
+        "sourceIds": [9115]
+      },
+      {
+        "name": "설명 「무기 강화」",
+        "sourceIds": [9131]
+      },
+      {
+        "name": "설명 「전투 기술 부여」",
+        "sourceIds": [9116]
+      },
+      {
+        "name": "설명 「속성 부여」",
+        "sourceIds": [9136]
+      },
+      {
+        "name": "설명 「파우치」",
+        "sourceIds": [9137]
+      },
+      {
+        "name": "설명 「거대한 룬」",
+        "sourceIds": [9141]
+      },
+      {
+        "name": "설명 「다른 플레이어 소환」",
+        "sourceIds": [9121]
+      },
+      {
+        "name": "설명 「협력 멀티 플레이」",
+        "sourceIds": [9122]
+      },
+      {
+        "name": "설명 「적대 멀티 플레이」",
+        "sourceIds": [9123]
+      },
+      {
+        "name": "설명 「침입 멀티 플레이」",
+        "sourceIds": [9124]
+      },
+      {
+        "name": "설명 「사냥꾼 소환 요청」",
+        "sourceIds": [9128]
+      },
+      {
+        "name": "설명 「사냥꾼 멀티 플레이」",
+        "sourceIds": [9125]
+      },
+      {
+        "name": "설명 「사인 대기소」",
+        "sourceIds": [9126]
+      },
+      {
+        "name": "설명 「결투」",
+        "sourceIds": [9150]
+      },
+      {
+        "name": "설명 「공투/난투」",
+        "sourceIds": [9151]
+      },
+      {
+        "name": "설명 「뼛가루 허용 투기」",
+        "sourceIds": [9152]
+      },
+      {
+        "name": "설명 「원탁의 마리카 동상」",
+        "sourceIds": [9153]
+      },
+      {
+        "name": "설명 「그림자 나무의 가호」",
+        "sourceIds": [2009160]
+      },
+      {
+        "name": "설명 「영혼 재의 가호」",
+        "sourceIds": [2009161]
+      },
+      {
+        "name": "설명 「인벤토리의 새 기능」",
+        "sourceIds": [2009162]
+      }
+    ]
+  },
+  {
+    "id": "gestures",
+    "name": "제스처",
+    "isConfirmed": true,
+    "items": [
+      {
+        "name": "앞을 가리키기",
+        "sourceIds": [9011]
+      },
+      {
+        "name": "위를 가리키기",
+        "sourceIds": [9012]
+      },
+      {
+        "name": "아래를 가리키기",
+        "sourceIds": [9013]
+      },
+      {
+        "name": "기다려",
+        "sourceIds": [9015]
+      },
+      {
+        "name": "진정해",
+        "sourceIds": [9016]
+      },
+      {
+        "name": "손을 흔든다",
+        "sourceIds": [9007]
+      },
+      {
+        "name": "부르는 손짓",
+        "sourceIds": [9014]
+      },
+      {
+        "name": "가벼운 인사",
+        "sourceIds": [9008]
+      },
+      {
+        "name": "환영",
+        "sourceIds": [9006]
+      },
+      {
+        "name": "박수",
+        "sourceIds": [9026]
+      },
+      {
+        "name": "주먹 꾹",
+        "sourceIds": [9009]
+      },
+      {
+        "name": "뛰어오르며 환희",
+        "sourceIds": [9027]
+      },
+      {
+        "name": "양손으로 환희",
+        "sourceIds": [9028]
+      },
+      {
+        "name": "빙글 돌기",
+        "sourceIds": [9029]
+      },
+      {
+        "name": "생각하며 끄덕임",
+        "sourceIds": [9017]
+      },
+      {
+        "name": "핑거 스냅",
+        "sourceIds": [9030]
+      },
+      {
+        "name": "아자 아자 아자",
+        "sourceIds": [9020]
+      },
+      {
+        "name": "오 오 오",
+        "sourceIds": [9021]
+      },
+      {
+        "name": "겨루기 소망",
+        "sourceIds": [2009001]
+      },
+      {
+        "name": "인사",
+        "sourceIds": [9000]
+      },
+      {
+        "name": "정중한 인사",
+        "sourceIds": [9001]
+      },
+      {
+        "name": "분부대로 하겠습니다",
+        "sourceIds": [9010]
+      },
+      {
+        "name": "감사",
+        "sourceIds": [9002]
+      },
+      {
+        "name": "커트시",
+        "sourceIds": [9003]
+      },
+      {
+        "name": "공손한 인사",
+        "sourceIds": [9004]
+      },
+      {
+        "name": "나의 왕이여",
+        "sourceIds": [9005]
+      },
+      {
+        "name": "당신과 함께",
+        "sourceIds": [2009003]
+      },
+      {
+        "name": "어머니여",
+        "sourceIds": [2009004]
+      },
+      {
+        "name": "귀공, 무슨 일인가",
+        "sourceIds": [9040]
+      },
+      {
+        "name": "검에 맹세코",
+        "sourceIds": [9022]
+      },
+      {
+        "name": "호슬로의 맹세",
+        "sourceIds": [9023]
+      },
+      {
+        "name": "내 안에 불꽃 있으라",
+        "sourceIds": [9024]
+      },
+      {
+        "name": "고리의 포즈",
+        "sourceIds": [9049, 9050]
+      },
+      {
+        "name": "미켈라의 고리",
+        "sourceIds": [2009000]
+      },
+      {
+        "name": "예지",
+        "sourceIds": [9045]
+      },
+      {
+        "name": "기도",
+        "sourceIds": [9041]
+      },
+      {
+        "name": "매료된 기도",
+        "sourceIds": [9042]
+      },
+      {
+        "name": "황홀",
+        "sourceIds": [9043]
+      },
+      {
+        "name": "내재하는 규율",
+        "sourceIds": [9047]
+      },
+      {
+        "name": "외부의 규율",
+        "sourceIds": [9046]
+      },
+      {
+        "name": "황금률의 전모",
+        "sourceIds": [9048]
+      },
+      {
+        "name": "두 손가락",
+        "sourceIds": [2009002]
+      },
+      {
+        "name": "무릎 꿇고 절하기",
+        "sourceIds": [9018]
+      },
+      {
+        "name": "목숨 구걸",
+        "sourceIds": [9019]
+      },
+      {
+        "name": "책상다리",
+        "sourceIds": [9033]
+      },
+      {
+        "name": "앉아서 자기",
+        "sourceIds": [9036]
+      },
+      {
+        "name": "무릎 세우고 앉기",
+        "sourceIds": [9034]
+      },
+      {
+        "name": "옆으로 앉기",
+        "sourceIds": [9035]
+      },
+      {
+        "name": "주저앉기",
+        "sourceIds": [9031]
+      },
+      {
+        "name": "패치처럼 앉기",
+        "sourceIds": [9032]
+      },
+      {
+        "name": "웅크리기",
+        "sourceIds": [9039]
+      },
+      {
+        "name": "대자로 뻗기",
+        "sourceIds": [9037]
+      }
+    ]
+  }
+]

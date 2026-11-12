@@ -51,6 +51,11 @@
 - `FmgWrappers`의 테이블 이름과 `Fmg.Entries`의 텍스트 ID로 연결합니다. 무기·방어구·탈리스만·일반 아이템은 각각 `Weapon`·`Protector`·`Accessory`·`Goods`의 이름 및 설명 테이블을 확인합니다. 전회 아이템은 `GemName`·`GemCaption`, 전투 기술은 `ArtsName`·`ArtsCaption`을 사용합니다.
 - `WeaponEffect`에는 일부 공식 효과 문구가 있습니다. 도감의 부가 효과 설명을 작성할 때 게임 원문에 명시된 내용과 [파라미터로 확인한 수치·적용 조건](#무기-부가-효과-대조)을 근거로 사용합니다.
 
+### 일반 아이템 도감 대조
+
+- 일반 아이템의 원본 ID와 정렬 정보는 같은 버전의 `EquipParamGoods.csv`에서 확인하고, 한국어 이름과 설명은 해당 ID의 `GoodsName`과 `GoodsCaption`을 사용합니다.
+- [도감 아이템 매핑](../reference-data/elden-ring/regulation-1.17.3/catalog-item-mapping.json)은 도감에 적용한 분류와 표시 순서, 항목별 원본 ID를 기록합니다. 성배병 단계와 거대한 룬의 활성화 전후처럼 여러 원본 행을 한 항목으로 표시하는 경우에도 원본 ID를 보존합니다.
+
 ### 무기 도감 한국어 원문 대조
 
 - 단검부터 조향병까지는 기본 무기의 파라미터 ID를 `WeaponName`·`WeaponCaption`에 연결합니다. FMG 원문을 따르며 이전 등록 절의 나무위키 문구는 최초 등록 근거입니다.
