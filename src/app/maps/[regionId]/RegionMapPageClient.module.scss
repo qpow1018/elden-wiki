@@ -1,0 +1,105 @@
+.region-map {
+  .content {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+    padding: 16px;
+
+    a {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      color: $steel-accent;
+    }
+  }
+
+  .map {
+    display: grid;
+    width: 100%;
+    gap: 8px;
+
+    .viewport {
+      position: relative;
+      overflow: clip;
+      height: clamp(240px, 65dvh, 680px);
+      border-radius: $border-radius;
+      background: $bg-page-outer;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+
+    .image {
+      position: absolute;
+      max-width: none;
+      pointer-events: none;
+    }
+
+    .marker {
+      position: absolute;
+      display: grid;
+      width: 24px;
+      height: 24px;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      cursor: pointer;
+
+      &::before {
+        width: 12px;
+        height: 12px;
+        border: 2px solid $bg-dark;
+        border-radius: 50%;
+        background: $steel-light;
+        box-shadow: 0 0 0 1px $steel-light;
+        content: '';
+      }
+
+      &[aria-pressed='true'] {
+        z-index: 1;
+
+        &::before {
+          background: $white;
+        }
+      }
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      button {
+        min-width: 44px;
+        min-height: 44px;
+        padding-inline: 12px;
+        border: 1px solid $border-soft;
+        border-radius: $border-radius;
+        background: $bg;
+        color: $text-primary;
+
+        &:disabled {
+          opacity: 0.45;
+        }
+      }
+    }
+
+    .marker:focus-visible,
+    .controls button:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: 2px;
+    }
+
+    .item-name {
+      margin: 0;
+      padding: 8px 12px;
+      border-radius: $border-radius;
+      background: $bg;
+      color: $text-primary;
+    }
+  }
+}
