@@ -1,18 +1,16 @@
 .maps {
+  .list-title {
+    margin: 0 16px;
+    padding-top: 8px;
+    color: $text-muted;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
   .regions {
-    padding: 16px;
-
-    h2 {
-      margin-bottom: 12px;
-      color: $text-muted;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    ul {
-      padding: 0;
-      list-style: none;
-    }
+    margin: 0;
+    padding: 0 16px 8px;
+    list-style: none;
 
     li + li {
       border-top: 1px solid $border-soft;
@@ -20,12 +18,12 @@
 
     a {
       display: flex;
-      min-height: 46px;
+      min-height: 48px;
       align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
+      gap: 12px;
+      padding-block: 8px;
       border-radius: $border-radius;
-      color: $text-secondary;
+      color: $text-primary;
       font-size: 15px;
       text-decoration: none;
 
@@ -36,11 +34,19 @@
 
       &:focus-visible {
         outline: 2px solid $focus-ring;
-        outline-offset: -2px;
+        outline-offset: 2px;
       }
     }
 
-    span {
+    .region-number {
+      flex: 0 0 20px;
+      color: $text-muted;
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      text-align: end;
+    }
+
+    .region-name {
       flex: 1;
       min-width: 0;
       overflow-wrap: anywhere;

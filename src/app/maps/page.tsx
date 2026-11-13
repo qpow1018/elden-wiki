@@ -12,19 +12,22 @@ export default function MapsPage() {
   return (
     <main className={styles['maps']}>
       <Header title="지도" />
-      <section className={styles['regions']} aria-labelledby="map-regions">
-        <h2 id="map-regions">지역 선택</h2>
-        <ul>
-          {MAP_REGIONS.map(({ id, name }) => (
-            <li key={id}>
-              <Link href={`/maps/${id}`}>
-                <span>{name}</span>
-                <MdChevronRight size={14} aria-hidden="true" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <h2 id="base-game-maps" className={styles['list-title']}>
+        본편
+      </h2>
+      <ol className={styles['regions']} aria-labelledby="base-game-maps" role="list">
+        {MAP_REGIONS.map(({ id, name }, index) => (
+          <li key={id}>
+            <Link href={`/maps/${id}`}>
+              <span className={styles['region-number']} aria-hidden="true">
+                {index + 1}
+              </span>
+              <span className={styles['region-name']}>{name}</span>
+              <MdChevronRight size={16} aria-hidden="true" />
+            </Link>
+          </li>
+        ))}
+      </ol>
     </main>
   );
 }
