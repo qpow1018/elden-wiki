@@ -1,0 +1,48 @@
+.maps {
+  .regions {
+    padding: 16px;
+
+    h2 {
+      margin-bottom: 8px;
+      color: $text-secondary;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid $border-soft;
+    }
+
+    li {
+      border-bottom: 1px solid $border-soft;
+    }
+
+    a {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px;
+      color: $text-primary;
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        background: $bg;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $focus-ring;
+        outline-offset: -2px;
+      }
+    }
+
+    svg {
+      flex: none;
+      color: $text-muted;
+    }
+  }
+}
