@@ -22,7 +22,7 @@ export default function BottomNavigation() {
       </Link>
       <Link href="/maps" aria-current={isMaps ? 'page' : undefined}>
         <MdMap size={16} aria-hidden="true" />
-        맵스
+        지도
       </Link>
     </nav>
   );
