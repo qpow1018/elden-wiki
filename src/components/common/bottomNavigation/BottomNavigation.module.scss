@@ -1,0 +1,61 @@
+.bottom-navigation {
+  position: fixed;
+  inset-inline: 0;
+  bottom: calc(#{$bottom-navigation-gap} + env(safe-area-inset-bottom, 0px));
+  z-index: $z-index-header;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+  height: $bottom-navigation-height;
+  margin-inline: auto;
+  padding-inline: 3px;
+  border: 1px solid $border-strong;
+  border-radius: 999px;
+  background: $bg-dark;
+
+  a {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-inline: 12px;
+    border-radius: 999px;
+    color: $text-secondary;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+
+    &::after {
+      position: absolute;
+      inset: 4px 1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: var(--navigation-button-background, transparent);
+      content: '';
+      pointer-events: none;
+    }
+
+    &[aria-current] {
+      --navigation-button-background: #{$bg};
+      color: $steel-light;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+      outline-offset: -2px;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .bottom-navigation {
+    a:hover:not([aria-current]) {
+      --navigation-button-background: #{$bg-light};
+      color: $text-primary;
+    }
+  }
+}

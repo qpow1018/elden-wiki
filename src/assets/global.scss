@@ -1,3 +1,12 @@
+html:has(body > [data-bottom-navigation]) {
+  --bottom-navigation-top: calc(
+    #{$bottom-navigation-height} + #{$bottom-navigation-gap} + env(safe-area-inset-bottom, 0px)
+  );
+  --bottom-navigation-offset: calc(var(--bottom-navigation-top) + #{$bottom-navigation-gap});
+
+  scroll-padding-bottom: var(--bottom-navigation-offset);
+}
+
 body {
   min-height: 100dvh;
   background: $bg-page-outer;
@@ -10,5 +19,6 @@ main {
   max-width: $page-mobile-width;
   min-height: 100dvh;
   margin: 0 auto;
+  padding-bottom: var(--bottom-navigation-offset, 0px);
   background: $bg-dark;
 }

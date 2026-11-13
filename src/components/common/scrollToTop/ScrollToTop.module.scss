@@ -1,17 +1,22 @@
+$scroll-to-top-size: 44px;
+
 .scroll-to-top {
   position: fixed;
   right: max(16px, calc((100% - $page-mobile-width) / 2 + 16px));
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(
+    var(--bottom-navigation-top, 24px + env(safe-area-inset-bottom, 0px) + #{$scroll-to-top-size}) -
+      #{$scroll-to-top-size}
+  );
   z-index: $z-index-popover;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: $scroll-to-top-size;
+  height: $scroll-to-top-size;
   padding: 0;
   border: 1px solid $border-strong;
   border-radius: $border-radius;
-  background-color: $bg;
-  color: $text-primary;
+  background-color: $bg-dark;
+  color: $text-secondary;
   cursor: pointer;
 
   svg {
