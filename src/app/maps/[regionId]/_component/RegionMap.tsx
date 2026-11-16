@@ -1,5 +1,5 @@
 import Image, { type StaticImageData } from 'next/image';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import type { getMapMarkerSamples } from '@/app/maps/[regionId]/mapMarkerSamples';
 
@@ -35,6 +35,13 @@ export default function RegionMap({
   } = useMapViewport(image);
   const [selectedId, setSelectedId] = useState<string>();
   const selected = markers.find(({ id }) => id === selectedId);
+  const selectedMarkerRef = useRef<HTMLButtonElement>(null);
+  const zoomOutButtonRef = useRef<HTMLButtonElement>(null);
+
+  function handleCloseMarker() {
+    (selectedMarkerRef.current ?? zoomOutButtonRef.current)?.focus({ preventScroll: true });
+    setSelectedId(undefined);
+  }
 
   return (
     <div className={styles['map']}>
@@ -67,6 +74,7 @@ export default function RegionMap({
               return (
                 <button
                   key={marker.id}
+                  ref={selectedId === marker.id ? selectedMarkerRef : undefined}
                   type="button"
                   className={styles['marker']}
                   aria-label={marker.name}
@@ -85,7 +93,7 @@ export default function RegionMap({
           type="button"
           aria-label="전체 보기"
           title="전체 보기"
-          disabled={!canZoomOut}
+          disabled={!canZoomOut && !selected}
           onClick={() => {
             resetView();
             setSelectedId(undefined);
@@ -103,6 +111,7 @@ export default function RegionMap({
             <MdAdd size={22} aria-hidden="true" />
           </button>
           <button
+            ref={zoomOutButtonRef}
             type="button"
             aria-label="축소"
             onClick={() => handleZoom(1 / 1.5)}
@@ -115,7 +124,7 @@ export default function RegionMap({
       {selected && (
         <div className={styles['marker-panel']}>
           <p role="status">{selected.name}</p>
-          <button type="button" aria-label="닫기" onClick={() => setSelectedId(undefined)}>
+          <button type="button" aria-label="닫기" onClick={handleCloseMarker}>
             <MdClose size={20} aria-hidden="true" />
           </button>
         </div>

@@ -4,17 +4,37 @@
   z-index: $z-index-header;
   display: flex;
   align-items: center;
-  gap: 16px;
   height: $header-height;
   padding-inline: 16px;
   background: $bg-dark;
   transition: top $header-transition;
+
+  .back-control {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    margin-inline-start: -12px;
+    margin-inline-end: -4px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: $border-radius;
+    color: $text-primary;
+
+    &:hover {
+      background: $bg;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
+    }
+  }
 
   .right-components {
     display: flex;
     align-items: center;
     flex-shrink: 0;
     gap: 8px;
+    margin-inline-start: 16px;
   }
 
   h1 {

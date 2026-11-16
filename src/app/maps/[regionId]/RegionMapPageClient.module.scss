@@ -1,24 +1,5 @@
 .region-map {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  max-width: none;
   height: 100dvh;
-
-  .back-link {
-    display: grid;
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-    place-items: center;
-    border-radius: $border-radius;
-    color: $text-primary;
-
-    &:hover {
-      background: $bg;
-    }
-
-    &:focus-visible {
-      outline: 2px solid $focus-ring;
-    }
-  }
 }

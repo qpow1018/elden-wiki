@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 
 const SCROLL_THRESHOLD = 12;
 
-export default function useScrollHeader(hideOnScroll: boolean) {
+export default function useScrollHeader(isScrollHideEnabled: boolean) {
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!hideOnScroll) return;
+    if (!isScrollHideEnabled) return;
 
     const element = headerRef.current;
     const parent = element?.parentElement;
@@ -78,7 +78,7 @@ export default function useScrollHeader(hideOnScroll: boolean) {
       header.style.removeProperty('--header-height');
       container.style.removeProperty('--header-offset');
     };
-  }, [hideOnScroll]);
+  }, [isScrollHideEnabled]);
 
   return headerRef;
 }
