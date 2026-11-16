@@ -21,7 +21,7 @@ export default function RegionMapPageClient({
 }) {
   return (
     <main className={styles['region-map']}>
-      <Header title={name} />
+      <Header title={name} hideOnScroll={false} />
       <div className={styles['content']}>
         <Link href="/maps">지역 목록</Link>
         <RegionMap image={image} name={name} markers={markers} />
