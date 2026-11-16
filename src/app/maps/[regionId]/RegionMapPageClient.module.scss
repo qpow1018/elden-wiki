@@ -1,15 +1,24 @@
 .region-map {
-  .content {
-    display: grid;
-    justify-items: start;
-    gap: 12px;
-    padding: 16px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  max-width: none;
+  height: 100dvh;
 
-    a {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      color: $steel-accent;
+  .back-link {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: $border-radius;
+    color: $text-primary;
+
+    &:hover {
+      background: $bg;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $focus-ring;
     }
   }
 }

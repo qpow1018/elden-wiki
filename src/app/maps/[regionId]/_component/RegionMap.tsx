@@ -7,6 +7,8 @@ import useMapViewport from './useMapViewport';
 
 import styles from './RegionMap.module.scss';
 
+import { MdAdd, MdClose, MdFitScreen, MdRemove } from 'react-icons/md';
+
 export default function RegionMap({
   image,
   name,
@@ -41,9 +43,7 @@ export default function RegionMap({
         className={styles['viewport']}
         role="group"
         aria-label={`${name} 지도`}
-        onPointerDown={(event) => {
-          if (handlePointerDown(event)) setSelectedId(undefined);
-        }}
+        onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
@@ -83,34 +83,42 @@ export default function RegionMap({
       <div className={styles['controls']} aria-label="지도 조작" role="group">
         <button
           type="button"
-          aria-label="확대"
-          onClick={() => handleZoom(1.5)}
-          disabled={!canZoomIn}
-        >
-          +
-        </button>
-        <button
-          type="button"
-          aria-label="축소"
-          onClick={() => handleZoom(1 / 1.5)}
+          aria-label="전체 보기"
+          title="전체 보기"
           disabled={!canZoomOut}
-        >
-          −
-        </button>
-        <button
-          type="button"
           onClick={() => {
             resetView();
             setSelectedId(undefined);
           }}
         >
-          전체 보기
+          <MdFitScreen size={22} aria-hidden="true" />
         </button>
+        <div className={styles['zoom-buttons']}>
+          <button
+            type="button"
+            aria-label="확대"
+            onClick={() => handleZoom(1.5)}
+            disabled={!canZoomIn}
+          >
+            <MdAdd size={22} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            aria-label="축소"
+            onClick={() => handleZoom(1 / 1.5)}
+            disabled={!canZoomOut}
+          >
+            <MdRemove size={22} aria-hidden="true" />
+          </button>
+        </div>
       </div>
       {selected && (
-        <p className={styles['item-name']} role="status">
-          {selected.name}
-        </p>
+        <div className={styles['marker-panel']}>
+          <p role="status">{selected.name}</p>
+          <button type="button" aria-label="닫기" onClick={() => setSelectedId(undefined)}>
+            <MdClose size={20} aria-hidden="true" />
+          </button>
+        </div>
       )}
     </div>
   );

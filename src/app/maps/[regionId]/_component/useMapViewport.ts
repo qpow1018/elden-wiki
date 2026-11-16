@@ -81,11 +81,10 @@ export default function useMapViewport(image: { width: number; height: number })
   }, [baseWidth, baseHeight, size]);
 
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
-    if (event.button !== 0 || pointers.current.size === 2) return false;
+    if (event.button !== 0 || pointers.current.size === 2) return;
 
     event.currentTarget.setPointerCapture(event.pointerId);
     pointers.current.set(event.pointerId, pointerPoint(event));
-    return true;
   }
 
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {

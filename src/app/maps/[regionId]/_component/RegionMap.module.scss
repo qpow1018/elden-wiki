@@ -1,13 +1,17 @@
 .map {
-  display: grid;
-  width: 100%;
-  gap: 8px;
+  --control-size: 44px;
+  --map-edge: 12px;
+  --overlay-bottom: calc(var(--map-edge) + env(safe-area-inset-bottom, 0px));
+
+  position: relative;
+  isolation: isolate;
+  min-height: 0;
 
   .viewport {
     position: relative;
+    z-index: 0;
     overflow: clip;
-    height: clamp(240px, 65dvh, 680px);
-    border-radius: $border-radius;
+    height: 100%;
     background: $bg-page-outer;
     cursor: grab;
     touch-action: none;
@@ -53,37 +57,84 @@
     }
   }
 
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  .controls,
+  .marker-panel {
+    position: absolute;
+    bottom: var(--overlay-bottom);
 
     button {
-      min-width: 44px;
-      min-height: 44px;
-      padding-inline: 12px;
-      border: 1px solid $border-soft;
-      border-radius: $border-radius;
-      background: $bg;
+      display: grid;
+      width: var(--control-size);
+      height: var(--control-size);
+      flex-shrink: 0;
+      place-items: center;
       color: $text-primary;
 
+      &:hover:enabled {
+        background: $bg;
+      }
+
       &:disabled {
-        opacity: 0.45;
+        color: $text-muted;
       }
     }
   }
 
-  .marker:focus-visible,
-  .controls button:focus-visible {
-    outline: 2px solid $focus-ring;
-    outline-offset: 2px;
+  .controls {
+    right: max(var(--map-edge), env(safe-area-inset-right, 0px));
+    display: grid;
+    gap: 8px;
+
+    > button,
+    .zoom-buttons {
+      border-radius: $border-radius;
+      background: $bg-dark;
+      box-shadow: 0 0 0 1px $border-soft;
+    }
+
+    .zoom-buttons {
+      display: grid;
+
+      button:first-child {
+        border-radius: $border-radius $border-radius 0 0;
+      }
+
+      button:last-child {
+        border-top: 1px solid $border-soft;
+        border-radius: 0 0 $border-radius $border-radius;
+      }
+    }
   }
 
-  .item-name {
-    margin: 0;
-    padding: 8px 12px;
+  .marker-panel {
+    --panel-left: max(var(--map-edge), env(safe-area-inset-left, 0px));
+    --panel-right: max(var(--map-edge), env(safe-area-inset-right, 0px));
+
+    left: var(--panel-left);
+    display: flex;
+    width: max-content;
+    max-width: calc(100% - var(--panel-left) - var(--panel-right) - var(--control-size) - 12px);
+    align-items: center;
+    gap: 4px;
+    padding-left: 12px;
     border-radius: $border-radius;
-    background: $bg;
+    background: $bg-dark;
+    box-shadow: 0 0 0 1px $border-soft;
     color: $text-primary;
+
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    button {
+      border-radius: $border-radius;
+    }
+  }
+
+  .marker:focus-visible,
+  .controls button:focus-visible,
+  .marker-panel button:focus-visible {
+    outline: 2px solid $focus-ring;
+    outline-offset: -2px;
   }
 }
