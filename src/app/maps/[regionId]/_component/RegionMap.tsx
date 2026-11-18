@@ -123,7 +123,19 @@ export default function RegionMap({
       </div>
       {selected && (
         <div className={styles['marker-panel']}>
-          <p role="status">{selected.name}</p>
+          <div className={styles['marker-details']}>
+            <p role="status">{selected.name}</p>
+            {selected.loot && (
+              <ul aria-label="획득 아이템">
+                {selected.loot.map(({ id, name, quantity }) => (
+                  <li key={id}>
+                    {name}
+                    {quantity && ` ×${quantity}`}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           <button type="button" aria-label="닫기" onClick={handleCloseMarker}>
             <MdClose size={20} aria-hidden="true" />
           </button>
