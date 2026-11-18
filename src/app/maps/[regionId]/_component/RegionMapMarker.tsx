@@ -26,6 +26,7 @@ export default function RegionMapMarker({
   categories,
   x,
   y,
+  label,
   isSelected,
   onSelect,
 }: {
@@ -34,6 +35,7 @@ export default function RegionMapMarker({
   categories: string[];
   x: number;
   y: number;
+  label?: { offsetX: number; width: number; height: number; fontSize: number };
   isSelected: boolean;
   onSelect: () => void;
 }) {
@@ -54,6 +56,20 @@ export default function RegionMapMarker({
       <span className={styles['marker-icon']} aria-hidden="true">
         <Icon size={12} />
       </span>
+      {label && (
+        <span
+          className={styles['marker-label']}
+          aria-hidden="true"
+          style={{
+            [label.offsetX > 0 ? 'left' : 'right']: `calc(50% + ${Math.abs(label.offsetX)}px)`,
+            maxWidth: label.width,
+            height: label.height,
+            fontSize: label.fontSize,
+          }}
+        >
+          {name}
+        </span>
+      )}
     </button>
   );
 }

@@ -11,13 +11,23 @@ import styles from './RegionMap.module.scss';
 
 import { MdAdd, MdClose, MdFitScreen, MdRemove } from 'react-icons/md';
 
+type TVisibleMarker = ReturnType<typeof getMapMarkerSamples>[number];
+
+const MIN_LABEL_FONT_SIZE = 5;
+const MAX_LABEL_FONT_SIZE = 13;
+const LABEL_WORLD_SCALE = 22;
+const LABEL_OFFSET = 14;
+const LABEL_GAP = 4;
+
 export default function RegionMap({
   image,
   name,
+  worldWidth,
   markers,
 }: {
   image: StaticImageData;
   name: string;
+  worldWidth?: number;
   markers: ReturnType<typeof getMapMarkerSamples>;
 }) {
   const {
@@ -39,6 +49,16 @@ export default function RegionMap({
   const selected = markers.find(({ id }) => id === selectedId);
   const selectedMarkerRef = useRef<HTMLButtonElement>(null);
   const zoomOutButtonRef = useRef<HTMLButtonElement>(null);
+  const visibleMarkers = markers
+    .map((marker) => ({ ...marker, x: left + marker.x * width, y: top + marker.y * height }))
+    .filter(({ x, y }) => x >= 0 && x <= size.width && y >= 0 && y <= size.height);
+  const labelFontSize = worldWidth
+    ? Math.min(
+        MAX_LABEL_FONT_SIZE,
+        Math.max(MIN_LABEL_FONT_SIZE, (width / worldWidth) * LABEL_WORLD_SCALE),
+      )
+    : 11;
+  const markerLabels = getMarkerLabels(visibleMarkers, size, selectedId, labelFontSize);
 
   function handleCloseMarker() {
     (selectedMarkerRef.current ?? zoomOutButtonRef.current)?.focus({ preventScroll: true });
@@ -68,11 +88,7 @@ export default function RegionMap({
               sizes={`${Math.ceil(Math.min(image.width, width * 2))}px`}
               style={{ width, height, left, top }}
             />
-            {markers.map((marker) => {
-              const x = left + marker.x * width;
-              const y = top + marker.y * height;
-              if (x < 0 || x > size.width || y < 0 || y > size.height) return null;
-
+            {visibleMarkers.map((marker) => {
               const isSelected = selectedId === marker.id;
 
               return (
@@ -81,8 +97,9 @@ export default function RegionMap({
                   ref={isSelected ? selectedMarkerRef : undefined}
                   name={marker.name}
                   categories={marker.categories}
-                  x={x}
-                  y={y}
+                  x={marker.x}
+                  y={marker.y}
+                  label={markerLabels.get(marker.id)}
                   isSelected={isSelected}
                   onSelect={() => setSelectedId(isSelected ? undefined : marker.id)}
                 />
@@ -149,4 +166,50 @@ export default function RegionMap({
       )}
     </div>
   );
+}
+
+function getMarkerLabels(
+  markers: TVisibleMarker[],
+  size: { width: number; height: number },
+  selectedId: string | undefined,
+  labelFontSize: number,
+) {
+  const candidates = markers
+    .filter(({ id, isLabelPriority }) => isLabelPriority || id === selectedId)
+    .sort((a, b) => Number(b.id === selectedId) - Number(a.id === selectedId));
+  const labels = new Map<
+    string,
+    { offsetX: number; width: number; height: number; fontSize: number }
+  >();
+  const occupied: { left: number; right: number; top: number; bottom: number }[] = [];
+
+  for (const { id, name, x, y } of candidates) {
+    const fontSize = id === selectedId ? MAX_LABEL_FONT_SIZE : labelFontSize;
+    const width = Math.min(132, Math.ceil(name.length * fontSize) + 12);
+    const height = Math.ceil(fontSize * 1.5) + 4;
+    const top = y - height / 2;
+    const bottom = top + height;
+    if (top < LABEL_GAP || bottom > size.height - LABEL_GAP) continue;
+
+    for (const offsetX of [LABEL_OFFSET, -LABEL_OFFSET - width]) {
+      const left = x + offsetX;
+      const right = left + width;
+      if (left < LABEL_GAP || right > size.width - LABEL_GAP) continue;
+
+      const overlapsLabel = occupied.some(
+        (rect) =>
+          left < rect.right + LABEL_GAP &&
+          right > rect.left - LABEL_GAP &&
+          top < rect.bottom + LABEL_GAP &&
+          bottom > rect.top - LABEL_GAP,
+      );
+      if (overlapsLabel) continue;
+
+      occupied.push({ left, right, top, bottom });
+      labels.set(id, { offsetX: Math.sign(offsetX) * LABEL_OFFSET, width, height, fontSize });
+      break;
+    }
+  }
+
+  return labels;
 }

@@ -23,6 +23,24 @@
     pointer-events: none;
   }
 
+  .marker-label {
+    position: absolute;
+    top: 50%;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: max-content;
+    padding: 1px 5px;
+    transform: translateY(-50%);
+    border: 1px solid $border-soft;
+    border-radius: 4px;
+    background: $bg-dark;
+    color: var(--marker-color);
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
   &[data-kind='grace'] {
     --marker-color: #{$brass-accent};
   }

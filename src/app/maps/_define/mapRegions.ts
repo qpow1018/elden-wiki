@@ -24,8 +24,9 @@ import mapMohgwynPalace from '@/assets/images/maps/24_mohgwyn_palace.webp';
 import mapMiquellaHaligtree from '@/assets/images/maps/25_miquella_haligtree.webp';
 
 export const MAP_REGIONS = [
-  { id: '1', name: '림그레이브', image: mapLimgrave },
-  { id: '2', name: '흐느낌의 반도', image: mapWeepingPeninsula },
+  // Approximate world widths derived from mapped grace coordinates.
+  { id: '1', name: '림그레이브', image: mapLimgrave, worldWidth: 1670 },
+  { id: '2', name: '흐느낌의 반도', image: mapWeepingPeninsula, worldWidth: 1376 },
   { id: '3', name: '스톰빌 성', image: mapStormveilCastle },
   { id: '4', name: '리에니에 동, 서부', image: mapLiurniaEastWest },
   { id: '5', name: '리에니에 북부', image: mapLiurniaNorth },

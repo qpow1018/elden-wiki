@@ -10,7 +10,14 @@ const LIMGRAVE_MARKERS = [
   { id: 'LSDL-1232', categories: ['무기'], name: '랜스', x: 0.3679, y: 0.2307 },
   { id: 'LSDL-1233', categories: ['무기'], name: '짐승 문양 히터 실드', x: 0.375, y: 0.2211 },
   { id: 'LSDL-1272', categories: ['무기'], name: '금장 철제 방패', x: 0.3765, y: 0.9012 },
-  { id: 'LSDL-1862', categories: ['무기'], name: '트윈 블레이드', x: 0.4559, y: 0.7115 },
+  {
+    id: 'LSDL-1862',
+    categories: ['무기'],
+    name: '트윈 블레이드',
+    x: 0.4559,
+    y: 0.7115,
+    isLabelPriority: true,
+  },
   { id: 'LSDL-1103', categories: ['물방울 유생'], name: '물방울 유생', x: 0.6257, y: 0.8064 },
   {
     id: 'LSDL-1094',
@@ -107,7 +114,14 @@ const LIMGRAVE_MARKERS = [
     x: 0.3596,
     y: 0.4719,
   },
-  { id: 'LSDL-1864', categories: ['중요아이템'], name: '석검 열쇠', x: 0.4507, y: 0.6901 },
+  {
+    id: 'LSDL-1864',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.4507,
+    y: 0.6901,
+    isLabelPriority: true,
+  },
   { id: 'LSDL-2187', categories: ['중요아이템'], name: '새 다리 황금 절임', x: 0.3048, y: 0.7657 },
   { id: 'LSDL-2311', categories: ['중요아이템'], name: '유혹의 나뭇가지', x: 0.361, y: 0.868 },
   { id: 'LSDL-3012', categories: ['중요아이템'], name: '그림: 귀소', x: 0.5874, y: 0.3509 },
@@ -117,6 +131,7 @@ const LIMGRAVE_MARKERS = [
     name: '지도 조각 (림그레이브 동부)',
     x: 0.7678,
     y: 0.5033,
+    isLabelPriority: true,
   },
   {
     id: 'LSDL-1150',
@@ -124,6 +139,7 @@ const LIMGRAVE_MARKERS = [
     name: '지도 조각 (림그레이브 서부)',
     x: 0.3526,
     y: 0.4446,
+    isLabelPriority: true,
   },
   { id: 'LSDL-1097', categories: ['탈리스만'], name: '성룡 표식의 탈리스만', x: 0.3853, y: 0.7562 },
   { id: 'LSDL-1186', categories: ['탈리스만'], name: '망치의 탈리스만', x: 0.2696, y: 0.108 },
@@ -1124,6 +1140,7 @@ type TMapMarkerSample = {
   name: string;
   x: number;
   y: number;
+  isLabelPriority?: boolean;
   loot?: { id: string; name: string; quantity?: number }[];
 };
 

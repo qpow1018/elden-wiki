@@ -12,16 +12,18 @@ import styles from './RegionMapPageClient.module.scss';
 export default function RegionMapPageClient({
   image,
   name,
+  worldWidth,
   markers,
 }: {
   image: StaticImageData;
   name: string;
+  worldWidth?: number;
   markers: ReturnType<typeof getMapMarkerSamples>;
 }) {
   return (
     <main className={styles['region-map']}>
       <Header title={name} goBack="/maps" isScrollHideEnabled={false} />
-      <RegionMap image={image} name={name} markers={markers} />
+      <RegionMap image={image} name={name} worldWidth={worldWidth} markers={markers} />
     </main>
   );
 }
