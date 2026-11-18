@@ -5,6 +5,8 @@ import type { getMapMarkerSamples } from '@/app/maps/[regionId]/mapMarkerSamples
 
 import useMapViewport from './useMapViewport';
 
+import RegionMapMarker from './RegionMapMarker';
+
 import styles from './RegionMap.module.scss';
 
 import { MdAdd, MdClose, MdFitScreen, MdRemove } from 'react-icons/md';
@@ -71,17 +73,18 @@ export default function RegionMap({
               const y = top + marker.y * height;
               if (x < 0 || x > size.width || y < 0 || y > size.height) return null;
 
+              const isSelected = selectedId === marker.id;
+
               return (
-                <button
+                <RegionMapMarker
                   key={marker.id}
-                  ref={selectedId === marker.id ? selectedMarkerRef : undefined}
-                  type="button"
-                  className={styles['marker']}
-                  aria-label={marker.name}
-                  aria-pressed={selectedId === marker.id}
-                  style={{ left: x, top: y }}
-                  onPointerDown={(event) => event.stopPropagation()}
-                  onClick={() => setSelectedId(selectedId === marker.id ? undefined : marker.id)}
+                  ref={isSelected ? selectedMarkerRef : undefined}
+                  name={marker.name}
+                  categories={marker.categories}
+                  x={x}
+                  y={y}
+                  isSelected={isSelected}
+                  onSelect={() => setSelectedId(isSelected ? undefined : marker.id)}
                 />
               );
             })}
@@ -125,6 +128,9 @@ export default function RegionMap({
         <div className={styles['marker-panel']}>
           <div className={styles['marker-details']}>
             <p role="status">{selected.name}</p>
+            {selected.categories.length > 0 && (
+              <p className={styles['marker-categories']}>{selected.categories.join(' · ')}</p>
+            )}
             {selected.loot && (
               <ul aria-label="획득 아이템">
                 {selected.loot.map(({ id, name, quantity }) => (

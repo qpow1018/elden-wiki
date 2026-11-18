@@ -1,0 +1,80 @@
+.marker {
+  --marker-color: #{$text-muted};
+
+  position: absolute;
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  cursor: pointer;
+
+  .marker-icon {
+    display: grid;
+    width: 17px;
+    height: 17px;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: $bg-dark;
+    box-shadow: 0 0 0 1px $bg-dark;
+    color: var(--marker-color);
+    pointer-events: none;
+  }
+
+  &[data-kind='grace'] {
+    --marker-color: #{$brass-accent};
+  }
+
+  &[data-kind='enemy'] {
+    --marker-color: #{$error-light};
+  }
+
+  &[data-kind='npc'] {
+    --marker-color: #{$teal-light};
+  }
+
+  &[data-kind='dungeon'],
+  &[data-kind='place'] {
+    --marker-color: #{$lavender-light};
+  }
+
+  &[data-kind='item'] {
+    --marker-color: #{$steel-light};
+  }
+
+  &[data-kind='other'] {
+    .marker-icon {
+      width: 10px;
+      height: 10px;
+
+      svg {
+        width: 5px;
+        height: 5px;
+      }
+    }
+  }
+
+  &:not([data-kind='other']) {
+    z-index: 1;
+  }
+
+  &[aria-pressed='true'],
+  &:focus-visible {
+    z-index: 2;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $focus-ring;
+    outline-offset: -2px;
+  }
+
+  &[aria-pressed='true'] {
+    .marker-icon {
+      border-color: $white;
+      background: var(--marker-color);
+      color: $bg-dark;
+    }
+  }
+}

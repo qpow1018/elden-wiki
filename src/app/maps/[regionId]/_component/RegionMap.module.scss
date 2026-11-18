@@ -27,35 +27,6 @@
     pointer-events: none;
   }
 
-  .marker {
-    position: absolute;
-    display: grid;
-    width: 24px;
-    height: 24px;
-    place-items: center;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    cursor: pointer;
-
-    &::before {
-      width: 12px;
-      height: 12px;
-      border: 2px solid $bg-dark;
-      border-radius: 50%;
-      background: $steel-light;
-      box-shadow: 0 0 0 1px $steel-light;
-      content: '';
-    }
-
-    &[aria-pressed='true'] {
-      z-index: 1;
-
-      &::before {
-        background: $white;
-      }
-    }
-  }
-
   .controls,
   .marker-panel {
     position: absolute;
@@ -124,6 +95,11 @@
     .marker-details {
       overflow-wrap: anywhere;
 
+      .marker-categories {
+        color: $text-muted;
+        font-size: 12px;
+      }
+
       ul {
         max-height: 40dvh;
         margin-block: 4px 8px;
@@ -137,7 +113,6 @@
     }
   }
 
-  .marker:focus-visible,
   .controls button:focus-visible,
   .marker-panel button:focus-visible {
     outline: 2px solid $focus-ring;
