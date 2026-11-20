@@ -58,6 +58,7 @@ export default function RegionMapMarker({
       </span>
       {label && (
         <span
+          hidden
           className={styles['marker-label']}
           aria-hidden="true"
           style={{
