@@ -12,13 +12,13 @@
 
   .marker-icon {
     display: grid;
-    width: 17px;
-    height: 17px;
+    width: 20px;
+    height: 20px;
     place-items: center;
-    border: 1px solid currentColor;
+    border: 1px solid $border-strong;
     border-radius: 50%;
     background: $bg-dark;
-    box-shadow: 0 0 0 1px $bg-dark;
+    box-shadow: 0 1px 3px rgba($black, 0.5);
     color: var(--marker-color);
     pointer-events: none;
   }
