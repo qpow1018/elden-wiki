@@ -8,18 +8,17 @@
   place-items: center;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  cursor: pointer;
 
   .marker-icon {
     display: grid;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     place-items: center;
-    border: 1px solid $border-strong;
+    border: 1px solid $bg-dark;
     border-radius: 50%;
-    background: $bg-dark;
+    background: var(--marker-color);
     box-shadow: 0 1px 3px rgba($black, 0.5);
-    color: var(--marker-color);
+    color: $bg-dark;
     pointer-events: none;
   }
 
@@ -27,7 +26,6 @@
     position: absolute;
     top: 50%;
     overflow: hidden;
-    box-sizing: border-box;
     width: max-content;
     padding: 1px 5px;
     transform: translateY(-50%);
@@ -90,9 +88,9 @@
 
   &[aria-pressed='true'] {
     .marker-icon {
-      border-color: $white;
-      background: var(--marker-color);
-      color: $bg-dark;
+      box-shadow:
+        0 0 0 2px $bg-dark,
+        0 0 0 3px $white;
     }
   }
 }

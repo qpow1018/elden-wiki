@@ -78,7 +78,7 @@ export default function RegionMapMarker({
       onClick={onSelect}
     >
       <span className={styles['marker-icon']} aria-hidden="true">
-        <Icon size={13} />
+        <Icon size={12} />
       </span>
       {label && (
         <span
