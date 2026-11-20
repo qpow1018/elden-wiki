@@ -1,0 +1,1313 @@
+{
+  "descriptions": {
+    "308": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "309": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "성배의 물방울"
+        },
+        {
+          "name": "미친 불"
+        }
+      ]
+    },
+    "310": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "314": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "채찍"
+        },
+        {
+          "name": "석검 열쇠"
+        },
+        {
+          "name": "단석 [2]",
+          "quantity": 4
+        },
+        {
+          "name": "단석 [1]",
+          "quantity": 2
+        },
+        {
+          "name": "색 잃은 단석 [1]"
+        },
+        {
+          "name": "희생의 가는 가지"
+        }
+      ]
+    },
+    "315": {
+      "status": "reviewed",
+      "reason": "LSDL 제목은 비어 있으나 기존 WorldMapPointParam 장소의 분류·위치와 대조됨. 기존 한국어 이름을 표시용으로 유지.",
+      "displayName": "순례교회"
+    },
+    "318": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "죄인의 방패"
+        }
+      ]
+    },
+    "321": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "메모리 스톤"
+        }
+      ]
+    },
+    "324": {
+      "status": "reviewed",
+      "reason": "LSDL 제목은 비어 있으나 기존 WorldMapPointParam 장소의 분류·위치와 대조됨. 기존 한국어 이름을 표시용으로 유지.",
+      "displayName": "은둔 상인의 오두막"
+    },
+    "370": {
+      "status": "reviewed",
+      "reason": "LSDL 제목은 비어 있으나 기존 WorldMapPointParam 장소의 분류·위치와 대조됨. 기존 한국어 이름을 표시용으로 유지.",
+      "displayName": "제4 마리카 교회"
+    },
+    "508": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "721": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "722": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "말하는 머리 「도와줘」"
+        },
+        {
+          "name": "묘 은방울꽃 [1]",
+          "quantity": 3
+        },
+        {
+          "name": "묘 은방울꽃 [2]",
+          "quantity": 3
+        },
+        {
+          "name": "아인단의 뼛가루"
+        }
+      ]
+    },
+    "723": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "724": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "725": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "726": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "728": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "729": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "730": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "731": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "732": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "733": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "734": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "독꽃"
+        },
+        {
+          "name": "아르테리아의 잎"
+        },
+        {
+          "name": "황금의 룬 [2]"
+        },
+        {
+          "name": "면역의 흰 육포"
+        },
+        {
+          "name": "방랑 전사의 제작서 [8]"
+        },
+        {
+          "name": "녹색 호박 메달리온"
+        }
+      ]
+    },
+    "736": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외; 제작서 [9] 접근에는 석검 열쇠 1개 필요(획득품으로 추가하지 않음).",
+      "loot": [
+        {
+          "name": "묘 은방울꽃 [1]",
+          "quantity": 4
+        },
+        {
+          "name": "묘 은방울꽃 [2]",
+          "quantity": 3
+        },
+        {
+          "name": "황금의 룬 [2]"
+        },
+        {
+          "name": "방랑 전사의 제작서 [9]"
+        },
+        {
+          "name": "말하는 머리 「고마워」"
+        },
+        {
+          "name": "목 없는 기사 루텔"
+        }
+      ]
+    },
+    "813": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "단석 [1]",
+          "quantity": 9
+        },
+        {
+          "name": "색 잃은 단석 [1]",
+          "quantity": 3
+        },
+        {
+          "name": "황금의 룬 [2]"
+        },
+        {
+          "name": "황금의 룬 [4]"
+        },
+        {
+          "name": "용사의 고깃덩어리"
+        },
+        {
+          "name": "출혈 이끼약"
+        },
+        {
+          "name": "아르테리아의 잎",
+          "quantity": 2
+        },
+        {
+          "name": "녹슨 닻"
+        }
+      ]
+    },
+    "816": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "819": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "연기나비",
+          "quantity": 5
+        },
+        {
+          "name": "트리나의 수련"
+        },
+        {
+          "name": "황금의 룬 [1]"
+        },
+        {
+          "name": "황금의 룬 [3]"
+        },
+        {
+          "name": "마력 용 표식의 탈리스만"
+        }
+      ]
+    },
+    "871": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "925": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "색 잃은 단석[1]",
+          "quantity": 1
+        }
+      ]
+    },
+    "926": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "단석 [2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "1059": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1060": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1061": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1062": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1064": {
+      "status": "reviewed",
+      "reason": "대화 보상 희생의 가는 가지, 처치 보상 도끼창+8·샤브리리의 포도는 퀘스트·대화·처치 조건을 표현할 구조가 없어 보류. 다른 지역 이동 설명도 보존."
+    },
+    "1065": {
+      "status": "reviewed",
+      "reason": "일레나의 편지 전달 퀘스트 설명; 확정 획득 목록으로 변환하지 않음."
+    },
+    "1099": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1101": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "별빛 조각",
+          "quantity": 1
+        }
+      ]
+    },
+    "1146": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1147": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 4
+        },
+        {
+          "name": "날개낫"
+        }
+      ]
+    },
+    "1148": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "독꽃",
+          "quantity": 5
+        },
+        {
+          "name": "큰 잠자리 머리"
+        },
+        {
+          "name": "기적의 돌팔매"
+        }
+      ]
+    },
+    "1189": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1190": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1250": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "사냥개의 긴 이빨"
+        }
+      ]
+    },
+    "1251": {
+      "status": "reviewed",
+      "reason": "대리윌 처치 후 블라이드 대화로 색 잃은 단석[2] 획득. 퀘스트 선행 조건이 있어 보류."
+    },
+    "1264": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "석검 열쇠",
+          "quantity": 1
+        }
+      ]
+    },
+    "1266": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "핸디 발리스타"
+        },
+        {
+          "name": "발리스타 볼트",
+          "quantity": 5
+        }
+      ]
+    },
+    "1269": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "아인 여왕의 지팡이"
+        },
+        {
+          "name": "결정 산탄"
+        }
+      ]
+    },
+    "1270": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1271": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "진주색 거품 물방울"
+        },
+        {
+          "name": "샘솟는 붉은 결정 물방울"
+        }
+      ]
+    },
+    "1272": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1273": {
+      "status": "reviewed",
+      "reason": "그림 「예언」 보상 위치. 선행 조건은 원본 설명에 보존하고 별도 확정 보상 목록으로 중복 추가하지 않음."
+    },
+    "1274": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1275": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "석검 열쇠",
+          "quantity": 1
+        }
+      ]
+    },
+    "1276": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "단석[1]",
+          "quantity": 3
+        }
+      ]
+    },
+    "1277": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1278": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "단석[2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "1279": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1280": {
+      "status": "reviewed",
+      "reason": "상점 판매 목록을 현 위치의 무료 획득 목록에 섞지 않음."
+    },
+    "1281": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외; 밤에 출현하는 보스의 처치 보상.",
+      "loot": [
+        {
+          "name": "밤 기병의 철퇴"
+        },
+        {
+          "name": "철벽의 방패"
+        }
+      ]
+    },
+    "1282": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1283": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외; 밤에 출현하는 보스의 처치 보상.",
+      "loot": [
+        {
+          "name": "산 제물의 도끼"
+        }
+      ]
+    },
+    "1284": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "색 잃은 단석[2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "1285": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "별빛 조각",
+          "quantity": 1
+        }
+      ]
+    },
+    "1287": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1288": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1293": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1294": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1295": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1296": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1297": {
+      "status": "reviewed",
+      "reason": "상점 판매 목록과 특전 구매 조건을 현 위치 획득 목록에 섞지 않음."
+    },
+    "1298": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1303": {
+      "status": "reviewed",
+      "reason": "에드거 이벤트 소환 조건; 아이템 보상 없음."
+    },
+    "1304": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "검 잇기의 대검"
+        }
+      ]
+    },
+    "1305": {
+      "status": "reviewed",
+      "reason": "퀘스트 진행에 따른 에드거 이동 설명; 보상 없음."
+    },
+    "1306": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1316": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1365": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "단석 [1]",
+          "quantity": 1
+        }
+      ]
+    },
+    "1366": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 1
+        }
+      ]
+    },
+    "1367": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 1
+        }
+      ]
+    },
+    "1369": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 1
+        }
+      ]
+    },
+    "1370": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 1
+        }
+      ]
+    },
+    "1440": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 1
+        }
+      ]
+    },
+    "1441": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 3
+        }
+      ]
+    },
+    "1666": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 3
+        }
+      ]
+    },
+    "1667": {
+      "status": "reviewed",
+      "reason": "용의 심장을 소비하는 용찬 교환 목록; 획득 목록과 구분해 보류."
+    },
+    "1668": {
+      "status": "reviewed",
+      "reason": "다른 지역 대용찬 교회 안내. 기존 림그레이브와 동일하게 원본 마커는 유지, 현 위치 loot는 없음."
+    },
+    "1831": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "1835": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "단석 [2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "1836": {
+      "status": "reviewed",
+      "reason": "셀렌의 원휘석은 퀘스트 선행 조건이 있어 보류."
+    },
+    "1918": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "트리나의 수련",
+          "quantity": 1
+        }
+      ]
+    },
+    "2257": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "아르테리아의 잎",
+          "quantity": 1
+        }
+      ]
+    },
+    "2258": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "단석 [1]",
+          "quantity": 3
+        }
+      ]
+    },
+    "2259": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "2260": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "2261": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "단석 [2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2262": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "2263": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "색 잃은 단석 [1]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2292": {
+      "status": "reviewed",
+      "reason": "쥐 처치 시 룬의 호·황금의 룬[1] 드롭; 반복 파밍·확률 정보를 표현할 구조가 없어 목록 변환 보류."
+    },
+    "2299": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [1]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2301": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [4]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2302": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "아르테리아의 잎",
+          "quantity": 1
+        }
+      ]
+    },
+    "2303": {
+      "status": "reviewed",
+      "reason": "독꽃 6개 리스폰 파밍 위치; 고정 일회 획득 수량과 구분해 보류."
+    },
+    "2304": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "이엘로의 눈동자",
+          "quantity": 1
+        }
+      ]
+    },
+    "2305": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "이엘로의 눈동자",
+          "quantity": 1
+        }
+      ]
+    },
+    "2306": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2307": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "아르테리아의 잎",
+          "quantity": 4
+        }
+      ]
+    },
+    "2308": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "이엘로의 눈동자",
+          "quantity": 5
+        }
+      ]
+    },
+    "2309": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2310": {
+      "status": "reviewed",
+      "reason": "독꽃 5개·미란다 꽃 무작위 드롭; 확정 수량으로 변환하지 않음."
+    },
+    "2311": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "유혹의 나뭇가지",
+          "quantity": 3
+        }
+      ]
+    },
+    "2313": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "아르테리아의 잎",
+          "quantity": 2
+        }
+      ]
+    },
+    "2314": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "2315": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [1]",
+          "quantity": 3
+        }
+      ]
+    },
+    "2316": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [1]",
+          "quantity": 3
+        }
+      ]
+    },
+    "2317": {
+      "status": "reviewed",
+      "reason": "가는 짐승 뼈·짐승 간·저민 고기·뿔의 싹 무작위 드롭. 확률·수량 범위 보류."
+    },
+    "2318": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [5]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2319": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2320": {
+      "status": "reviewed",
+      "reason": "별도 획득 목록 없음"
+    },
+    "2321": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외",
+      "loot": [
+        {
+          "name": "황금의 룬 [1]",
+          "quantity": 4
+        },
+        {
+          "name": "황금의 룬 [2]"
+        },
+        {
+          "name": "황금의 룬 [3]"
+        }
+      ]
+    },
+    "2322": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "큰 잠자리 머리",
+          "quantity": 3
+        }
+      ]
+    },
+    "2444": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [1]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2500": {
+      "status": "reviewed",
+      "reason": "현 위치에서 획득하는 항목; 제작법 내용·비용·다른 장소 언급은 제외; 입장에 석검 열쇠 1개 필요(획득품으로 추가하지 않음).",
+      "loot": [
+        {
+          "name": "라다곤의 각인"
+        }
+      ]
+    },
+    "2615": {
+      "status": "reviewed",
+      "reason": "개별 마커 설명에 수량 명시",
+      "loot": [
+        {
+          "name": "황금의 룬 [2]",
+          "quantity": 1
+        }
+      ]
+    },
+    "2878": {
+      "status": "reviewed",
+      "reason": "올빼미 처치 시 잠알 파밍 위치. 반복 파밍 정보는 획득 목록과 구분해 보류."
+    }
+  },
+  "legacy": [
+    {
+      "id": "BonfireWarpParam-300000",
+      "categories": ["축복"],
+      "name": "영묘 들판 지하 묘지",
+      "x": 0.4602,
+      "y": 0.288,
+      "replacedBy": "LSDL-736",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-300100",
+      "categories": ["축복"],
+      "name": "꼬챙이의 지하 묘지",
+      "x": 0.8824,
+      "y": 0.2165,
+      "replacedBy": "LSDL-722",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-310100",
+      "categories": ["축복"],
+      "name": "구멍을 내려가는 동굴",
+      "x": 0.6408,
+      "y": 0.2092,
+      "replacedBy": "LSDL-819",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-310200",
+      "categories": ["축복"],
+      "name": "영묘 들판 동굴",
+      "x": 0.2608,
+      "y": 0.3433,
+      "replacedBy": "LSDL-734",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-320000",
+      "categories": ["축복"],
+      "name": "몬 갱도",
+      "x": 0.556,
+      "y": 0.4168,
+      "replacedBy": "LSDL-813",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61413200",
+      "categories": ["축복"],
+      "name": "은둔 상인의 오두막",
+      "x": 0.1596,
+      "y": 0.4722,
+      "replacedBy": "LSDL-732",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61413300",
+      "categories": ["축복"],
+      "name": "제4 마리카 교회",
+      "x": 0.1968,
+      "y": 0.3183,
+      "replacedBy": "LSDL-871",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61423300",
+      "categories": ["축복"],
+      "name": "영묘 들판",
+      "x": 0.3998,
+      "y": 0.3917,
+      "replacedBy": "LSDL-733",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61433000",
+      "categories": ["축복"],
+      "name": "몬의 한탄묘",
+      "x": 0.5071,
+      "y": 0.9332,
+      "replacedBy": "LSDL-731",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61433100",
+      "categories": ["축복"],
+      "name": "몬 성 승강기 앞",
+      "x": 0.6056,
+      "y": 0.7401,
+      "replacedBy": "LSDL-728",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61433101",
+      "categories": ["축복"],
+      "name": "성 뒤편",
+      "x": 0.5576,
+      "y": 0.8221,
+      "replacedBy": "LSDL-729",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61433102",
+      "categories": ["축복"],
+      "name": "성벽 감옥 옆",
+      "x": 0.542,
+      "y": 0.8423,
+      "replacedBy": "LSDL-730",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61433400",
+      "categories": ["축복"],
+      "name": "순례교회",
+      "x": 0.4493,
+      "y": 0.0985,
+      "replacedBy": "LSDL-816",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61443300",
+      "categories": ["축복"],
+      "name": "몬 성문 앞",
+      "x": 0.7748,
+      "y": 0.4349,
+      "replacedBy": "LSDL-726",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61443301",
+      "categories": ["축복"],
+      "name": "감시탑 남쪽",
+      "x": 0.7,
+      "y": 0.3056,
+      "replacedBy": "LSDL-724",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61443302",
+      "categories": ["축복"],
+      "name": "격리 마을 변두리",
+      "x": 0.6668,
+      "y": 0.3118,
+      "replacedBy": "LSDL-725",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61443400",
+      "categories": ["축복"],
+      "name": "제물 이송 대교",
+      "x": 0.7906,
+      "y": 0.1795,
+      "replacedBy": "LSDL-721",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "BonfireWarpParam-61453300",
+      "categories": ["축복"],
+      "name": "구멍난 땅 옆",
+      "x": 0.8537,
+      "y": 0.3228,
+      "replacedBy": "LSDL-723",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-310200",
+      "categories": ["장소"],
+      "name": "영묘 들판 동굴",
+      "x": 0.2608,
+      "y": 0.3433,
+      "replacedBy": "LSDL-734",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61413200",
+      "categories": ["장소"],
+      "name": "은둔 상인의 오두막",
+      "x": 0.1627,
+      "y": 0.4788,
+      "replacedBy": "LSDL-324",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61413300",
+      "categories": ["장소"],
+      "name": "제4 마리카 교회",
+      "x": 0.2179,
+      "y": 0.3159,
+      "replacedBy": "LSDL-370",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61413301",
+      "categories": ["장소"],
+      "name": "마녀 봉인의 폐허",
+      "x": 0.1928,
+      "y": 0.3678,
+      "replacedBy": "LSDL-1148",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61423200",
+      "categories": ["장소"],
+      "name": "귀환의 탑",
+      "x": 0.3066,
+      "y": 0.5834,
+      "replacedBy": "LSDL-1298",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61423300",
+      "categories": ["장소"],
+      "name": "흐느낌의 봉인감옥",
+      "x": 0.2639,
+      "y": 0.289,
+      "replacedBy": "LSDL-2500",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61423400",
+      "categories": ["장소"],
+      "name": "영묘 들판 폐허",
+      "x": 0.3383,
+      "y": 0.2612,
+      "replacedBy": "LSDL-1147",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61433100",
+      "categories": ["장소"],
+      "name": "몬 성",
+      "x": 0.625,
+      "y": 0.7206,
+      "replacedBy": "LSDL-314",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61433301",
+      "categories": ["장소"],
+      "name": "작은 황금 나무",
+      "x": 0.4861,
+      "y": 0.3968,
+      "replacedBy": "LSDL-1059",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61433400",
+      "categories": ["장소"],
+      "name": "순례교회",
+      "x": 0.4493,
+      "y": 0.096,
+      "replacedBy": "LSDL-315",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61443300",
+      "categories": ["장소"],
+      "name": "카르의 세례교회",
+      "x": 0.6534,
+      "y": 0.4102,
+      "replacedBy": "LSDL-309",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61443302",
+      "categories": ["장소"],
+      "name": "병자 마을",
+      "x": 0.6386,
+      "y": 0.3813,
+      "replacedBy": "LSDL-310",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61443400",
+      "categories": ["장소"],
+      "name": "제물 이송용 대교",
+      "x": 0.803,
+      "y": 0.1447,
+      "replacedBy": "LSDL-308",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61443401",
+      "categories": ["장소"],
+      "name": "숲 감시탑",
+      "x": 0.7175,
+      "y": 0.2238,
+      "replacedBy": "LSDL-1266",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-61453300",
+      "categories": ["장소"],
+      "name": "오리티스의 마술사탑",
+      "x": 0.8537,
+      "y": 0.4085,
+      "replacedBy": "LSDL-321",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-81433100",
+      "categories": ["NPC"],
+      "name": "성주 에드거",
+      "x": 0.6015,
+      "y": 0.7702,
+      "replacedBy": "LSDL-1064",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    },
+    {
+      "id": "WorldMapPointParam-81453400",
+      "categories": ["NPC"],
+      "name": "몬의 일레나",
+      "x": 0.8256,
+      "y": 0.2081,
+      "replacedBy": "LSDL-1065",
+      "reason": "이름·분류·위치를 대조한 동일 지점; LSDL 좌표 채택"
+    }
+  ],
+  "legacyLoot": {
+    "WorldMapPointParam-61433100": {
+      "석검 열쇠": "LSDL-314",
+      "강선 토치": "LSDL-2260",
+      "채찍": "LSDL-2262",
+      "쌍날검의 탈리스만": "LSDL-1831",
+      "클레이모어": "LSDL-2259"
+    },
+    "WorldMapPointParam-61453300": {
+      "메모리 스톤": "LSDL-321"
+    }
+  }
+}
