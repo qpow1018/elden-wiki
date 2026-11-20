@@ -8,13 +8,13 @@
 - `source.json`: 공개 마커 원본 중 대상 이미지 안의 125개에 대한 ID·이름·좌표·코드·설명을 보존합니다. 전체 2,096개 좌표 인덱스로 이미지 범위 선택을 다시 계산할 수 있습니다. 사용자 계정 정보는 저장하지 않습니다.
 - 분류는 공개 `map.js`의 마커 코드 매핑을 사용합니다. 원문 설명 키워드로 추가되는 검색 필터를 아이템 자체의 분류로 확장하지 않습니다. 예를 들어 상점 설명에 무기가 있어도 NPC를 무기 마커로 바꾸지 않습니다.
 - `review.json`: 125개 설명 전체의 검토 결과, 획득 목록과 보류 이유, 기존 CSV 35개 및 기존 획득 목록의 대응을 기록합니다. LSDL 제목이 없는 순례교회·제4 마리카 교회·은둔 상인의 오두막은 CSV의 같은 장소와 대조해 기존 한국어 표시명을 유지합니다.
-- `generate.mjs`: 표준 Node.js 모듈과 프로젝트에 설치된 Prettier로 좌표·분류·획득 목록을 생성합니다. 네트워크 요청은 하지 않습니다. 지도 이미지 해시와 원본·검토 ID 집합을 확인하며 반도 데이터 블록만 갱신합니다.
+- `../generate.mjs`: 표준 Node.js 모듈과 프로젝트에 설치된 Prettier로 좌표·분류·획득 목록을 생성합니다. 네트워크 요청은 하지 않습니다. 지도 이미지 해시와 원본·검토 ID 집합을 확인하며 반도 데이터 블록만 갱신합니다.
 
 저장소 루트에서 실행합니다. 원본·검토 파일 또는 지도 이미지가 바뀌면 검증 결과를 다시 확인해야 합니다.
 
 ```bash
-node reference-data/maps/weeping-peninsula/generate.mjs
-node reference-data/maps/weeping-peninsula/generate.mjs --check
+node reference-data/maps/generate.mjs weeping-peninsula
+node reference-data/maps/generate.mjs weeping-peninsula --check
 ```
 
 검증 명령은 스냅샷과 현재 코드의 일치를 확인합니다. LSDL 사이트가 이후 갱신됐는지 또는 사람이 정리한 획득 목록의 의미가 올바른지까지 자동 검증하지는 않습니다.

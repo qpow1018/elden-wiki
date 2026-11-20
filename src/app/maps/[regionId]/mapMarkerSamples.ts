@@ -985,7 +985,7 @@ const LIMGRAVE_MARKERS = [
 // Weeping Peninsula: LSDL base-game map, checked 2026-11-20; patch unspecified.
 // Source, terrain alignment, description review and legacy CSV mapping:
 // reference-data/maps/weeping-peninsula/{source.json,review.json,README.md}.
-// Regenerate with node reference-data/maps/weeping-peninsula/generate.mjs.
+// Regenerate with node reference-data/maps/generate.mjs weeping-peninsula.
 const WEEPING_PENINSULA_MARKERS = [
   {
     id: 'LSDL-308',
@@ -2441,6 +2441,1576 @@ const WEEPING_PENINSULA_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-20; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/stormveil-castle/.
+// Regenerate: node reference-data/maps/generate.mjs stormveil-castle.
+const STORMVEIL_CASTLE_MARKERS = [
+  {
+    id: 'LSDL-379',
+    categories: ['장소'],
+    name: '이름 없는 마커',
+    x: 0.886105,
+    y: 0.909203,
+  },
+  {
+    id: 'LSDL-390',
+    categories: ['장소'],
+    name: '이름 없는 마커',
+    x: 0.551957,
+    y: 0.750607,
+  },
+  {
+    id: 'LSDL-517',
+    categories: ['축복'],
+    name: '끔찍한 흉조 멀기트',
+    x: 0.286802,
+    y: 0.938577,
+  },
+  {
+    id: 'LSDL-519',
+    categories: ['축복'],
+    name: '스톰빌 정문',
+    x: 0.225023,
+    y: 0.881249,
+  },
+  {
+    id: 'LSDL-520',
+    categories: ['축복'],
+    name: '성문 옆 작은 방',
+    x: 0.198148,
+    y: 0.91132,
+    loot: [
+      {
+        id: 'LSDL-520-1',
+        name: '황금의 룬 [5]',
+      },
+      {
+        id: 'LSDL-520-2',
+        name: '시민의 옷',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-539',
+    categories: ['축복'],
+    name: '성으로 향하는 굴',
+    x: 0.31213,
+    y: 0.909462,
+  },
+  {
+    id: 'LSDL-540',
+    categories: ['축복'],
+    name: '폭풍 언덕의 낡은 집',
+    x: 0.39306,
+    y: 0.844326,
+    loot: [
+      {
+        id: 'LSDL-540-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-541',
+    categories: ['축복'],
+    name: '림그레이브 신수탑 교량',
+    x: 0.246642,
+    y: 0.732858,
+  },
+  {
+    id: 'LSDL-543',
+    categories: ['축복'],
+    name: '후미진 작은 방',
+    x: 0.161999,
+    y: 0.479853,
+    loot: [
+      {
+        id: 'LSDL-543-1',
+        name: '전회 : 폭풍 부르기',
+      },
+      {
+        id: 'LSDL-543-2',
+        name: '단석 [2]',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-543-3',
+        name: '단석 [1]',
+      },
+      {
+        id: 'LSDL-543-4',
+        name: '성관의 타워 실드',
+      },
+      {
+        id: 'LSDL-543-5',
+        name: '단석 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-544',
+    categories: ['축복'],
+    name: '접목의 고드릭',
+    x: 0.127401,
+    y: 0.421037,
+  },
+  {
+    id: 'LSDL-546',
+    categories: ['축복'],
+    name: '호수를 향한 절벽',
+    x: 0.032875,
+    y: 0.273229,
+  },
+  {
+    id: 'LSDL-880',
+    categories: ['축복'],
+    name: '화가의 낡은 집',
+    x: 0.887319,
+    y: 0.910691,
+  },
+  {
+    id: 'LSDL-883',
+    categories: ['축복'],
+    name: '성인 다리',
+    x: 0.745246,
+    y: 0.513172,
+  },
+  {
+    id: 'LSDL-885',
+    categories: ['축복', '던전', '보스'],
+    name: '죽음에 닿은 지하 묘지 (해골)',
+    x: 0.662987,
+    y: 0.46987,
+    loot: [
+      {
+        id: 'LSDL-885-1',
+        name: '묘 은방울꽃 [1]',
+        quantity: 4,
+      },
+      {
+        id: 'LSDL-885-2',
+        name: '타도',
+      },
+      {
+        id: 'LSDL-885-3',
+        name: '피의 장미',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-885-4',
+        name: '붉은 흉악한 칼날',
+      },
+      {
+        id: 'LSDL-885-5',
+        name: '사근',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-887',
+    categories: ['축복', '던전', '보스'],
+    name: '높은 길 아래 동굴',
+    x: 0.757669,
+    y: 0.401227,
+    loot: [
+      {
+        id: 'LSDL-887-1',
+        name: '단석 [1]',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-887-2',
+        name: '단석 [2]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-887-3',
+        name: '황금의 룬 [4]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-887-4',
+        name: '샴시르',
+      },
+      {
+        id: 'LSDL-887-5',
+        name: '푸른 무희',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-889',
+    categories: ['축복'],
+    name: '림그레이브 신수탑',
+    x: 0.920807,
+    y: 0.094139,
+  },
+  {
+    id: 'LSDL-891',
+    categories: ['축복'],
+    name: '전쟁 배움의 낡은 집',
+    x: 0.548868,
+    y: 0.752891,
+  },
+  {
+    id: 'LSDL-931',
+    categories: ['축복', '던전', '보스'],
+    name: '고인물 동굴',
+    x: 0.000656,
+    y: 0.204691,
+    loot: [
+      {
+        id: 'LSDL-931-1',
+        name: '황금의 룬 [3]',
+      },
+      {
+        id: 'LSDL-931-2',
+        name: '황금의 룬 [4]',
+      },
+      {
+        id: 'LSDL-931-3',
+        name: '동굴 이끼',
+      },
+      {
+        id: 'LSDL-931-4',
+        name: '동굴 이끼 결정',
+      },
+      {
+        id: 'LSDL-931-5',
+        name: '동굴 이끼 꽃눈',
+      },
+      {
+        id: 'LSDL-931-6',
+        name: '독꽃',
+      },
+      {
+        id: 'LSDL-931-7',
+        name: '현자의 후드',
+      },
+      {
+        id: 'LSDL-931-8',
+        name: '현자의 로브',
+      },
+      {
+        id: 'LSDL-931-9',
+        name: '현자의 바지',
+      },
+      {
+        id: 'LSDL-931-10',
+        name: '유익검의 휘장',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-934',
+    categories: ['축복'],
+    name: '마중물 마을 변두리',
+    x: 0.992443,
+    y: 0.563329,
+  },
+  {
+    id: 'LSDL-999',
+    categories: ['NPC'],
+    name: '알렉산더[1]',
+    x: 0.722848,
+    y: 0.540108,
+  },
+  {
+    id: 'LSDL-1008',
+    categories: ['NPC'],
+    name: '네펠리 루[1]',
+    x: 0.155657,
+    y: 0.613155,
+  },
+  {
+    id: 'LSDL-1068',
+    categories: ['NPC'],
+    name: '방랑 민족 상인 [1]',
+    x: 0.837872,
+    y: 0.555889,
+  },
+  {
+    id: 'LSDL-1081',
+    categories: ['NPC'],
+    name: '마음이 꺾인 아가씨(로데리카 [1])',
+    x: 0.402579,
+    y: 0.877107,
+  },
+  {
+    id: 'LSDL-1082',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.180801,
+    y: 0.609808,
+  },
+  {
+    id: 'LSDL-1110',
+    categories: ['NPC'],
+    name: '피 묻은 손가락 사냥꾼 유라[2]',
+    x: 0.826747,
+    y: 0.919457,
+  },
+  {
+    id: 'LSDL-1111',
+    categories: ['축복'],
+    name: '흐린 강 기슭',
+    x: 0.802001,
+    y: 0.917809,
+  },
+  {
+    id: 'LSDL-1112',
+    categories: ['색단석'],
+    name: '색 잃은 단석[1]',
+    x: 0.845294,
+    y: 0.936937,
+  },
+  {
+    id: 'LSDL-1113',
+    categories: ['일반단석'],
+    name: '단석[1]',
+    x: 0.87455,
+    y: 0.913666,
+  },
+  {
+    id: 'LSDL-1114',
+    categories: ['일반단석'],
+    name: '단석[1]',
+    x: 0.713382,
+    y: 0.793272,
+    loot: [
+      {
+        id: 'LSDL-1114-1',
+        name: '단석[1]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1116',
+    categories: ['축복', '던전', '보스'],
+    name: '흐린 강의 지하 묘지 ( 임프 )',
+    x: 0.791709,
+    y: 0.776696,
+    loot: [
+      {
+        id: 'LSDL-1116-1',
+        name: '묘 은방울꽃 [1]',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-1116-2',
+        name: '땅 잃은 기사 잉바르',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1135',
+    categories: ['보스'],
+    name: '끔찍한 흉조 멀기트',
+    x: 0.264488,
+    y: 0.933582,
+    loot: [
+      {
+        id: 'LSDL-1135-1',
+        name: '부적 주머니',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1136',
+    categories: ['보스'],
+    name: '접목의 고드릭',
+    x: 0.11979,
+    y: 0.40393,
+    loot: [
+      {
+        id: 'LSDL-1136-1',
+        name: '고드릭의 거대한 룬',
+      },
+      {
+        id: 'LSDL-1136-2',
+        name: '접목의 추억',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1185',
+    categories: ['암령'],
+    name: '침입 : 배율자 헨릭스',
+    x: 0.512216,
+    y: 0.359943,
+    loot: [
+      {
+        id: 'LSDL-1185-1',
+        name: '망치의 탈리스만',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1186',
+    categories: ['탈리스만'],
+    name: '망치의 탈리스만',
+    x: 0.51263,
+    y: 0.337522,
+  },
+  {
+    id: 'LSDL-1207',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.414946,
+    y: 0.981614,
+  },
+  {
+    id: 'LSDL-1208',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.393509,
+    y: 0.868712,
+  },
+  {
+    id: 'LSDL-1218',
+    categories: ['일반단석'],
+    name: '빛나는 석상',
+    x: 0.616115,
+    y: 0.88322,
+    loot: [
+      {
+        id: 'LSDL-1218-1',
+        name: '단석 [1]',
+        quantity: 5,
+      },
+      {
+        id: 'LSDL-1218-2',
+        name: '단석 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1219',
+    categories: ['보스'],
+    name: '죽음의 새 - 전쟁 배움 집',
+    x: 0.638352,
+    y: 0.763678,
+    loot: [
+      {
+        id: 'LSDL-1219-1',
+        name: '푸른 날개 칠지인',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1220',
+    categories: ['보스'],
+    name: '방울 사냥꾼 - 전쟁 배움 집',
+    x: 0.550559,
+    y: 0.733818,
+    loot: [
+      {
+        id: 'LSDL-1220-1',
+        name: '뼈 장사꾼의 방울',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1221',
+    categories: ['NPC'],
+    name: '전사 베르나르',
+    x: 0.566225,
+    y: 0.757886,
+  },
+  {
+    id: 'LSDL-1222',
+    categories: ['일반단석'],
+    name: '단석[1]',
+    x: 0.443939,
+    y: 0.95404,
+    loot: [
+      {
+        id: 'LSDL-1222-1',
+        name: '단석[1]',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1223',
+    categories: ['중요아이템'],
+    name: '작은 붉은 우상',
+    x: 0.524169,
+    y: 0.338106,
+  },
+  {
+    id: 'LSDL-1225',
+    categories: ['성배병'],
+    name: '근력의 혹 결정 물방울',
+    x: 0.494084,
+    y: 0.638343,
+  },
+  {
+    id: 'LSDL-1226',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.402579,
+    y: 0.845867,
+  },
+  {
+    id: 'LSDL-1227',
+    categories: ['전회'],
+    name: '전회 : 난격',
+    x: 0.336207,
+    y: 0.709694,
+  },
+  {
+    id: 'LSDL-1232',
+    categories: ['무기'],
+    name: '랜스',
+    x: 0.627928,
+    y: 0.613426,
+  },
+  {
+    id: 'LSDL-1233',
+    categories: ['무기'],
+    name: '짐승 문양 히터 실드',
+    x: 0.636159,
+    y: 0.591856,
+  },
+  {
+    id: 'LSDL-1234',
+    categories: ['색단석'],
+    name: '색 잃은 단석[1]',
+    x: 0.627926,
+    y: 0.48889,
+    loot: [
+      {
+        id: 'LSDL-1234-1',
+        name: '색 잃은 단석[1]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1235',
+    categories: ['전회'],
+    name: '전회 : 황금 나무에 맹세코',
+    x: 0.63534,
+    y: 0.547014,
+  },
+  {
+    id: 'LSDL-1236',
+    categories: ['탈리스만'],
+    name: '랜스의 탈리스만',
+    x: 0.740041,
+    y: 0.17176,
+  },
+  {
+    id: 'LSDL-1237',
+    categories: ['일반단석'],
+    name: '단석[1]',
+    x: 0.785372,
+    y: 0.520451,
+    loot: [
+      {
+        id: 'LSDL-1237-1',
+        name: '단석[1]',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1238',
+    categories: ['NPC'],
+    name: '죽음을 사냥하는 자 D [1]',
+    x: 0.941208,
+    y: 0.497767,
+  },
+  {
+    id: 'LSDL-1263',
+    categories: ['중요아이템'],
+    name: '투사의 갈고리 손가락',
+    x: 0.524995,
+    y: 0.354949,
+  },
+  {
+    id: 'LSDL-1310',
+    categories: [],
+    name: '이름 없는 마커',
+    x: 0.844052,
+    y: 0.842525,
+  },
+  {
+    id: 'LSDL-1311',
+    categories: [],
+    name: '이름 없는 마커',
+    x: 0.710508,
+    y: 0.837582,
+  },
+  {
+    id: 'LSDL-1312',
+    categories: [],
+    name: '영기류',
+    x: 0.773158,
+    y: 0.543669,
+  },
+  {
+    id: 'LSDL-1315',
+    categories: ['NPC'],
+    name: '고스토크[4]',
+    x: 0.105396,
+    y: 0.403345,
+  },
+  {
+    id: 'LSDL-1317',
+    categories: ['전회'],
+    name: '전회 : 폭풍의 벽',
+    x: 0.221197,
+    y: 0.461205,
+  },
+  {
+    id: 'LSDL-1318',
+    categories: ['제작서'],
+    name: '방랑 전사의 제작서 [7]',
+    x: 0.265303,
+    y: 0.424705,
+  },
+  {
+    id: 'LSDL-1321',
+    categories: ['중요아이템'],
+    name: '샤브리리의 포도',
+    x: 0.065787,
+    y: 0.284387,
+  },
+  {
+    id: 'LSDL-1322',
+    categories: ['NPC'],
+    name: '하이타[1]',
+    x: 0.031574,
+    y: 0.254527,
+  },
+  {
+    id: 'LSDL-1323',
+    categories: ['일반단석'],
+    name: '단석[1]',
+    x: 0.231374,
+    y: 0.949362,
+    loot: [
+      {
+        id: 'LSDL-1323-1',
+        name: '단석[1]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1326',
+    categories: ['NPC'],
+    name: '고스토크[1]',
+    x: 0.209801,
+    y: 0.904254,
+  },
+  {
+    id: 'LSDL-1327',
+    categories: ['NPC'],
+    name: '마술사 로지에르 소환 사인',
+    x: 0.302823,
+    y: 0.931936,
+  },
+  {
+    id: 'LSDL-1328',
+    categories: ['NPC'],
+    name: '네펠리 루 소환 사인',
+    x: 0.153182,
+    y: 0.462904,
+  },
+  {
+    id: 'LSDL-1329',
+    categories: ['일반단석'],
+    name: '단석[3]',
+    x: 0.152642,
+    y: 0.985064,
+    loot: [
+      {
+        id: 'LSDL-1329-1',
+        name: '단석[3]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1330',
+    categories: ['축복'],
+    name: '스톰빌 절벽',
+    x: 0.15649,
+    y: 0.946013,
+  },
+  {
+    id: 'LSDL-1348',
+    categories: ['중요아이템'],
+    name: '그림 : 예언',
+    x: 0.107841,
+    y: 0.644714,
+  },
+  {
+    id: 'LSDL-1350',
+    categories: ['마술'],
+    name: '마술 : 원혼 부르기',
+    x: 0.095888,
+    y: 0.655499,
+  },
+  {
+    id: 'LSDL-1351',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.1132,
+    y: 0.696994,
+  },
+  {
+    id: 'LSDL-1353',
+    categories: ['탈리스만'],
+    name: '뇌룡 표식의 탈리스만',
+    x: 0.274376,
+    y: 0.691151,
+  },
+  {
+    id: 'LSDL-1354',
+    categories: ['방어구'],
+    name: '전회 스카라베',
+    x: 0.458907,
+    y: 0.530701,
+  },
+  {
+    id: 'LSDL-1355',
+    categories: [],
+    name: '전송문 : 림그레이브 신수탑',
+    x: 0.444891,
+    y: 0.542283,
+  },
+  {
+    id: 'LSDL-1356',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.954535,
+    y: 0.697004,
+    loot: [
+      {
+        id: 'LSDL-1356-1',
+        name: '트리나의 수련',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1364',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.864681,
+    y: 0.783338,
+    loot: [
+      {
+        id: 'LSDL-1364-1',
+        name: '트리나의 수련',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1371',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.210488,
+    y: 0.945217,
+    loot: [
+      {
+        id: 'LSDL-1371-1',
+        name: '트리나의 수련',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1372',
+    categories: ['장소'],
+    name: '스톰빌 성',
+    x: 0.241073,
+    y: 0.855534,
+  },
+  {
+    id: 'LSDL-1373',
+    categories: ['NPC'],
+    name: '고스토크 미행 [1]',
+    x: 0.168855,
+    y: 0.96514,
+  },
+  {
+    id: 'LSDL-1374',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.180801,
+    y: 0.56417,
+    loot: [
+      {
+        id: 'LSDL-1374-1',
+        name: '트리나의 수련',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1377',
+    categories: ['색단석'],
+    name: '사자',
+    x: 0.228211,
+    y: 0.796613,
+    loot: [
+      {
+        id: 'LSDL-1377-1',
+        name: '색 잃은 단석 [1]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-1377-2',
+        name: '짐승 피',
+      },
+      {
+        id: 'LSDL-1377-3',
+        name: '옛 엄니',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1494',
+    categories: ['장소'],
+    name: '림그레이브 신수탑',
+    x: 0.917007,
+    y: 0.066883,
+  },
+  {
+    id: 'LSDL-1578',
+    categories: ['장소'],
+    name: '림그레이브 콜로세움 마리카 동상',
+    x: 0.527055,
+    y: 0.30931,
+  },
+  {
+    id: 'LSDL-1600',
+    categories: [],
+    name: '전송문',
+    x: 0.876618,
+    y: 0.129151,
+  },
+  {
+    id: 'LSDL-1673',
+    categories: ['그릇'],
+    name: '금 간 항아리 - 스톰빌',
+    x: 0.109076,
+    y: 0.540898,
+    loot: [
+      {
+        id: 'LSDL-1673-1',
+        name: '금 간 항아리 - 스톰빌',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1882',
+    categories: ['암령'],
+    name: '화산관 암살 퀘스트 1 : 옛 기사 이슈트반',
+    x: 0.498202,
+    y: 0.368231,
+  },
+  {
+    id: 'LSDL-1919',
+    categories: ['NPC'],
+    name: '재봉사 아인 보크 [3]',
+    x: 0.016321,
+    y: 0.29023,
+  },
+  {
+    id: 'LSDL-2174',
+    categories: [],
+    name: '석관 묘지 ( 폭풍의 언덕 )',
+    x: 0.530775,
+    y: 0.835614,
+    loot: [
+      {
+        id: 'LSDL-2174-1',
+        name: '황금의 룬 [1]',
+        quantity: 4,
+      },
+      {
+        id: 'LSDL-2174-2',
+        name: '황금의 룬 [2]',
+      },
+      {
+        id: 'LSDL-2174-3',
+        name: '황금의 룬 [3]',
+      },
+      {
+        id: 'LSDL-2174-4',
+        name: '황금의 룬 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2243',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.809011,
+    y: 0.545051,
+    loot: [
+      {
+        id: 'LSDL-2243-1',
+        name: '트리나의 수련',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2282',
+    categories: [],
+    name: '뿌리 기름 파밍 위치 1',
+    x: 0.562926,
+    y: 0.716923,
+  },
+  {
+    id: 'LSDL-2283',
+    categories: [],
+    name: '뿌리 기름 파밍 위치 2',
+    x: 0.565399,
+    y: 0.61146,
+  },
+  {
+    id: 'LSDL-2284',
+    categories: [],
+    name: '연기 나비 파밍 위치 1',
+    x: 0.59012,
+    y: 0.463706,
+  },
+  {
+    id: 'LSDL-2287',
+    categories: [],
+    name: '문어 파밍 위치 - 림그레이브 북쪽',
+    x: 0.794578,
+    y: 0.451276,
+  },
+  {
+    id: 'LSDL-2332',
+    categories: [],
+    name: '황금의 룬 [5]',
+    x: 0.198533,
+    y: 0.883799,
+    loot: [
+      {
+        id: 'LSDL-2332-1',
+        name: '황금의 룬 [5]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2333',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.196881,
+    y: 0.743483,
+    loot: [
+      {
+        id: 'LSDL-2333-1',
+        name: '트리나의 수련',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2334',
+    categories: ['무기'],
+    name: '아바레스트',
+    x: 0.184927,
+    y: 0.726853,
+  },
+  {
+    id: 'LSDL-2335',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.192344,
+    y: 0.612306,
+    loot: [
+      {
+        id: 'LSDL-2335-1',
+        name: '트리나의 수련',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2336',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.189461,
+    y: 0.664585,
+    loot: [
+      {
+        id: 'LSDL-2336-1',
+        name: '트리나의 수련',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2337',
+    categories: [],
+    name: '황금의 룬',
+    x: 0.154421,
+    y: 0.673723,
+    loot: [
+      {
+        id: 'LSDL-2337-1',
+        name: '황금의 룬 [1]',
+      },
+      {
+        id: 'LSDL-2337-2',
+        name: '황금의 룬 [2]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-2337-3',
+        name: '황금의 룬 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2338',
+    categories: ['무기'],
+    name: '파이크',
+    x: 0.137109,
+    y: 0.643864,
+  },
+  {
+    id: 'LSDL-2339',
+    categories: ['무기'],
+    name: '목제 대형 방패',
+    x: 0.142878,
+    y: 0.618149,
+  },
+  {
+    id: 'LSDL-2340',
+    categories: ['일반단석'],
+    name: '빛나는 석상',
+    x: 0.125566,
+    y: 0.620593,
+    loot: [
+      {
+        id: 'LSDL-2340-1',
+        name: '단석 [1]',
+        quantity: 5,
+      },
+      {
+        id: 'LSDL-2340-2',
+        name: '단석 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2341',
+    categories: ['축복'],
+    name: '승강기 측 방',
+    x: 0.10784,
+    y: 0.580745,
+  },
+  {
+    id: 'LSDL-2342',
+    categories: ['일반단석'],
+    name: '단석 [1]',
+    x: 0.100422,
+    y: 0.604016,
+    loot: [
+      {
+        id: 'LSDL-2342-1',
+        name: '단석 [1]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2344',
+    categories: ['중요아이템'],
+    name: '단석, 황룬',
+    x: 0.121854,
+    y: 0.578302,
+    loot: [
+      {
+        id: 'LSDL-2344-1',
+        name: '단석 [2]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2344-2',
+        name: '황금의 룬 [1]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2346',
+    categories: ['일반단석'],
+    name: '스톰빌 정문 앞 발리스타들',
+    x: 0.169679,
+    y: 0.864672,
+    loot: [
+      {
+        id: 'LSDL-2346-1',
+        name: '단석 [1]',
+      },
+      {
+        id: 'LSDL-2346-2',
+        name: '단석 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2347',
+    categories: [],
+    name: '황금의 룬 [2]',
+    x: 0.168022,
+    y: 0.587387,
+    loot: [
+      {
+        id: 'LSDL-2347-1',
+        name: '황금의 룬 [2]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2348',
+    categories: ['일반단석'],
+    name: '단석 [2]',
+    x: 0.191931,
+    y: 0.560026,
+    loot: [
+      {
+        id: 'LSDL-2348-1',
+        name: '단석 [2]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2349',
+    categories: ['제작서'],
+    name: '방랑 전사의 제작서 [10]',
+    x: 0.157718,
+    y: 0.635576,
+  },
+  {
+    id: 'LSDL-2350',
+    categories: ['일반단석'],
+    name: '색 잃은 단석 [2]',
+    x: 0.146178,
+    y: 0.726056,
+  },
+  {
+    id: 'LSDL-2353',
+    categories: ['무기'],
+    name: '갈고리 발톱',
+    x: 0.119386,
+    y: 0.789121,
+  },
+  {
+    id: 'LSDL-2356',
+    categories: ['중요아이템'],
+    name: '잠기는 방',
+    x: 0.126394,
+    y: 0.81983,
+    loot: [
+      {
+        id: 'LSDL-2356-1',
+        name: '녹슨 열쇠',
+      },
+      {
+        id: 'LSDL-2356-2',
+        name: '곡검의 탈리스만',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2363',
+    categories: ['전회'],
+    name: '전회 : 폭풍 부르기',
+    x: 0.128037,
+    y: 0.534257,
+  },
+  {
+    id: 'LSDL-2364',
+    categories: ['일반단석'],
+    name: '단석 [2]',
+    x: 0.138756,
+    y: 0.559175,
+    loot: [
+      {
+        id: 'LSDL-2364-1',
+        name: '단석 [2]',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2365',
+    categories: ['무기'],
+    name: '성관의 타깃 실드',
+    x: 0.094236,
+    y: 0.525968,
+  },
+  {
+    id: 'LSDL-2366',
+    categories: ['일반단석'],
+    name: '단석 [3]',
+    x: 0.075685,
+    y: 0.536754,
+    loot: [
+      {
+        id: 'LSDL-2366-1',
+        name: '단석 [3]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2367',
+    categories: [],
+    name: '황금의 룬 [5]',
+    x: 0.070742,
+    y: 0.574104,
+    loot: [
+      {
+        id: 'LSDL-2367-1',
+        name: '황금의 룬 [5]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2369',
+    categories: ['일반단석'],
+    name: '단석 [2]',
+    x: 0.09094,
+    y: 0.604016,
+    loot: [
+      {
+        id: 'LSDL-2369-1',
+        name: '단석 [2]',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2370',
+    categories: [],
+    name: '황금의 룬 [2]',
+    x: 0.08723,
+    y: 0.574954,
+    loot: [
+      {
+        id: 'LSDL-2370-1',
+        name: '황금의 룬 [2]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2372',
+    categories: ['중요아이템'],
+    name: '지하 문드러진 나무령 근처',
+    x: 0.104956,
+    y: 0.699491,
+    loot: [
+      {
+        id: 'LSDL-2372-1',
+        name: '석검 열쇠',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2372-2',
+        name: '죽음의 왕자의 부스럼',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2382',
+    categories: [],
+    name: '룬',
+    x: 0.213373,
+    y: 0.875458,
+    loot: [
+      {
+        id: 'LSDL-2382-1',
+        name: '황금의 룬 [1]',
+      },
+      {
+        id: 'LSDL-2382-2',
+        name: '황금의 룬 [2]',
+      },
+      {
+        id: 'LSDL-2382-3',
+        name: '발리스타 볼트',
+        quantity: 5,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2385',
+    categories: ['방어구'],
+    name: '시민의 옷',
+    x: 0.189878,
+    y: 0.907867,
+  },
+  {
+    id: 'LSDL-2386',
+    categories: ['중요아이템'],
+    name: '석검 열쇠 방 - 스톰빌 쥐',
+    x: 0.146098,
+    y: 0.799906,
+    loot: [
+      {
+        id: 'LSDL-2386-1',
+        name: '신 사냥의 성인',
+      },
+      {
+        id: 'LSDL-2386-2',
+        name: '황금의 룬 [4]',
+      },
+      {
+        id: 'LSDL-2386-3',
+        name: '신의 살갗의 기도서',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2387',
+    categories: ['중요아이템'],
+    name: '식당',
+    x: 0.156486,
+    y: 0.754268,
+    loot: [
+      {
+        id: 'LSDL-2387-1',
+        name: '출혈 이끼약',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2387-2',
+        name: '하이랜드 액스',
+      },
+      {
+        id: 'LSDL-2387-3',
+        name: '용사의 고깃덩어리',
+      },
+      {
+        id: 'LSDL-2387-4',
+        name: '거북 목 절임',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-2387-5',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2388',
+    categories: ['중요아이템'],
+    name: '의태의 베일',
+    x: 0.15937,
+    y: 0.792468,
+  },
+  {
+    id: 'LSDL-2389',
+    categories: ['중요아이템'],
+    name: '아이템들',
+    x: 0.136699,
+    y: 0.738488,
+    loot: [
+      {
+        id: 'LSDL-2389-1',
+        name: '황금의 룬 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2390',
+    categories: ['축복'],
+    name: '성벽 탑',
+    x: 0.109492,
+    y: 0.754267,
+    loot: [
+      {
+        id: 'LSDL-2390-1',
+        name: '황금의 룬 [2]',
+      },
+      {
+        id: 'LSDL-2390-2',
+        name: '석검 열쇠',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2390-3',
+        name: '제스처 : 앉아서 자기',
+      },
+      {
+        id: 'LSDL-2390-4',
+        name: '손톱의 탈리스만',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2391',
+    categories: ['무기'],
+    name: '침식된 목제 방패',
+    x: 0.077339,
+    y: 0.651301,
+  },
+  {
+    id: 'LSDL-2392',
+    categories: ['전회'],
+    name: '전회 : 폭풍의 습격',
+    x: 0.08146,
+    y: 0.695346,
+  },
+  {
+    id: 'LSDL-2393',
+    categories: ['기도'],
+    name: '기도 : 도가니의 모습/뿔',
+    x: 0.082699,
+    y: 0.765052,
+  },
+  {
+    id: 'LSDL-2394',
+    categories: [],
+    name: '아르테리아의 잎',
+    x: 0.111966,
+    y: 0.832315,
+    loot: [
+      {
+        id: 'LSDL-2394-1',
+        name: '아르테리아의 잎',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2395',
+    categories: ['중요아이템'],
+    name: '스톰빌 절벽 ~ 성벽 탑 구간',
+    x: 0.142472,
+    y: 0.880451,
+    loot: [
+      {
+        id: 'LSDL-2395-1',
+        name: '황금의 룬 [2]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-2395-2',
+        name: '갈고리 발톱',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2396',
+    categories: ['NPC'],
+    name: '고스토크 미행 [2]',
+    x: 0.138762,
+    y: 0.83561,
+  },
+  {
+    id: 'LSDL-2397',
+    categories: ['중요아이템'],
+    name: '석검 열쇠 방 - 스톰빌 식당 옆',
+    x: 0.128453,
+    y: 0.749273,
+    loot: [
+      {
+        id: 'LSDL-2397-1',
+        name: '자비의 단검',
+      },
+      {
+        id: 'LSDL-2397-2',
+        name: '매 문양 우드 실드',
+      },
+      {
+        id: 'LSDL-2397-3',
+        name: '철의 숫돌 칼날',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2398',
+    categories: ['중요아이템'],
+    name: '번데기 방',
+    x: 0.133401,
+    y: 0.696994,
+    loot: [
+      {
+        id: 'LSDL-2398-1',
+        name: '번데기들의 유품',
+      },
+      {
+        id: 'LSDL-2398-2',
+        name: '심홍색 후드',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2420',
+    categories: [],
+    name: '아르테리아의 잎',
+    x: 0.031573,
+    y: 0.21298,
+  },
+  {
+    id: 'LSDL-2482',
+    categories: ['무기'],
+    name: '트리 스피어',
+    x: 0.18739,
+    y: 0.281891,
+  },
+  {
+    id: 'LSDL-2493',
+    categories: ['일반단석'],
+    name: '단석 [1]',
+    x: 0.167199,
+    y: 0.615652,
+    loot: [
+      {
+        id: 'LSDL-2493-1',
+        name: '단석 [1]',
+        quantity: 4,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2954',
+    categories: ['NPC'],
+    name: '스포일러 - 스톰빌 성',
+    x: 0.097119,
+    y: 0.337517,
+  },
+  {
+    id: 'LSDL-3012',
+    categories: ['중요아이템'],
+    name: '그림: 귀소',
+    x: 0.885287,
+    y: 0.883807,
+  },
+  {
+    id: 'LSDL-3016',
+    categories: ['중요아이템'],
+    name: '☆영마의 복장 「트리가드」',
+    x: 0.108246,
+    y: 0.315096,
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -2454,5 +4024,6 @@ type TMapMarkerSample = {
 export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '1') return LIMGRAVE_MARKERS;
   if (regionId === '2') return WEEPING_PENINSULA_MARKERS;
+  if (regionId === '3') return STORMVEIL_CASTLE_MARKERS;
   return [];
 }

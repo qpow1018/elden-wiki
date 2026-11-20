@@ -4,10 +4,17 @@ import { fileURLToPath } from 'node:url';
 
 import prettier from 'prettier';
 
-const ROOT = new URL('../../../', import.meta.url);
+const ROOT = new URL('../../', import.meta.url);
 const TARGET = new URL('src/app/maps/[regionId]/mapMarkerSamples.ts', ROOT);
-const SOURCE = JSON.parse(await readFile(new URL('./source.json', import.meta.url), 'utf8'));
-const REVIEW = JSON.parse(await readFile(new URL('./review.json', import.meta.url), 'utf8'));
+const REGION = process.argv[2];
+if (!REGION || REGION.startsWith('--')) throw new Error('Provide a region directory name.');
+const CONSTANT = `${REGION.replaceAll('-', '_').toUpperCase()}_MARKERS`;
+const SOURCE = JSON.parse(
+  await readFile(new URL(`./${REGION}/source.json`, import.meta.url), 'utf8'),
+);
+const REVIEW = JSON.parse(
+  await readFile(new URL(`./${REGION}/review.json`, import.meta.url), 'utf8'),
+);
 const IS_CHECK = process.argv.includes('--check');
 
 const image = await readFile(new URL(SOURCE.image, ROOT));
@@ -65,15 +72,24 @@ const markers = SOURCE.markers.map((marker) => {
 });
 
 const before = await readFile(TARGET, 'utf8');
-const start = before.search(/\/\/ (?:Smithbox CSV:|Weeping Peninsula:)/);
-const end = before.indexOf('\n];', before.indexOf('const WEEPING_PENINSULA_MARKERS = [')) + 3;
-if (start < 0 || end < start) throw new Error('Weeping Peninsula data block not found.');
-const block = `// Weeping Peninsula: LSDL base-game map, checked ${SOURCE.checkedAt}; patch unspecified.
-// Source, terrain alignment, description review and legacy CSV mapping:
-// reference-data/maps/weeping-peninsula/{source.json,review.json,README.md}.
-// Regenerate with node reference-data/maps/weeping-peninsula/generate.mjs.
-const WEEPING_PENINSULA_MARKERS = ${JSON.stringify(markers, null, 2)};`;
-const after = await prettier.format(before.slice(0, start) + block + before.slice(end), {
+const declaration = `const ${CONSTANT} = `;
+const start = before.indexOf(declaration);
+const end = start < 0 ? -1 : before.indexOf('\n];', start) + 3;
+if (start >= 0 && end <= start) throw new Error('Region data block not found.');
+const block = `${declaration}${JSON.stringify(markers, null, 2)};`;
+const insertion = before.indexOf('type TMapMarkerSample');
+if (start < 0 && insertion < 0) throw new Error('Map data insertion point not found.');
+const content =
+  start >= 0
+    ? before.slice(0, start) + block + before.slice(end)
+    : before.slice(0, insertion) +
+      `// LSDL base-game map, checked ${SOURCE.checkedAt}; patch unspecified.\n` +
+      `// Source, terrain alignment and description review: reference-data/maps/${REGION}/.\n` +
+      `// Regenerate: node reference-data/maps/generate.mjs ${REGION}.\n` +
+      block +
+      '\n\n' +
+      before.slice(insertion);
+const after = await prettier.format(content, {
   ...(await prettier.resolveConfig(fileURLToPath(TARGET))),
   filepath: fileURLToPath(TARGET),
 });
