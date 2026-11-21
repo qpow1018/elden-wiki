@@ -14804,6 +14804,952 @@ const CAELID_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-21; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/deeproot-depths/.
+// Regenerate: node reference-data/maps/generate.mjs deeproot-depths.
+const DEEPROOT_DEPTHS_MARKERS = [
+  {
+    id: 'LSDL-271',
+    categories: ['장소'],
+    name: '항아리 마을',
+    x: 0.647988,
+    y: 0.360791,
+    loot: [
+      {
+        id: 'LSDL-271-1',
+        name: '아르테리아의 잎',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-271-2',
+        name: '미켈라의 수련',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-271-3',
+        name: '트리나의 수련',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-271-4',
+        name: '이엘로의 눈동자',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-271-5',
+        name: '산 항아리 파편',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-271-6',
+        name: '단석 [3]',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-272',
+    categories: ['장소'],
+    name: '리에니에 신수탑',
+    x: 0.871921,
+    y: 0.214499,
+    loot: [
+      {
+        id: 'LSDL-272-1',
+        name: '죽음의 주흔',
+      },
+      {
+        id: 'LSDL-272-2',
+        name: '별 보는 소녀의 전승',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-583',
+    categories: ['축복'],
+    name: '서원 입구',
+    x: 0.582893,
+    y: 0.218537,
+  },
+  {
+    id: 'LSDL-584',
+    categories: ['축복'],
+    name: '리에니에 신수탑 교량',
+    x: 0.626784,
+    y: 0.280144,
+  },
+  {
+    id: 'LSDL-586',
+    categories: ['축복'],
+    name: '리에니에 신수탑',
+    x: 0.892821,
+    y: 0.207995,
+  },
+  {
+    id: 'LSDL-985',
+    categories: ['축복'],
+    name: '대폭포 정상',
+    x: 0.552955,
+    y: 0.717319,
+  },
+  {
+    id: 'LSDL-986',
+    categories: ['축복'],
+    name: '깊은 뿌리 밑바닥',
+    x: 0.264378,
+    y: 0.699647,
+  },
+  {
+    id: 'LSDL-988',
+    categories: ['축복'],
+    name: '뿌리 너머',
+    x: 0.353443,
+    y: 0.41212,
+  },
+  {
+    id: 'LSDL-989',
+    categories: ['축복'],
+    name: '죽음의 왕자의 자리',
+    x: 0.40902,
+    y: 0.232802,
+  },
+  {
+    id: 'LSDL-1142',
+    categories: ['보스'],
+    name: '사룡 포르삭스',
+    x: 0.382657,
+    y: 0.270804,
+    loot: [
+      {
+        id: 'LSDL-1142-1',
+        name: '사룡의 추억',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1143',
+    categories: ['보스'],
+    name: '도가니의 기사 실루리아',
+    x: 0.086955,
+    y: 0.37887,
+    loot: [
+      {
+        id: 'LSDL-1143-1',
+        name: '실루리아의 나무창',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1165',
+    categories: ['지도조각'],
+    name: '지도 조각 (깊은 뿌리 바닥)',
+    x: 0.297866,
+    y: 0.488123,
+    loot: [
+      {
+        id: 'LSDL-1165-1',
+        name: '지도 조각 (깊은 뿌리 바닥)',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1390',
+    categories: ['일반단석'],
+    name: '단석 [3]',
+    x: 0.574033,
+    y: 0.392162,
+    loot: [
+      {
+        id: 'LSDL-1390-1',
+        name: '단석 [3]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1394',
+    categories: ['기도서'],
+    name: '용 신앙의 기도서',
+    x: 0.525023,
+    y: 0.30319,
+  },
+  {
+    id: 'LSDL-1395',
+    categories: ['일반단석'],
+    name: '단석 [4]',
+    x: 0.524618,
+    y: 0.133901,
+    loot: [
+      {
+        id: 'LSDL-1395-1',
+        name: '단석 [4]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1405',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [3]',
+    x: 0.559285,
+    y: 0.177025,
+    loot: [
+      {
+        id: 'LSDL-1405-1',
+        name: '색 잃은 단석 [3]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1409',
+    categories: ['축복'],
+    name: '뿌리를 향한 절벽',
+    x: 0.539417,
+    y: 0.589064,
+  },
+  {
+    id: 'LSDL-1475',
+    categories: ['장소'],
+    name: '카리아의 서원',
+    x: 0.597937,
+    y: 0.287245,
+    loot: [
+      {
+        id: 'LSDL-1475-1',
+        name: '카리아의 휘석 지팡이',
+      },
+      {
+        id: 'LSDL-1475-2',
+        name: '쏟아지는 마력',
+      },
+      {
+        id: 'LSDL-1475-3',
+        name: '푸른 종자의 탈리스만',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1624',
+    categories: ['그릇'],
+    name: '의식 항아리 - 항아리마을 1',
+    x: 0.650934,
+    y: 0.382845,
+    loot: [
+      {
+        id: 'LSDL-1624-1',
+        name: '의식 항아리 - 항아리마을 1',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1625',
+    categories: ['그릇'],
+    name: '금 간 항아리 - 항아리마을 3',
+    x: 0.653722,
+    y: 0.325734,
+    loot: [
+      {
+        id: 'LSDL-1625-1',
+        name: '금 간 항아리 - 항아리마을 3',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1626',
+    categories: ['그릇'],
+    name: '금 간 항아리 - 항아리마을 2',
+    x: 0.631011,
+    y: 0.323103,
+    loot: [
+      {
+        id: 'LSDL-1626-1',
+        name: '금 간 항아리 - 항아리마을 2',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1627',
+    categories: ['그릇'],
+    name: '의식 항아리 - 항아리마을 2',
+    x: 0.625832,
+    y: 0.338359,
+    loot: [
+      {
+        id: 'LSDL-1627-1',
+        name: '의식 항아리 - 항아리마을 2',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1764',
+    categories: ['전회'],
+    name: '전회 : 황금의 땅',
+    x: 0.538705,
+    y: 0.801633,
+    loot: [
+      {
+        id: 'LSDL-1764-1',
+        name: '황금의 땅',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1765',
+    categories: ['무기'],
+    name: '화신의 의장',
+    x: 0.535141,
+    y: 0.761256,
+    loot: [
+      {
+        id: 'LSDL-1765-1',
+        name: '화신의 의장',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1766',
+    categories: ['기도'],
+    name: '엘데의 유성',
+    x: 0.426835,
+    y: 0.621127,
+    loot: [
+      {
+        id: 'LSDL-1766-1',
+        name: '엘데의 유성',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1770',
+    categories: ['보스'],
+    name: '피아의 영웅',
+    x: 0.402251,
+    y: 0.293365,
+    loot: [
+      {
+        id: 'LSDL-1770-1',
+        name: '피아의 안개',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2122',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.514123,
+    y: 0.710787,
+    loot: [
+      {
+        id: 'LSDL-2122-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2123',
+    categories: ['중요아이템'],
+    name: '룬의 호',
+    x: 0.531579,
+    y: 0.644877,
+    loot: [
+      {
+        id: 'LSDL-2123-1',
+        name: '룬의 호',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2124',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.538348,
+    y: 0.608658,
+    loot: [
+      {
+        id: 'LSDL-2124-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2125',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.456405,
+    y: 0.514248,
+    loot: [
+      {
+        id: 'LSDL-2125-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2126',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [7]',
+    x: 0.392633,
+    y: 0.599751,
+    loot: [
+      {
+        id: 'LSDL-2126-1',
+        name: '영혼 묘 은방울꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2127',
+    categories: ['탈리스만'],
+    name: '죽음의 왕자의 업창',
+    x: 0.368051,
+    y: 0.513656,
+    loot: [
+      {
+        id: 'LSDL-2127-1',
+        name: '죽음의 왕자의 업창',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2128',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.300361,
+    y: 0.586687,
+    loot: [
+      {
+        id: 'LSDL-2128-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2129',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.379095,
+    y: 0.479215,
+    loot: [
+      {
+        id: 'LSDL-2129-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2130',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [5]',
+    x: 0.353088,
+    y: 0.46734,
+    loot: [
+      {
+        id: 'LSDL-2130-1',
+        name: '영혼 묘 은방울꽃 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2131',
+    categories: ['전회'],
+    name: '전회 「진공베기」',
+    x: 0.330287,
+    y: 0.428153,
+    loot: [
+      {
+        id: 'LSDL-2131-1',
+        name: '진공베기',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2132',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [5]',
+    x: 0.301072,
+    y: 0.434089,
+    loot: [
+      {
+        id: 'LSDL-2132-1',
+        name: '영혼 묘 은방울꽃 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2133',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.302497,
+    y: 0.400838,
+    loot: [
+      {
+        id: 'LSDL-2133-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2134',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.29644,
+    y: 0.346211,
+    loot: [
+      {
+        id: 'LSDL-2134-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2135',
+    categories: ['무기'],
+    name: '죽음의 왕자의 지팡이',
+    x: 0.265089,
+    y: 0.38718,
+    loot: [
+      {
+        id: 'LSDL-2135-1',
+        name: '죽음의 왕자의 지팡이',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2136',
+    categories: [],
+    name: '영기류',
+    x: 0.279695,
+    y: 0.321867,
+  },
+  {
+    id: 'LSDL-2137',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [5]',
+    x: 0.28967,
+    y: 0.298709,
+    loot: [
+      {
+        id: 'LSDL-2137-1',
+        name: '영혼 묘 은방울꽃 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2138',
+    categories: ['NPC'],
+    name: '피아 마지막 이벤트',
+    x: 0.40795,
+    y: 0.21083,
+  },
+  {
+    id: 'LSDL-2139',
+    categories: ['NPC'],
+    name: '죽음을 본 자 D [2]',
+    x: 0.416145,
+    y: 0.219737,
+  },
+  {
+    id: 'LSDL-2140',
+    categories: [],
+    name: '도읍 로데일로 가는 전송문',
+    x: 0.430396,
+    y: 0.242302,
+  },
+  {
+    id: 'LSDL-2141',
+    categories: ['영체'],
+    name: '영묘 병사의 뼛가루',
+    x: 0.228035,
+    y: 0.089109,
+    loot: [
+      {
+        id: 'LSDL-2141-1',
+        name: '영묘 병사의 뼛가루',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2142',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.222335,
+    y: 0.136611,
+    loot: [
+      {
+        id: 'LSDL-2142-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2143',
+    categories: ['일반단석'],
+    name: '단석 [5]',
+    x: 0.172458,
+    y: 0.15858,
+    loot: [
+      {
+        id: 'LSDL-2143-1',
+        name: '단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2144',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.129707,
+    y: 0.305242,
+    loot: [
+      {
+        id: 'LSDL-2144-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2145',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.161058,
+    y: 0.281491,
+    loot: [
+      {
+        id: 'LSDL-2145-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2146',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.185998,
+    y: 0.31296,
+    loot: [
+      {
+        id: 'LSDL-2146-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2147',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.197041,
+    y: 0.316525,
+    loot: [
+      {
+        id: 'LSDL-2147-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2148',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [6]',
+    x: 0.122937,
+    y: 0.333744,
+    loot: [
+      {
+        id: 'LSDL-2148-1',
+        name: '영혼 묘 은방울꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2149',
+    categories: ['축복'],
+    name: '이름 없는 영원한 도읍',
+    x: 0.212006,
+    y: 0.469123,
+  },
+  {
+    id: 'LSDL-2150',
+    categories: ['색단석'],
+    name: '영혼 묘 은방울꽃 [7]',
+    x: 0.080899,
+    y: 0.348587,
+    loot: [
+      {
+        id: 'LSDL-2150-1',
+        name: '영혼 묘 은방울꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2151',
+    categories: ['방어구'],
+    name: '도가니의 기사 세트',
+    x: 0.066648,
+    y: 0.360463,
+    loot: [
+      {
+        id: 'LSDL-2151-1',
+        name: '도가니의 기사 세트',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2152',
+    categories: [],
+    name: '영기류',
+    x: 0.103345,
+    y: 0.400839,
+  },
+  {
+    id: 'LSDL-2153',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.115812,
+    y: 0.391931,
+    loot: [
+      {
+        id: 'LSDL-2153-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2154',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.124007,
+    y: 0.410339,
+    loot: [
+      {
+        id: 'LSDL-2154-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2155',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [6]',
+    x: 0.113676,
+    y: 0.451312,
+    loot: [
+      {
+        id: 'LSDL-2155-1',
+        name: '영혼 묘 은방울꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2156',
+    categories: [],
+    name: '전송문',
+    x: 0.134339,
+    y: 0.486935,
+  },
+  {
+    id: 'LSDL-2157',
+    categories: ['일반단석'],
+    name: '단석 [4]',
+    x: 0.185286,
+    y: 0.491685,
+    loot: [
+      {
+        id: 'LSDL-2157-1',
+        name: '단석 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2158',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [5]',
+    x: 0.169966,
+    y: 0.461998,
+    loot: [
+      {
+        id: 'LSDL-2158-1',
+        name: '영혼 묘 은방울꽃 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2159',
+    categories: ['일반단석'],
+    name: '단석 [5]',
+    x: 0.228037,
+    y: 0.425778,
+    loot: [
+      {
+        id: 'LSDL-2159-1',
+        name: '단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2160',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.240863,
+    y: 0.403213,
+    loot: [
+      {
+        id: 'LSDL-2160-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2161',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [5]',
+    x: 0.272215,
+    y: 0.532064,
+    loot: [
+      {
+        id: 'LSDL-2161-1',
+        name: '영혼 묘 은방울꽃 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2162',
+    categories: ['NPC'],
+    name: '손가락 읽는 노파',
+    x: 0.264378,
+    y: 0.719692,
+  },
+  {
+    id: 'LSDL-2163',
+    categories: ['일반단석'],
+    name: '단석 [4]',
+    x: 0.330644,
+    y: 0.696538,
+    loot: [
+      {
+        id: 'LSDL-2163-1',
+        name: '단석 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2164',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울꽃 [4]',
+    x: 0.359146,
+    y: 0.692973,
+    loot: [
+      {
+        id: 'LSDL-2164-1',
+        name: '영혼 묘 은방울꽃 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2487',
+    categories: [],
+    name: '큰 잠자리 머리',
+    x: 0.547733,
+    y: 0.263329,
+    loot: [
+      {
+        id: 'LSDL-2487-1',
+        name: '큰 잠자리 머리',
+        quantity: 5,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2777',
+    categories: [],
+    name: '대폭포의 석관의 도착지',
+    x: 0.556875,
+    y: 0.683471,
+  },
+  {
+    id: 'LSDL-2778',
+    categories: [],
+    name: '유생나비',
+    x: 0.493103,
+    y: 0.729191,
+    loot: [
+      {
+        id: 'LSDL-2778-1',
+        name: '유생나비',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2779',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [4]',
+    x: 0.551531,
+    y: 0.7856,
+    loot: [
+      {
+        id: 'LSDL-2779-1',
+        name: '영혼 묘 은방울 꽃 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2885',
+    categories: ['보스'],
+    name: '신의 살갗의 귀인',
+    x: 0.737794,
+    y: 0.242054,
+    loot: [
+      {
+        id: 'LSDL-2885-1',
+        name: '신의 살갗의 귀인 후드',
+      },
+      {
+        id: 'LSDL-2885-2',
+        name: '신의 살갗의 귀인 로브',
+      },
+      {
+        id: 'LSDL-2885-3',
+        name: '귀인의 팔찌',
+      },
+      {
+        id: 'LSDL-2885-4',
+        name: '귀인의 바지',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2961',
+    categories: ['NPC'],
+    name: '디아로스',
+    x: 0.644557,
+    y: 0.34235,
+  },
+  {
+    id: 'LSDL-2963',
+    categories: ['NPC'],
+    name: '작은 항아리',
+    x: 0.633404,
+    y: 0.382167,
+  },
+  {
+    id: 'LSDL-2972',
+    categories: ['기타'],
+    name: '항아리 마을 내려가기',
+    x: 0.616668,
+    y: 0.387481,
+  },
+  {
+    id: 'LSDL-2985',
+    categories: [],
+    name: '걷는 영묘 [종]',
+    x: 0.228036,
+    y: 0.276148,
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -14823,5 +15769,6 @@ export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '6') return AINSEL_RIVER_MARKERS;
   if (regionId === '7') return SIOFRA_RIVER_MARKERS;
   if (regionId === '8') return CAELID_MARKERS;
+  if (regionId === '10') return DEEPROOT_DEPTHS_MARKERS;
   return [];
 }

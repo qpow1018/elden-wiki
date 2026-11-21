@@ -23,14 +23,25 @@ if (createHash('sha256').update(image).digest('hex') !== SOURCE.imageSha256) {
 }
 
 function project(x, y) {
-  const u = Number(x) * 2 ** SOURCE.zoom - SOURCE.origin[0];
-  const v = -Number(y) * 2 ** SOURCE.zoom - SOURCE.origin[1];
-  return SOURCE.transform.map(([a, b, c], index) => (a * u + b * v + c) / SOURCE.imageSize[index]);
+  const panels = SOURCE.panels ?? [SOURCE];
+  const positions = panels.flatMap((panel) => {
+    const u = Number(x) * 2 ** SOURCE.zoom - panel.origin[0];
+    const v = -Number(y) * 2 ** SOURCE.zoom - panel.origin[1];
+    const position = panel.transform.map(([a, b, c]) => a * u + b * v + c);
+    const bounds = panel.bounds ?? [0, 0, ...SOURCE.imageSize];
+    function isInside([left, top, right, bottom]) {
+      return (
+        position[0] >= left && position[0] <= right && position[1] >= top && position[1] <= bottom
+      );
+    }
+    if (!isInside(bounds) || panel.excludeBounds?.some(isInside)) return [];
+    return [position.map((value, index) => value / SOURCE.imageSize[index])];
+  });
+  if (positions.length > 1) throw new Error('Marker matches multiple map panels.');
+  return positions[0];
 }
 
-const candidates = SOURCE.coordinateIndex
-  .filter(([, x, y]) => project(x, y).every((value) => value >= 0 && value <= 1))
-  .map(([id]) => id);
+const candidates = SOURCE.coordinateIndex.filter(([, x, y]) => project(x, y)).map(([id]) => id);
 const sourceIds = SOURCE.markers.map(({ no }) => no);
 const reviewedIds = Object.keys(REVIEW.descriptions);
 for (const ids of [candidates, sourceIds, reviewedIds]) {
