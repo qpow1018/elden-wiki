@@ -25420,6 +25420,707 @@ const LEYNDELL_OUTSKIRTS_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-21; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/ainsel-river-main/.
+// Regenerate: node reference-data/maps/generate.mjs ainsel-river-main.
+const AINSEL_RIVER_MAIN_MARKERS = [
+  {
+    id: 'LSDL-946',
+    categories: ['축복'],
+    name: '부패한 호숫가',
+    x: 0.069561,
+    y: 0.941486,
+  },
+  {
+    id: 'LSDL-947',
+    categories: ['축복'],
+    name: '에인세르 강 하류',
+    x: 0.429544,
+    y: 0.979114,
+  },
+  {
+    id: 'LSDL-952',
+    categories: ['축복'],
+    name: '에인세르 강 본류',
+    x: 0.828744,
+    y: 0.230027,
+  },
+  {
+    id: 'LSDL-953',
+    categories: ['축복'],
+    name: '영원한 도읍 노스텔라',
+    x: 0.484335,
+    y: 0.603861,
+  },
+  {
+    id: 'LSDL-954',
+    categories: ['축복'],
+    name: '녹스텔라의 용인병',
+    x: 0.312523,
+    y: 0.514061,
+  },
+  {
+    id: 'LSDL-955',
+    categories: ['축복'],
+    name: '녹스텔라 폭포',
+    x: 0.139889,
+    y: 0.431494,
+  },
+  {
+    id: 'LSDL-982',
+    categories: ['장소'],
+    name: '영원한 도읍 녹스텔라',
+    x: 0.307584,
+    y: 0.115635,
+  },
+  {
+    id: 'LSDL-1144',
+    categories: ['보스'],
+    name: '녹스텔라의 용인병',
+    x: 0.269977,
+    y: 0.550285,
+    loot: [
+      {
+        id: 'LSDL-1144-1',
+        name: '얼음 뇌창',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1167',
+    categories: ['지도조각'],
+    name: '지도 조각 (부패한 호수)',
+    x: 0.092471,
+    y: 0.976255,
+    loot: [
+      {
+        id: 'LSDL-1167-1',
+        name: '지도 조각 (부패한 호수)',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1203',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.175059,
+    y: 0.272328,
+    loot: [
+      {
+        id: 'LSDL-1203-1',
+        name: '황금 종자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1592',
+    categories: ['암령'],
+    name: '재앙의 그림자',
+    x: 0.095726,
+    y: 0.708226,
+  },
+  {
+    id: 'LSDL-1634',
+    categories: [],
+    name: '레나의 마술사탑 전송지',
+    x: 0.825464,
+    y: 0.11122,
+  },
+  {
+    id: 'LSDL-1761',
+    categories: ['영혼묘'],
+    name: '큰 영혼 묘 은방울 꽃 - 에인세르',
+    x: 0.235614,
+    y: 0.498132,
+    loot: [
+      {
+        id: 'LSDL-1761-1',
+        name: '큰 영혼 묘 은방울 꽃 - 에인세르',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1840',
+    categories: ['NPC'],
+    name: '작은 라니',
+    x: 0.84592,
+    y: 0.174966,
+  },
+  {
+    id: 'LSDL-1841',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.74859,
+    y: 0.538633,
+    loot: [
+      {
+        id: 'LSDL-1841-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1842',
+    categories: ['영혼묘'],
+    name: '영혼 꽃 채취자의 방울 [2]',
+    x: 0.386159,
+    y: 0.606776,
+    loot: [
+      {
+        id: 'LSDL-1842-1',
+        name: '영혼 꽃 채취자의 방울 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1843',
+    categories: ['영체'],
+    name: '밤무녀와 검사 꼭두각시',
+    x: 0.346065,
+    y: 0.518406,
+    loot: [
+      {
+        id: 'LSDL-1843-1',
+        name: '밤무녀와 검사 꼭두각시',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1844',
+    categories: ['물방울 유생'],
+    name: '물방울 유생',
+    x: 0.32887,
+    y: 0.357587,
+    loot: [
+      {
+        id: 'LSDL-1844-1',
+        name: '물방울 유생',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1845',
+    categories: ['물방울 유생'],
+    name: '물방울 유생',
+    x: 0.278957,
+    y: 0.244581,
+    loot: [
+      {
+        id: 'LSDL-1845-1',
+        name: '물방울 유생',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1846',
+    categories: ['탈리스만'],
+    name: '녹스텔라의 달',
+    x: 0.0736,
+    y: 0.204041,
+    loot: [
+      {
+        id: 'LSDL-1846-1',
+        name: '녹스텔라의 달',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1847',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [9]',
+    x: 0.183251,
+    y: 0.459018,
+    loot: [
+      {
+        id: 'LSDL-1847-1',
+        name: '영혼 묘 은방울 꽃 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2165',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.254466,
+    y: 0.993629,
+    loot: [
+      {
+        id: 'LSDL-2165-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2169',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [8]',
+    x: 0.121097,
+    y: 0.822681,
+    loot: [
+      {
+        id: 'LSDL-2169-1',
+        name: '색 잃은 단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2181',
+    categories: ['일반단석'],
+    name: '단석',
+    x: 0.125986,
+    y: 0.569135,
+    loot: [
+      {
+        id: 'LSDL-2181-1',
+        name: '단석 [4]',
+      },
+      {
+        id: 'LSDL-2181-2',
+        name: '단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2182',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.187322,
+    y: 0.195338,
+    loot: [
+      {
+        id: 'LSDL-2182-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2183',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.174229,
+    y: 0.154773,
+    loot: [
+      {
+        id: 'LSDL-2183-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2184',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.252776,
+    y: 0.228654,
+    loot: [
+      {
+        id: 'LSDL-2184-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2185',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.272407,
+    y: 0.170699,
+    loot: [
+      {
+        id: 'LSDL-2185-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2186',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.309229,
+    y: 0.283698,
+    loot: [
+      {
+        id: 'LSDL-2186-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2188',
+    categories: ['영혼묘'],
+    name: '큰 영혼 묘 은방울 꽃 - 녹스텔라',
+    x: 0.350956,
+    y: 0.28079,
+    loot: [
+      {
+        id: 'LSDL-2188-1',
+        name: '큰 영혼 묘 은방울 꽃 - 녹스텔라',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2189',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.446683,
+    y: 0.376404,
+    loot: [
+      {
+        id: 'LSDL-2189-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2190',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [7]',
+    x: 0.512965,
+    y: 0.505338,
+    loot: [
+      {
+        id: 'LSDL-2190-1',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2191',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [6]',
+    x: 0.537513,
+    y: 0.606757,
+    loot: [
+      {
+        id: 'LSDL-2191-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2192',
+    categories: ['무기'],
+    name: '개미의 두갑',
+    x: 0.41643,
+    y: 0.624158,
+    loot: [
+      {
+        id: 'LSDL-2192-1',
+        name: '개미의 두갑',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2193',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.386154,
+    y: 0.538679,
+    loot: [
+      {
+        id: 'LSDL-2193-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2194',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [7]',
+    x: 0.394329,
+    y: 0.476377,
+    loot: [
+      {
+        id: 'LSDL-2194-1',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2195',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [9]',
+    x: 0.280608,
+    y: 0.422788,
+    loot: [
+      {
+        id: 'LSDL-2195-1',
+        name: '영혼 묘 은방울 꽃 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2196',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [8]',
+    x: 0.317425,
+    y: 0.453206,
+    loot: [
+      {
+        id: 'LSDL-2196-1',
+        name: '영혼 묘 은방울 꽃 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2197',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.229882,
+    y: 0.444529,
+    loot: [
+      {
+        id: 'LSDL-2197-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2198',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [8]',
+    x: 0.161974,
+    y: 0.346018,
+    loot: [
+      {
+        id: 'LSDL-2198-1',
+        name: '영혼 묘 은방울 꽃 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2199',
+    categories: ['중요아이템'],
+    name: '별의 물방울',
+    x: 0.406594,
+    y: 0.350326,
+    loot: [
+      {
+        id: 'LSDL-2199-1',
+        name: '별의 물방울',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2201',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [6]',
+    x: 0.782131,
+    y: 0.505304,
+    loot: [
+      {
+        id: 'LSDL-2201-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2202',
+    categories: ['장소'],
+    name: '우르의 왕조 유적',
+    x: 0.786222,
+    y: 0.537182,
+  },
+  {
+    id: 'LSDL-2203',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [7]',
+    x: 0.724869,
+    y: 0.583552,
+    loot: [
+      {
+        id: 'LSDL-2203-1',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2204',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃',
+    x: 0.767409,
+    y: 0.613969,
+    loot: [
+      {
+        id: 'LSDL-2204-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+      {
+        id: 'LSDL-2204-2',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2205',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [6]',
+    x: 0.863133,
+    y: 0.589329,
+    loot: [
+      {
+        id: 'LSDL-2205-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2206',
+    categories: ['영체'],
+    name: '진흙인간의 뼛가루',
+    x: 0.859042,
+    y: 0.634245,
+    loot: [
+      {
+        id: 'LSDL-2206-1',
+        name: '진흙인간의 뼛가루',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2215',
+    categories: ['NPC'],
+    name: '속세를 떠난 상인 [3]',
+    x: 0.427901,
+    y: 0.841474,
+  },
+  {
+    id: 'LSDL-2216',
+    categories: ['지도조각'],
+    name: '지도 조각 (에인세르 강)',
+    x: 0.454082,
+    y: 0.855964,
+    loot: [
+      {
+        id: 'LSDL-2216-1',
+        name: '지도 조각 (에인세르 강)',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2217',
+    categories: ['무기'],
+    name: '아스테르의 날개',
+    x: 0.457358,
+    y: 0.897977,
+    loot: [
+      {
+        id: 'LSDL-2217-1',
+        name: '아스테르의 날개',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2218',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.513803,
+    y: 0.816836,
+    loot: [
+      {
+        id: 'LSDL-2218-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2219',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [2]',
+    x: 0.553075,
+    y: 0.851602,
+    loot: [
+      {
+        id: 'LSDL-2219-1',
+        name: '영혼 묘 은방울 꽃 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2220',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [1]',
+    x: 0.593165,
+    y: 0.886369,
+    loot: [
+      {
+        id: 'LSDL-2220-1',
+        name: '영혼 묘 은방울 꽃 [1]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2221',
+    categories: ['일반단석'],
+    name: '단석 [1]',
+    x: 0.548993,
+    y: 0.950122,
+    loot: [
+      {
+        id: 'LSDL-2221-1',
+        name: '단석 [1]',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2225',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃',
+    x: 0.367365,
+    y: 0.974773,
+    loot: [
+      {
+        id: 'LSDL-2225-1',
+        name: '영혼 묘 은방울 꽃 [1]',
+      },
+      {
+        id: 'LSDL-2225-2',
+        name: '영혼 묘 은방울 꽃 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2226',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [2]',
+    x: 0.39108,
+    y: 0.748755,
+    loot: [
+      {
+        id: 'LSDL-2226-1',
+        name: '영혼 묘 은방울 꽃 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2227',
+    categories: ['영체'],
+    name: '궁병의 뼛가루',
+    x: 0.36407,
+    y: 0.635755,
+    loot: [
+      {
+        id: 'LSDL-2227-1',
+        name: '궁병의 뼛가루',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-3009',
+    categories: ['물방울 유생'],
+    name: '물방울 유생',
+    x: 0.359961,
+    y: 0.34309,
+    loot: [
+      {
+        id: 'LSDL-3009-1',
+        name: '물방울 유생',
+      },
+    ],
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -25444,5 +26145,6 @@ export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '12') return MT_GELMIR_MARKERS;
   if (regionId === '13') return LEYNDELL_OUTSKIRTS_MARKERS;
   if (regionId === '14') return LEYNDELL_ROYAL_CAPITAL_MARKERS;
+  if (regionId === '15') return AINSEL_RIVER_MAIN_MARKERS;
   return [];
 }
