@@ -26509,6 +26509,313 @@ const LAKE_OF_ROT_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-21; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/moonlight-altar/.
+// Regenerate: node reference-data/maps/generate.mjs moonlight-altar.
+const MOONLIGHT_ALTAR_MARKERS = [
+  {
+    id: 'LSDL-401',
+    categories: ['장소'],
+    name: '마누스 셀리스 대교회',
+    x: 0.59754,
+    y: 0.249824,
+    loot: [
+      {
+        id: 'LSDL-401-1',
+        name: '별빛 조각',
+        quantity: 11,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-402',
+    categories: ['장소'],
+    name: '이름 없는 마커',
+    x: 0.363563,
+    y: 0.520208,
+  },
+  {
+    id: 'LSDL-404',
+    categories: ['장소'],
+    name: '달의 민족의 폐허',
+    x: 0.398205,
+    y: 0.238833,
+    loot: [
+      {
+        id: 'LSDL-404-1',
+        name: '색 잃은 단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-405',
+    categories: ['보스'],
+    name: '칼날 우두머리의 봉인감옥',
+    x: 0.091225,
+    y: 0.115317,
+    loot: [
+      {
+        id: 'LSDL-405-1',
+        name: '검은 칼날 티시',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-552',
+    categories: ['축복'],
+    name: '마누스 셀리스 대교회',
+    x: 0.662662,
+    y: 0.23994,
+  },
+  {
+    id: 'LSDL-903',
+    categories: ['축복'],
+    name: '에인세르 강 안쪽 우물',
+    x: 0.367546,
+    y: 0.521749,
+  },
+  {
+    id: 'LSDL-1009',
+    categories: ['축복'],
+    name: '월광의 제단',
+    x: 0.379468,
+    y: 0.45895,
+  },
+  {
+    id: 'LSDL-1010',
+    categories: ['NPC'],
+    name: '네펠리 루[3]',
+    x: 0.392087,
+    y: 0.40582,
+  },
+  {
+    id: 'LSDL-1013',
+    categories: ['장소'],
+    name: '달의 귀족의 폐허',
+    x: 0.693604,
+    y: 0.450651,
+  },
+  {
+    id: 'LSDL-1014',
+    categories: ['장소'],
+    name: '백금 마을',
+    x: 0.456506,
+    y: 0.351891,
+    loot: [
+      {
+        id: 'LSDL-1014-1',
+        name: '물방울 유생',
+      },
+      {
+        id: 'LSDL-1014-2',
+        name: '결정검',
+      },
+      {
+        id: 'LSDL-1014-3',
+        name: '미켈라의 수련',
+      },
+      {
+        id: 'LSDL-1014-4',
+        name: '도가니 혹의 탈리스만',
+      },
+      {
+        id: 'LSDL-1014-5',
+        name: '룬의 호',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1015',
+    categories: ['축복'],
+    name: '제단 남쪽',
+    x: 0.129756,
+    y: 0.844997,
+  },
+  {
+    id: 'LSDL-1016',
+    categories: ['장소'],
+    name: '히에로나의 마술사탑',
+    x: 0.097878,
+    y: 0.893133,
+    loot: [
+      {
+        id: 'LSDL-1016-1',
+        name: '라니의 암월',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1481',
+    categories: ['전회'],
+    name: '전회 : 무적',
+    x: 0.765329,
+    y: 0.282972,
+  },
+  {
+    id: 'LSDL-1499',
+    categories: ['축복'],
+    name: '호수의 폴리',
+    x: 0.712194,
+    y: 0.003193,
+  },
+  {
+    id: 'LSDL-1500',
+    categories: ['성배병'],
+    name: '기량의 결정 혹 물방울',
+    x: 0.961248,
+    y: 0.062956,
+  },
+  {
+    id: 'LSDL-1501',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.985157,
+    y: 0.043032,
+  },
+  {
+    id: 'LSDL-1502',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.491701,
+    y: 0.055533,
+    loot: [
+      {
+        id: 'LSDL-1502-1',
+        name: '트리나의 수련',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2276',
+    categories: [],
+    name: '잠알 파밍 위치 (월광제단)',
+    x: 0.46182,
+    y: 0.412512,
+  },
+  {
+    id: 'LSDL-2462',
+    categories: ['일반단석'],
+    name: '단석 [2]',
+    x: 0.717508,
+    y: 0.089529,
+    loot: [
+      {
+        id: 'LSDL-2462-1',
+        name: '단석 [2]',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2886',
+    categories: ['보스'],
+    name: '휘석룡 아듀라',
+    x: 0.553467,
+    y: 0.263905,
+    loot: [
+      {
+        id: 'LSDL-2886-1',
+        name: '용의 심장',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-2886-2',
+        name: '아듀라의 달의 검',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2887',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [2]',
+    x: 0.793222,
+    y: 0.447354,
+  },
+  {
+    id: 'LSDL-2888',
+    categories: ['탈리스만'],
+    name: '푸른 호박 메달리온 +2',
+    x: 0.649768,
+    y: 0.41665,
+  },
+  {
+    id: 'LSDL-2889',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [2]',
+    x: 0.63649,
+    y: 0.442365,
+  },
+  {
+    id: 'LSDL-2890',
+    categories: [],
+    name: '황금의 룬 [10]',
+    x: 0.63184,
+    y: 0.463139,
+    loot: [
+      {
+        id: 'LSDL-2890-1',
+        name: '황금의 룬 [10]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2891',
+    categories: ['기타'],
+    name: '히에로나의 마술사탑 거대한 지혜로운 짐승 1',
+    x: 0.052054,
+    y: 0.889841,
+  },
+  {
+    id: 'LSDL-2892',
+    categories: ['기타'],
+    name: '히에로나의 마술사탑 거대한 지혜로운 짐승 3',
+    x: 0.15764,
+    y: 0.174235,
+  },
+  {
+    id: 'LSDL-2893',
+    categories: ['중요아이템'],
+    name: '용의 심장',
+    x: 0.200147,
+    y: 0.388399,
+    loot: [
+      {
+        id: 'LSDL-2893-1',
+        name: '용의 심장',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2894',
+    categories: ['기타'],
+    name: '히에로나의 마술사탑 거대한 지혜로운 짐승 2',
+    x: 0.769984,
+    y: 0.689732,
+  },
+  {
+    id: 'LSDL-2895',
+    categories: ['중요아이템'],
+    name: '아이템',
+    x: 0.384778,
+    y: 0.273846,
+    loot: [
+      {
+        id: 'LSDL-2895-1',
+        name: '룬의 호',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2895-2',
+        name: '황금의 룬 [9]',
+        quantity: 1,
+      },
+    ],
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -26535,5 +26842,6 @@ export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '14') return LEYNDELL_ROYAL_CAPITAL_MARKERS;
   if (regionId === '15') return AINSEL_RIVER_MAIN_MARKERS;
   if (regionId === '16') return LAKE_OF_ROT_MARKERS;
+  if (regionId === '17') return MOONLIGHT_ALTAR_MARKERS;
   return [];
 }
