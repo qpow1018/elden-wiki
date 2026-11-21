@@ -9999,6 +9999,614 @@ const LIURNIA_NORTH_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-21; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/ainsel-river/.
+// Regenerate: node reference-data/maps/generate.mjs ainsel-river.
+const AINSEL_RIVER_MARKERS = [
+  {
+    id: 'LSDL-947',
+    categories: ['축복'],
+    name: '에인세르 강 하류',
+    x: 0.312823,
+    y: 0.64486,
+  },
+  {
+    id: 'LSDL-950',
+    categories: ['축복'],
+    name: '에인세르 강 수문',
+    x: 0.649092,
+    y: 0.901387,
+  },
+  {
+    id: 'LSDL-951',
+    categories: ['축복'],
+    name: '에인세르 강 우물 아래',
+    x: 0.927326,
+    y: 0.695952,
+  },
+  {
+    id: 'LSDL-953',
+    categories: ['축복'],
+    name: '영원한 도읍 노스텔라',
+    x: 0.382453,
+    y: 0.244712,
+  },
+  {
+    id: 'LSDL-954',
+    categories: ['축복'],
+    name: '녹스텔라의 용인병',
+    x: 0.16449,
+    y: 0.148888,
+  },
+  {
+    id: 'LSDL-1144',
+    categories: ['보스'],
+    name: '녹스텔라의 용인병',
+    x: 0.110498,
+    y: 0.187501,
+    loot: [
+      {
+        id: 'LSDL-1144-1',
+        name: '얼음 뇌창',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1761',
+    categories: ['영혼묘'],
+    name: '큰 영혼 묘 은방울 꽃 - 에인세르',
+    x: 0.066915,
+    y: 0.131873,
+    loot: [
+      {
+        id: 'LSDL-1761-1',
+        name: '큰 영혼 묘 은방울 꽃 - 에인세르',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1841',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.717752,
+    y: 0.175248,
+    loot: [
+      {
+        id: 'LSDL-1841-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1842',
+    categories: ['영혼묘'],
+    name: '영혼 꽃 채취자의 방울 [2]',
+    x: 0.257889,
+    y: 0.247785,
+    loot: [
+      {
+        id: 'LSDL-1842-1',
+        name: '영혼 꽃 채취자의 방울 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1843',
+    categories: ['영체'],
+    name: '밤무녀와 검사 꼭두각시',
+    x: 0.207046,
+    y: 0.153533,
+    loot: [
+      {
+        id: 'LSDL-1843-1',
+        name: '밤무녀와 검사 꼭두각시',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1847',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [9]',
+    x: 0.00049,
+    y: 0.090143,
+    loot: [
+      {
+        id: 'LSDL-1847-1',
+        name: '영혼 묘 은방울 꽃 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2165',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.090685,
+    y: 0.660276,
+    loot: [
+      {
+        id: 'LSDL-2165-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2166',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.128027,
+    y: 0.794691,
+    loot: [
+      {
+        id: 'LSDL-2166-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2189',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.33475,
+    y: 0.002139,
+    loot: [
+      {
+        id: 'LSDL-2189-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2190',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [7]',
+    x: 0.418807,
+    y: 0.139657,
+    loot: [
+      {
+        id: 'LSDL-2190-1',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2191',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [6]',
+    x: 0.449923,
+    y: 0.247819,
+    loot: [
+      {
+        id: 'LSDL-2191-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2192',
+    categories: ['무기'],
+    name: '개미의 두갑',
+    x: 0.296291,
+    y: 0.266332,
+    loot: [
+      {
+        id: 'LSDL-2192-1',
+        name: '개미의 두갑',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2193',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.257904,
+    y: 0.175167,
+    loot: [
+      {
+        id: 'LSDL-2193-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2194',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [7]',
+    x: 0.268294,
+    y: 0.108731,
+    loot: [
+      {
+        id: 'LSDL-2194-1',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2195',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [9]',
+    x: 0.124025,
+    y: 0.051542,
+    loot: [
+      {
+        id: 'LSDL-2195-1',
+        name: '영혼 묘 은방울 꽃 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2196',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [8]',
+    x: 0.170728,
+    y: 0.083993,
+    loot: [
+      {
+        id: 'LSDL-2196-1',
+        name: '영혼 묘 은방울 꽃 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2197',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.059659,
+    y: 0.074708,
+    loot: [
+      {
+        id: 'LSDL-2197-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2201',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [6]',
+    x: 0.760317,
+    y: 0.139718,
+    loot: [
+      {
+        id: 'LSDL-2201-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2202',
+    categories: ['장소'],
+    name: '우르의 왕조 유적',
+    x: 0.765499,
+    y: 0.173714,
+  },
+  {
+    id: 'LSDL-2203',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [7]',
+    x: 0.687641,
+    y: 0.22314,
+    loot: [
+      {
+        id: 'LSDL-2203-1',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2204',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃',
+    x: 0.741606,
+    y: 0.255593,
+    loot: [
+      {
+        id: 'LSDL-2204-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+      {
+        id: 'LSDL-2204-2',
+        name: '영혼 묘 은방울 꽃 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2205',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [6]',
+    x: 0.863065,
+    y: 0.229351,
+    loot: [
+      {
+        id: 'LSDL-2205-1',
+        name: '영혼 묘 은방울 꽃 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2206',
+    categories: ['영체'],
+    name: '진흙인간의 뼛가루',
+    x: 0.857861,
+    y: 0.277248,
+    loot: [
+      {
+        id: 'LSDL-2206-1',
+        name: '진흙인간의 뼛가루',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2207',
+    categories: ['일반단석'],
+    name: '단석 [3]',
+    x: 0.878519,
+    y: 0.814906,
+    loot: [
+      {
+        id: 'LSDL-2207-1',
+        name: '단석 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2208',
+    categories: ['일반단석'],
+    name: '단석 [3]',
+    x: 0.774704,
+    y: 0.845798,
+    loot: [
+      {
+        id: 'LSDL-2208-1',
+        name: '단석 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2209',
+    categories: ['중요아이템'],
+    name: '룬의 호',
+    x: 0.694765,
+    y: 0.906032,
+    loot: [
+      {
+        id: 'LSDL-2209-1',
+        name: '룬의 호',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2210',
+    categories: ['일반단석'],
+    name: '단석 [3]',
+    x: 0.658448,
+    y: 0.825685,
+    loot: [
+      {
+        id: 'LSDL-2210-1',
+        name: '단석 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2211',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [1]',
+    x: 0.68026,
+    y: 0.787066,
+    loot: [
+      {
+        id: 'LSDL-2211-1',
+        name: '영혼 묘 은방울 꽃 [1]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2212',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [1]',
+    x: 0.613832,
+    y: 0.757697,
+    loot: [
+      {
+        id: 'LSDL-2212-1',
+        name: '영혼 묘 은방울 꽃 [1]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2213',
+    categories: ['장소'],
+    name: '우르의 왕조 유적',
+    x: 0.531821,
+    y: 0.78086,
+  },
+  {
+    id: 'LSDL-2214',
+    categories: ['일반단석'],
+    name: '단석',
+    x: 0.544264,
+    y: 0.8473,
+    loot: [
+      {
+        id: 'LSDL-2214-1',
+        name: '단석 [1]',
+      },
+      {
+        id: 'LSDL-2214-2',
+        name: '단석 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2215',
+    categories: ['NPC'],
+    name: '속세를 떠난 상인 [3]',
+    x: 0.31078,
+    y: 0.498081,
+  },
+  {
+    id: 'LSDL-2216',
+    categories: ['지도조각'],
+    name: '지도 조각 (에인세르 강)',
+    x: 0.343994,
+    y: 0.513542,
+    loot: [
+      {
+        id: 'LSDL-2216-1',
+        name: '지도 조각 (에인세르 강)',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2217',
+    categories: ['무기'],
+    name: '아스테르의 날개',
+    x: 0.348137,
+    y: 0.558346,
+    loot: [
+      {
+        id: 'LSDL-2217-1',
+        name: '아스테르의 날개',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2218',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.419776,
+    y: 0.471838,
+    loot: [
+      {
+        id: 'LSDL-2218-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2219',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [2]',
+    x: 0.469594,
+    y: 0.508927,
+    loot: [
+      {
+        id: 'LSDL-2219-1',
+        name: '영혼 묘 은방울 꽃 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2220',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [1]',
+    x: 0.520449,
+    y: 0.546016,
+    loot: [
+      {
+        id: 'LSDL-2220-1',
+        name: '영혼 묘 은방울 꽃 [1]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2221',
+    categories: ['일반단석'],
+    name: '단석 [1]',
+    x: 0.464385,
+    y: 0.613987,
+    loot: [
+      {
+        id: 'LSDL-2221-1',
+        name: '단석 [1]',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2222',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [1]',
+    x: 0.319042,
+    y: 0.706662,
+    loot: [
+      {
+        id: 'LSDL-2222-1',
+        name: '영혼 묘 은방울 꽃 [1]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2223',
+    categories: ['일반단석'],
+    name: '단석 [2]',
+    x: 0.243257,
+    y: 0.723646,
+    loot: [
+      {
+        id: 'LSDL-2223-1',
+        name: '단석 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2224',
+    categories: ['탈리스만'],
+    name: '면역의 뿔 장식',
+    x: 0.22458,
+    y: 0.706645,
+    loot: [
+      {
+        id: 'LSDL-2224-1',
+        name: '면역의 뿔 장식',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2225',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃',
+    x: 0.233934,
+    y: 0.640209,
+    loot: [
+      {
+        id: 'LSDL-2225-1',
+        name: '영혼 묘 은방울 꽃 [1]',
+      },
+      {
+        id: 'LSDL-2225-2',
+        name: '영혼 묘 은방울 꽃 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2226',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [2]',
+    x: 0.26409,
+    y: 0.399192,
+    loot: [
+      {
+        id: 'LSDL-2226-1',
+        name: '영혼 묘 은방울 꽃 [2]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2227',
+    categories: ['영체'],
+    name: '궁병의 뼛가루',
+    x: 0.229855,
+    y: 0.27868,
+    loot: [
+      {
+        id: 'LSDL-2227-1',
+        name: '궁병의 뼛가루',
+      },
+    ],
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -10015,5 +10623,6 @@ export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '3') return STORMVEIL_CASTLE_MARKERS;
   if (regionId === '4') return LIURNIA_EAST_WEST_MARKERS;
   if (regionId === '5') return LIURNIA_NORTH_MARKERS;
+  if (regionId === '6') return AINSEL_RIVER_MARKERS;
   return [];
 }
