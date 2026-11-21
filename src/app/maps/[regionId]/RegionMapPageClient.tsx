@@ -22,7 +22,7 @@ export default function RegionMapPageClient({
 }) {
   return (
     <main className={styles['region-map']}>
-      <Header title={name} goBack="/maps" isScrollHideEnabled={false} />
+      <Header title={name} goBack isScrollHideEnabled={false} />
       <RegionMap image={image} name={name} worldWidth={worldWidth} markers={markers} />
     </main>
   );
