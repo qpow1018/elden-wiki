@@ -20568,6 +20568,2324 @@ const ALTUS_PLATEAU_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-21; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/mt-gelmir/.
+// Regenerate: node reference-data/maps/generate.mjs mt-gelmir.
+const MT_GELMIR_MARKERS = [
+  {
+    id: 'LSDL-128',
+    categories: ['축복', '던전', '보스'],
+    name: '끓는 강 동굴',
+    x: 0.555571,
+    y: 0.413054,
+    loot: [
+      {
+        id: 'LSDL-128-1',
+        name: '동굴 이끼',
+      },
+      {
+        id: 'LSDL-128-2',
+        name: '동굴 이끼결정',
+      },
+      {
+        id: 'LSDL-128-3',
+        name: '동굴 이끼꽃눈',
+      },
+      {
+        id: 'LSDL-128-4',
+        name: '독꽃',
+      },
+      {
+        id: 'LSDL-128-5',
+        name: '독곰팡이버섯',
+      },
+      {
+        id: 'LSDL-128-6',
+        name: '부패이끼약',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-128-7',
+        name: '면역의 육포',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-128-8',
+        name: '황금의 룬 [6]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-128-9',
+        name: '황금의 룬 [7]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-128-10',
+        name: '버섯머리',
+      },
+      {
+        id: 'LSDL-128-11',
+        name: '버섯몸',
+      },
+      {
+        id: 'LSDL-128-12',
+        name: '버섯팔',
+      },
+      {
+        id: 'LSDL-128-13',
+        name: '버섯다리',
+      },
+      {
+        id: 'LSDL-128-14',
+        name: '부패 권속의 환의',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-141',
+    categories: ['축복', '던전', '보스'],
+    name: '화산 동굴',
+    x: 0.497294,
+    y: 0.088027,
+    loot: [
+      {
+        id: 'LSDL-141-1',
+        name: '똬리 방패',
+      },
+      {
+        id: 'LSDL-141-2',
+        name: '아르테리아의 잎',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-141-3',
+        name: '동굴 이끼',
+      },
+      {
+        id: 'LSDL-141-4',
+        name: '동굴 이끼꽃눈',
+      },
+      {
+        id: 'LSDL-141-5',
+        name: '동굴 이끼결정',
+      },
+      {
+        id: 'LSDL-141-6',
+        name: '황금의 룬 [6]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-141-7',
+        name: '대포 항아리',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-624',
+    categories: ['축복'],
+    name: '죄인교',
+    x: 0.944296,
+    y: 0.503849,
+  },
+  {
+    id: 'LSDL-627',
+    categories: ['축복'],
+    name: '겔미어 화산 일부 능선',
+    x: 0.821849,
+    y: 0.413231,
+  },
+  {
+    id: 'LSDL-630',
+    categories: ['축복'],
+    name: '원류의 마술사 아줄',
+    x: 0.585332,
+    y: 0.608432,
+  },
+  {
+    id: 'LSDL-631',
+    categories: ['축복'],
+    name: '땅 밑 책문소',
+    x: 0.492345,
+    y: 0.583575,
+    loot: [
+      {
+        id: 'LSDL-631-1',
+        name: '단석 [4]',
+      },
+      {
+        id: 'LSDL-631-2',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-632',
+    categories: ['축복'],
+    name: '알현의 길',
+    x: 0.434339,
+    y: 0.446357,
+  },
+  {
+    id: 'LSDL-634',
+    categories: ['축복'],
+    name: '모독의 군주 라이커드',
+    x: 0.428013,
+    y: 0.551038,
+  },
+  {
+    id: 'LSDL-635',
+    categories: ['축복'],
+    name: '에이그레이 성당',
+    x: 0.402178,
+    y: 0.664388,
+    loot: [
+      {
+        id: 'LSDL-635-1',
+        name: '황금의 룬 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-636',
+    categories: ['축복'],
+    name: '감옥 거리 교회',
+    x: 0.285827,
+    y: 0.560034,
+  },
+  {
+    id: 'LSDL-637',
+    categories: ['축복'],
+    name: '끓는 강 종단',
+    x: 0.218474,
+    y: 0.470051,
+  },
+  {
+    id: 'LSDL-638',
+    categories: ['축복'],
+    name: '영빈관',
+    x: 0.222283,
+    y: 0.652874,
+  },
+  {
+    id: 'LSDL-639',
+    categories: ['축복'],
+    name: '죄인 이송용 길',
+    x: 0.316685,
+    y: 0.371817,
+  },
+  {
+    id: 'LSDL-640',
+    categories: ['축복'],
+    name: '겔미어 화산 구부 능선',
+    x: 0.445232,
+    y: 0.264404,
+  },
+  {
+    id: 'LSDL-642',
+    categories: ['축복', '던전', '보스'],
+    name: '추한 지하 묘지 (혼종)',
+    x: 0.29444,
+    y: 0.965692,
+    loot: [
+      {
+        id: 'LSDL-642-1',
+        name: '날개 혼종의 뼛가루',
+      },
+      {
+        id: 'LSDL-642-2',
+        name: '말하는 머리 "미안해"',
+      },
+      {
+        id: 'LSDL-642-3',
+        name: '묘 은방울 꽃 [4]',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-642-4',
+        name: '묘 은방울 꽃 [5]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-642-5',
+        name: '영혼 묘 은방울 꽃 [5]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-642-6',
+        name: '룬의 호',
+      },
+      {
+        id: 'LSDL-642-7',
+        name: '묘의 보라',
+      },
+      {
+        id: 'LSDL-642-8',
+        name: '조향사 트리샤',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-643',
+    categories: ['축복'],
+    name: '강인의 오두막',
+    x: 0.423632,
+    y: 0.838941,
+    loot: [
+      {
+        id: 'LSDL-643-1',
+        name: '미켈라의 수련',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-643-2',
+        name: '도르래 석궁',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-644',
+    categories: ['축복', '던전', '보스'],
+    name: '현자의 동굴',
+    x: 0.648309,
+    y: 0.855629,
+    loot: [
+      {
+        id: 'LSDL-644-1',
+        name: '맹금의 발톱',
+      },
+      {
+        id: 'LSDL-644-2',
+        name: '뼈 가면',
+      },
+      {
+        id: 'LSDL-644-3',
+        name: '맹금의 검은 깃털',
+      },
+      {
+        id: 'LSDL-644-4',
+        name: '석검 열쇠',
+      },
+      {
+        id: 'LSDL-644-5',
+        name: '상실의 전회',
+      },
+      {
+        id: 'LSDL-644-6',
+        name: '죽음 이끼약',
+        quantity: 5,
+      },
+      {
+        id: 'LSDL-644-7',
+        name: '황금의 룬 [5]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-644-8',
+        name: '동굴 이끼 꽃눈',
+      },
+      {
+        id: 'LSDL-644-9',
+        name: '동굴 이끼 결정',
+      },
+      {
+        id: 'LSDL-644-10',
+        name: '은색 반딧불',
+      },
+      {
+        id: 'LSDL-644-11',
+        name: '몸 가리는 베일',
+      },
+      {
+        id: 'LSDL-644-12',
+        name: '가족의 머리',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-645',
+    categories: ['축복', '던전', '보스'],
+    name: '구 알터 갱도',
+    x: 0.895323,
+    y: 0.668376,
+    loot: [
+      {
+        id: 'LSDL-645-1',
+        name: '트롤 해머',
+      },
+      {
+        id: 'LSDL-645-2',
+        name: '뇌룡 표식의 탈리스만',
+      },
+      {
+        id: 'LSDL-645-3',
+        name: '단석 [5]',
+        quantity: 6,
+      },
+      {
+        id: 'LSDL-645-4',
+        name: '색 잃은 단석 [5]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-645-5',
+        name: '황금의 룬 [6]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-645-6',
+        name: '출혈 이끼약',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-645-7',
+        name: '망가진 결정',
+      },
+      {
+        id: 'LSDL-645-8',
+        name: '그레이트 클럽',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-646',
+    categories: ['축복', '던전', '보스'],
+    name: '윈덤 지하 묘지 (임프)',
+    x: 0.68646,
+    y: 0.682456,
+    loot: [
+      {
+        id: 'LSDL-646-1',
+        name: '벼락 전갈',
+      },
+      {
+        id: 'LSDL-646-2',
+        name: '묘 은방울 꽃 [4]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-646-3',
+        name: '묘 은방울 꽃 [5]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-646-4',
+        name: '영혼 묘 은방울 꽃 [6]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-646-5',
+        name: '황금의 룬 [5]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-646-6',
+        name: '묘의 보라',
+      },
+      {
+        id: 'LSDL-646-7',
+        name: '고룡 신도의 제작서 [1]',
+      },
+      {
+        id: 'LSDL-646-8',
+        name: '은방울꽃 채취자의 방울 [1]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-647',
+    categories: ['축복'],
+    name: '납치하는 소녀 인형',
+    x: 0.584116,
+    y: 0.697027,
+  },
+  {
+    id: 'LSDL-648',
+    categories: ['축복'],
+    name: '끓는 강',
+    x: 0.630335,
+    y: 0.754175,
+  },
+  {
+    id: 'LSDL-649',
+    categories: ['장소'],
+    name: '윈덤 폐허',
+    x: 0.766263,
+    y: 0.806907,
+  },
+  {
+    id: 'LSDL-1005',
+    categories: ['NPC'],
+    name: '알렉산더[6]',
+    x: 0.157568,
+    y: 0.647208,
+  },
+  {
+    id: 'LSDL-1089',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.591867,
+    y: 0.563059,
+    loot: [
+      {
+        id: 'LSDL-1089-1',
+        name: '황금 종자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1090',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.231056,
+    y: 0.241015,
+    loot: [
+      {
+        id: 'LSDL-1090-1',
+        name: '황금 종자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1156',
+    categories: ['지도조각'],
+    name: '지도 조각 (겔미어 화산)',
+    x: 0.284243,
+    y: 0.40569,
+    loot: [
+      {
+        id: 'LSDL-1156-1',
+        name: '지도 조각 (겔미어 화산)',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1213',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.807914,
+    y: 0.984455,
+    loot: [
+      {
+        id: 'LSDL-1213-1',
+        name: '황금 종자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1447',
+    categories: ['NPC'],
+    name: '밀리센트 [3]',
+    x: 0.80901,
+    y: 0.955238,
+  },
+  {
+    id: 'LSDL-1454',
+    categories: ['중요아이템'],
+    name: '창문으로 진입',
+    x: 0.438874,
+    y: 0.629532,
+    loot: [
+      {
+        id: 'LSDL-1454-1',
+        name: '선교사의 제작서 [6]',
+      },
+      {
+        id: 'LSDL-1454-2',
+        name: '끈달린 불기름',
+        quantity: 4,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1608',
+    categories: [],
+    name: '레아 루카리아 납치하는 소녀의 전송지',
+    x: 0.319335,
+    y: 0.583175,
+  },
+  {
+    id: 'LSDL-1772',
+    categories: ['NPC'],
+    name: '패치 [3]',
+    x: 0.661512,
+    y: 0.388626,
+  },
+  {
+    id: 'LSDL-1773',
+    categories: ['장소'],
+    name: '시체 냄새가 나는 오두막',
+    x: 0.734444,
+    y: 0.259937,
+  },
+  {
+    id: 'LSDL-1775',
+    categories: ['기도'],
+    name: '기도 : 황금 나무에 맹세코',
+    x: 0.715801,
+    y: 0.297144,
+    loot: [
+      {
+        id: 'LSDL-1775-1',
+        name: '황금 나무에 맹세코',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1776',
+    categories: ['장소'],
+    name: '라이드 요새',
+    x: 0.058868,
+    y: 0.408734,
+  },
+  {
+    id: 'LSDL-1780',
+    categories: ['보스'],
+    name: '티비아의 배 - 윈덤 폐허',
+    x: 0.727854,
+    y: 0.869235,
+    loot: [
+      {
+        id: 'LSDL-1780-1',
+        name: '사근',
+      },
+      {
+        id: 'LSDL-1780-2',
+        name: '티비아의 부름',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1781',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.850145,
+    y: 0.42828,
+    loot: [
+      {
+        id: 'LSDL-1781-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1783',
+    categories: ['NPC'],
+    name: '원류의 마술사 아줄',
+    x: 0.584738,
+    y: 0.634417,
+    loot: [
+      {
+        id: 'LSDL-1783-1',
+        name: '혜성 아줄',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1785',
+    categories: ['보스'],
+    name: '내리는 별의 짐승 성체',
+    x: 0.428462,
+    y: 0.337994,
+    loot: [
+      {
+        id: 'LSDL-1785-1',
+        name: '성수의 턱',
+      },
+      {
+        id: 'LSDL-1785-2',
+        name: '색 잃은 단석 [6]',
+      },
+      {
+        id: 'LSDL-1785-3',
+        name: '단석 [6]',
+        quantity: 5,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1786',
+    categories: ['보스'],
+    name: '문드러진 나무령',
+    x: 0.55568,
+    y: 0.374597,
+    loot: [
+      {
+        id: 'LSDL-1786-1',
+        name: '납빛 굳은 물방울',
+      },
+      {
+        id: 'LSDL-1786-2',
+        name: '푸른 숨겨진 물방울',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1787',
+    categories: ['중요아이템'],
+    name: '전쟁 처녀의 의수',
+    x: 0.950498,
+    y: 0.227012,
+    loot: [
+      {
+        id: 'LSDL-1787-1',
+        name: '전쟁 처녀의 의수',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1792',
+    categories: ['보스'],
+    name: '철가시 엘레메르',
+    x: 0.995462,
+    y: 0.242873,
+    loot: [
+      {
+        id: 'LSDL-1792-1',
+        name: '마레가의 집행검',
+      },
+      {
+        id: 'LSDL-1792-2',
+        name: '철가시 방패',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1796',
+    categories: ['중요아이템'],
+    name: '처형대 위의 시체',
+    x: 0.213502,
+    y: 0.670998,
+    loot: [
+      {
+        id: 'LSDL-1796-1',
+        name: '백금 지팡이',
+      },
+      {
+        id: 'LSDL-1796-2',
+        name: '백금의 복면',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1797',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.263951,
+    y: 0.66612,
+    loot: [
+      {
+        id: 'LSDL-1797-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1798',
+    categories: ['일반단석'],
+    name: '단석 [6] ',
+    x: 0.2634,
+    y: 0.623429,
+    loot: [
+      {
+        id: 'LSDL-1798-1',
+        name: '단석 [6]',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1800',
+    categories: ['중요아이템'],
+    name: '뱀의 양막',
+    x: 0.420231,
+    y: 0.677106,
+    loot: [
+      {
+        id: 'LSDL-1800-1',
+        name: '뱀의 양막',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1801',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [5]',
+    x: 0.387331,
+    y: 0.57281,
+    loot: [
+      {
+        id: 'LSDL-1801-1',
+        name: '색 잃은 단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1802',
+    categories: ['보스'],
+    name: '모독의 군주 라이커드',
+    x: 0.45478,
+    y: 0.534387,
+    loot: [
+      {
+        id: 'LSDL-1802-1',
+        name: '라이커드의 거대한 룬',
+      },
+      {
+        id: 'LSDL-1802-2',
+        name: '모독의 군주의 추억',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1877',
+    categories: ['전회'],
+    name: '전회 : 피의 칼날',
+    x: 0.911554,
+    y: 0.918643,
+    loot: [
+      {
+        id: 'LSDL-1877-1',
+        name: '피의 칼날',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1879',
+    categories: ['NPC'],
+    name: '적대 npc : 그늘의 성주 멀레이 마레',
+    x: 0.846309,
+    y: 0.250183,
+    loot: [
+      {
+        id: 'LSDL-1879-1',
+        name: '개미 가시 레이피어',
+      },
+      {
+        id: 'LSDL-1879-2',
+        name: '마레 가의 가면',
+      },
+      {
+        id: 'LSDL-1879-3',
+        name: '마레 가의 로브',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1880',
+    categories: ['암령'],
+    name: '화산관 암살 퀘스트 2 : 저물지 않는 라일리',
+    x: 0.988329,
+    y: 0.530749,
+  },
+  {
+    id: 'LSDL-1881',
+    categories: ['NPC'],
+    name: '타니스',
+    x: 0.40762,
+    y: 0.504501,
+  },
+  {
+    id: 'LSDL-1883',
+    categories: ['NPC'],
+    name: '패치',
+    x: 0.350592,
+    y: 0.464243,
+  },
+  {
+    id: 'LSDL-1910',
+    categories: ['보스'],
+    name: '납치하는 소녀 인형 (진자 낫 & 수레바귀)',
+    x: 0.614347,
+    y: 0.693578,
+    loot: [
+      {
+        id: 'LSDL-1910-1',
+        name: '책문 촛대',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2327',
+    categories: ['NPC'],
+    name: '방랑 민족 상인 [8]',
+    x: 0.59242,
+    y: 0.232487,
+  },
+  {
+    id: 'LSDL-2412',
+    categories: [],
+    name: '납치당하는 구역',
+    x: 0.398299,
+    y: 0.545974,
+    loot: [
+      {
+        id: 'LSDL-2412-1',
+        name: '연기 나비',
+        quantity: 5,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2494',
+    categories: [],
+    name: '석관 묘지 ( 겔미어 화산 일부능선 )',
+    x: 0.83589,
+    y: 0.428279,
+    loot: [
+      {
+        id: 'LSDL-2494-1',
+        name: '황금의 룬 [2]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2494-2',
+        name: '황금의 룬 [3]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-2494-3',
+        name: '황금의 룬 [4]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2494-4',
+        name: '황금의 룬 [7]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2517',
+    categories: [],
+    name: '황금의 룬 [3]',
+    x: 0.960361,
+    y: 0.652117,
+    loot: [
+      {
+        id: 'LSDL-2517-1',
+        name: '황금의 룬 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2597',
+    categories: ['일반단석'],
+    name: '단석 [5]',
+    x: 0.695504,
+    y: 0.894852,
+    loot: [
+      {
+        id: 'LSDL-2597-1',
+        name: '단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2598',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.731694,
+    y: 0.853989,
+    loot: [
+      {
+        id: 'LSDL-2598-1',
+        name: '트리나의 수련',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2599',
+    categories: [],
+    name: '황금의 룬 [3]',
+    x: 0.763497,
+    y: 0.852772,
+    loot: [
+      {
+        id: 'LSDL-2599-1',
+        name: '황금의 룬 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2600',
+    categories: [],
+    name: '황금의 룬 [7]',
+    x: 0.793658,
+    y: 0.783242,
+    loot: [
+      {
+        id: 'LSDL-2600-1',
+        name: '황금의 룬 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2601',
+    categories: [],
+    name: '성혈 나무의 싹',
+    x: 0.768984,
+    y: 0.705173,
+    loot: [
+      {
+        id: 'LSDL-2601-1',
+        name: '성혈 나무의 싹',
+        quantity: 4,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2602',
+    categories: ['탈리스만'],
+    name: '진주룡 표식의 탈리스만 +1',
+    x: 0.762951,
+    y: 0.732617,
+    loot: [
+      {
+        id: 'LSDL-2602-1',
+        name: '진주룡 표식의 탈리스만 +1',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2607',
+    categories: ['장소'],
+    name: '조향사의 폐허',
+    x: 0.322621,
+    y: 0.938752,
+    loot: [
+      {
+        id: 'LSDL-2607-1',
+        name: '조향병',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-2607-2',
+        name: '조향사의 제작서 [1]',
+      },
+      {
+        id: 'LSDL-2607-3',
+        name: '조향의 탈리스만',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2608',
+    categories: [],
+    name: '유생나비',
+    x: 0.425162,
+    y: 0.910698,
+    loot: [
+      {
+        id: 'LSDL-2608-1',
+        name: '유생나비',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2609',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.636278,
+    y: 0.889358,
+    loot: [
+      {
+        id: 'LSDL-2609-1',
+        name: '트리나의 수련',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2627',
+    categories: ['전회'],
+    name: '전회 : 연속 사격',
+    x: 0.631893,
+    y: 0.727733,
+    loot: [
+      {
+        id: 'LSDL-2627-1',
+        name: '연속 사격',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2628',
+    categories: ['일반단석'],
+    name: '단석 [5]',
+    x: 0.605576,
+    y: 0.488649,
+    loot: [
+      {
+        id: 'LSDL-2628-1',
+        name: '단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2629',
+    categories: [],
+    name: '화산석 파밍 위치 (끓는 강)',
+    x: 0.589675,
+    y: 0.47401,
+  },
+  {
+    id: 'LSDL-2630',
+    categories: ['중요아이템'],
+    name: '죽음 이끼약',
+    x: 0.610515,
+    y: 0.416069,
+    loot: [
+      {
+        id: 'LSDL-2630-1',
+        name: '죽음 이끼약',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2631',
+    categories: [],
+    name: '유생 나비',
+    x: 0.606129,
+    y: 0.389237,
+    loot: [
+      {
+        id: 'LSDL-2631-1',
+        name: '유생 나비',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2632',
+    categories: [],
+    name: '미켈라의 수련',
+    x: 0.569387,
+    y: 0.439246,
+    loot: [
+      {
+        id: 'LSDL-2632-1',
+        name: '미켈라의 수련',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2633',
+    categories: ['중요아이템'],
+    name: '항염의 말린 간',
+    x: 0.365947,
+    y: 0.407523,
+    loot: [
+      {
+        id: 'LSDL-2633-1',
+        name: '항염의 말린 간',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2634',
+    categories: [],
+    name: '황금의 룬 [6]',
+    x: 0.263403,
+    y: 0.436186,
+    loot: [
+      {
+        id: 'LSDL-2634-1',
+        name: '황금의 룬 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2635',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.148799,
+    y: 0.335548,
+    loot: [
+      {
+        id: 'LSDL-2635-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2636',
+    categories: ['무기'],
+    name: '주교의 대형 화염 망치',
+    x: 0.082995,
+    y: 0.425808,
+    loot: [
+      {
+        id: 'LSDL-2636-1',
+        name: '주교의 대형 화염 망치',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2637',
+    categories: ['방어구'],
+    name: '불 주교의 값옷 (경장)',
+    x: 0.097254,
+    y: 0.423982,
+  },
+  {
+    id: 'LSDL-2638',
+    categories: ['제작서'],
+    name: '요새 1층',
+    x: 0.093962,
+    y: 0.467895,
+    loot: [
+      {
+        id: 'LSDL-2638-1',
+        name: '무구 장인의 제작서 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2639',
+    categories: ['중요아이템'],
+    name: '요새 2층',
+    x: 0.105476,
+    y: 0.474602,
+    loot: [
+      {
+        id: 'LSDL-2639-1',
+        name: '잠알',
+        quantity: 3,
+      },
+      {
+        id: 'LSDL-2639-2',
+        name: '황금의 룬 [8]',
+      },
+      {
+        id: 'LSDL-2639-3',
+        name: '화염 전갈',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2640',
+    categories: ['보스'],
+    name: '용암 토룡',
+    x: 0.123572,
+    y: 0.64111,
+    loot: [
+      {
+        id: 'LSDL-2640-1',
+        name: '용의 심장',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2642',
+    categories: [],
+    name: '황금의 룬 [5]',
+    x: 0.142214,
+    y: 0.649647,
+    loot: [
+      {
+        id: 'LSDL-2642-1',
+        name: '황금의 룬 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2643',
+    categories: [],
+    name: '아르테리아의 잎',
+    x: 0.909916,
+    y: 0.401442,
+    loot: [
+      {
+        id: 'LSDL-2643-1',
+        name: '아르테리아의 잎',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2644',
+    categories: [],
+    name: '황금의 룬 [8]',
+    x: 0.836438,
+    y: 0.365458,
+    loot: [
+      {
+        id: 'LSDL-2644-1',
+        name: '황금의 룬 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2645',
+    categories: [],
+    name: '성혈의 나무 싹',
+    x: 0.770637,
+    y: 0.292267,
+    loot: [
+      {
+        id: 'LSDL-2645-1',
+        name: '성혈의 나무 싹',
+        quantity: 4,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2646',
+    categories: ['암령'],
+    name: '암령 : 빛바랜 자를 먹는 아나스타시아',
+    x: 0.737736,
+    y: 0.292265,
+    loot: [
+      {
+        id: 'LSDL-2646-1',
+        name: '신성한 해체 식칼',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2647',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.648352,
+    y: 0.314828,
+    loot: [
+      {
+        id: 'LSDL-2647-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2648',
+    categories: [],
+    name: '성혈 나무의 싹',
+    x: 0.704832,
+    y: 0.404487,
+    loot: [
+      {
+        id: 'LSDL-2648-1',
+        name: '성혈 나무의 싹',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2649',
+    categories: [],
+    name: '황금의 룬 [6]',
+    x: 0.68564,
+    y: 0.356303,
+    loot: [
+      {
+        id: 'LSDL-2649-1',
+        name: '황금의 룬 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2650',
+    categories: ['무기'],
+    name: '도르래 활',
+    x: 0.708672,
+    y: 0.383748,
+    loot: [
+      {
+        id: 'LSDL-2650-1',
+        name: '도르래 활',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2651',
+    categories: [],
+    name: '황금의 룬 [6]',
+    x: 0.625867,
+    y: 0.56306,
+    loot: [
+      {
+        id: 'LSDL-2651-1',
+        name: '황금의 룬 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2652',
+    categories: ['축복', '던전', '보스'],
+    name: '겔미어 영웅묘지',
+    x: 0.681798,
+    y: 0.538053,
+    loot: [
+      {
+        id: 'LSDL-2652-1',
+        name: '당랑도',
+      },
+      {
+        id: 'LSDL-2652-2',
+        name: '사냥개 기사의 투구',
+      },
+      {
+        id: 'LSDL-2652-3',
+        name: '사냥개 기사의 갑옷',
+      },
+      {
+        id: 'LSDL-2652-4',
+        name: '사냥개 기사의 장갑',
+      },
+      {
+        id: 'LSDL-2652-5',
+        name: '사냥개 기사의 각반',
+      },
+      {
+        id: 'LSDL-2652-6',
+        name: '겔미어 기사의 투구',
+      },
+      {
+        id: 'LSDL-2652-7',
+        name: '겔미어 기사의 갑옷',
+      },
+      {
+        id: 'LSDL-2652-8',
+        name: '겔미어 기사의 장갑',
+      },
+      {
+        id: 'LSDL-2652-9',
+        name: '겔미어 기사의 각반',
+      },
+      {
+        id: 'LSDL-2652-10',
+        name: '반지 손가락',
+      },
+      {
+        id: 'LSDL-2652-11',
+        name: '석검 열쇠',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-2652-12',
+        name: '황금의 룬 [6]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2652-13',
+        name: '묘 은방울 꽃 [6]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-2652-14',
+        name: '묘 은방울 꽃 [7]',
+        quantity: 7,
+      },
+      {
+        id: 'LSDL-2652-15',
+        name: '영혼 묘 은방울 꽃 [7]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2652-16',
+        name: '묘의 보라',
+      },
+      {
+        id: 'LSDL-2652-17',
+        name: '사냥개 기사 플로',
+      },
+      {
+        id: 'LSDL-2652-18',
+        name: '사근',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2653',
+    categories: ['무기'],
+    name: '시체 뒤지는 자의 곡검',
+    x: 0.644514,
+    y: 0.236759,
+    loot: [
+      {
+        id: 'LSDL-2653-1',
+        name: '시체 뒤지는 자의 곡검',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2654',
+    categories: [],
+    name: '트리나의 수련',
+    x: 0.599005,
+    y: 0.15381,
+    loot: [
+      {
+        id: 'LSDL-2654-1',
+        name: '트리나의 수련',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2655',
+    categories: [],
+    name: '성혈 나무의 싹',
+    x: 0.60284,
+    y: 0.207482,
+    loot: [
+      {
+        id: 'LSDL-2655-1',
+        name: '성혈 나무의 싹',
+        quantity: 4,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2656',
+    categories: [],
+    name: '이옐로의 눈동자',
+    x: 0.550198,
+    y: 0.207481,
+    loot: [
+      {
+        id: 'LSDL-2656-1',
+        name: '이옐로의 눈동자',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2657',
+    categories: [],
+    name: '노란 잔불',
+    x: 0.560617,
+    y: 0.231877,
+    loot: [
+      {
+        id: 'LSDL-2657-1',
+        name: '노란 잔불',
+        quantity: 5,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2658',
+    categories: [],
+    name: '이옐로의 눈동자',
+    x: 0.53539,
+    y: 0.256881,
+    loot: [
+      {
+        id: 'LSDL-2658-1',
+        name: '이옐로의 눈동자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2659',
+    categories: ['중요아이템'],
+    name: '별빛 조각',
+    x: 0.446009,
+    y: 0.371541,
+    loot: [
+      {
+        id: 'LSDL-2659-1',
+        name: '별빛 조각',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2660',
+    categories: ['전회'],
+    name: '전회 : 관통 사격',
+    x: 0.240923,
+    y: 0.306276,
+    loot: [
+      {
+        id: 'LSDL-2660-1',
+        name: '관통 사격',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2661',
+    categories: [],
+    name: '황금의 룬 [3]',
+    x: 0.207474,
+    y: 0.344696,
+    loot: [
+      {
+        id: 'LSDL-2661-1',
+        name: '황금의 룬 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2662',
+    categories: ['물방울 유생'],
+    name: '물방울 유생',
+    x: 0.395009,
+    y: 0.372761,
+    loot: [
+      {
+        id: 'LSDL-2662-1',
+        name: '물방울 유생',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2663',
+    categories: [],
+    name: '황금의 룬 [3]',
+    x: 0.544713,
+    y: 0.355689,
+    loot: [
+      {
+        id: 'LSDL-2663-1',
+        name: '황금의 룬 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2664',
+    categories: [],
+    name: '황금의 룬 [4]',
+    x: 0.544713,
+    y: 0.355689,
+    loot: [
+      {
+        id: 'LSDL-2664-1',
+        name: '황금의 룬 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2665',
+    categories: ['장소'],
+    name: '화산관',
+    x: 0.395009,
+    y: 0.427041,
+  },
+  {
+    id: 'LSDL-2666',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.359914,
+    y: 0.43802,
+    loot: [
+      {
+        id: 'LSDL-2666-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2667',
+    categories: ['암령'],
+    name: '암령 침입 : 책문관 기자',
+    x: 0.362658,
+    y: 0.453876,
+    loot: [
+      {
+        id: 'LSDL-2667-1',
+        name: '기자의 수레바퀴',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2668',
+    categories: ['NPC'],
+    name: '유령 npc',
+    x: 0.354979,
+    y: 0.49047,
+  },
+  {
+    id: 'LSDL-2669',
+    categories: ['축복'],
+    name: '화산관',
+    x: 0.392817,
+    y: 0.505718,
+  },
+  {
+    id: 'LSDL-2670',
+    categories: ['중요아이템'],
+    name: '화산관 비밀 통로 입구',
+    x: 0.373073,
+    y: 0.489249,
+    loot: [
+      {
+        id: 'LSDL-2670-1',
+        name: '조향병',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2670-2',
+        name: '사냥개의 발톱',
+      },
+      {
+        id: 'LSDL-2670-3',
+        name: '항염의 말린 간',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2670-4',
+        name: '방랑 전사의 제작서 [21]',
+      },
+      {
+        id: 'LSDL-2670-5',
+        name: '타락 조향상 카르만',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2672',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.250792,
+    y: 0.540481,
+    loot: [
+      {
+        id: 'LSDL-2672-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2673',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [5]',
+    x: 0.235438,
+    y: 0.549017,
+    loot: [
+      {
+        id: 'LSDL-2673-1',
+        name: '색 잃은 단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2674',
+    categories: [],
+    name: '황금의 룬 [9]',
+    x: 0.22173,
+    y: 0.567312,
+    loot: [
+      {
+        id: 'LSDL-2674-1',
+        name: '황금의 룬 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2675',
+    categories: ['탈리스만'],
+    name: '붉은 호박 메달리온 +1',
+    x: 0.181149,
+    y: 0.596586,
+    loot: [
+      {
+        id: 'LSDL-2675-1',
+        name: '붉은 호박 메달리온 +1',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2676',
+    categories: [],
+    name: '황금의 룬 [5]',
+    x: 0.252985,
+    y: 0.582564,
+    loot: [
+      {
+        id: 'LSDL-2676-1',
+        name: '황금의 룬 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2677',
+    categories: ['일반단석'],
+    name: '단석 [4]',
+    x: 0.197597,
+    y: 0.669775,
+    loot: [
+      {
+        id: 'LSDL-2677-1',
+        name: '단석 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2678',
+    categories: [],
+    name: '황금의 룬 [10]',
+    x: 0.232692,
+    y: 0.675269,
+    loot: [
+      {
+        id: 'LSDL-2678-1',
+        name: '황금의 룬 [10]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2679',
+    categories: [],
+    name: '황금의 룬 [9]',
+    x: 0.211308,
+    y: 0.687466,
+    loot: [
+      {
+        id: 'LSDL-2679-1',
+        name: '황금의 룬 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2680',
+    categories: ['중요아이템'],
+    name: '항염의 말린 간',
+    x: 0.244757,
+    y: 0.691738,
+    loot: [
+      {
+        id: 'LSDL-2680-1',
+        name: '항염의 말린 간',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2681',
+    categories: [],
+    name: '황금의 룬 [9]',
+    x: 0.264498,
+    y: 0.645994,
+    loot: [
+      {
+        id: 'LSDL-2681-1',
+        name: '황금의 룬 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2682',
+    categories: ['중요아이템'],
+    name: '용의 심장',
+    x: 0.380202,
+    y: 0.630748,
+    loot: [
+      {
+        id: 'LSDL-2682-1',
+        name: '용의 심장',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2683',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.362655,
+    y: 0.619771,
+    loot: [
+      {
+        id: 'LSDL-2683-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2684',
+    categories: ['중요아이템'],
+    name: '용암지대 동굴 안',
+    x: 0.249146,
+    y: 0.524012,
+    loot: [
+      {
+        id: 'LSDL-2684-1',
+        name: '그을림의 방패',
+      },
+      {
+        id: 'LSDL-2684-2',
+        name: '황금의 룬 [9]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2684-3',
+        name: '단석 [6]',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2685',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.232693,
+    y: 0.600249,
+    loot: [
+      {
+        id: 'LSDL-2685-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2686',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [5]',
+    x: 0.367041,
+    y: 0.675882,
+    loot: [
+      {
+        id: 'LSDL-2686-1',
+        name: '색 잃은 단석 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2687',
+    categories: ['보스'],
+    name: '신의 살갗의 귀인',
+    x: 0.390071,
+    y: 0.655757,
+    loot: [
+      {
+        id: 'LSDL-2687-1',
+        name: '신의 살갗 대자검',
+      },
+      {
+        id: 'LSDL-2687-2',
+        name: '귀족의 배짱',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2688',
+    categories: [],
+    name: '황금의 룬 [12]',
+    x: 0.444906,
+    y: 0.671615,
+    loot: [
+      {
+        id: 'LSDL-2688-1',
+        name: '황금의 룬 [12]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2689',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [6]',
+    x: 0.349496,
+    y: 0.515475,
+    loot: [
+      {
+        id: 'LSDL-2689-1',
+        name: '색 잃은 단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2690',
+    categories: ['방어구'],
+    name: '시민의 모자',
+    x: 0.375817,
+    y: 0.547191,
+    loot: [
+      {
+        id: 'LSDL-2690-1',
+        name: '시민의 모자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2692',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.391718,
+    y: 0.597815,
+    loot: [
+      {
+        id: 'LSDL-2692-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2693',
+    categories: ['영체'],
+    name: '뱀 인간의 뼛가루',
+    x: 0.387332,
+    y: 0.486814,
+    loot: [
+      {
+        id: 'LSDL-2693-1',
+        name: '뱀 인간의 뼛가루',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2694',
+    categories: [],
+    name: '라이커드 전송문',
+    x: 0.419139,
+    y: 0.483763,
+  },
+  {
+    id: 'LSDL-2695',
+    categories: ['중요아이템'],
+    name: '석검 열쇠 필요 (1개)',
+    x: 0.340723,
+    y: 0.487421,
+    loot: [
+      {
+        id: 'LSDL-2695-1',
+        name: '단검의 탈리스만',
+      },
+      {
+        id: 'LSDL-2695-2',
+        name: '룬의 호',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2695-3',
+        name: '모판의 저주',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2695-4',
+        name: '도읍 기사의 결의',
+      },
+      {
+        id: 'LSDL-2695-5',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2696',
+    categories: [],
+    name: '석관 묘지 (라이드 요새 뒷편)',
+    x: 0.177858,
+    y: 0.759432,
+    loot: [
+      {
+        id: 'LSDL-2696-1',
+        name: '황금의 룬 [2]',
+        quantity: 2,
+      },
+      {
+        id: 'LSDL-2696-2',
+        name: '황금의 룬 [4]',
+        quantity: 1,
+      },
+      {
+        id: 'LSDL-2696-3',
+        name: '황금의 룬 [6]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2697',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.23982,
+    y: 0.821034,
+    loot: [
+      {
+        id: 'LSDL-2697-1',
+        name: '단석 [6]',
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2698',
+    categories: ['장소'],
+    name: '은자의 오두막',
+    x: 0.229949,
+    y: 0.785661,
+    loot: [
+      {
+        id: 'LSDL-2698-1',
+        name: '솟구치는 용암',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2699',
+    categories: [],
+    name: '조약돌',
+    x: 0.303978,
+    y: 0.795422,
+    loot: [
+      {
+        id: 'LSDL-2699-1',
+        name: '조약돌',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2700',
+    categories: [],
+    name: '산양 파밍 위치 (장인의 오두막)',
+    x: 0.441068,
+    y: 0.804576,
+  },
+  {
+    id: 'LSDL-2701',
+    categories: [],
+    name: '성혈의 나무 싹',
+    x: 0.5299,
+    y: 0.768594,
+    loot: [
+      {
+        id: 'LSDL-2701-1',
+        name: '성혈의 나무 싹',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2702',
+    categories: ['중요아이템'],
+    name: '별빛 조각',
+    x: 0.615444,
+    y: 0.735664,
+    loot: [
+      {
+        id: 'LSDL-2702-1',
+        name: '별빛 조각',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2703',
+    categories: ['방어구'],
+    name: '아로다스의 휘석 머리',
+    x: 0.574864,
+    y: 0.74176,
+    loot: [
+      {
+        id: 'LSDL-2703-1',
+        name: '아로다스의 휘석 머리',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2704',
+    categories: ['장소'],
+    name: '은자의 마을',
+    x: 0.538128,
+    y: 0.711874,
+  },
+  {
+    id: 'LSDL-2705',
+    categories: [],
+    name: '성혈의 나무 싹',
+    x: 0.629153,
+    y: 0.706389,
+    loot: [
+      {
+        id: 'LSDL-2705-1',
+        name: '성혈의 나무 싹',
+        quantity: 4,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2706',
+    categories: ['보스'],
+    name: '아인 여왕 마기',
+    x: 0.586384,
+    y: 0.655152,
+    loot: [
+      {
+        id: 'LSDL-2706-1',
+        name: '메모리 스톤',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2707',
+    categories: ['중요아이템'],
+    name: '저지대',
+    x: 0.250241,
+    y: 0.568535,
+    loot: [
+      {
+        id: 'LSDL-2707-1',
+        name: '황금의 룬 [6]',
+      },
+      {
+        id: 'LSDL-2707-2',
+        name: '황금 나무의 성인',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2708',
+    categories: ['일반단석'],
+    name: '단석 [5]',
+    x: 0.804087,
+    y: 0.231886,
+    loot: [
+      {
+        id: 'LSDL-2708-1',
+        name: '단석 [5]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2715',
+    categories: ['중요아이템'],
+    name: '독 이끼 약',
+    x: 0.951045,
+    y: 0.31606,
+    loot: [
+      {
+        id: 'LSDL-2715-1',
+        name: '독 이끼 약',
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2716',
+    categories: ['일반단석'],
+    name: '단석 [5]',
+    x: 0.971885,
+    y: 0.252018,
+    loot: [
+      {
+        id: 'LSDL-2716-1',
+        name: '단석 [5]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2717',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [5]',
+    x: 0.959819,
+    y: 0.266046,
+    loot: [
+      {
+        id: 'LSDL-2717-1',
+        name: '색 잃은 단석 [5]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2718',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [4]',
+    x: 0.972432,
+    y: 0.271535,
+    loot: [
+      {
+        id: 'LSDL-2718-1',
+        name: '영혼 묘 은방울 꽃 [4]',
+        quantity: 1,
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2728',
+    categories: ['축복'],
+    name: '성주의 응접실',
+    x: 0.998754,
+    y: 0.228845,
+  },
+  {
+    id: 'LSDL-2782',
+    categories: ['NPC'],
+    name: '화산관 NPC들',
+    x: 0.365945,
+    y: 0.517916,
+  },
+  {
+    id: 'LSDL-2784',
+    categories: ['무기'],
+    name: '큰 뱀 사냥꾼',
+    x: 0.444909,
+    y: 0.489252,
+    loot: [
+      {
+        id: 'LSDL-2784-1',
+        name: '큰 뱀 사냥꾼',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2785',
+    categories: ['NPC'],
+    name: '타니스',
+    x: 0.449295,
+    y: 0.553904,
+  },
+  {
+    id: 'LSDL-2786',
+    categories: ['방어구'],
+    name: '눈동자 서코트',
+    x: 0.412006,
+    y: 0.559391,
+    loot: [
+      {
+        id: 'LSDL-2786-1',
+        name: '눈동자 서코트',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2960',
+    categories: ['NPC'],
+    name: '조라야스',
+    x: 0.432845,
+    y: 0.616725,
+  },
+  {
+    id: 'LSDL-2965',
+    categories: ['중요아이템'],
+    name: '말하는 머리 "너는 아름다워"',
+    x: 0.558963,
+    y: 0.719803,
+    loot: [
+      {
+        id: 'LSDL-2965-1',
+        name: '말하는 머리 "너는 아름다워"',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2986',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.334142,
+    y: 0.550851,
+    loot: [
+      {
+        id: 'LSDL-2986-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2987',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [2]',
+    x: 0.413104,
+    y: 0.597207,
+    loot: [
+      {
+        id: 'LSDL-2987-1',
+        name: '색 잃은 단석 [2]',
+      },
+    ],
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -20589,5 +22907,6 @@ export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '8') return CAELID_MARKERS;
   if (regionId === '10') return DEEPROOT_DEPTHS_MARKERS;
   if (regionId === '11') return ALTUS_PLATEAU_MARKERS;
+  if (regionId === '12') return MT_GELMIR_MARKERS;
   return [];
 }
