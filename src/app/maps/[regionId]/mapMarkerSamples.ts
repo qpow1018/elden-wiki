@@ -32936,6 +32936,411 @@ const CRUMBLING_FARUM_AZULA_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-22; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/mohgwyn-palace/.
+// Regenerate: node reference-data/maps/generate.mjs mohgwyn-palace.
+const MOHGWYN_PALACE_MARKERS = [
+  {
+    id: 'LSDL-976',
+    categories: ['축복'],
+    name: '반신이 잠든 고치',
+    x: 0.191176,
+    y: 0.555179,
+  },
+  {
+    id: 'LSDL-977',
+    categories: ['장소'],
+    name: '모그윈 왕조묘',
+    x: 0.292257,
+    y: 0.635738,
+  },
+  {
+    id: 'LSDL-978',
+    categories: ['축복'],
+    name: '왕조묘 중턱',
+    x: 0.326917,
+    y: 0.553497,
+  },
+  {
+    id: 'LSDL-979',
+    categories: ['축복'],
+    name: '왕조묘 입구',
+    x: 0.407795,
+    y: 0.47131,
+  },
+  {
+    id: 'LSDL-980',
+    categories: ['축복'],
+    name: '왕조에 이르는 절벽길',
+    x: 0.664912,
+    y: 0.749187,
+  },
+  {
+    id: 'LSDL-1139',
+    categories: ['보스'],
+    name: '피의 군주 모그',
+    x: 0.232357,
+    y: 0.574069,
+    loot: [
+      {
+        id: 'LSDL-1139-1',
+        name: '모그의 거대한 룬',
+      },
+      {
+        id: 'LSDL-1139-2',
+        name: '피의 군주의 추억',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1164',
+    categories: ['지도조각'],
+    name: '지도 조각 (모그윈 왕조)',
+    x: 0.38108,
+    y: 0.449105,
+    loot: [
+      {
+        id: 'LSDL-1164-1',
+        name: '지도 조각 (모그윈 왕조)',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1179',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.573213,
+    y: 0.651369,
+    loot: [
+      {
+        id: 'LSDL-1179-1',
+        name: '황금 종자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1588',
+    categories: ['암령'],
+    name: '침입 사인 : 백면 바레',
+    x: 0.337779,
+    y: 0.588067,
+  },
+  {
+    id: 'LSDL-1854',
+    categories: ['암령'],
+    name: '침입자 : 이름 없는 백면',
+    x: 0.523342,
+    y: 0.57902,
+  },
+  {
+    id: 'LSDL-1856',
+    categories: ['암령'],
+    name: '침입 : 이름 없는 백면',
+    x: 0.56092,
+    y: 0.671101,
+  },
+  {
+    id: 'LSDL-1857',
+    categories: ['NPC'],
+    name: '붙잡힌 상인',
+    x: 0.233054,
+    y: 0.701509,
+  },
+  {
+    id: 'LSDL-1889',
+    categories: [],
+    name: '모그윈 왕조 입구',
+    x: 0.838965,
+    y: 0.690837,
+  },
+  {
+    id: 'LSDL-1898',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.527687,
+    y: 0.611064,
+    loot: [
+      {
+        id: 'LSDL-1898-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1899',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [9]',
+    x: 0.437427,
+    y: 0.664522,
+    loot: [
+      {
+        id: 'LSDL-1899-1',
+        name: '영혼 묘 은방울 꽃 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1900',
+    categories: ['탈리스만'],
+    name: '성룡 문양의 탈리스만 +2',
+    x: 0.420097,
+    y: 0.722085,
+    loot: [
+      {
+        id: 'LSDL-1900-1',
+        name: '성룡 문양의 탈리스만 +2',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1901',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [8]',
+    x: 0.630985,
+    y: 0.669471,
+    loot: [
+      {
+        id: 'LSDL-1901-1',
+        name: '영혼 묘 은방울 꽃 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1902',
+    categories: ['제작서'],
+    name: '방랑 전사의 제작서 [24]',
+    x: 0.643974,
+    y: 0.699042,
+    loot: [
+      {
+        id: 'LSDL-1902-1',
+        name: '방랑 전사의 제작서 [24]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1903',
+    categories: ['암령'],
+    name: '침입 : 이름 없는 백면',
+    x: 0.578993,
+    y: 0.738504,
+    loot: [
+      {
+        id: 'LSDL-1903-1',
+        name: '흰 가면',
+      },
+      {
+        id: 'LSDL-1903-2',
+        name: '종군의사의 백의(경장)',
+      },
+      {
+        id: 'LSDL-1903-3',
+        name: '종군의사의 장갑',
+      },
+      {
+        id: 'LSDL-1903-4',
+        name: '종군의사의 바지',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1904',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.464882,
+    y: 0.722875,
+    loot: [
+      {
+        id: 'LSDL-1904-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1905',
+    categories: ['중요아이템'],
+    name: '석검 열쇠',
+    x: 0.464882,
+    y: 0.722875,
+    loot: [
+      {
+        id: 'LSDL-1905-1',
+        name: '석검 열쇠',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1906',
+    categories: ['영혼묘'],
+    name: '큰 영혼 묘 은방울 꽃 - 모그윈',
+    x: 0.334176,
+    y: 0.641474,
+    loot: [
+      {
+        id: 'LSDL-1906-1',
+        name: '큰 영혼 묘 은방울 꽃',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1907',
+    categories: ['색단석'],
+    name: '고룡의 색 잃은 단석 - 모그윈',
+    x: 0.376789,
+    y: 0.650525,
+    loot: [
+      {
+        id: 'LSDL-1907-1',
+        name: '고룡의 색 잃은 단석',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2228',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [9]',
+    x: 0.708209,
+    y: 0.511619,
+    loot: [
+      {
+        id: 'LSDL-2228-1',
+        name: '색 잃은 단석 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2229',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.674289,
+    y: 0.616012,
+    loot: [
+      {
+        id: 'LSDL-2229-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2231',
+    categories: ['전회'],
+    name: '전회 피의 징수',
+    x: 0.682234,
+    y: 0.479522,
+    loot: [
+      {
+        id: 'LSDL-2231-1',
+        name: '피의 징수',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2232',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.648306,
+    y: 0.357869,
+    loot: [
+      {
+        id: 'LSDL-2232-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2233',
+    categories: ['중요아이템'],
+    name: '룬의 호',
+    x: 0.594135,
+    y: 0.236164,
+    loot: [
+      {
+        id: 'LSDL-2233-1',
+        name: '룬의 호',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2234',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.566688,
+    y: 0.403909,
+    loot: [
+      {
+        id: 'LSDL-2234-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2235',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.586194,
+    y: 0.483625,
+    loot: [
+      {
+        id: 'LSDL-2235-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2236',
+    categories: ['기도'],
+    name: '파리떼',
+    x: 0.675715,
+    y: 0.420327,
+    loot: [
+      {
+        id: 'LSDL-2236-1',
+        name: '파리떼',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2237',
+    categories: ['영혼묘'],
+    name: '영혼 묘 은방울 꽃 [8]',
+    x: 0.654085,
+    y: 0.403068,
+    loot: [
+      {
+        id: 'LSDL-2237-1',
+        name: '영혼 묘 은방울 꽃 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2239',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.373874,
+    y: 0.557655,
+    loot: [
+      {
+        id: 'LSDL-2239-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-3006',
+    categories: [],
+    name: 'DLC 입장',
+    x: 0.163723,
+    y: 0.542024,
+  },
+  {
+    id: 'LSDL-3007',
+    categories: ['NPC'],
+    name: '침의 기사 레다 [1]',
+    x: 0.192608,
+    y: 0.531343,
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -32968,5 +33373,6 @@ export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '21') return MOUNTAINTOPS_OF_THE_GIANTS_MARKERS;
   if (regionId === '22') return CONSECRATED_SNOWFIELD_MARKERS;
   if (regionId === '23') return CRUMBLING_FARUM_AZULA_MARKERS;
+  if (regionId === '24') return MOHGWYN_PALACE_MARKERS;
   return [];
 }
