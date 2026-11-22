@@ -17,7 +17,7 @@ export default async function RegionMapPage({ params }: { params: Promise<{ regi
       image={region.image}
       name={region.name}
       worldWidth={region.worldWidth}
-      markers={process.env.NODE_ENV === 'development' ? getMapMarkerSamples(regionId) : []}
+      markers={getMapMarkerSamples(regionId)}
     />
   );
 }
