@@ -32144,6 +32144,798 @@ const CONSECRATED_SNOWFIELD_MARKERS = [
   },
 ];
 
+// LSDL base-game map, checked 2026-11-22; patch unspecified.
+// Source, terrain alignment and description review: reference-data/maps/crumbling-farum-azula/.
+// Regenerate: node reference-data/maps/generate.mjs crumbling-farum-azula.
+const CRUMBLING_FARUM_AZULA_MARKERS = [
+  {
+    id: 'LSDL-990',
+    categories: ['축복'],
+    name: '무너지는 짐승묘',
+    x: 0.579713,
+    y: 0.784062,
+  },
+  {
+    id: 'LSDL-991',
+    categories: ['축복'],
+    name: '무너지는 짐승묘 심부',
+    x: 0.256942,
+    y: 0.699081,
+  },
+  {
+    id: 'LSDL-992',
+    categories: ['축복'],
+    name: '회오리를 향한 노대',
+    x: 0.270717,
+    y: 0.597592,
+  },
+  {
+    id: 'LSDL-993',
+    categories: ['축복'],
+    name: '용성당',
+    x: 0.298326,
+    y: 0.4196,
+  },
+  {
+    id: 'LSDL-994',
+    categories: ['축복'],
+    name: '용성당의 제단',
+    x: 0.428871,
+    y: 0.41784,
+  },
+  {
+    id: 'LSDL-995',
+    categories: ['축복'],
+    name: '용성당 익랑',
+    x: 0.458298,
+    y: 0.496104,
+  },
+  {
+    id: 'LSDL-996',
+    categories: ['축복'],
+    name: '용왕 플라키두삭스',
+    x: 0.432576,
+    y: 0.537052,
+  },
+  {
+    id: 'LSDL-997',
+    categories: ['축복'],
+    name: '흑검 말리케스',
+    x: 0.761825,
+    y: 0.476513,
+  },
+  {
+    id: 'LSDL-998',
+    categories: ['장소'],
+    name: '무너지는 파름 아즈라',
+    x: 0.49049,
+    y: 0.607941,
+  },
+  {
+    id: 'LSDL-1007',
+    categories: ['NPC'],
+    name: '알렉산더[8]',
+    x: 0.196208,
+    y: 0.429066,
+  },
+  {
+    id: 'LSDL-1027',
+    categories: ['축복'],
+    name: '용성당 승강기 앞',
+    x: 0.294621,
+    y: 0.280245,
+  },
+  {
+    id: 'LSDL-1028',
+    categories: ['축복'],
+    name: '용성당 지붕 위',
+    x: 0.507983,
+    y: 0.113427,
+  },
+  {
+    id: 'LSDL-1029',
+    categories: ['축복'],
+    name: '대도량 옆',
+    x: 0.513511,
+    y: 0.290043,
+  },
+  {
+    id: 'LSDL-1134',
+    categories: ['보스'],
+    name: '짐승 사제',
+    x: 0.705676,
+    y: 0.468587,
+    loot: [
+      {
+        id: 'LSDL-1134-1',
+        name: '흑검의 추억',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1180',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.370956,
+    y: 0.427306,
+    loot: [
+      {
+        id: 'LSDL-1180-1',
+        name: '황금 종자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1181',
+    categories: ['탈리스만'],
+    name: '옛 왕의 탈리스만',
+    x: 0.630286,
+    y: 0.216624,
+    loot: [
+      {
+        id: 'LSDL-1181-1',
+        name: '옛 왕의 탈리스만',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1635',
+    categories: [],
+    name: '거인의 불가마의 전송지',
+    x: 0.794893,
+    y: 0.857319,
+  },
+  {
+    id: 'LSDL-1727',
+    categories: ['보스'],
+    name: '신의 살갗의 두 명',
+    x: 0.381078,
+    y: 0.463411,
+    loot: [
+      {
+        id: 'LSDL-1727-1',
+        name: '흑염의 회오리',
+      },
+      {
+        id: 'LSDL-1727-2',
+        name: '단석 채석꾼의 방울 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1925',
+    categories: ['방울'],
+    name: '색 잃은 단석 채석꾼의 방울 [4]',
+    x: 0.257828,
+    y: 0.577833,
+    loot: [
+      {
+        id: 'LSDL-1925-1',
+        name: '색 잃은 단석 채석꾼의 방울 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1926',
+    categories: ['방울'],
+    name: '색 잃은 단석 채석꾼의 방울 [5]',
+    x: 0.448238,
+    y: 0.301766,
+    loot: [
+      {
+        id: 'LSDL-1926-1',
+        name: '색 잃은 단석 채석꾼의 방울 [5]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-1928',
+    categories: ['일반묘'],
+    name: '은방울꽃 채취자의 방울 [3]',
+    x: 0.306553,
+    y: 0.922645,
+    loot: [
+      {
+        id: 'LSDL-1928-1',
+        name: '은방울꽃 채취자의 방울 [3]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2073',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [8]',
+    x: 0.751694,
+    y: 0.79364,
+    loot: [
+      {
+        id: 'LSDL-2073-1',
+        name: '색 잃은 단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2076',
+    categories: ['일반단석'],
+    name: '고룡암의 단석 - 고룡2',
+    x: 0.668951,
+    y: 0.386911,
+    loot: [
+      {
+        id: 'LSDL-2076-1',
+        name: '고룡암의 단석',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2077',
+    categories: ['색단석'],
+    name: '색 잃은 고룡의 단석 - 파름 아즈라',
+    x: 0.63858,
+    y: 0.383443,
+    loot: [
+      {
+        id: 'LSDL-2077-1',
+        name: '색 잃은 고룡의 단석',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2078',
+    categories: ['방어구'],
+    name: '이형의 용 세트',
+    x: 0.583371,
+    y: 0.429894,
+    loot: [
+      {
+        id: 'LSDL-2078-1',
+        name: '이형의 용 세트',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2079',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.541995,
+    y: 0.407549,
+    loot: [
+      {
+        id: 'LSDL-2079-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2080',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.5098,
+    y: 0.42472,
+    loot: [
+      {
+        id: 'LSDL-2080-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2082',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.481304,
+    y: 0.754121,
+    loot: [
+      {
+        id: 'LSDL-2082-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2083',
+    categories: ['일반단석'],
+    name: '고룡암의 단석 - 고룡1',
+    x: 0.437162,
+    y: 0.748947,
+    loot: [
+      {
+        id: 'LSDL-2083-1',
+        name: '고룡암의 단석',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2084',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.393961,
+    y: 0.743773,
+    loot: [
+      {
+        id: 'LSDL-2084-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2085',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.318506,
+    y: 0.748065,
+    loot: [
+      {
+        id: 'LSDL-2085-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2086',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.213679,
+    y: 0.802277,
+    loot: [
+      {
+        id: 'LSDL-2086-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2087',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [9]',
+    x: 0.22657,
+    y: 0.759292,
+    loot: [
+      {
+        id: 'LSDL-2087-1',
+        name: '색 잃은 단석 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2088',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.333217,
+    y: 0.877074,
+    loot: [
+      {
+        id: 'LSDL-2088-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2089',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.224747,
+    y: 0.71196,
+    loot: [
+      {
+        id: 'LSDL-2089-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2090',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.211859,
+    y: 0.656922,
+    loot: [
+      {
+        id: 'LSDL-2090-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2091',
+    categories: ['기도서'],
+    name: '옛 용의 기도서',
+    x: 0.232988,
+    y: 0.649217,
+    loot: [
+      {
+        id: 'LSDL-2091-1',
+        name: '옛 용의 기도서',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2092',
+    categories: ['일반묘'],
+    name: '큰 묘 은방울꽃 - 짐승묘',
+    x: 0.244937,
+    y: 0.629403,
+    loot: [
+      {
+        id: 'LSDL-2092-1',
+        name: '큰 묘 은방울꽃',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2093',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.150237,
+    y: 0.595885,
+    loot: [
+      {
+        id: 'LSDL-2093-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2094',
+    categories: ['제작서'],
+    name: '고룡 신도의 제작서 [4]',
+    x: 0.210036,
+    y: 0.563193,
+    loot: [
+      {
+        id: 'LSDL-2094-1',
+        name: '고룡 신도의 제작서 [4]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2095',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [8]',
+    x: 0.184257,
+    y: 0.550314,
+    loot: [
+      {
+        id: 'LSDL-2095-1',
+        name: '색 잃은 단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2096',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [7]',
+    x: 0.221043,
+    y: 0.536555,
+    loot: [
+      {
+        id: 'LSDL-2096-1',
+        name: '색 잃은 단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2097',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.20268,
+    y: 0.54426,
+    loot: [
+      {
+        id: 'LSDL-2097-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2098',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.143824,
+    y: 0.492689,
+    loot: [
+      {
+        id: 'LSDL-2098-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2099',
+    categories: ['일반묘'],
+    name: '큰 묘 은방울꽃 - 용성당',
+    x: 0.174135,
+    y: 0.489222,
+    loot: [
+      {
+        id: 'LSDL-2099-1',
+        name: '큰 묘 은방울꽃',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2100',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [9]',
+    x: 0.227521,
+    y: 0.419599,
+    loot: [
+      {
+        id: 'LSDL-2100-1',
+        name: '색 잃은 단석 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2101',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [9]',
+    x: 0.299208,
+    y: 0.454824,
+    loot: [
+      {
+        id: 'LSDL-2101-1',
+        name: '색 잃은 단석 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2102',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.324046,
+    y: 0.454824,
+    loot: [
+      {
+        id: 'LSDL-2102-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2103',
+    categories: ['영체'],
+    name: '아즈라 수인의 뼛가루',
+    x: 0.33876,
+    y: 0.437653,
+    loot: [
+      {
+        id: 'LSDL-2103-1',
+        name: '아즈라 수인의 뼛가루',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2104',
+    categories: ['기도'],
+    name: '황금의 벼락 방호',
+    x: 0.323103,
+    y: 0.484104,
+    loot: [
+      {
+        id: 'LSDL-2104-1',
+        name: '황금의 벼락 방호',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2105',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.331401,
+    y: 0.510743,
+    loot: [
+      {
+        id: 'LSDL-2105-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2106',
+    categories: ['보스'],
+    name: '용왕 플라키두삭스',
+    x: 0.407739,
+    y: 0.521035,
+    loot: [
+      {
+        id: 'LSDL-2106-1',
+        name: '용왕의 추억',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2107',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.413276,
+    y: 0.340457,
+    loot: [
+      {
+        id: 'LSDL-2107-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2108',
+    categories: ['탈리스만'],
+    name: '용 표식 방패의 탈리스만 +2',
+    x: 0.416045,
+    y: 0.25102,
+    loot: [
+      {
+        id: 'LSDL-2108-1',
+        name: '용 표식 방패의 탈리스만 +2',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2109',
+    categories: ['탈리스만'],
+    name: '뇌룡 표식의 탈리스만 +2',
+    x: 0.526403,
+    y: 0.22009,
+    loot: [
+      {
+        id: 'LSDL-2109-1',
+        name: '뇌룡 표식의 탈리스만 +2',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2110',
+    categories: ['일반단석'],
+    name: '단석 [8]',
+    x: 0.504335,
+    y: 0.082496,
+    loot: [
+      {
+        id: 'LSDL-2110-1',
+        name: '단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2111',
+    categories: ['일반단석'],
+    name: '단석 [6]',
+    x: 0.583379,
+    y: 0.13836,
+    loot: [
+      {
+        id: 'LSDL-2111-1',
+        name: '단석 [6]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2112',
+    categories: ['방어구'],
+    name: '용기사의 갑옷',
+    x: 0.6101,
+    y: 0.116015,
+    loot: [
+      {
+        id: 'LSDL-2112-1',
+        name: '용기사의 갑옷',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2113',
+    categories: ['암령'],
+    name: '배율자 베르나르 침입',
+    x: 0.573254,
+    y: 0.198571,
+    loot: [
+      {
+        id: 'LSDL-2113-1',
+        name: '모독의 손톱',
+      },
+      {
+        id: 'LSDL-2113-2',
+        name: '세계 먹는 자의 왕홀',
+      },
+      {
+        id: 'LSDL-2113-3',
+        name: '짐승 모임 갑옷 세트',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2114',
+    categories: ['성배병'],
+    name: '황금 종자',
+    x: 0.647765,
+    y: 0.273368,
+    loot: [
+      {
+        id: 'LSDL-2114-1',
+        name: '황금 종자',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2115',
+    categories: ['성배병'],
+    name: '단석 [7]',
+    x: 0.622927,
+    y: 0.287127,
+    loot: [
+      {
+        id: 'LSDL-2115-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2116',
+    categories: ['무기'],
+    name: '용의 타워 실드',
+    x: 0.732402,
+    y: 0.258783,
+    loot: [
+      {
+        id: 'LSDL-2116-1',
+        name: '용의 타워 실드',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2117',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [8]',
+    x: 0.53282,
+    y: 0.158998,
+    loot: [
+      {
+        id: 'LSDL-2117-1',
+        name: '색 잃은 단석 [8]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2118',
+    categories: ['일반단석'],
+    name: '고룡암의 단석 - 용성당',
+    x: 0.344297,
+    y: 0.282006,
+    loot: [
+      {
+        id: 'LSDL-2118-1',
+        name: '고룡암의 단석',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2119',
+    categories: ['색단석'],
+    name: '색 잃은 단석 [9]',
+    x: 0.324051,
+    y: 0.239847,
+    loot: [
+      {
+        id: 'LSDL-2119-1',
+        name: '색 잃은 단석 [9]',
+      },
+    ],
+  },
+  {
+    id: 'LSDL-2120',
+    categories: ['일반단석'],
+    name: '단석 [7]',
+    x: 0.373727,
+    y: 0.221795,
+    loot: [
+      {
+        id: 'LSDL-2120-1',
+        name: '단석 [7]',
+      },
+    ],
+  },
+];
+
 type TMapMarkerSample = {
   id: string;
   categories: string[];
@@ -32175,5 +32967,6 @@ export function getMapMarkerSamples(regionId: string): TMapMarkerSample[] {
   if (regionId === '20') return FORBIDDEN_LANDS_MARKERS;
   if (regionId === '21') return MOUNTAINTOPS_OF_THE_GIANTS_MARKERS;
   if (regionId === '22') return CONSECRATED_SNOWFIELD_MARKERS;
+  if (regionId === '23') return CRUMBLING_FARUM_AZULA_MARKERS;
   return [];
 }
