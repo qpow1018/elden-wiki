@@ -1,7 +1,8 @@
 import { useState, type MouseEvent } from 'react';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
-import type { TGameItem, TGameItemType } from '@/api/gameItem/types';
+import type { TGameItem, TGameItemType, TGameItemCategory } from '@/api/gameItem/types';
+import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import BottomModal from '@/components/common/modal/BottomModal';
 import Modal from '@/components/common/modal/Modal';
@@ -23,37 +24,51 @@ type TContentsGroup = {
   items: TGameItem[];
 };
 
-type TCategoryOption = {
-  id: number | undefined;
-  name: string;
-};
-
 type TCatalogToolbarProps = {
   type: TGameItemType;
-  categoryOptions: TCategoryOption[];
+  categories: TGameItemCategory[];
+  canSelectAllCategories: boolean;
   categoryId: number | undefined;
-  onCategoryChange: (categoryId: number | undefined) => void;
+  subcategoryId: number | undefined;
+  onCategoryChange: (categoryId: number | undefined, subcategoryId: number | undefined) => void;
 };
 
 export default function CatalogToolbar({
   type,
-  categoryOptions,
+  categories,
+  canSelectAllCategories,
   categoryId,
   onCategoryChange,
+  subcategoryId,
 }: TCatalogToolbarProps) {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isTableOfContentsOpen, setIsTableOfContentsOpen] = useState(false);
 
   const typeFilter = TYPE_FILTERS[type];
   const categoryLabel = typeFilter?.categoryLabel ?? '분류';
-  const selectedCategory = categoryOptions.find((option) => option.id === categoryId);
+  const selectedCategory = categories.find((category) => category.id === categoryId);
 
-  const selectedName = selectedCategory?.name ?? '–';
-  const canSelectCategory = categoryOptions.length > 1;
-  const hasCategoryOptions = categoryOptions.length > 0;
+  const selectedSubcategory = selectedCategory?.subcategories.find(
+    (subcategory) => subcategory.id === subcategoryId,
+  );
+  const allCategoriesLabel = `${GAME_ITEM_TYPES[type]} 전체`;
+  const selectedName =
+    selectedCategory?.name ?? (canSelectAllCategories ? allCategoriesLabel : '–');
+  const selectedLabel = selectedSubcategory
+    ? `${selectedName} / ${selectedSubcategory.name}`
+    : selectedName;
+  const canSelectCategory =
+    categories.length > 0 &&
+    (canSelectAllCategories ||
+      categories.length > 1 ||
+      categories.some((category) => category.subcategories.length > 0));
+  const hasCategories = categories.length > 0;
 
-  function handleCategoryChange(nextCategoryId: number | undefined) {
-    onCategoryChange(nextCategoryId);
+  function handleCategoryChange(
+    nextCategoryId: number | undefined,
+    nextSubcategoryId: number | undefined,
+  ) {
+    onCategoryChange(nextCategoryId, nextSubcategoryId);
     setIsCategoryOpen(false);
   }
 
@@ -65,19 +80,19 @@ export default function CatalogToolbar({
             <button
               type="button"
               className={`${styles['category-label']} ${styles['category-trigger']}`}
-              aria-label={`${categoryLabel}: ${selectedName}`}
+              aria-label={`${categoryLabel}: ${selectedLabel}`}
               aria-haspopup="dialog"
               aria-expanded={isCategoryOpen}
               onClick={() => setIsCategoryOpen(true)}
             >
-              <span>{selectedName}</span>
+              <span>{selectedLabel}</span>
               <MdKeyboardArrowDown aria-hidden="true" />
             </button>
           ) : (
             <span className={styles['category-label']}>{selectedName}</span>
           )}
         </div>
-        {hasCategoryOptions && (
+        {hasCategories && (
           <button
             type="button"
             className={styles['toc-trigger']}
@@ -96,19 +111,23 @@ export default function CatalogToolbar({
           isOpen={isCategoryOpen}
           onClose={() => setIsCategoryOpen(false)}
           title={categoryLabel}
-          categoryOptions={categoryOptions}
+          categories={categories}
+          canSelectAllCategories={canSelectAllCategories}
+          allCategoriesLabel={allCategoriesLabel}
           categoryId={categoryId}
+          subcategoryId={subcategoryId}
           onCategoryChange={handleCategoryChange}
         />
       )}
-      {hasCategoryOptions && (
+      {hasCategories && (
         <TableOfContentsModal
-          key={categoryId ?? 'all'}
+          key={`${categoryId ?? 'all'}-${subcategoryId ?? 'all'}`}
           isOpen={isTableOfContentsOpen}
           onClose={() => setIsTableOfContentsOpen(false)}
           type={type}
           categoryId={categoryId}
-          categoryName={selectedName}
+          subcategoryId={subcategoryId}
+          categoryName={selectedLabel}
         />
       )}
     </section>
@@ -119,31 +138,71 @@ function CategoryModal({
   isOpen,
   onClose,
   title,
-  categoryOptions,
+  allCategoriesLabel,
+  categories,
+  canSelectAllCategories,
   categoryId,
+  subcategoryId,
   onCategoryChange,
 }: {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  categoryOptions: TCategoryOption[];
+  allCategoriesLabel: string;
+  categories: TGameItemCategory[];
+  canSelectAllCategories: boolean;
   categoryId: number | undefined;
-  onCategoryChange: (categoryId: number | undefined) => void;
+  subcategoryId: number | undefined;
+  onCategoryChange: (categoryId: number | undefined, subcategoryId: number | undefined) => void;
 }) {
   return (
     <BottomModal isOpen={isOpen} onClose={onClose} title={title} isCloseOnBackdropClick>
       <div className={styles['category-options']}>
-        {categoryOptions.map((option) => (
+        {canSelectAllCategories && (
           <button
-            key={option.id ?? 'all'}
             type="button"
             className={styles['category-option']}
-            aria-pressed={categoryId === option.id}
-            onClick={() => onCategoryChange(option.id)}
+            aria-pressed={categoryId === undefined}
+            onClick={() => onCategoryChange(undefined, undefined)}
           >
-            {option.name}
-            {categoryId === option.id && <MdCheck aria-hidden="true" />}
+            {allCategoriesLabel}
+            {categoryId === undefined && <MdCheck aria-hidden="true" />}
           </button>
+        )}
+        {categories.map((category) => (
+          <div key={category.id} className={styles['category-group']}>
+            {category.subcategories.length > 0 && (
+              <h2 className={styles['category-group-title']}>{category.name}</h2>
+            )}
+            <button
+              type="button"
+              className={styles['category-option']}
+              aria-label={
+                category.subcategories.length > 0 ? `${category.name} 전체` : category.name
+              }
+              aria-pressed={categoryId === category.id && subcategoryId === undefined}
+              onClick={() => onCategoryChange(category.id, undefined)}
+            >
+              {category.subcategories.length > 0 ? '전체' : category.name}
+              {categoryId === category.id && subcategoryId === undefined && (
+                <MdCheck aria-hidden="true" />
+              )}
+            </button>
+            {category.subcategories.map((subcategory) => (
+              <button
+                key={subcategory.id}
+                type="button"
+                className={styles['category-option']}
+                aria-pressed={categoryId === category.id && subcategoryId === subcategory.id}
+                onClick={() => onCategoryChange(category.id, subcategory.id)}
+              >
+                {subcategory.name}
+                {categoryId === category.id && subcategoryId === subcategory.id && (
+                  <MdCheck aria-hidden="true" />
+                )}
+              </button>
+            ))}
+          </div>
         ))}
       </div>
     </BottomModal>
@@ -156,14 +215,16 @@ function TableOfContentsModal({
   type,
   categoryId,
   categoryName,
+  subcategoryId,
 }: {
   isOpen: boolean;
   onClose: () => void;
   type: TGameItemType;
   categoryId: number | undefined;
   categoryName: string;
+  subcategoryId: number | undefined;
 }) {
-  const { data } = gameItemQuery.useGetGameItems({ categoryId, type });
+  const { data } = gameItemQuery.useGetGameItems({ categoryId, subcategoryId, type });
   const gameItems = data?.gameItems ?? [];
   const groups: TContentsGroup[] =
     categoryId === undefined ? groupContentsByCategory(gameItems) : [{ items: gameItems }];

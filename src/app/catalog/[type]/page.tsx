@@ -10,10 +10,10 @@ export default async function CatalogPage({
   searchParams,
 }: {
   params: Promise<{ type: string }>;
-  searchParams: Promise<{ categoryId?: string | string[] }>;
+  searchParams: Promise<{ categoryId?: string | string[]; subcategoryId?: string | string[] }>;
 }) {
   const { type } = await params;
-  const { categoryId } = await searchParams;
+  const { categoryId, subcategoryId } = await searchParams;
 
   function isGameItemType(value: string): value is TGameItemType {
     return Object.hasOwn(GAME_ITEM_TYPES, value);
@@ -26,6 +26,7 @@ export default async function CatalogPage({
       key={type}
       type={type}
       categoryId={typeof categoryId === 'string' ? Number(categoryId) : undefined}
+      subcategoryId={typeof subcategoryId === 'string' ? Number(subcategoryId) : undefined}
     />
   );
 }

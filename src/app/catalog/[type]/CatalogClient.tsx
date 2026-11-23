@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 
 import gameItemQuery from '@/api/gameItem/gameItemQuery';
 import type { TGameItemType } from '@/api/gameItem/types';
-import { GAME_ITEM_TYPES } from '@/define/gameItems';
 
 import EmptyState from '@/components/common/empty/EmptyState';
 import ErrorState from '@/components/common/error/ErrorState';
@@ -33,29 +32,33 @@ const VIEW_ALL_TYPES: readonly TGameItemType[] = [
 export default function CatalogClient(props: {
   type: TGameItemType;
   categoryId: number | undefined;
+  subcategoryId: number | undefined;
 }) {
-  const { type, categoryId } = props;
+  const { type, categoryId, subcategoryId } = props;
 
   const router = useRouter();
 
   const categoriesQuery = gameItemQuery.useGetGameItemCategories();
   const categories = categoriesQuery.data?.filter((category) => category.type === type) ?? [];
+  const canSelectAllCategories = VIEW_ALL_TYPES.includes(type);
 
-  const canViewAll = VIEW_ALL_TYPES.includes(type);
-  const categoryOptions =
-    canViewAll && categories.length > 0
-      ? [{ id: undefined, name: `${GAME_ITEM_TYPES[type]} 전체` }, ...categories]
-      : categories;
-  const defaultCategory = categoryOptions[0];
   const selectedCategory =
-    categoryOptions.find((option) => option.id === categoryId) ?? defaultCategory;
+    categories.find((category) => category.id === categoryId) ??
+    (canSelectAllCategories ? undefined : categories[0]);
 
-  function handleCategoryChange(nextCategoryId: number | undefined) {
-    if (nextCategoryId === selectedCategory?.id && nextCategoryId === categoryId) return;
-    const nextParams = new URLSearchParams(window.location.search);
-    if (nextCategoryId === undefined) nextParams.delete('categoryId');
-    else nextParams.set('categoryId', String(nextCategoryId));
-    const query = nextParams.toString();
+  const selectedSubcategory = selectedCategory?.subcategories.find(
+    (subcategory) => subcategory.id === subcategoryId,
+  );
+
+  function handleCategoryChange(
+    nextCategoryId: number | undefined,
+    nextSubcategoryId: number | undefined,
+  ) {
+    if (nextCategoryId === categoryId && nextSubcategoryId === subcategoryId) return;
+    const params = new URLSearchParams();
+    if (nextCategoryId !== undefined) params.set('categoryId', String(nextCategoryId));
+    if (nextSubcategoryId !== undefined) params.set('subcategoryId', String(nextSubcategoryId));
+    const query = params.toString();
     router.push(`/catalog/${type}${query ? `?${query}` : ''}`, { scroll: true });
   }
 
@@ -72,9 +75,11 @@ export default function CatalogClient(props: {
       <CatalogNavigation type={type} />
       <CatalogToolbar
         type={type}
-        categoryOptions={categoryOptions}
+        categories={categories}
+        canSelectAllCategories={canSelectAllCategories}
         categoryId={selectedCategory?.id}
         onCategoryChange={handleCategoryChange}
+        subcategoryId={selectedSubcategory?.id}
       />
       {categoriesQuery.isPending && <BoxLoading />}
       {categoriesQuery.isError && (
@@ -89,7 +94,11 @@ export default function CatalogClient(props: {
         <EmptyState message="표시할 아이템이 없습니다." />
       )}
       {categoriesQuery.isSuccess && categories.length > 0 && (
-        <CatalogList type={type} categoryId={selectedCategory?.id} />
+        <CatalogList
+          type={type}
+          categoryId={selectedCategory?.id}
+          subcategoryId={selectedSubcategory?.id}
+        />
       )}
       <ScrollToTop />
     </main>
@@ -99,12 +108,15 @@ export default function CatalogClient(props: {
 function CatalogList({
   type,
   categoryId,
+  subcategoryId,
 }: {
   type: TGameItemType;
   categoryId: number | undefined;
+  subcategoryId: number | undefined;
 }) {
   const { data, isLoading, isError, isSuccess, refetch } = gameItemQuery.useGetGameItems({
     categoryId,
+    subcategoryId,
     type,
   });
 
@@ -125,7 +137,7 @@ function CatalogList({
     });
 
     return () => cancelAnimationFrame(frame);
-  }, [categoryId, hasItems, type]);
+  }, [categoryId, subcategoryId, hasItems, type]);
 
   return (
     <>

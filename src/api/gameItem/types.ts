@@ -16,12 +16,15 @@ export type TGameItemSearchEntry = {
   type: TGameItemType;
   categoryId: number;
   categoryName: string | null;
+  subcategoryId: number | null;
+  subcategoryName: string | null;
 };
 
 export type TReqGetGameItems = {
   search?: string;
   type: TGameItemType;
   categoryId?: number;
+  subcategoryId?: number;
   contentCode?: string;
   signal?: AbortSignal;
 };
@@ -34,6 +37,10 @@ export type TGameItemCategory = {
   id: number;
   name: string;
   type: TGameItemType;
+  subcategories: {
+    id: number;
+    name: string;
+  }[];
 };
 
 export type TResGetGameItemCategories = TGameItemCategory[];
@@ -133,6 +140,10 @@ export type TGameItem = {
   gameDescription: string | null;
   effectDescription: string | null;
   gameItemCategories: {
+    name: string;
+  } | null;
+  gameItemSubcategories: {
+    id: number;
     name: string;
   } | null;
   weaponDetails: TWeapon | null;

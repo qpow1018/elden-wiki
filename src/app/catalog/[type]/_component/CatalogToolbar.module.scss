@@ -51,6 +51,7 @@
     }
   }
   .toc-trigger {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -79,6 +80,21 @@
 .category-options {
   display: grid;
   padding: 12px 0 16px;
+
+  .category-group {
+    display: grid;
+  }
+
+  .category-group-title {
+    padding: 12px 16px 4px;
+    color: $text-muted;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .category-group-title ~ .category-option {
+    padding-inline-start: 28px;
+  }
 
   .category-option {
     display: flex;

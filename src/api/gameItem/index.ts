@@ -11,6 +11,7 @@ export async function getGameItems({
   search,
   type,
   categoryId,
+  subcategoryId,
   contentCode,
   signal,
 }: TReqGetGameItems): Promise<TResGetGameItems> {
@@ -18,11 +19,13 @@ export async function getGameItems({
   const request = client
     .from('game_items')
     .select(
-      'id,name,type,image_url,content_code,game_description,effect_description,game_item_categories(name,sort_order),armor_details(*),talisman_details(*),spell_details(*),spirit_ash_details(fp_cost,hp_cost),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
+      'id,name,type,image_url,content_code,game_description,effect_description,game_item_categories(name,sort_order),game_item_subcategories(id,name,sort_order),armor_details(*),talisman_details(*),spell_details(*),spirit_ash_details(fp_cost,hp_cost),ash_of_war_details(native_affinity,applicable_armaments_text,weapon_skills(name,description,fp_cost_text)),weapon_details(*,weapon_skills(name,description,fp_cost_text),weapon_scalings(*))',
       { count: 'exact' },
     )
     .order('game_item_categories(sort_order)')
     .order('category_id')
+    .order('game_item_subcategories(sort_order)', { nullsFirst: true })
+    .order('subcategory_id', { nullsFirst: true })
     .order('sort_order')
     .order('id');
 
@@ -32,6 +35,7 @@ export async function getGameItems({
   }
   request.eq('type', type);
   if (categoryId !== undefined) request.eq('category_id', categoryId);
+  if (subcategoryId !== undefined) request.eq('subcategory_id', subcategoryId);
   if (contentCode) request.eq('content_code', contentCode);
   if (signal) request.abortSignal(signal);
 
@@ -83,6 +87,9 @@ export async function getGameItems({
           : null,
         gameItemCategories: row.game_item_categories
           ? { name: row.game_item_categories.name }
+          : null,
+        gameItemSubcategories: row.game_item_subcategories
+          ? { id: row.game_item_subcategories.id, name: row.game_item_subcategories.name }
           : null,
         armorDetails: armor
           ? {
@@ -164,14 +171,24 @@ export async function getGameItemCategories({
   const client = getApiClient();
   const request = client
     .from('game_item_categories')
-    .select('id,name,type')
+    .select('id,name,type,game_item_subcategories(id,name)')
     .order('type')
     .order('sort_order')
-    .order('id');
+    .order('id')
+    .order('sort_order', { referencedTable: 'game_item_subcategories' })
+    .order('id', { referencedTable: 'game_item_subcategories' });
   if (signal) request.abortSignal(signal);
 
   const { data } = await request.throwOnError();
-  return data;
+  return data.map((row) => ({
+    id: row.id,
+    name: row.name,
+    type: row.type,
+    subcategories: row.game_item_subcategories.map((subcategory) => ({
+      id: subcategory.id,
+      name: subcategory.name,
+    })),
+  }));
 }
 
 export async function getGameItemSearchEntries({ signal }: { signal?: AbortSignal } = {}): Promise<
@@ -184,7 +201,9 @@ export async function getGameItemSearchEntries({ signal }: { signal?: AbortSigna
   while (true) {
     const request = client
       .from('game_items')
-      .select('id,name,type,category_id,game_item_categories(name)')
+      .select(
+        'id,name,type,category_id,subcategory_id,game_item_categories(name),game_item_subcategories(name)',
+      )
       .order('id')
       .limit(1000);
     if (lastId !== undefined) request.gt('id', lastId);
@@ -201,6 +220,8 @@ export async function getGameItemSearchEntries({ signal }: { signal?: AbortSigna
         type: row.type,
         categoryId: row.category_id,
         categoryName: row.game_item_categories?.name ?? null,
+        subcategoryId: row.subcategory_id,
+        subcategoryName: row.game_item_subcategories?.name ?? null,
       });
     }
 
