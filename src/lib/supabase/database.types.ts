@@ -135,6 +135,36 @@ export type TDatabase = {
         };
         Relationships: [];
       };
+      game_item_subcategories: {
+        Row: {
+          category_id: number;
+          id: number;
+          name: string;
+          sort_order: number;
+        };
+        ComputedFields: never;
+        Insert: {
+          category_id: number;
+          id?: never;
+          name: string;
+          sort_order: number;
+        };
+        Update: {
+          category_id?: number;
+          id?: never;
+          name?: string;
+          sort_order?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'game_item_subcategories_category_id_fkey';
+            columns: ['category_id'];
+            isOneToOne: false;
+            referencedRelation: 'game_item_categories';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       game_items: {
         Row: {
           category_id: number;
@@ -145,6 +175,7 @@ export type TDatabase = {
           image_url: string | null;
           name: string;
           sort_order: number;
+          subcategory_id: number | null;
           type: TDatabase['public']['Enums']['game_item_type'];
         };
         ComputedFields: never;
@@ -157,6 +188,7 @@ export type TDatabase = {
           image_url?: string | null;
           name: string;
           sort_order: number;
+          subcategory_id?: number | null;
           type: TDatabase['public']['Enums']['game_item_type'];
         };
         Update: {
@@ -168,6 +200,7 @@ export type TDatabase = {
           image_url?: string | null;
           name?: string;
           sort_order?: number;
+          subcategory_id?: number | null;
           type?: TDatabase['public']['Enums']['game_item_type'];
         };
         Relationships: [
@@ -177,6 +210,13 @@ export type TDatabase = {
             isOneToOne: false;
             referencedRelation: 'game_item_categories';
             referencedColumns: ['id', 'type'];
+          },
+          {
+            foreignKeyName: 'game_items_subcategory_id_category_id_fkey';
+            columns: ['subcategory_id', 'category_id'];
+            isOneToOne: false;
+            referencedRelation: 'game_item_subcategories';
+            referencedColumns: ['id', 'category_id'];
           },
         ];
       };

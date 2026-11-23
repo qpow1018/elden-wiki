@@ -57,7 +57,7 @@
 ## 개발 전에 확인할 확정 규칙
 
 - 공통 아이템 식별자는 `game_items.id`입니다. 이름에는 고유 제약이 없으므로 기능에서 이름을 식별자로 사용하지 않습니다.
-- `type`은 무기·주문 등의 종류, `category_id`는 단검·마술 등의 세부 분류입니다. 두 종류가 일치해야 한다는 규칙은 복합 외래키로 보장합니다.
+- `type`은 무기·주문 등의 종류, `category_id`는 단검 등의 분류, `subcategory_id`는 선택적 세부분류입니다. 종류와 분류의 일치 및 세부분류의 분류 소속은 복합 외래키로 보장합니다. 세부분류가 필요 없는 아이템은 `subcategory_id = NULL`로 저장합니다.
 - 이미지·콘텐츠 소속·게임 내 설명은 공통 정보입니다. 일반 설명은 제외했습니다. 게임 내 원문과 사용자 해설을 같은 컬럼에 섞지 않습니다.
 - `content_code`는 콘텐츠 소속이며 판매 에디션·현재 소유 여부·획득 장소를 뜻하지 않습니다.
 - 무기는 기본 전투 기술을 참조합니다. 전회 아이템과 전투 기술을 동일한 데이터로 취급하지 않습니다. 사용자의 전회 장착 상태는 저장하지 않습니다.
@@ -75,6 +75,8 @@
 ```mermaid
 erDiagram
   game_item_categories ||--o{ game_items : "분류"
+  game_item_categories ||--o{ game_item_subcategories : "세부분류"
+  game_item_subcategories o|--o{ game_items : "선택적 세부분류"
   game_items ||--o| ash_of_war_details : "전회 상세"
   weapon_skills o|--o{ ash_of_war_details : "부여 기술"
   game_items ||--o| spell_details : "주문 상세"
@@ -114,9 +116,9 @@ erDiagram
 
 - 기타 무기는 기존 `weapon_details`·`weapon_scalings`를 사용합니다. 지팡이와 성인은 기타 무기의 첫 두 카테고리입니다. 상세 등록 시 `type`을 부모와 동일하게 명시해야 합니다. 사거리·시전 보정 같은 전용 필드와 화면은 아직 구현하지 않았습니다.
 
-## `game_item_categories`: 세부 분류
+## `game_item_categories`: 분류
 
-직검·단검·투구처럼 각 종류 안의 세부 분류를 관리합니다. 분류는 실제 아이템을 입력할 때 추가할 수 있습니다.
+직검·단검·투구처럼 각 종류 안의 분류를 관리합니다. 분류는 실제 아이템을 입력할 때 추가할 수 있습니다.
 
 | 컬럼         | 자료형           | NULL 허용 | 의미                                                 |
 | ------------ | ---------------- | --------- | ---------------------------------------------------- |
@@ -128,6 +130,23 @@ erDiagram
 - `(type, name)`은 고유합니다. 같은 종류에 같은 분류명을 중복 등록할 수 없습니다.
 - `(id, type)` 고유 제약은 아이템에서 ID와 종류를 함께 참조하기 위해 사용합니다.
 
+## `game_item_subcategories`: 선택적 세부분류
+
+종류 → 분류 → 선택적 세부분류 구조에서 분류 바로 아래 한 단계만 관리합니다. 종류는 부모 분류에서 결정하며 별도 `type` 컬럼이나 재귀적인 하위 분류는 두지 않습니다.
+
+| 컬럼          | 자료형    | NULL 허용 | 의미                                                 |
+| ------------- | --------- | --------- | ---------------------------------------------------- |
+| `id`          | `bigint`  | 아니요    | 자동 생성 기본키                                     |
+| `category_id` | `bigint`  | 아니요    | 부모 분류. `game_item_categories(id)` 참조           |
+| `name`        | `text`    | 아니요    | 세부분류명. 빈 문자열·공백만 있는 값 금지            |
+| `sort_order`  | `integer` | 아니요    | 같은 분류 안의 표시 순서. 1 이상의 정수, 기본값 없음 |
+
+- `(category_id, name)`은 고유합니다. 서로 다른 분류에서는 같은 이름을 사용할 수 있습니다.
+- `(id, category_id)` 고유 제약은 아이템의 세부분류와 분류 소속을 함께 검증하기 위해 사용합니다.
+- `(category_id, sort_order, id)` 인덱스를 둡니다. 표시 순서 중복은 허용하며 ID로 순서를 확정할 수 있습니다.
+- 외래키는 UPDATE·DELETE RESTRICT입니다. RLS를 활성화하고 `anon`·`authenticated`에 공개 SELECT만 허용합니다.
+- 구조 추가만으로 기존 분류를 재배치하지 않습니다. 세부분류 데이터 등록과 API·화면의 조회·표시 지원은 별도 작업입니다.
+
 ## `game_items`: 획득 대상의 공통 정보
 
 | 컬럼                 | 자료형           | NULL 허용 | 의미                                                        |
@@ -135,7 +154,8 @@ erDiagram
 | `id`                 | `bigint`         | 아니요    | 자동 생성 기본키                                            |
 | `name`               | `text`           | 아니요    | 아이템 이름. 빈 문자열·공백만 있는 값 금지                  |
 | `type`               | `game_item_type` | 아니요    | 획득 대상의 종류                                            |
-| `category_id`        | `bigint`         | 아니요    | 세부 분류 ID                                                |
+| `category_id`        | `bigint`         | 아니요    | 분류 ID                                                     |
+| `subcategory_id`     | `bigint`         | 예        | 선택적 세부분류 ID. NULL은 미지정                           |
 | `sort_order`         | `integer`        | 아니요    | 같은 분류 안의 표시 순서. 1 이상의 정수, 기본값 없음        |
 | `image_url`          | `text`           | 예        | 이미지 주소. URL 형식·접근 가능 여부는 DB에서 검증하지 않음 |
 | `content_code`       | `text`           | 아니요    | 콘텐츠 소속. 아래 세 값만 허용하며 기본값 없음              |
@@ -154,6 +174,7 @@ erDiagram
 부가 효과는 `effect_description`에 설명으로만 저장합니다. NULL은 효과 없음 또는 미입력이며 구분하지 않습니다. 효과별 필터·계산용 구조는 두지 않습니다. 무기의 출혈·동상 등 축적 수치는 기존 전용 컬럼을 유지합니다.
 
 - `(category_id, type)`이 `game_item_categories(id, type)`을 참조합니다. 무기에 방어구 분류를 연결할 수 없습니다.
+- `(subcategory_id, category_id)`는 `game_item_subcategories(id, category_id)`를 참조합니다. 세부분류가 NULL이면 기존 분류 연결만 사용하며, 지정하면 부모 분류가 일치해야 합니다. `(subcategory_id, category_id)` 인덱스가 있습니다.
 - `(id, type)`은 무기 상세의 복합 외래키를 위한 고유 제약입니다.
 - 아이템 이름에는 고유 제약이 없습니다. 이름이 아닌 ID가 식별 기준입니다.
 - `(category_id, type)` 인덱스가 있습니다.
