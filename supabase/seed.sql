@@ -33,18 +33,10 @@ values
   ('손톱', 'weapon', 280),
   ('짐승 발톱', 'weapon', 290),
   ('조향병', 'weapon', 300),
-  ('지팡이', 'other_weapon', 10),
-  ('성인', 'other_weapon', 20),
-  ('소형 활', 'other_weapon', 310),
-  ('활', 'other_weapon', 320),
-  ('대궁', 'other_weapon', 330),
-  ('석궁', 'other_weapon', 340),
-  ('발리스타', 'other_weapon', 350),
-  ('횃불', 'other_weapon', 380),
-  ('소형 방패', 'other_weapon', 390),
-  ('중형 방패', 'other_weapon', 400),
-  ('대형 방패', 'other_weapon', 410),
-  ('관통 방패', 'other_weapon', 420),
+  ('촉매', 'other_weapon', 10),
+  ('원거리 무기', 'other_weapon', 20),
+  ('횃불', 'other_weapon', 30),
+  ('방패', 'other_weapon', 40),
   ('투구', 'armor', 10),
   ('갑옷', 'armor', 20),
   ('장갑', 'armor', 30),
@@ -102,3 +94,24 @@ values
   ('용찬 기도', 'incantation', 180),
   ('결정 물방울', 'crystal_tear', 10)
 on conflict (type, name) do nothing;
+
+-- 기타 무기의 세부분류. 횃불은 세부분류 없이 분류에 직접 연결합니다.
+with source (category, name, sort_order) as (
+  values
+    ('촉매', '지팡이', 10),
+    ('촉매', '성인', 20),
+    ('원거리 무기', '소형 활', 10),
+    ('원거리 무기', '활', 20),
+    ('원거리 무기', '대궁', 30),
+    ('원거리 무기', '석궁', 40),
+    ('원거리 무기', '발리스타', 50),
+    ('방패', '소형 방패', 10),
+    ('방패', '중형 방패', 20),
+    ('방패', '대형 방패', 30),
+    ('방패', '관통 방패', 40)
+)
+insert into public.game_item_subcategories (category_id, name, sort_order)
+select c.id, s.name, s.sort_order
+from source s
+join public.game_item_categories c on c.type = 'other_weapon' and c.name = s.category
+on conflict (category_id, name) do nothing;

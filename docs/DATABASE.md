@@ -114,7 +114,7 @@ erDiagram
 
 `20261102015026_replace_gesture_type_with_other.sql`에서 미사용 `gesture` 값을 `other`로 교체합니다. 표시명은 아이템이며 DB 키 `other`는 유지합니다. 도구·소모품·재료 등 세부 분류는 실제 등록 시 정의합니다.
 
-- 기타 무기는 기존 `weapon_details`·`weapon_scalings`를 사용합니다. 지팡이와 성인은 기타 무기의 첫 두 카테고리입니다. 상세 등록 시 `type`을 부모와 동일하게 명시해야 합니다. 사거리·시전 보정 같은 전용 필드와 화면은 아직 구현하지 않았습니다.
+- 기타 무기는 기존 `weapon_details`·`weapon_scalings`를 사용합니다. 기타 무기의 분류·세부분류 구성은 시드 SQL에서 관리합니다. 상세 등록 시 `type`을 부모와 동일하게 명시해야 합니다. 사거리·시전 보정 같은 전용 필드와 화면은 아직 구현하지 않았습니다.
 
 ## `game_item_categories`: 분류
 
@@ -145,7 +145,7 @@ erDiagram
 - `(id, category_id)` 고유 제약은 아이템의 세부분류와 분류 소속을 함께 검증하기 위해 사용합니다.
 - `(category_id, sort_order, id)` 인덱스를 둡니다. 표시 순서 중복은 허용하며 ID로 순서를 확정할 수 있습니다.
 - 외래키는 UPDATE·DELETE RESTRICT입니다. RLS를 활성화하고 `anon`·`authenticated`에 공개 SELECT만 허용합니다.
-- 구조 추가만으로 기존 분류를 재배치하지 않습니다. 세부분류 데이터 등록과 API·화면의 조회·표시 지원은 별도 작업입니다.
+- 세부분류가 없는 분류는 아이템을 직접 연결합니다. 세부분류의 API·화면 조회·표시 지원은 별도 작업입니다.
 
 ## `game_items`: 획득 대상의 공통 정보
 

@@ -2,13 +2,14 @@
 -- 공통 기준은 docs/DATABASE.md, 출처와 변환 기준은 docs/DATA_SOURCES.md에 기록합니다.
 do $$
 begin
-  if (select count(*) from public.game_item_categories where type = 'other_weapon' and name in ('소형 활','활','대궁','석궁','발리스타')) <> 5 then
-    raise exception '원거리 무기 5개 분류를 먼저 등록해야 합니다.';
+  if (select count(*) from public.game_item_subcategories sub join public.game_item_categories c on c.id = sub.category_id where c.type = 'other_weapon' and c.name = '원거리 무기' and sub.name in ('소형 활','활','대궁','석궁','발리스타')) <> 5 then
+    raise exception '원거리 무기 5개 세부분류를 먼저 등록해야 합니다.';
   end if;
   if exists (
-    select i.category_id, i.name from public.game_items i join public.game_item_categories c on c.id = i.category_id
-    where c.type = 'other_weapon' and c.name in ('소형 활','활','대궁','석궁','발리스타')
-    group by i.category_id, i.name having count(*) > 1
+    select i.subcategory_id, i.name from public.game_items i join public.game_item_categories c on c.id = i.category_id
+    join public.game_item_subcategories sub on sub.id = i.subcategory_id
+    where c.type = 'other_weapon' and c.name = '원거리 무기' and sub.name in ('소형 활','활','대궁','석궁','발리스타')
+    group by i.subcategory_id, i.name having count(*) > 1
   ) or exists (
     select name, description from public.weapon_skills
     where name in ('연속 사격','강화 사격','원혼 쏘기','관통 사격','부채꼴 쏘기','라단의 소나기','킥','연노 연사')
@@ -213,10 +214,11 @@ with source (name, category, sort_order, content_code, game_description, effect_
 발사되는 볼트에 마력 공격력을 부여한다.
 또한, 그 볼트는 대상을 향해 유도된다.', '발사하는 대형 볼트에 마력 공격력을 부여하며 대상에게 유도된다.')
 )
-insert into public.game_items (name, type, category_id, sort_order, content_code, game_description, effect_description)
-select s.name, 'other_weapon', c.id, s.sort_order, s.content_code, s.game_description, s.effect_description
-from source s join public.game_item_categories c on c.type = 'other_weapon' and c.name = s.category
-where not exists (select 1 from public.game_items i where i.category_id = c.id and i.name = s.name);
+insert into public.game_items (name, type, category_id, subcategory_id, sort_order, content_code, game_description, effect_description)
+select s.name, 'other_weapon', c.id, sub.id, s.sort_order, s.content_code, s.game_description, s.effect_description
+from source s join public.game_item_categories c on c.type = 'other_weapon' and c.name = '원거리 무기'
+join public.game_item_subcategories sub on sub.category_id = c.id and sub.name = s.category
+where not exists (select 1 from public.game_items i where i.category_id = c.id and i.subcategory_id = sub.id and i.name = s.name);
 
 with source (name, category, skill_name, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane) as (
   values
@@ -255,8 +257,9 @@ with source (name, category, skill_name, weight, physical_attack_types, upgrade_
 insert into public.weapon_details (game_item_id, default_skill_id, type, weight, physical_attack_types, upgrade_material, can_change_affinity, attack_physical, attack_magic, attack_fire, attack_lightning, attack_holy, guard_physical, guard_magic, guard_fire, guard_lightning, guard_holy, critical, guard_boost, scarlet_rot, frostbite, bleed, poison, sleep, madness, required_strength, required_dexterity, required_intelligence, required_faith, required_arcane)
 select i.id, k.id, 'other_weapon', s.weight, case when s.physical_attack_types = '없음' then array[]::text[] else null end, s.upgrade_material, s.can_change_affinity, s.attack_physical, s.attack_magic, s.attack_fire, s.attack_lightning, s.attack_holy, s.guard_physical, s.guard_magic, s.guard_fire, s.guard_lightning, s.guard_holy, s.critical, s.guard_boost, s.scarlet_rot, s.frostbite, s.bleed, s.poison, s.sleep, s.madness, s.required_strength, s.required_dexterity, s.required_intelligence, s.required_faith, s.required_arcane
 from source s
-join public.game_item_categories c on c.type = 'other_weapon' and c.name = s.category
-join public.game_items i on i.category_id = c.id and i.name = s.name
+join public.game_item_categories c on c.type = 'other_weapon' and c.name = '원거리 무기'
+join public.game_item_subcategories sub on sub.category_id = c.id and sub.name = s.category
+join public.game_items i on i.category_id = c.id and i.subcategory_id = sub.id and i.name = s.name
 left join public.weapon_skills k on k.name = s.skill_name
 on conflict (game_item_id) do nothing;
 
@@ -296,6 +299,7 @@ with source (name, category, affinity, strength, dexterity, intelligence, faith,
 )
 insert into public.weapon_scalings (game_item_id, affinity, strength, dexterity, intelligence, faith, arcane)
 select i.id, s.affinity, s.strength, s.dexterity, s.intelligence, s.faith, s.arcane from source s
-join public.game_item_categories c on c.type = 'other_weapon' and c.name = s.category
-join public.game_items i on i.category_id = c.id and i.name = s.name
+join public.game_item_categories c on c.type = 'other_weapon' and c.name = '원거리 무기'
+join public.game_item_subcategories sub on sub.category_id = c.id and sub.name = s.category
+join public.game_items i on i.category_id = c.id and i.subcategory_id = sub.id and i.name = s.name
 on conflict (game_item_id, affinity) do nothing;
